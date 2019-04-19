@@ -1,5 +1,6 @@
 package domain;
 
+import exceptions.*;
 import static java.util.Objects.requireNonNull;
 
 public class BorradorPrenda {
@@ -18,9 +19,9 @@ public class BorradorPrenda {
         //requireNonNull(tipo, "tipo de prenda es obligatorio"); EL CHEQUEO SE HACE EN definir o cuando hago la prenda o ambos
     }
 
-    public void definirMaterial(Material material) {
+    public void definirMaterial(Material material) throws NoPermiteMaterialException{
         if(!tipoPrenda.permiteMaterial(material))
-            throw new NoPermiteMaterialException();
+            throw new NoPermiteMaterialException("El tipo de prenda" +tipoPrenda+ "no permite el material"+material);
         this.material = material;
     }
 
