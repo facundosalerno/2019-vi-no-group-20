@@ -1,11 +1,11 @@
 package domain;
 
 public class Prenda {
-    TipoDePrenda tipoPrenda;
-    Material material;
-    Color colorPrimario;
-    Color colorSecundario;
-    Trama trama;
+    private TipoDePrenda tipoPrenda;
+    private Material material;
+    private Color colorPrimario;
+    private Color colorSecundario;
+    private Trama trama;
 
 
     public Prenda(TipoDePrenda tipo, Color colorPrimario, Color colorSecundario, Material material, Trama trama) {
@@ -17,6 +17,10 @@ public class Prenda {
     }
 
     public Categoria categoria() {
-        return tipoPrenda.categoria;
+        return this.tipoPrenda.categoria;
+    }
+
+    public TipoDePrenda tipoPrenda(){
+        return this.tipoPrenda;
     }
 }

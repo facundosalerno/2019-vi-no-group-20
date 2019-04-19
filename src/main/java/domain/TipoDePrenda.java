@@ -6,8 +6,9 @@ public class TipoDePrenda {
     Categoria categoria;
     List<Material> materialesValidos;
 
-    public TipoDePrenda(Categoria categoria) {
+    public TipoDePrenda(Categoria categoria, List<Material> materiales) {
         this.categoria = categoria;
+        materialesValidos = materiales;
     }
 
     public Categoria categoria() {
@@ -18,9 +19,10 @@ public class TipoDePrenda {
         return materialesValidos.contains(material);
     }
 
-    public static final TipoDePrenda ZAPATO = new TipoDePrenda(Categoria.CALZADO);
-    public static final TipoDePrenda REMERA = new TipoDePrenda(Categoria.PARTE_SUPERIOR);
-    public static final TipoDePrenda PANTALON = new TipoDePrenda(Categoria.PARTE_INFERIOR);
-    public static final TipoDePrenda SHORT = new TipoDePrenda(Categoria.PARTE_INFERIOR);
-    public static final TipoDePrenda ZAPATO_DE_TACON = new TipoDePrenda(Categoria.CALZADO);
+    public static final TipoDePrenda ZAPATO = new TipoDePrenda(Categoria.CALZADO, [Material.CUERO]);
+    public static final TipoDePrenda REMERA = new TipoDePrenda(Categoria.PARTE_SUPERIOR, [Material.ALGODON]);
+    public static final TipoDePrenda PANTALON = new TipoDePrenda(Categoria.PARTE_INFERIOR, [Material.JEAN]);
+    public static final TipoDePrenda SHORT = new TipoDePrenda(Categoria.PARTE_INFERIOR, [Material.ALGODON]);
+    public static final TipoDePrenda ZAPATO_DE_TACON = new TipoDePrenda(Categoria.CALZADO, [Material.CUERO]);
 }
+
