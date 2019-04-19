@@ -1,6 +1,6 @@
 package domain;
 
-public enum Categoria{
+public enum Categoria {
     PARTE_SUPERIOR,
     CALZADO,
     PARTE_INFERIOR,

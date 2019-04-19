@@ -1,6 +1,7 @@
 package domain;
 
 import exceptions.*;
+
 import static java.util.Objects.requireNonNull;
 
 public class BorradorPrenda {
@@ -19,9 +20,9 @@ public class BorradorPrenda {
         //requireNonNull(tipo, "tipo de prenda es obligatorio"); EL CHEQUEO SE HACE EN definir o cuando hago la prenda o ambos
     }
 
-    public void definirMaterial(Material material) throws NoPermiteMaterialException{
-        if(!tipoPrenda.permiteMaterial(material))
-            throw new NoPermiteMaterialException("El tipo de prenda" +tipoPrenda+ "no permite el material"+material);
+    public void definirMaterial(Material material) throws NoPermiteMaterialException {
+        if (!tipoPrenda.permiteMaterial(material))
+            throw new NoPermiteMaterialException("El tipo de prenda" + tipoPrenda + "no permite el material" + material);
         this.material = material;
     }
 
@@ -37,11 +38,14 @@ public class BorradorPrenda {
         this.trama = trama;
     }
 
-    public Prenda crearPrenda() {
+    public Prenda crearPrenda() throws NoPermiteSerElMismoColorException {
         requireNonNull(tipoPrenda, "tipo de prenda es obligatorio");
         requireNonNull(material, "material es obligatorio");
         requireNonNull(colorPrimario, "color es obligatorio");
         requireNonNull(trama, "tipo de prenda es obligatorio");
+        if(this.colorPrimario == this.colorSecundario){
+            throw new NoPermiteSerElMismoColorException();
+        }
         return new Prenda(tipoPrenda, colorPrimario, colorSecundario, material, trama);
     }
 
