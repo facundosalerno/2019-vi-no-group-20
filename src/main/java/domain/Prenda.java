@@ -16,11 +16,11 @@ public class Prenda {
         this.trama = trama;
     }
 
-    public Categoria categoria() {
+    public Categoria getCategoria() {
         return this.tipoPrenda.categoria;
     }
 
-    public TipoDePrenda tipoPrenda(){
+    public TipoDePrenda getTipoPrenda(){
         return this.tipoPrenda;
     }
 }

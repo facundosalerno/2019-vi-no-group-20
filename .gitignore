@@ -270,3 +270,4 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/osx,java,linux,macos,windows,eclipse,netbeans,intellij
+/target/
