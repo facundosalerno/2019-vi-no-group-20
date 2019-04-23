@@ -1,6 +1,6 @@
 package domain;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,34 +14,21 @@ public class Guardarropas {
     List<Prenda> prendasInferior;
     List<Prenda> prendasCalzado;
 
-    //va a generar atuendos hasta que encuentre uno valido por defecto el atuendo se crea no valido y luego se lo valida.
-    public Atuendo generarSugerencia() {
-       /*
-    	Atuendo sugerencia;
-        do {
-
-            sugerencia = this.combinar(prendasSuperior, prendasInferior, prendasCalzado);
-
-        } while (sugerencia.getValidez());
-
-        return sugerencia;
-        */
+    public List<Atuendo>  generarSugerencias() {
+       	
+    	return combinarPrendas(prendasSuperior,this.prendasInferior,this.prendasCalzado)
+    			.stream()
+    			.filter(atuendo-> atuendo.getValidez()==true)
+    			.collect(Collectors.toList());
     	
     }
 
     public List<Atuendo> combinarPrendas(List<Prenda> prendasSuperior, List<Prenda> prendasInferior, List<Prenda> prendasCalzado) {
-
-        //por ahora agarro el primero de la lista y genero la sugerencia
-       // Prenda prendaSuperior = prendasSuperior.stream().findFirst().get();
-        //Prenda prendaInferior = prendasSuperior.stream().findFirst().get();
-        //Prenda prendaCalzado = prendasSuperior.stream().findFirst().get();
-
-       // Atuendo sugerencia = new Atuendo(prendaSuperior, prendaInferior, prendaCalzado);
-       
-    	return 	Sets.cartesianProduct(ImmutableList.of(ImmutableSet.copyOf(this.prendasSuperior), ImmutableSet.copyOf(this.prendasInferior), ImmutableSet.copyOf(this.prendasCalzado)))
+             
+    	return 	Sets.cartesianProduct(ImmutableList.of(ImmutableSet.copyOf(prendasSuperior), ImmutableSet.copyOf(prendasInferior), ImmutableSet.copyOf(prendasCalzado)))
         		.stream()
         		.map(list -> new Atuendo(list.get(0), list.get(1), list.get(2)))
-        	     .collect(Collectors.toList());
+        	    .collect(Collectors.toList());
     }
 
     public Guardarropas(List<Prenda> prendasSuperior, List<Prenda> prendasInferior, List<Prenda> prendasCalzado) {
