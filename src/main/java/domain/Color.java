@@ -11,6 +11,7 @@ public class Color {
     }
 
     public boolean esIgual (Color colorComparado){
+        if (colorComparado== null) return false;
         return this.rojo == colorComparado.rojo || this.azul == colorComparado.azul || this.verde == colorComparado.verde;
     }
 }

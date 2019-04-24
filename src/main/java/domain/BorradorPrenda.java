@@ -14,6 +14,9 @@ public class BorradorPrenda {
     public BorradorPrenda() {
 
     }
+    public Categoria getCategoria(){
+        return this.tipoPrenda.categoria();
+    }
 
     public void definirTipo(TipoDePrenda tipoPrenda) {
         this.tipoPrenda = tipoPrenda;
@@ -27,10 +30,16 @@ public class BorradorPrenda {
     }
 
     public void definirColorPrimario(Color color) {
+        if (color.esIgual(this.colorSecundario)) {
+            throw new NoPermiteSerElMismoColorException();
+        }
         this.colorPrimario = color;
     }
 
     public void definirColorSecundario(Color color) {
+        if (color.esIgual(this.colorPrimario)) {
+            throw new NoPermiteSerElMismoColorException();
+        }
         this.colorSecundario = color;
     }
 
@@ -43,9 +52,6 @@ public class BorradorPrenda {
         requireNonNull(material, "material es obligatorio");
         requireNonNull(colorPrimario, "color es obligatorio");
         requireNonNull(trama, "tipo de prenda es obligatorio");
-        if (this.colorPrimario.esIgual(this.colorSecundario)) {
-            throw new NoPermiteSerElMismoColorException();
-        }
         return new Prenda(tipoPrenda, colorPrimario, colorSecundario, material, trama);
     }
 
