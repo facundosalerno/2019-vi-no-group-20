@@ -9,4 +9,8 @@ public class Color {
         this.verde=verde;
         this.azul=azul;
     }
+
+    public boolean esIgual (Color colorComparado){
+        return this.rojo == colorComparado.rojo || this.azul == colorComparado.azul || this.verde == colorComparado.verde;
+    }
 }

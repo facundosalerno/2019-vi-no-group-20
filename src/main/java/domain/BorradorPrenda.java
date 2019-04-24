@@ -20,9 +20,9 @@ public class BorradorPrenda {
         //requireNonNull(tipo, "tipo de prenda es obligatorio"); EL CHEQUEO SE HACE EN definir o cuando hago la prenda o ambos
     }
 
-    public void definirMaterial(Material material) throws NoPermiteMaterialException {
+    public void definirMaterial(Material material) {
         if (!tipoPrenda.permiteMaterial(material))
-            throw new NoPermiteMaterialException("El tipo de prenda" + tipoPrenda + "no permite el material" + material);
+            throw new NoPermiteMaterialException();
         this.material = material;
     }
 
@@ -38,12 +38,12 @@ public class BorradorPrenda {
         this.trama = trama;
     }
 
-    public Prenda crearPrenda() throws NoPermiteSerElMismoColorException {
+    public Prenda crearPrenda() {
         requireNonNull(tipoPrenda, "tipo de prenda es obligatorio");
         requireNonNull(material, "material es obligatorio");
         requireNonNull(colorPrimario, "color es obligatorio");
         requireNonNull(trama, "tipo de prenda es obligatorio");
-        if(this.colorPrimario == this.colorSecundario){
+        if (this.colorPrimario.esIgual(this.colorSecundario)) {
             throw new NoPermiteSerElMismoColorException();
         }
         return new Prenda(tipoPrenda, colorPrimario, colorSecundario, material, trama);

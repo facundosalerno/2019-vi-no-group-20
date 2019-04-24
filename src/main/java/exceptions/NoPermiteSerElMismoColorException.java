@@ -1,4 +1,4 @@
 package exceptions;
 
-public class NoPermiteSerElMismoColorException extends Exception{
+public class NoPermiteSerElMismoColorException extends RuntimeException{
 }
