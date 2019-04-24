@@ -5,11 +5,11 @@ import exceptions.*;
 import static java.util.Objects.requireNonNull;
 
 public class BorradorPrenda {
-    TipoDePrenda tipoPrenda;
-    Material material;
-    Color colorPrimario;
-    Color colorSecundario;
-    Trama trama = Trama.LISA;
+    private TipoDePrenda tipoPrenda;
+    private Material material;
+    private Color colorPrimario;
+    private Color colorSecundario;
+    private Trama trama = Trama.LISA;
 
     public BorradorPrenda() {
 

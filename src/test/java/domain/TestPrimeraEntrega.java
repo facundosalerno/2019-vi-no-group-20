@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public  class TestPrimeraEntrega{
+public class TestPrimeraEntrega{
     private BorradorPrenda borradorPrenda;
 
     @Before
@@ -15,7 +15,8 @@ public  class TestPrimeraEntrega{
         Color coloPrimario= new Color(200,100,100);
         this.borradorPrenda.definirColorPrimario(coloPrimario);
         this.borradorPrenda.definirTipo(TipoDePrenda.PANTALON);
-
+        //this.borradorPrenda.definirMaterial(Material.JEAN);
+        this.borradorPrenda.definirTrama(Trama.GASTADO);
     }
 
 
@@ -37,7 +38,6 @@ public  class TestPrimeraEntrega{
 
     //Test para verificar consistencia tipo de prenda con material
     @Test(expected= NoPermiteMaterialException.class)
-
     public void definirMaterialInconsistenteConTipoPrendaDaExcepcion (){
             this.borradorPrenda.definirMaterial(Material.ALGODON);
     }
@@ -51,6 +51,13 @@ public  class TestPrimeraEntrega{
     //Test para verificar que se crea una prenda valida
     @Test
     public void prendaGeneradaEsValida(){
+        //TODO: AGREGAR ASSERT DE TRAMA, COLOR PRIMARIO Y TIPO DE PRENDA
+        try{
+            Prenda prenda = this.borradorPrenda.crearPrenda();
+            Assert.assertEquals(Material.class, prenda.getMaterial().getClass());
+        }catch (NullPointerException e){
+            System.out.println(e.getMessage());
+        }
 
     }
 

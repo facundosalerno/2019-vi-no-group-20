@@ -23,4 +23,7 @@ public class Prenda {
     public TipoDePrenda getTipoPrenda(){
         return this.tipoPrenda;
     }
+    public Material getMaterial(){
+        return this.material;
+    }
 }

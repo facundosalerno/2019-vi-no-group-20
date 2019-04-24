@@ -12,7 +12,6 @@ public class Usuario {
     }
 
     public List<Atuendo> obtenerSugerencias(){
-        //TODO: RESOLVER DE UNA MEJOR FORMA
         List<Atuendo> aux = new ArrayList<Atuendo>();
         guardarropas.stream()
                 .forEach(guardarropa -> aux.addAll(guardarropa.sugerir()));
