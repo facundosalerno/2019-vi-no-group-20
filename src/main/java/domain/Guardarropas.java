@@ -1,57 +1,56 @@
 package domain;
 
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
+import exceptions.AtuendoInvalidoException;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Guardarropas {
 
-    List<Prenda> prendasSuperior;
-    List<Prenda> prendasInferior;
-    List<Prenda> prendasCalzado;
+    private List<Prenda> prendasSuperiores;
+    private List<Prenda> prendasInferiores;
+    private List<Prenda> calzados;
 
-    public List<Atuendo>  generarSugerencias() {
-       	
-    	return combinarPrendas(prendasSuperior,this.prendasInferior,this.prendasCalzado)
-    			.stream()
-    			.filter(atuendo-> atuendo.getValidez()==true)
+    public Guardarropas(List<Prenda> prendasSuperiores, List<Prenda> prendasInferiores, List<Prenda> calzados) {
+        //TODO: VALIDAR QUE LAS LISTAS SEAN DE LAS CATEGORIAS CORRESPONDIENTES
+        this.prendasSuperiores = prendasSuperiores;
+        this.prendasInferiores = prendasInferiores;
+        this.calzados = calzados;
+
+
+    }
+
+    public List<Atuendo> sugerir(){
+
+    	return Sets.cartesianProduct(ImmutableList.of(ImmutableSet.copyOf(prendasSuperiores), ImmutableSet.copyOf(prendasInferiores), ImmutableSet.copyOf(calzados)))
+                .stream()
+                .map(list ->{
+                    try{
+                        return new Atuendo(list.get(0), list.get(1), list.get(2));
+                    }catch (AtuendoInvalidoException e){
+                        throw new RuntimeException(e);
+                    }
+                } )
     			.collect(Collectors.toList());
-    	
-    }
-
-    public List<Atuendo> combinarPrendas(List<Prenda> prendasSuperior, List<Prenda> prendasInferior, List<Prenda> prendasCalzado) {
-             
-    	return 	Sets.cartesianProduct(ImmutableList.of(ImmutableSet.copyOf(prendasSuperior), ImmutableSet.copyOf(prendasInferior), ImmutableSet.copyOf(prendasCalzado)))
-        		.stream()
-        		.map(list -> new Atuendo(list.get(0), list.get(1), list.get(2)))
-        	    .collect(Collectors.toList());
-    }
-
-    public Guardarropas(List<Prenda> prendasSuperior, List<Prenda> prendasInferior, List<Prenda> prendasCalzado) {
-
-        this.prendasSuperior = prendasSuperior;
-        this.prendasInferior = prendasInferior;
-        this.prendasCalzado = prendasCalzado;
-
 
     }
 
     public void agregarPrendaSuperior(Prenda prendaSuperior) {
-
-        this.prendasSuperior.add(prendaSuperior);
+        //TODO: VALIDAR QUE SEA DE LA CATEGORIA CORRESPONDIENTE
+        this.prendasSuperiores.add(prendaSuperior);
     }
 
     public void agregarPrendaInferior(Prenda prendaInferior) {
-
-        this.prendasSuperior.add(prendaInferior);
+        //TODO: VALIDAR QUE SEA DE LA CATEGORIA CORRESPONDIENTE
+        this.prendasSuperiores.add(prendaInferior);
     }
 
-    public void agregarPrendaCalzado(Prenda prendaCalzado) {
-
-        this.prendasSuperior.add(prendaCalzado);
+    public void agregarCalzado(Prenda calzado) {
+        //TODO: VALIDAR QUE SEA DE LA CATEGORIA CORRESPONDIENTE
+        this.prendasSuperiores.add(calzado);
     }
 }
