@@ -18,25 +18,42 @@ public class BorradorPrenda {
         return this.tipoPrenda.categoria();
     }
 
+    public Material getMaterial(){ return this.material; }
+
+    public TipoDePrenda getTipoPrenda(){
+        return this.tipoPrenda;
+    }
+
+    public Color getColorPrimario(){
+        return this.colorPrimario;
+    }
+
+    public Color getColorSecundario(){
+        return this.colorSecundario;
+    }
+
+    public Trama getTrama(){
+        return this.trama;
+    }
+
     public void definirTipo(TipoDePrenda tipoPrenda) {
         this.tipoPrenda = tipoPrenda;
         //requireNonNull(tipo, "tipo de prenda es obligatorio"); EL CHEQUEO SE HACE EN definir o cuando hago la prenda o ambos
     }
 
     public void definirMaterial(Material material) {
+        requireNonNull(tipoPrenda, "Defina antes el tipo de prenda");
         if (!tipoPrenda.permiteMaterial(material))
             throw new NoPermiteMaterialException();
         this.material = material;
     }
 
     public void definirColorPrimario(Color color) {
-        if (color.esIgual(this.colorSecundario)) {
-            throw new NoPermiteSerElMismoColorException();
-        }
         this.colorPrimario = color;
     }
 
     public void definirColorSecundario(Color color) {
+        requireNonNull(colorPrimario, "Defina antes el color primario");
         if (color.esIgual(this.colorPrimario)) {
             throw new NoPermiteSerElMismoColorException();
         }

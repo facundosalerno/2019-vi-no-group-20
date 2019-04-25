@@ -17,13 +17,20 @@ public class Prenda {
     }
 
     public Categoria getCategoria() {
-        return this.tipoPrenda.categoria;
+        return this.tipoPrenda.categoria();
     }
 
     public TipoDePrenda getTipoPrenda(){
         return this.tipoPrenda;
     }
+
     public Material getMaterial(){
         return this.material;
     }
+
+    public Color getColorPrimario() { return colorPrimario;}
+
+    public Color getColorSecundario() { return colorSecundario;}
+
+    public Trama getTrama() { return trama;}
 }

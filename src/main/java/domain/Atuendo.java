@@ -8,15 +8,10 @@ public class Atuendo {
     Prenda prendaSuperior;
     Prenda prendaInferior;
     Prenda calzado;
-    //boolean validez;
-/*
-    public boolean getValidez() {
-        return this.validez;
 
-    }
-*/
     public Atuendo(Prenda prendaSuperior, Prenda prendaInferior, Prenda calzado) throws AtuendoInvalidoException {
-        validarAtuendo(prendaSuperior, prendaInferior, calzado);
+        if(!atuendoEsValido(prendaSuperior, prendaInferior, calzado))
+            throw new AtuendoInvalidoException();
         this.prendaSuperior = prendaSuperior;
         this.prendaInferior = prendaInferior;
         this.calzado = calzado;
@@ -24,10 +19,15 @@ public class Atuendo {
 
     }
 
-    public void validarAtuendo(Prenda prendaSuperior, Prenda prendaInferior, Prenda calzado) throws AtuendoInvalidoException {
+    public boolean atuendoEsValido(Prenda prendaSuperior, Prenda prendaInferior, Prenda calzado) {
         if((prendaSuperior.getCategoria()!= Categoria.PARTE_SUPERIOR) || (prendaInferior.getCategoria()!= Categoria.PARTE_INFERIOR)|| (calzado.getCategoria() != Categoria.CALZADO))
-            throw new AtuendoInvalidoException();
-        //this.validez = true;
+            return false;
+        else
+            return true;
     }
+
+    public Prenda getPrendaSuperior() {return prendaSuperior;}
+    public Prenda getPrendaInferior() {return prendaInferior;}
+    public Prenda getCalzado() {return calzado;}
 
 }

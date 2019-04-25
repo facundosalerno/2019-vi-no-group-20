@@ -5,7 +5,7 @@ import java.util.List;
 
 
 public class TipoDePrenda {
-    Categoria categoria;
+    private Categoria categoria;
     List<Material> materialesValidos;
 
     public TipoDePrenda(Categoria categoria, List<Material> materiales) {
