@@ -130,4 +130,11 @@ public class TestsValidacionAtuendo {
     public void crearAtuendoInvalido() {
         atuendo = new Atuendo(pantalon, pantalon, zapatos);
     }
+
+    //Test para capturar guardarropas invalido
+    @Test(expected = NoPerteneceALaCategoriaException.class)
+    public void crearGuardarropasInvalido(){
+        Guardarropas guardarropas= new Guardarropas(Arrays.asList(remera, alpargatas), Arrays.asList(shorts, pantalon), Arrays.asList(zapatos, zapatillas));
+
+    }
 }

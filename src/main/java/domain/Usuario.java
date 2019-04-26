@@ -5,8 +5,7 @@ import java.util.List;
 
 public class Usuario {
     private List<Guardarropas> guardarropas;
-    //TODO: FALTA DECIDIR SI EL USUARIO LLEVA LISTAS DE PRENDAS (PARTE SUPERIOR, INFERIOR, ETC) O SOLO UN ATRIBUTO POR CADA PRENDA SIMULANDO QUE ESTA VESTIDO
-
+    
     public Usuario(List<Guardarropas> guardarropas){
 
         this.guardarropas = guardarropas;

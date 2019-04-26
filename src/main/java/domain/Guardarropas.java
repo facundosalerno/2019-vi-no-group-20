@@ -17,7 +17,10 @@ public class Guardarropas {
     private List<Prenda> calzados;
 
     public Guardarropas(List<Prenda> prendasSuperiores, List<Prenda> prendasInferiores, List<Prenda> calzados) {
-        //TODO: VALIDAR QUE LAS LISTAS SEAN DE LAS CATEGORIAS CORRESPONDIENTES
+        validarPrendasParaGuardarropas(prendasSuperiores,Categoria.PARTE_SUPERIOR);
+        validarPrendasParaGuardarropas(prendasInferiores,Categoria.PARTE_INFERIOR);
+        validarPrendasParaGuardarropas(calzados,Categoria.CALZADO);
+
         this.prendasSuperiores = prendasSuperiores;
         this.prendasInferiores = prendasInferiores;
         this.calzados = calzados;
@@ -40,8 +43,7 @@ public class Guardarropas {
 
     }
 
-    public void agregarPrendaSuperior(Prenda prendaSuperior) {
-        //TODO: VALIDAR QUE SEA DE LA CATEGORIA CORRESPONDIENTE
+    /*public void agregarPrendaSuperior(Prenda prendaSuperior) {
         if(prendaSuperior.getCategoria() != Categoria.PARTE_SUPERIOR){
             throw new NoPerteneceALaCategoriaException();
         }
@@ -49,7 +51,6 @@ public class Guardarropas {
     }
 
     public void agregarPrendaInferior(Prenda prendaInferior) {
-        //TODO: VALIDAR QUE SEA DE LA CATEGORIA CORRESPONDIENTE
         if(prendaInferior.getCategoria() != Categoria.PARTE_SUPERIOR){
             throw new NoPerteneceALaCategoriaException();
         }
@@ -57,10 +58,15 @@ public class Guardarropas {
     }
 
     public void agregarCalzado(Prenda calzado) {
-        //TODO: VALIDAR QUE SEA DE LA CATEGORIA CORRESPONDIENTE
         if(calzado.getCategoria() != Categoria.PARTE_SUPERIOR){
             throw new NoPerteneceALaCategoriaException();
         }
         this.calzados.add(calzado);
+    }*/
+
+    public void validarPrendasParaGuardarropas(List<Prenda> prendas, Categoria categoria){
+        if(!prendas.stream().allMatch(prenda -> prenda.getCategoria()==categoria)){
+            throw new NoPerteneceALaCategoriaException();
+        }
     }
 }
