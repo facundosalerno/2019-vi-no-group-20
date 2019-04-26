@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class TestsValidacionAtuendo {
     private Atuendo atuendo;
@@ -20,9 +21,12 @@ public class TestsValidacionAtuendo {
     private Prenda ojotas;
     private Prenda alpargatas;
 
+    private Guardarropas guardarropas_1;
+    private Guardarropas guardarropas_2;
+    Usuario carlos;
 
     @Before
-    public void init(){
+    public void init() {
         //Instanciaciones previas a los TEST
         BorradorPrenda borradorPrenda;
         Color color1 = new Color(200, 100, 100);
@@ -96,42 +100,34 @@ public class TestsValidacionAtuendo {
         alpargatas = borradorPrenda.crearPrenda();
 
 
-        Guardarropas guardarropas_1= new Guardarropas(Arrays.asList(remera,camisa),Arrays.asList(shorts, pantalon),Arrays.asList(zapatos,zapatillas));
-        Guardarropas guardarropas_2= new Guardarropas(Arrays.asList(blusa, camisa),Arrays.asList(pollera),Arrays.asList(ojotas,alpargatas));
-        Usuario carlos= new Usuario(Arrays.asList(guardarropas_1,guardarropas_2));
+        guardarropas_1 = new Guardarropas(Arrays.asList(remera, camisa), Arrays.asList(shorts, pantalon), Arrays.asList(zapatos, zapatillas));
+        guardarropas_2 = new Guardarropas(Arrays.asList(blusa, camisa), Arrays.asList(pollera), Arrays.asList(ojotas, alpargatas));
+        carlos = new Usuario(Arrays.asList(guardarropas_1, guardarropas_2));
     }
 
-    
-   
+
     //Test de sugerencias de varios guardarropas (que las listas generadas por los distintos guardarropas sean distintas)
-    /*
-     @Test
-     public void crear_sugerencias_independientes(){
-        atuendos1 = guardarropas1.sugerir();
-        atuendos2 = guardarropas2.sugerir();
-        
-         Assert.assertFalse(Arrays.equals(atuendos1, atuendos2));
-        
+    @Test
+    public void sugerenciasUsuarioEsLaUnionDeSugerenciasDeSusGuardarropas() {
+        List<Atuendo> atuendos1 = guardarropas_1.sugerir();
+        List<Atuendo> atuendos2 = guardarropas_2.sugerir();
+        //Assert.assertTrue(carlos.obtenerSugerencias().containsAll(atuendos2) && carlos.obtenerSugerencias().containsAll(atuendos1));
     }
-    */
-    //--CREANDO EL ATUENDO--
 
     //Test de atuendo valido
     @Test
-    public void crear_atuendo_valido(){
+    public void crearAtuendoValido() {
         atuendo = new Atuendo(remera, pantalon, zapatos);
-        Assert.assertNotEquals(null, atuendo);
+        Assert.assertNotNull(atuendo);
         //TODO: MEJORAR ESTO
     }
-
-
 
 
     //--CHEQUEANDO EXCEPCIONES--
 
     //Test para capturar atuendo invalido exception
-    @Test (expected = AtuendoInvalidoException.class)
-    public void crear_atuendo_invalido(){
-        atuendo = new Atuendo (pantalon, pantalon, zapatos);
+    @Test(expected = AtuendoInvalidoException.class)
+    public void crearAtuendoInvalido() {
+        atuendo = new Atuendo(pantalon, pantalon, zapatos);
     }
 }

@@ -20,10 +20,9 @@ public class Atuendo {
     }
 
     public boolean atuendoEsValido(Prenda prendaSuperior, Prenda prendaInferior, Prenda calzado) {
-        if((prendaSuperior.getCategoria()!= Categoria.PARTE_SUPERIOR) || (prendaInferior.getCategoria()!= Categoria.PARTE_INFERIOR)|| (calzado.getCategoria() != Categoria.CALZADO))
-            return false;
-        else
-            return true;
+        return  ((prendaSuperior.getCategoria() == Categoria.PARTE_SUPERIOR) &&
+                (prendaInferior.getCategoria()== Categoria.PARTE_INFERIOR) &&
+                (calzado.getCategoria() == Categoria.CALZADO));
     }
 
     public Prenda getPrendaSuperior() {return prendaSuperior;}

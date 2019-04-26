@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import exceptions.AtuendoInvalidoException;
+import exceptions.NoPerteneceALaCategoriaException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,16 +42,25 @@ public class Guardarropas {
 
     public void agregarPrendaSuperior(Prenda prendaSuperior) {
         //TODO: VALIDAR QUE SEA DE LA CATEGORIA CORRESPONDIENTE
+        if(prendaSuperior.getCategoria() != Categoria.PARTE_SUPERIOR){
+            throw new NoPerteneceALaCategoriaException();
+        }
         this.prendasSuperiores.add(prendaSuperior);
     }
 
     public void agregarPrendaInferior(Prenda prendaInferior) {
         //TODO: VALIDAR QUE SEA DE LA CATEGORIA CORRESPONDIENTE
+        if(prendaInferior.getCategoria() != Categoria.PARTE_SUPERIOR){
+            throw new NoPerteneceALaCategoriaException();
+        }
         this.prendasInferiores.add(prendaInferior);
     }
 
     public void agregarCalzado(Prenda calzado) {
         //TODO: VALIDAR QUE SEA DE LA CATEGORIA CORRESPONDIENTE
+        if(calzado.getCategoria() != Categoria.PARTE_SUPERIOR){
+            throw new NoPerteneceALaCategoriaException();
+        }
         this.calzados.add(calzado);
     }
 }
