@@ -38,12 +38,18 @@ public class TestsValidacionAtuendo {
         borradorPrenda.definirColorPrimario(color1);
         borradorPrenda.definirTrama(Trama.GASTADO);
         pantalon = borradorPrenda.crearPrenda();
+        
+        guardarropas_1= new Guardarropas([remera,musculosa],[bermnuda, pantalon],[zapato,zapatilla]);
+        guardarropas_2= new Guardarropas([blusa, camisa],[pollera],[ojota,sandalia]);
+        carlos= new Usuario([guardarropas1,guardarropas2]);
     }
 
     
-    //Test de creacion de multiples usuarios con distintas prendas y guardarropas
+   
     //Test de sugerencias de varios guardarropas (que las listas generadas por los distintos guardarropas sean distintas)
 
+   
+    
     //--CREANDO EL ATUENDO--
 
     //Test de atuendo valido
