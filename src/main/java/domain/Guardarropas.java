@@ -46,11 +46,11 @@ public class Guardarropas {
 
     public void agregarPrendaInferior(Prenda prendaInferior) {
         //TODO: VALIDAR QUE SEA DE LA CATEGORIA CORRESPONDIENTE
-        this.prendasSuperiores.add(prendaInferior);
+        this.prendasInferiores.add(prendaInferior);
     }
 
     public void agregarCalzado(Prenda calzado) {
         //TODO: VALIDAR QUE SEA DE LA CATEGORIA CORRESPONDIENTE
-        this.prendasSuperiores.add(calzado);
+        this.calzados.add(calzado);
     }
 }
