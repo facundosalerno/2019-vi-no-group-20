@@ -47,8 +47,15 @@ public class TestsValidacionAtuendo {
     
    
     //Test de sugerencias de varios guardarropas (que las listas generadas por los distintos guardarropas sean distintas)
-
-   
+    
+     @Test
+     public void crear_sugerencias_independientes(){
+        atuendos1 = guardarropas1.sugerir();
+        atuendos2 = guardarropas2.sugerir();
+        
+         Assert.assertFalse(Arrays.equals(atuendos1, atuendos2));
+        
+    }
     
     //--CREANDO EL ATUENDO--
 
