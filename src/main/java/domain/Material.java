@@ -8,5 +8,7 @@ public enum Material{
     LANA,
     LICRA,
     POLIESTER,
-    JEAN
+    JEAN,
+    GAMUZA,
+    GOMA
 }
