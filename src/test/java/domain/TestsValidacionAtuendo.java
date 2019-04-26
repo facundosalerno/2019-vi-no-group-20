@@ -111,7 +111,8 @@ public class TestsValidacionAtuendo {
     public void sugerenciasUsuarioEsLaUnionDeSugerenciasDeSusGuardarropas() {
         List<Atuendo> atuendos1 = guardarropas_1.sugerir();
         List<Atuendo> atuendos2 = guardarropas_2.sugerir();
-        //Assert.assertTrue(carlos.obtenerSugerencias().containsAll(atuendos2) && carlos.obtenerSugerencias().containsAll(atuendos1));
+        Assert.assertTrue(carlos.obtenerSugerencias().size() == atuendos1.size() + atuendos2.size());
+        //Assert.assertTrue(carlos.obtenerSugerencias().containsAll(atuendos2) || carlos.obtenerSugerencias().containsAll(atuendos1));
     }
 
     //Test de atuendo valido
@@ -119,7 +120,6 @@ public class TestsValidacionAtuendo {
     public void crearAtuendoValido() {
         atuendo = new Atuendo(remera, pantalon, zapatos);
         Assert.assertNotNull(atuendo);
-        //TODO: MEJORAR ESTO
     }
 
 
