@@ -34,7 +34,7 @@ public class Guardarropas {
                         .map(list -> new Atuendo(list.get(0), list.get(1), list.get(2)))
                         .collect(Collectors.toList());
             }
-        throw new NoPermiteGuardarropaVacioException();
+        throw new NoPermiteGuardarropaIncompletoException();
 
     }
 
