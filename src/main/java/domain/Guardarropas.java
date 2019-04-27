@@ -25,11 +25,17 @@ public class Guardarropas {
         this.calzados = calzados;
     }
 
-    public List<Atuendo> sugerirAtuendos(){
-    	return Sets.cartesianProduct(ImmutableList.of(ImmutableSet.copyOf(prendasSuperiores), ImmutableSet.copyOf(prendasInferiores), ImmutableSet.copyOf(calzados)))
-                .stream()
-                .map(list -> new Atuendo(list.get(0), list.get(1), list.get(2)))
-    			.collect(Collectors.toList());
+    public List<Atuendo> sugerirAtuendo(){
+
+        if(this.prendasSuperiores.size()!=0 && this.prendasInferiores.size()!=0 && this.calzados.size()!= 0)
+            {
+                return Sets.cartesianProduct(ImmutableList.of(ImmutableSet.copyOf(prendasSuperiores), ImmutableSet.copyOf(prendasInferiores), ImmutableSet.copyOf(calzados)))
+                        .stream()
+                        .map(list -> new Atuendo(list.get(0), list.get(1), list.get(2)))
+                        .collect(Collectors.toList());
+            }
+        throw new NoPermiteGuardarropaVacioException();
+
     }
 
     //TODO: El nombre de la excepcion esta bien, pero agregarse agregarse otra del estilo GuardarropasInvalidoExcepcion para usar en el constructor del guardarropas
