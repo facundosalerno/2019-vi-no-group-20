@@ -10,5 +10,6 @@ public enum Material{
     POLIESTER,
     JEAN,
     GAMUZA,
-    GOMA
+    GOMA,
+    PLASTICO
 }
