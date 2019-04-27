@@ -21,7 +21,8 @@ public class TestsValidacionPrenda{
         azul = new Color(0,0,255);
     }
 
-
+    //TODO: Hay que ver si esta bien que pueda agarrar tantas exceptions porque no queda claro cual fue el error
+    
     //Test para verificar que una prenda se puede crear correctamente
     @Test
     public void verificarCreacionDeLaPrenda(){
