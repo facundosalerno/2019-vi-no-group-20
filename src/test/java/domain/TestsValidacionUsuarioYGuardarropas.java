@@ -20,6 +20,8 @@ public class TestsValidacionUsuarioYGuardarropas {
     private Prenda ojotas;
     private Prenda alpargatas;
     private Prenda camisa;
+    private Prenda pulseras;
+    private Prenda anteojos;
 
     @Before
     public void init() {
@@ -38,6 +40,8 @@ public class TestsValidacionUsuarioYGuardarropas {
         ojotas = armarUnaPrenda(TipoDePrenda.OJOTAS, Material.GOMA, azul, rojo, Trama.LISA);
         alpargatas = armarUnaPrenda(TipoDePrenda.ALPARGATAS, Material.ALGODON, azul, rojo, Trama.CUADROS);
         camisa = armarUnaPrenda(TipoDePrenda.CAMISA, Material.ALGODON, azul, rojo, Trama.CUADROS);
+        pulseras=  armarUnaPrenda(TipoDePrenda.PULSERA, Material.PLASTICO, azul, rojo, Trama.LISA);
+        anteojos = armarUnaPrenda(TipoDePrenda.ANTEOJOS, Material.PLASTICO, rojo, verde, Trama.LISA);
     }
 
     
@@ -56,21 +60,27 @@ public class TestsValidacionUsuarioYGuardarropas {
     @Test
     public void crearUnGuardarropasValido(){
         try{
-            Guardarropas guardarropasDeVerano = new Guardarropas(Arrays.asList(remera, blusa), Arrays.asList(shorts, pantalon), Arrays.asList(zapatos, zapatillas));
+            Guardarropas guardarropasDeVerano = new Guardarropas(Arrays.asList(remera, blusa), Arrays.asList(shorts, pantalon), Arrays.asList(zapatos, zapatillas),Arrays.asList(pulseras, anteojos));
         }catch (NoPerteneceALaCategoriaException ex){
             Assert.fail();
         }
     }
-    
-    // Verificar que no se permita tener un guardarropa vacio
-    
-     @Test(expected= NoPermiteGuardarropaVacioException.class)
-    public void pedirSugerenciaConGuardarropaVacio (){
-        Guardarropas guardarropasDeInvierno= new Guardarropas (Arrays.asList(),Arrays.asList(),Arrays.asList());
-        guardarropasDeInvierno.sugerirAtuendo();
+
+// Verificar que no se permita tener un guardarropa vacio
+
+   @Test(expected= NoPermiteGuardarropaIncompletoException.class)
+   public void pedirSugerenciaConGuardarropaVacio(){
+         Guardarropas guardarropasDeInvierno= new Guardarropas (Arrays.asList(),Arrays.asList(),Arrays.asList(),Arrays.asList());
+         guardarropasDeInvierno.sugerirAtuendo();
     }
 
-
-
-    //TODO: preguntar alguna manera copada de testear las sugerencias de guardarropas
+ // Verificar que no de sugerencias si no tiene prenda superior
+    @Test(expected= NoPermiteGuardarropaIncompletoException.class)
+    public void pedirSugerenciaConGuardarropaIncompleto(){
+        Guardarropas guardarropasDeportivo= new Guardarropas (Arrays.asList(),Arrays.asList(pantalon),Arrays.asList(zapatillas), Arrays.asList(anteojos));
+        guardarropasDeportivo.sugerirAtuendo();
 }
+
+}
+    //TODO: preguntar alguna manera copada de testear las sugerencias de guardarropas
+
