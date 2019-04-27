@@ -1,6 +1,7 @@
 -Dividir mas los test.
 
--En las últimas excepciones que hicimos en los test de prenda conviene el try catch para verificar que no quede el borrador inconsistente.
+-En las últimas excepciones que hicimos en los test de prenda conviene el try catch 
+ para verificar que no quede el borrador inconsistente.
 
 -No es buena idea que el borrador tenga getters 
 
@@ -8,7 +9,8 @@
 
 -No testear con NullPointerException
 
--Hacer test mas específicos de por ej excepción de dominio (tipo prenda invalida). Probar cosas invalidas y que rompan con excepción (al crear y definir)
+-Hacer test mas específicos de por ej excepción de dominio (tipo prenda invalida). 
+ Probar cosas invalidas y que rompan con excepción (al crear y definir)
 
 -Sacar todo lo del test get color primario y eso. 
 
@@ -16,13 +18,15 @@
 
 -Cambiar nombre, guardarropa verano/invierno que sea diferente.
 
--(No tan importante) Crear método dentro del test para armar los borradores y no poner tantas veces lo mismo en el init. Un método que no dice test.
+-(No tan importante) Crear método dentro del test para armar los borradores y no poner tantas veces lo mismo en el init. 
+ Un método que no dice test.
 
 -Que sugerir sea sugerirAtuendo
 
 -No hacer test con or.
 
--Testear mas cosas, tipo que pasa si el guardarropa no tiene nada, que pasa si solo tiene pantalón, que elementos debe dar…
+-Testear mas cosas, tipo que pasa si el guardarropa no tiene nada, 
+ que pasa si solo tiene pantalón, que elementos debe dar…
 
 -Crear excepción de guardarropas
 
@@ -38,7 +42,8 @@
 
 -En borrador una excepción mas especifica que el null
 
--Delegar en el test que vemos si el atuendo es valido, no usar “get categoria”  cambiarlo por esSuperior, esInferior
+-Delegar en el test que vemos si el atuendo es valido, no usar “get categoria”
+ cambiarlo por esSuperior, esInferior
 
 -Tag project encoding maven 
 
