@@ -20,16 +20,18 @@ public class Atuendo {
         this.calzado = calzado;
         this.accesorio = accesorio;
     }
-
-    //TODO: la logica de esta funcion es bastante parecida a la que se usa en el guardarropas para decir si una lista de prendas es valida. Revisar eso
+    
+    
+     //TODO: la logica de esta funcion es bastante parecida a la que se usa en el guardarropas para decir si una lista de prendas es valida. Revisar eso
     public boolean atuendoEsValido(Prenda prendaSuperior, Prenda prendaInferior, Prenda calzado, Prenda accesorio) {
-        return  ((prendaSuperior.getCategoria() == Categoria.PARTE_SUPERIOR) &&
-                (prendaInferior.getCategoria()== Categoria.PARTE_INFERIOR) &&
-                (calzado.getCategoria() == Categoria.CALZADO) &&
-                (accesorio.getCategoria() == Categoria.ACCESORIOS));
+        return (esCategoria(prendaSuperior, Categoria.PARTE_SUPERIOR) && esCategoria(prendaInferior, Categoria.PARTE_INFERIOR)
+                && esCategoria(calzado, Categoria.CALZADO) && esCategoria(accesorio,Categoria.ACCESORIOS));
+
     }
 
-
+    public boolean esCategoria(Prenda prenda, Categoria categoria){
+        return (prenda.getCategoria() == categoria);
+    }
 
 
 
