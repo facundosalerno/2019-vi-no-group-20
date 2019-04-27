@@ -40,6 +40,8 @@ public class TestsValidacionUsuarioYGuardarropas {
         camisa = armarUnaPrenda(TipoDePrenda.CAMISA, Material.ALGODON, azul, rojo, Trama.CUADROS);
     }
 
+    
+    
     public Prenda armarUnaPrenda(TipoDePrenda tipoDePrenda, Material material, Color colorPrimario, Color colorSecundario, Trama trama){
         BorradorPrenda borradorPrenda = new BorradorPrenda();
         borradorPrenda.definirTipo(tipoDePrenda);
@@ -59,6 +61,16 @@ public class TestsValidacionUsuarioYGuardarropas {
             Assert.fail();
         }
     }
+    
+    // Verificar que no se permita tener un guardarropa vacio
+    
+     @Test(expected= NoPermiteGuardarropaVacioException.class)
+    public void pedirSugerenciaConGuardarropaVacio (){
+        Guardarropas guardarropasDeInvierno= new Guardarropas (Arrays.asList(),Arrays.asList(),Arrays.asList());
+        guardarropasDeInvierno.sugerirAtuendo();
+    }
+
+
 
     //TODO: preguntar alguna manera copada de testear las sugerencias de guardarropas
 }
