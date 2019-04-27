@@ -33,5 +33,7 @@ public class TipoDePrenda {
     public static final TipoDePrenda OJOTAS = new TipoDePrenda(Categoria.CALZADO, Arrays.asList(Material.GOMA));
     public static final TipoDePrenda ALPARGATAS = new TipoDePrenda(Categoria.CALZADO, Arrays.asList(Material.ALGODON));
     public static final TipoDePrenda ZAPATO_DE_TACON = new TipoDePrenda(Categoria.CALZADO, Arrays.asList(Material.CUERO));
+    public static final TipoDePrenda PULSERA = new TipoDePrenda(Categoria.ACCESORIOS, Arrays.asList(Material.PLASTICO));
+    public static final TipoDePrenda ANTEOJOS = new TipoDePrenda(Categoria.ACCESORIOS, Arrays.asList(Material.PLASTICO));
 }
 
