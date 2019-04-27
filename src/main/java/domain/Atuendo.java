@@ -10,20 +10,23 @@ public class Atuendo {
     private Prenda prendaSuperior;
     private Prenda prendaInferior;
     private Prenda calzado;
+    private Prenda accesorio;
 
-    public Atuendo(Prenda prendaSuperior, Prenda prendaInferior, Prenda calzado){
-        if(!atuendoEsValido(prendaSuperior, prendaInferior, calzado))
+    public Atuendo(Prenda prendaSuperior, Prenda prendaInferior, Prenda calzado, Prenda accesorio){
+        if(!atuendoEsValido(prendaSuperior, prendaInferior, calzado, accesorio))
             throw new AtuendoInvalidoException();
         this.prendaSuperior = prendaSuperior;
         this.prendaInferior = prendaInferior;
         this.calzado = calzado;
+        this.accesorio = accesorio;
     }
 
     //TODO: la logica de esta funcion es bastante parecida a la que se usa en el guardarropas para decir si una lista de prendas es valida. Revisar eso
-    public boolean atuendoEsValido(Prenda prendaSuperior, Prenda prendaInferior, Prenda calzado) {
+    public boolean atuendoEsValido(Prenda prendaSuperior, Prenda prendaInferior, Prenda calzado, Prenda accesorio) {
         return  ((prendaSuperior.getCategoria() == Categoria.PARTE_SUPERIOR) &&
                 (prendaInferior.getCategoria()== Categoria.PARTE_INFERIOR) &&
-                (calzado.getCategoria() == Categoria.CALZADO));
+                (calzado.getCategoria() == Categoria.CALZADO) &&
+                (accesorio.getCategoria() == Categoria.ACCESORIOS));
     }
 
 
@@ -34,12 +37,9 @@ public class Atuendo {
     public Prenda getPrendaSuperior() {return prendaSuperior;}
     public Prenda getPrendaInferior() {return prendaInferior;}
     public Prenda getCalzado() {return calzado;}
+    public Prenda getAccesorio() {return accesorio;}
 
 
-
-
-
-    //Redefinicion de equals y hasCode para poder comparar dos instancias de este objeto distintas.
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -47,11 +47,12 @@ public class Atuendo {
         Atuendo atuendo = (Atuendo) o;
         return Objects.equals(prendaSuperior, atuendo.prendaSuperior) &&
                 Objects.equals(prendaInferior, atuendo.prendaInferior) &&
-                Objects.equals(calzado, atuendo.calzado);
+                Objects.equals(calzado, atuendo.calzado) &&
+                Objects.equals(accesorio, atuendo.accesorio);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(prendaSuperior, prendaInferior, calzado);
+        return Objects.hash(prendaSuperior, prendaInferior, calzado, accesorio);
     }
 }
