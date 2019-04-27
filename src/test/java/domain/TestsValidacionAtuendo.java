@@ -13,6 +13,7 @@ public class TestsValidacionAtuendo {
     private Prenda zapatos;
     private Prenda remera;
     private Prenda pantalon;
+    private Prenda anteojos;
 
     @Before
     public void init() {
@@ -24,7 +25,7 @@ public class TestsValidacionAtuendo {
         zapatos = armarUnaPrenda(TipoDePrenda.ZAPATO, Material.CUERO, rojo, azul, Trama.GASTADO);
         remera = armarUnaPrenda(TipoDePrenda.REMERA, Material.ALGODON, azul, rojo, Trama.CUADROS);
         pantalon = armarUnaPrenda(TipoDePrenda.PANTALON, Material.JEAN, verde, rojo, Trama.RAYADA);
-
+        anteojos= armarUnaPrenda(TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA);
 
     }
 
@@ -43,8 +44,8 @@ public class TestsValidacionAtuendo {
     @Test
     public void crearAtuendoValido() {
         try{
-            new Atuendo(remera, pantalon, zapatos);
-        }catch (AtuendoInvalidoException ex){
+            new Atuendo(remera, pantalon, zapatos, anteojos);
+        }catch (AtuendoInvalidoException exc){
             Assert.fail();
         }
     }
@@ -52,6 +53,6 @@ public class TestsValidacionAtuendo {
     //Test para verificar que no deberia crearse un atuendo invalido
     @Test (expected = AtuendoInvalidoException.class)
     public void crearAtuendoInvalido() {
-        new Atuendo(pantalon, pantalon, zapatos);
+        new Atuendo(pantalon, pantalon, zapatos, anteojos);
     }
 }
