@@ -12,129 +12,46 @@ public class TestsValidacionAtuendo {
     private Atuendo atuendo;
     private Prenda zapatos;
     private Prenda remera;
-    private Prenda camisa;
     private Prenda pantalon;
-    private Prenda blusa;
-    private Prenda shorts;
-    private Prenda zapatillas;
-    private Prenda pollera;
-    private Prenda ojotas;
-    private Prenda alpargatas;
-
-    private Guardarropas guardarropas_1;
-    private Guardarropas guardarropas_2;
-    Usuario carlos;
 
     @Before
     public void init() {
         //Instanciaciones previas a los TEST
-        BorradorPrenda borradorPrenda;
-        Color color1 = new Color(200, 100, 100);
-        Color color2 = new Color(90, 80, 10);
+        Color rojo = new Color(255, 0, 0);
+        Color verde = new Color(0, 255, 0);
+        Color azul = new Color(0, 0, 255);
 
-        borradorPrenda = new BorradorPrenda();
-        borradorPrenda.definirTipo(TipoDePrenda.ZAPATO);
-        borradorPrenda.definirMaterial(Material.CUERO);
-        borradorPrenda.definirColorPrimario(color1);
-        borradorPrenda.definirColorSecundario(color2);
-        zapatos = borradorPrenda.crearPrenda();
-
-        borradorPrenda = new BorradorPrenda(); //Para no arrastrar cosas como el color secundario
-        borradorPrenda.definirTipo(TipoDePrenda.REMERA);
-        borradorPrenda.definirMaterial(Material.ALGODON);
-        borradorPrenda.definirColorPrimario(color2);
-        borradorPrenda.definirTrama(Trama.CUADROS);
-        remera = borradorPrenda.crearPrenda();
-
-        borradorPrenda = new BorradorPrenda(); //Para no arrastrar cosas como el color secundario
-        borradorPrenda.definirTipo(TipoDePrenda.CAMISA);
-        borradorPrenda.definirMaterial(Material.POLIESTER);
-        borradorPrenda.definirColorPrimario(color2);
-        borradorPrenda.definirTrama(Trama.RAYADA);
-        camisa = borradorPrenda.crearPrenda();
-
-        borradorPrenda = new BorradorPrenda();
-        borradorPrenda.definirTipo(TipoDePrenda.PANTALON);
-        borradorPrenda.definirMaterial(Material.JEAN);
-        borradorPrenda.definirColorPrimario(color1);
-        borradorPrenda.definirTrama(Trama.GASTADO);
-        pantalon = borradorPrenda.crearPrenda();
-
-        borradorPrenda = new BorradorPrenda();
-        borradorPrenda.definirTipo(TipoDePrenda.SHORT);
-        borradorPrenda.definirMaterial(Material.JEAN);
-        borradorPrenda.definirColorPrimario(color1);
-        borradorPrenda.definirTrama(Trama.GASTADO);
-        shorts = borradorPrenda.crearPrenda();
-
-        borradorPrenda = new BorradorPrenda();
-        borradorPrenda.definirTipo(TipoDePrenda.BLUSA);
-        borradorPrenda.definirMaterial(Material.ALGODON);
-        borradorPrenda.definirColorPrimario(color1);
-        blusa = borradorPrenda.crearPrenda();
-
-        borradorPrenda = new BorradorPrenda();
-        borradorPrenda.definirTipo(TipoDePrenda.ZAPATILLA);
-        borradorPrenda.definirMaterial(Material.GAMUZA);
-        borradorPrenda.definirColorPrimario(color1);
-        zapatillas = borradorPrenda.crearPrenda();
-
-        borradorPrenda = new BorradorPrenda();
-        borradorPrenda.definirTipo(TipoDePrenda.POLLERA);
-        borradorPrenda.definirMaterial(Material.POLIESTER);
-        borradorPrenda.definirColorPrimario(color1);
-        borradorPrenda.definirTrama(Trama.CUADROS);
-        pollera = borradorPrenda.crearPrenda();
-
-        borradorPrenda = new BorradorPrenda();
-        borradorPrenda.definirTipo(TipoDePrenda.OJOTAS);
-        borradorPrenda.definirMaterial(Material.GOMA);
-        borradorPrenda.definirColorPrimario(color1);
-        ojotas = borradorPrenda.crearPrenda();
-
-        borradorPrenda = new BorradorPrenda();
-        borradorPrenda.definirTipo(TipoDePrenda.ALPARGATAS);
-        borradorPrenda.definirMaterial(Material.ALGODON);
-        borradorPrenda.definirColorPrimario(color1);
-        borradorPrenda.definirTrama(Trama.CUADROS);
-        alpargatas = borradorPrenda.crearPrenda();
+        zapatos = armarUnaPrenda(TipoDePrenda.ZAPATO, Material.CUERO, rojo, azul, Trama.GASTADO);
+        remera = armarUnaPrenda(TipoDePrenda.REMERA, Material.ALGODON, azul, rojo, Trama.CUADROS);
+        pantalon = armarUnaPrenda(TipoDePrenda.PANTALON, Material.JEAN, verde, rojo, Trama.RAYADA);
 
 
-        guardarropas_1 = new Guardarropas(Arrays.asList(remera, camisa), Arrays.asList(shorts, pantalon), Arrays.asList(zapatos, zapatillas));
-        guardarropas_2 = new Guardarropas(Arrays.asList(blusa, camisa), Arrays.asList(pollera), Arrays.asList(ojotas, alpargatas));
-        carlos = new Usuario(Arrays.asList(guardarropas_1, guardarropas_2));
+    }
+
+    public Prenda armarUnaPrenda(TipoDePrenda tipoDePrenda, Material material, Color colorPrimario, Color colorSecundario, Trama trama){
+        BorradorPrenda borradorPrenda = new BorradorPrenda();
+        borradorPrenda.definirTipo(tipoDePrenda);
+        borradorPrenda.definirMaterial(material);
+        borradorPrenda.definirColorPrimario(colorPrimario);
+        borradorPrenda.definirColorSecundario(colorSecundario);
+        borradorPrenda.definirTrama(trama);
+        return borradorPrenda.crearPrenda();
     }
 
 
-    //Test de sugerencias de varios guardarropas (que las listas generadas por los distintos guardarropas sean distintas)
-    @Test
-    public void sugerenciasUsuarioEsLaUnionDeSugerenciasDeSusGuardarropas() {
-        List<Atuendo> atuendos1 = guardarropas_1.sugerir();
-        List<Atuendo> atuendos2 = guardarropas_2.sugerir();
-        Assert.assertTrue(carlos.obtenerSugerencias().size() == atuendos1.size() + atuendos2.size());
-        //Assert.assertTrue(carlos.obtenerSugerencias().containsAll(atuendos2) || carlos.obtenerSugerencias().containsAll(atuendos1));
-    }
-
-    //Test de atuendo valido
+    //Test para verificar que podemos crear un atuendo correctamente
     @Test
     public void crearAtuendoValido() {
-        atuendo = new Atuendo(remera, pantalon, zapatos);
-        Assert.assertNotNull(atuendo);
+        try{
+            new Atuendo(remera, pantalon, zapatos);
+        }catch (AtuendoInvalidoException ex){
+            Assert.fail();
+        }
     }
 
-
-    //--CHEQUEANDO EXCEPCIONES--
-
-    //Test para capturar atuendo invalido exception
-    @Test(expected = AtuendoInvalidoException.class)
+    //Test para verificar que no deberia crearse un atuendo invalido
+    @Test (expected = AtuendoInvalidoException.class)
     public void crearAtuendoInvalido() {
-        atuendo = new Atuendo(pantalon, pantalon, zapatos);
-    }
-
-    //Test para capturar guardarropas invalido
-    @Test(expected = NoPerteneceALaCategoriaException.class)
-    public void crearGuardarropasInvalido(){
-        Guardarropas guardarropas= new Guardarropas(Arrays.asList(remera, alpargatas), Arrays.asList(shorts, pantalon), Arrays.asList(zapatos, zapatillas));
-
+        new Atuendo(pantalon, pantalon, zapatos);
     }
 }

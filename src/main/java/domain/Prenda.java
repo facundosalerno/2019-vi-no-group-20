@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Objects;
+
 public class Prenda {
     private TipoDePrenda tipoPrenda;
     private Material material;
@@ -16,21 +18,45 @@ public class Prenda {
         this.trama = trama;
     }
 
+
+
+
+
+
+    //Getters
     public Categoria getCategoria() {
         return this.tipoPrenda.categoria();
     }
-
     public TipoDePrenda getTipoPrenda(){
         return this.tipoPrenda;
     }
-
     public Material getMaterial(){
         return this.material;
     }
-
     public Color getColorPrimario() { return colorPrimario;}
-
     public Color getColorSecundario() { return colorSecundario;}
-
     public Trama getTrama() { return trama;}
+
+
+
+
+
+
+    //Equals y hashCode
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Prenda prenda = (Prenda) o;
+        return Objects.equals(getTipoPrenda(), prenda.getTipoPrenda()) &&
+                getMaterial() == prenda.getMaterial() &&
+                Objects.equals(getColorPrimario(), prenda.getColorPrimario()) &&
+                Objects.equals(getColorSecundario(), prenda.getColorSecundario()) &&
+                getTrama() == prenda.getTrama();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getTipoPrenda(), getMaterial(), getColorPrimario(), getColorSecundario(), getTrama());
+    }
 }

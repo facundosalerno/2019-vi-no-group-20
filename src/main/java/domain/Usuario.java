@@ -1,7 +1,8 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Usuario {
     private List<Guardarropas> guardarropas;
@@ -12,9 +13,26 @@ public class Usuario {
     }
 
     public List<Atuendo> obtenerSugerencias(){
-        List<Atuendo> aux = new ArrayList<Atuendo>();
-        guardarropas.stream()
-                .forEach(guardarropa -> aux.addAll(guardarropa.sugerir()));
-        return aux;
+        return guardarropas.stream()
+                .flatMap(guardarropa -> guardarropa.sugerirAtuendos().stream())
+                .collect(Collectors.toList());
+    }
+
+
+
+
+
+    //Equals y hashCode
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario = (Usuario) o;
+        return Objects.equals(guardarropas, usuario.guardarropas);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(guardarropas);
     }
 }

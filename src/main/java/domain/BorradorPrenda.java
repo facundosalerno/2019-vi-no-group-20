@@ -2,6 +2,7 @@ package domain;
 
 import exceptions.*;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 
 public class BorradorPrenda {
@@ -11,50 +12,32 @@ public class BorradorPrenda {
     private Color colorSecundario;
     private Trama trama = Trama.LISA;
 
-    public BorradorPrenda() {
-
-    }
-    public Categoria getCategoria(){
-        return this.tipoPrenda.categoria();
-    }
-
-    public Material getMaterial(){ return this.material; }
-
-    public TipoDePrenda getTipoPrenda(){
-        return this.tipoPrenda;
-    }
-
-    public Color getColorPrimario(){
-        return this.colorPrimario;
-    }
-
-    public Color getColorSecundario(){
-        return this.colorSecundario;
-    }
-
-    public Trama getTrama(){
-        return this.trama;
-    }
 
     public void definirTipo(TipoDePrenda tipoPrenda) {
+        requireNonNull(tipoPrenda, "Por ahora no admitimos un tipo de prenda null");
         this.tipoPrenda = tipoPrenda;
-        //requireNonNull(tipo, "tipo de prenda es obligatorio"); EL CHEQUEO SE HACE EN definir o cuando hago la prenda o ambos
     }
 
     public void definirMaterial(Material material) {
-        requireNonNull(tipoPrenda, "Defina antes el tipo de prenda");
+        requireNonNull(material, "Por ahora no admitimos un material null");
+        if(isNull(tipoPrenda))
+            throw new TipoDePrendaNoDefinidoExcepcion("Preferimos que defina antes el tipo de prenda");
         if (!tipoPrenda.permiteMaterial(material))
             throw new NoPermiteMaterialException();
         this.material = material;
     }
 
     public void definirColorPrimario(Color color) {
+        requireNonNull(color, "Por ahora no admitimos el color null");
+        if (color.equals(this.colorSecundario)) {
+            throw new NoPermiteSerElMismoColorException();
+        }
         this.colorPrimario = color;
     }
 
     public void definirColorSecundario(Color color) {
-        requireNonNull(colorPrimario, "Defina antes el color primario");
-        if (color.esIgual(this.colorPrimario)) {
+        requireNonNull(color, "Por ahora no admitimos el color null");
+        if (color.equals(this.colorPrimario)) {
             throw new NoPermiteSerElMismoColorException();
         }
         this.colorSecundario = color;
