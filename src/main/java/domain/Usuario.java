@@ -14,7 +14,7 @@ public class Usuario {
 
     public List<Atuendo> obtenerSugerencias(){
         return guardarropas.stream()
-                .flatMap(guardarropa -> guardarropa.sugerirAtuendos().stream())
+                .flatMap(guardarropa -> guardarropa.sugerirAtuendo().stream())
                 .collect(Collectors.toList());
     }
 

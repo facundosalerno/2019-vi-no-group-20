@@ -66,19 +66,17 @@ public class TestsValidacionUsuarioYGuardarropas {
         }
     }
 
-// Verificar que no se permita tener un guardarropa vacio
+    // Verificar que no se permita tener un guardarropa vacio
 
    @Test(expected= NoPermiteGuardarropaIncompletoException.class)
    public void pedirSugerenciaConGuardarropaVacio(){
          Guardarropas guardarropasDeInvierno= new Guardarropas (Arrays.asList(),Arrays.asList(),Arrays.asList(),Arrays.asList());
-         guardarropasDeInvierno.sugerirAtuendo();
     }
 
- // Verificar que no de sugerencias si no tiene prenda superior
+    // Verificar que no de sugerencias si no tiene prenda superior
     @Test(expected= NoPermiteGuardarropaIncompletoException.class)
     public void pedirSugerenciaConGuardarropaIncompleto(){
         Guardarropas guardarropasDeportivo= new Guardarropas (Arrays.asList(),Arrays.asList(pantalon),Arrays.asList(zapatillas), Arrays.asList(anteojos));
-        guardarropasDeportivo.sugerirAtuendo();
 }
 
 }
