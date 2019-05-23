@@ -33,9 +33,9 @@ public class Guardarropas {
     }
 
     public List<Atuendo> sugerirAtuendo(){
-        return Sets.cartesianProduct(ImmutableList.of(ImmutableSet.copyOf(prendasSuperiores), ImmutableSet.copyOf(prendasInferiores), ImmutableSet.copyOf(accesorios), ImmutableSet.copyOf(calzados)))
+        return Sets.cartesianProduct(ImmutableList.of(ImmutableSet.copyOf(prendasSuperiores),ImmutableSet.copyOf(prendasSuperiores), ImmutableSet.copyOf(prendasInferiores), ImmutableSet.copyOf(accesorios), ImmutableSet.copyOf(calzados)))
                 .stream()
-                .map(list -> new Atuendo(list.get(0), list.get(1), list.get(2),list.get(3)))
+                .map(list -> new Atuendo(list.get(0), list.get(1), list.get(2),list.get(3),list.get(4)))
                 .collect(Collectors.toList());
     }
 
