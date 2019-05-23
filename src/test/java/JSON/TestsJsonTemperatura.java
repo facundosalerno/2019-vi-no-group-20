@@ -8,7 +8,7 @@ import com.google.gson.Gson;
 
 import clima.ClimaActual;
 
-public class jsonTemperaturaTest {
+public class TestsJsonTemperatura {
 
 	
 	@Test
