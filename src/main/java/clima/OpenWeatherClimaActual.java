@@ -39,6 +39,7 @@ public class OpenWeatherClimaActual implements Clima {
     }
 
     public Temperature getTemperature() {
+        //Aca va la logica para convertir lo que te devuelve el JSON de OpenWeather al tipo Temperature
         return Temperature;
     }
 
