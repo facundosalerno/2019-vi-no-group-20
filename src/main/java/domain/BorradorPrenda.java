@@ -44,7 +44,12 @@ public class BorradorPrenda {
     }
 
     public void definirTrama(Trama trama) {
-        this.trama = trama;
+        if(isNull(trama)){
+            this.trama = Trama.LISA;
+        } else{
+            this.trama = trama;
+        }
+
     }
 
     public Prenda crearPrenda() {
@@ -56,3 +61,4 @@ public class BorradorPrenda {
     }
 
 }
+
