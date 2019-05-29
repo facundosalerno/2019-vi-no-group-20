@@ -10,11 +10,11 @@ public class AccuWeatherClimaActual implements Clima{
 	String HasPrecipitation;
 	String PrecipitationType;
 	String IsDayTime;
-	Temperature Temperature;
+	TemperaturaAccuWeather Temperature;
 	String MobileLink;
 	String Link;
 
-	public AccuWeatherClimaActual(String LocalObservationDateTime, String EpochTime, String WeatherText, String WeatherIcon, String HasPrecipitation,String PrecipitationType,String IsDayTime,Temperature Temperature,String MobileLink,String Link) {
+	public AccuWeatherClimaActual(String LocalObservationDateTime, String EpochTime, String WeatherText, String WeatherIcon, String HasPrecipitation,String PrecipitationType,String IsDayTime,TemperaturaAccuWeather Temperature,String MobileLink,String Link) {
 
 		this.LocalObservationDateTime=LocalObservationDateTime ;
 		this.EpochTime=EpochTime ;
@@ -85,11 +85,11 @@ public class AccuWeatherClimaActual implements Clima{
 		IsDayTime = isDayTime;
 	}
 
-	public Temperature getTemperature() {
+	public TemperaturaAccuWeather getTemperature() {
 		return Temperature;
 	}
 
-	public void setTemperature(Temperature temperature) {
+	public void setTemperature(TemperaturaAccuWeather temperature) {
 		Temperature = temperature;
 	}
 

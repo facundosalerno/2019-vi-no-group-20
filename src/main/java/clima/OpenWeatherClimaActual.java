@@ -4,7 +4,7 @@ public class OpenWeatherClimaActual implements Clima {
 
     String WeatherText;
     String WeatherIcon;
-    Temperature Temperature;
+    TemperaturaAccuWeather Temperature;
     String Coord;
     String Weather;
     String Base;
@@ -14,7 +14,7 @@ public class OpenWeatherClimaActual implements Clima {
     String Dt;
     String Sys;
 
-    public OpenWeatherClimaActual(String WeatherText, String WeatherIcon, Temperature Temperature) {
+    public OpenWeatherClimaActual(String WeatherText, String WeatherIcon, TemperaturaAccuWeather Temperature) {
 
         this.WeatherText=WeatherText;
         this.WeatherIcon=WeatherIcon;
@@ -38,12 +38,12 @@ public class OpenWeatherClimaActual implements Clima {
         WeatherIcon = weatherIcon;
     }
 
-    public Temperature getTemperature() {
+    public TemperaturaAccuWeather getTemperature() {
         //Aca va la logica para convertir lo que te devuelve el JSON de OpenWeather al tipo Temperature
         return Temperature;
     }
 
-    public void setTemperature(Temperature temperature) {
+    public void setTemperature(TemperaturaAccuWeather temperature) {
         Temperature = temperature;
     }
 

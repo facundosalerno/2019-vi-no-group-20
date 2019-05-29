@@ -5,7 +5,7 @@ public interface Clima {
 
     public void setWeatherText(String weatherText);
 
-    public Temperature getTemperature();
+    public TemperaturaAccuWeather getTemperature();
 
-    public void setTemperature(Temperature temperature);
+    public void setTemperature(TemperaturaAccuWeather temperature);
 }
