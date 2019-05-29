@@ -1,6 +1,9 @@
 package domain;
 
+import java.io.IOException;
 import java.util.Objects;
+
+import static java.util.Objects.requireNonNull;
 
 public class Prenda {
     private TipoDePrenda tipoPrenda;
@@ -8,7 +11,12 @@ public class Prenda {
     private Color colorPrimario;
     private Color colorSecundario;
     private Trama trama;
+    private Imagen imagen;
 
+    public void definirImagen(String pathDeArchivo) throws IOException {
+        requireNonNull(pathDeArchivo, "El path del archivo no es valido");
+        imagen=new Imagen(pathDeArchivo);
+    }
 
     public Prenda(TipoDePrenda tipo, Color colorPrimario, Color colorSecundario, Material material, Trama trama) {
         this.tipoPrenda = tipo;
@@ -17,10 +25,6 @@ public class Prenda {
         this.colorSecundario = colorSecundario;
         this.trama = trama;
     }
-
-
-
-
 
 
     //Getters

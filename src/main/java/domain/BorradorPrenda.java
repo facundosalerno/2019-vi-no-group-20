@@ -2,6 +2,8 @@ package domain;
 
 import exceptions.*;
 
+import java.io.IOException;
+
 import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 
@@ -11,7 +13,6 @@ public class BorradorPrenda {
     private Color colorPrimario;
     private Color colorSecundario;
     private Trama trama = Trama.LISA;
-
 
     public void definirTipo(TipoDePrenda tipoPrenda) {
         requireNonNull(tipoPrenda, "Por ahora no admitimos un tipo de prenda null");
