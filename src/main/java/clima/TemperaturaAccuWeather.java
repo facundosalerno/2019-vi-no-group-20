@@ -1,61 +1,34 @@
 package clima;
 
 public class TemperaturaAccuWeather implements Clima{
-	SistemaUnidades Metric;
-	SistemaUnidades Imperial;
+	float Value;
+	String Unit;
+	String UnitType;
 	
 	
-	public TemperaturaAccuWeather(SistemaUnidades Metric,SistemaUnidades Imperial) {
-		this.Metric=Metric;
-		this.Imperial=Imperial;
+	public float getValue() {
+		return Value;
+	}
+	public void setValue(float value) {
+		Value = value;
+	}
+	public String getUnit() {
+		return Unit;
+	}
+	public void setUnit(String unit) {
+		Unit = unit;
+	}
+	public String getUnitType() {
+		return UnitType;
+	}
+	public void setUnitType(String unitType) {
+		UnitType = unitType;
+	}
+	
+	@Override
+	public float getTemperature() {
 		
-	}
-
-
-	public SistemaUnidades getMetric() {
-		return Metric;
-	}
-
-
-	public void setMetric(SistemaUnidades metric) {
-		Metric = metric;
-	}
-
-
-	public SistemaUnidades getImperial() {
-		return Imperial;
-	}
-
-
-	public void setImperial(SistemaUnidades imperial) {
-		Imperial = imperial;
-	}
-
-
-	@Override
-	public String getWeatherText() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public void setWeatherText(String weatherText) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public TemperaturaAccuWeather getTemperature() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public void setTemperature(TemperaturaAccuWeather temperature) {
-		// TODO Auto-generated method stub
-		
+		return this.getValue();
 	}
 }
+
