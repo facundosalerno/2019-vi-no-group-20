@@ -19,7 +19,7 @@ public class TemperaturaOpenWeather implements Clima {
 	@Override
 	public double getTemperature() {
 	
-		return this.temp;
+		return this.temp-273.15;
 	}
 
 }
