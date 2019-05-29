@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import com.google.gson.Gson;
 
-import clima.ClimaActual;
+import clima.AccuWeatherClimaActual;
 
 public class TestsJsonTemperatura {
 
@@ -37,7 +37,7 @@ public class TestsJsonTemperatura {
 				"        \"Link\": \"http://www.accuweather.com/es/ar/buenos-aires/7894/current-weather/7894\"\r\n" + 
 				"    }";
 		final Gson gson = new Gson();
-	    final ClimaActual clima = gson.fromJson(json, ClimaActual.class);
+	    final AccuWeatherClimaActual clima = gson.fromJson(json, AccuWeatherClimaActual.class);
 	    assertEquals("2019-05-23T14:20:00-03:00", clima.getLocalObservationDateTime());
 		assertEquals("1558632000", clima.getEpochTime());
 		assertEquals("Soleado", clima.getWeatherText());
