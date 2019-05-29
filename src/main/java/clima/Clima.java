@@ -10,6 +10,6 @@ public interface Clima {
 
     public void setTemperature(TemperaturaAccuWeather temperature);*/
 	
-	public float getTemperature();
+	public double getTemperature();
 	
 }

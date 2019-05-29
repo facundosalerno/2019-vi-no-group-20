@@ -1,12 +1,18 @@
 package clima;
 
 public class TemperaturaAccuWeather implements Clima{
-	float Value;
+	double Value;
 	String Unit;
 	String UnitType;
 	
+	public TemperaturaAccuWeather (double Value,String Unit,String UnitType) {
+		this.Value=Value;
+		this.Unit=Unit;
+		this.UnitType=UnitType;
+		
+	}
 	
-	public float getValue() {
+	public double getValue() {
 		return Value;
 	}
 	public void setValue(float value) {
@@ -26,7 +32,7 @@ public class TemperaturaAccuWeather implements Clima{
 	}
 	
 	@Override
-	public float getTemperature() {
+	public double getTemperature() {
 		
 		return this.getValue();
 	}
