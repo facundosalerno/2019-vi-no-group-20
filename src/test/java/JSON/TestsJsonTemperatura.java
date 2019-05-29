@@ -13,7 +13,7 @@ import clima.TemperaturaOpenWeather;
 
 public class TestsJsonTemperatura {
 
-	
+	//verificar con postman las temperaturas antes del hacer el test
 	@Test
 	public void debeDevolverJSONEnUnObjetoAccuWeather() {
 		
