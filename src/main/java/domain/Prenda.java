@@ -26,6 +26,10 @@ public class Prenda {
         this.trama = trama;
     }
 
+    public boolean esAptaParaTemperatura(int temperatura){
+        return this.tipoPrenda.esAptaParaTemperatura(temperatura);
+    }
+
 
     //Getters
     public Categoria getCategoria() {
