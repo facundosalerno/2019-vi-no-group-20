@@ -13,17 +13,17 @@ public class Prenda {
     private Trama trama;
     private Imagen imagen;
 
-    public void definirImagen(String pathDeArchivo) throws IOException {
-        requireNonNull(pathDeArchivo, "El path del archivo no es valido");
-        imagen=new Imagen(pathDeArchivo);
-    }
-
     public Prenda(TipoDePrenda tipo, Color colorPrimario, Color colorSecundario, Material material, Trama trama) {
         this.tipoPrenda = tipo;
         this.material = material;
         this.colorPrimario = colorPrimario;
         this.colorSecundario = colorSecundario;
         this.trama = trama;
+    }
+
+    public void definirImagen(String pathDeArchivo) throws IOException {
+        requireNonNull(pathDeArchivo, "El path del archivo no es valido");
+        imagen=new Imagen(pathDeArchivo);
     }
 
     public boolean esAptaParaTemperatura(int temperatura){
