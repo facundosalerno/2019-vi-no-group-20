@@ -33,5 +33,6 @@ public class TestsJsonTemperatura {
 		TemperaturaOpenWeather nuevoClima= nuevaConexion.devolverClima();
 
 		Assert.assertEquals(10.94, nuevoClima.getTemperature(), 0.5);
+		
 	}
 }
