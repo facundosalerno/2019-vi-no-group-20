@@ -1,5 +1,7 @@
 package domain;
 
+import exceptions.NoExisteGuardarropasException;
+
 import java.time.LocalDateTime;
 import java.util.Deque;
 import java.util.List;
@@ -18,10 +20,10 @@ public class Usuario {
         this.guardarropas = guardarropas;
     }
 
-    public List<Atuendo> obtenerSugerencias(){
-        return guardarropas.stream()
-                    .flatMap(guardarropa -> guardarropa.sugerirAtuendo().stream())
-                .collect(Collectors.toList());
+    public List<Atuendo> obtenerSugerencias(int indexGuardarropas){
+        if(indexGuardarropas<0 || guardarropas.size() >= indexGuardarropas)
+            throw new NoExisteGuardarropasException();
+        return guardarropas.get(indexGuardarropas).sugerirAtuendo().stream().collect(Collectors.toList());
     }
 
     public void cargarEvento(String nombreEvento, LocalDateTime fechaYHora, String lugar){
