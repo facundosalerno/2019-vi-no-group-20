@@ -38,6 +38,13 @@ public class Usuario {
         eventos.add(new Evento(nombreEvento, fechaYHora,lugar, this));
     }
 
+    public List<Atuendo> recibirSugerenciasEvento(String nombreEvento, LocalDateTime fechaEvento){ //Tambien podriamos haber usado index en la lista
+        return eventos.stream().filter(evento -> evento.seLlama(nombreEvento))
+                .filter(evento -> evento.esEnLaFecha(fechaEvento))
+                .collect(Collectors.toList())
+                .get(0).obtenerSugerencias();
+    }
+
     public void deshacerUltimaDecision(){
         if(decisiones.isEmpty())
             throw new NoHayDecisionesParaDeshacer();
@@ -46,10 +53,12 @@ public class Usuario {
 
     public void aceptarSugerencia(Atuendo atuendo){
         decisiones.push(new Aceptar(atuendo));
+        atuendosAceptados.add(atuendo);
     }
 
     public void rechazarSugerencia(Atuendo atuendo){
         decisiones.push(new Rechazar(atuendo));
+        atuendosRechazados.add(atuendo);
     }
 
 
