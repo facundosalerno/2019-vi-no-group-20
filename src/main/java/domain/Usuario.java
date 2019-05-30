@@ -2,6 +2,7 @@ package domain;
 
 import exceptions.NoExisteGuardarropasException;
 import exceptions.NoHayDecisionesParaDeshacer;
+import exceptions.ElGuardarropasNoEsAptoException;
 
 import java.time.LocalDateTime;
 import java.util.Deque;
@@ -14,13 +15,15 @@ public class Usuario {
     private Deque<Decision> decisiones;
     private List<Atuendo> atuendosAceptados;
     private List<Atuendo> atuendosRechazados;
+    private TipoDeUsuario tipoDeUsuario;
 
     private List<Guardarropas> guardarropas;
     
-    public Usuario(List<Guardarropas> guardarropas){
+    public Usuario(List<Guardarropas> guardarropas) {
+        if (!guardarropas.stream().allMatch(guardarropa -> guardarropa.tipoDeUsuarioQueAcepta() == tipoDeUsuario))
+                  throw new ElGuardarropasNoEsAptoException();
         this.guardarropas = guardarropas;
     }
-
 
     public List<Atuendo> obtenerSugerenciasDeTodosSusGuardarropas(){
         return guardarropas.stream()
