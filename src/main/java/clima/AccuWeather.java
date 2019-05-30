@@ -1,11 +1,9 @@
 package clima;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 
 import conexionesUrl.NetClientGet;
+
 
 public class AccuWeather implements ApiExterna {
     private final String URI = "http://dataservice.accuweather.com/currentconditions/v1/7894?apikey=HV798EVNbOimEhbHAHcvlUkqLs3MwO7N";
@@ -15,14 +13,19 @@ public class AccuWeather implements ApiExterna {
     public void obtenerClima() {
         jsonData = NetClientGet.main(URI);
         final Gson gson = new Gson();
-		
-		JsonParser parser = new JsonParser();
-		JsonObject element = (JsonObject)parser.parse(gson.toString());
 
-		JsonElement responseWrapper = element.get("Metric");
+        JsonParser parser = new JsonParser();
+        JsonArray arrayParseado = parser.parse(jsonData).getAsJsonArray();
+        JsonElement primerElentoDelArray = arrayParseado.get(0);
+        JsonObject objetoParseado = (JsonObject)parser.parse(primerElentoDelArray.toString());
 
-	    final TemperaturaAccuWeather climaActual = gson.fromJson(jsonData, TemperaturaAccuWeather.class);
+        JsonElement Temperature = objetoParseado.get("Temperature");
+        JsonObject element3 = (JsonObject)parser.parse(Temperature.toString());
+        JsonElement Metric = element3.get("Metric");
+
+	    this.climaActual = gson.fromJson(Metric, TemperaturaAccuWeather.class);
     }
+
 
     public TemperaturaAccuWeather devolverClima() {
 
