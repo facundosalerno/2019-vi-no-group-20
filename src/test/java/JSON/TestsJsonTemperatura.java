@@ -2,6 +2,7 @@ package JSON;
 
 import static org.junit.Assert.*;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import clima.AccuWeather;
@@ -18,15 +19,19 @@ public class TestsJsonTemperatura {
 	public void debeDevolverJSONEnUnObjetoAccuWeather() {
 		
 		AccuWeather nuevaConexion= new AccuWeather();
+		nuevaConexion.obtenerClima();
 		TemperaturaAccuWeather nuevoClima= nuevaConexion.devolverClima();
-		assertEquals(12.8, nuevoClima.getTemperature());
+
+		Assert.assertEquals(12.2, nuevoClima.getTemperature(), 0.5);
 	}
 	
 	@Test
 	public void debeDevolverJSONEnUnObjetoOpenWeather() {
 		
 		OpenWeather nuevaConexion= new OpenWeather();
+		nuevaConexion.obtenerClima();
 		TemperaturaOpenWeather nuevoClima= nuevaConexion.devolverClima();
-		assertEquals(12.91, nuevoClima.getTemperature());
+
+		Assert.assertEquals(10.94, nuevoClima.getTemperature(), 0.5);
 	}
 }
