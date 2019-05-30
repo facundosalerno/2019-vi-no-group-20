@@ -5,36 +5,27 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import exceptions.NoPerteneceALaCategoriaException;
-import exceptions.NoPermiteGuardarropaIncompletoException;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Guardarropas {
+public abstract class Guardarropas {
 
-    private List<Prenda> prendasSuperiores;
-    private List<Prenda> prendasInferiores;
-    private List<Prenda> calzados;
-    private List<Prenda> accesorios;
+    public List<Prenda> prendasSuperiores;
+    public List<Prenda> prendasInferiores;
+    public List<Prenda> calzados;
+    public List<Prenda> accesorios;
+    public TipoDeUsuario tipoUsuarioQueAcepta = tipoUsuarioQueAcepta;
 
-    public Guardarropas(List<Prenda> prendasSuperiores, List<Prenda> prendasInferiores, List<Prenda> calzados, List<Prenda> accesorios) {
-        //TODO: hay que validar que ninguna este vacia o solo alguna??
-        if(prendasSuperiores.isEmpty() || prendasInferiores.isEmpty() || calzados.isEmpty() || accesorios.isEmpty())
-            throw new NoPermiteGuardarropaIncompletoException();
-        prendasCoincidenConCategoria(prendasSuperiores, Categoria.PARTE_SUPERIOR);
-        prendasCoincidenConCategoria(prendasInferiores, Categoria.PARTE_INFERIOR);
-        prendasCoincidenConCategoria(calzados, Categoria.CALZADO);
-        prendasCoincidenConCategoria(accesorios, Categoria.ACCESORIOS);
-
-        this.prendasSuperiores = prendasSuperiores;
-        this.prendasInferiores = prendasInferiores;
-        this.calzados = calzados;
-        this.accesorios= accesorios;
+    public abstract Guardarropas(List<Prenda> prendasSuperiores, List<Prenda> prendasInferiores, List<Prenda> calzados, List<Prenda> accesorios) {
     }
 
+    public TipoDeUsuario tipoDeUsuarioQueAcepta(){
 
+        return tipoUsuarioQueAcepta;
+    }
 
 
 
