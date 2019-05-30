@@ -1,24 +1,32 @@
 package domain;
 
+import java.time.LocalDateTime;
+import java.util.Deque;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Usuario {
+    private List<Evento> eventos;
+    private Deque<Decision> decisiones;
+    private List<Atuendo> atuendosAceptados;
+    private List<Atuendo> atuendosRechazados;
+
     private List<Guardarropas> guardarropas;
     
     public Usuario(List<Guardarropas> guardarropas){
-
         this.guardarropas = guardarropas;
     }
 
     public List<Atuendo> obtenerSugerencias(){
         return guardarropas.stream()
-                .flatMap(guardarropa -> guardarropa.sugerirAtuendo().stream())
+                    .flatMap(guardarropa -> guardarropa.sugerirAtuendo().stream())
                 .collect(Collectors.toList());
     }
 
-
+    public void cargarEvento(String nombreEvento, LocalDateTime fechaYHora, String lugar){
+        eventos.add(new Evento(nombreEvento, fechaYHora,lugar, this));
+    }
 
 
 

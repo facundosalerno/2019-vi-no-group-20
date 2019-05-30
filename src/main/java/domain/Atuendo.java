@@ -12,6 +12,7 @@ public class Atuendo {
     private Prenda prendaInferior;
     private Prenda calzado;
     private Prenda accesorio;
+    private Estado estado;
 
     public Atuendo(List<Prenda> prendaSuperior, Prenda prendaInferior, Prenda calzado, Prenda accesorio){
         if(!atuendoEsValido(prendaSuperior, prendaInferior, calzado, accesorio))
@@ -20,8 +21,13 @@ public class Atuendo {
         this.prendaInferior = prendaInferior;
         this.calzado = calzado;
         this.accesorio = accesorio;
+        estado=Estado.NUEVO;
     }
-    
+
+
+    public void cambiarEstado(Estado estado){
+        this.estado=estado;
+    }
     
      //TODO: la logica de esta funcion es bastante parecida a la que se usa en el guardarropas para decir si una lista de prendas es valida. Revisar eso
     public boolean atuendoEsValido(List<Prenda> prendaSuperior, Prenda prendaInferior, Prenda calzado, Prenda accesorio) {
