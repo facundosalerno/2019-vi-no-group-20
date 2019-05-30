@@ -19,7 +19,8 @@ public class Usuario {
 
     private List<Guardarropas> guardarropas;
     
-    public Usuario(List<Guardarropas> guardarropas) {
+    public Usuario(List<Guardarropas> guardarropas, TipoDeUsuario tipoDeUsuario) {
+        this.tipoDeUsuario=tipoDeUsuario;
         if (!guardarropas.stream().allMatch(guardarropa -> guardarropa.tipoDeUsuarioQueAcepta() == tipoDeUsuario))
                   throw new ElGuardarropasNoEsAptoException();
         this.guardarropas = guardarropas;
