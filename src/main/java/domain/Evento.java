@@ -3,13 +3,16 @@ package domain;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 public class Evento {
     //Contemplar  la temperatura al momento del evento.
-    String nombre;
-    LocalDateTime fecha;
-    String lugar;
-    Usuario usuario;
-    List<Atuendo> sugerenciasObtenidas;
+    private String nombre;
+    private LocalDateTime fecha;
+    private String lugar;
+    private Usuario usuario;
+    private List<Atuendo> sugerenciasObtenidas;
+    private int diasDeProximidadAEventos = 1;
 
     public Evento(String nombre, LocalDateTime fechaYHora, String lugar,Usuario usuario){
         this.nombre = nombre;
@@ -19,6 +22,8 @@ public class Evento {
     }
 
     public void generarSugerencias(){
-
+        if(DAYS.between(fecha, LocalDateTime.now()) <= diasDeProximidadAEventos){
+            sugerenciasObtenidas = usuario.obtenerSugerenciasDeTodosSusGuardarropas();
+        }
     }
 }
