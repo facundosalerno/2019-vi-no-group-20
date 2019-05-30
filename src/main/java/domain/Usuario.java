@@ -44,6 +44,14 @@ public class Usuario {
         decisiones.pop().deshacer();
     }
 
+    public void aceptarSugerencia(Atuendo atuendo){
+        decisiones.push(new Aceptar(atuendo));
+    }
+
+    public void rechazarSugerencia(Atuendo atuendo){
+        decisiones.push(new Rechazar(atuendo));
+    }
+
 
 
     //Equals y hashCode
