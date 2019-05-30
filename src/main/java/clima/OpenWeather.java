@@ -18,11 +18,11 @@ public class OpenWeather implements ApiExterna{
         final Gson gson = new Gson();
 		
 		JsonParser parser = new JsonParser();
-		JsonObject element = (JsonObject)parser.parse(gson.toString());
+		JsonObject objetoParseado = (JsonObject)parser.parse(jsonData.toString());
 
-		JsonElement responseWrapper = element.get("main");
+		JsonElement Main = objetoParseado.get("main");
 
-	    final TemperaturaOpenWeather climaActual = gson.fromJson(jsonData, TemperaturaOpenWeather.class);
+	    this.climaActual = gson.fromJson(Main, TemperaturaOpenWeather.class);
     }
 
     public TemperaturaOpenWeather devolverClima() {
