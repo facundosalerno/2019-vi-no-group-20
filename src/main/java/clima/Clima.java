@@ -2,7 +2,6 @@ package clima;
 
 public abstract class Clima {
 
-	double temp;
 	/*public String getWeatherText();
 
     public void setWeatherText(String weatherText);

@@ -1,20 +1,22 @@
 package clima;
 
 public class TemperaturaAccuWeather extends Clima{
+
+	double Value;
 	String Unit;
 	String UnitType;
 	
 	public TemperaturaAccuWeather (double Value,String Unit,String UnitType) {
-		this.temp=Value;
+		this.Value=Value;
 		this.Unit=Unit;
 		this.UnitType=UnitType;
 		
 	}
 	
 	public double getValue() {
-		return temp;
+		return Value;
 	}
-	public void setValue(float value) { temp = value; }
+	public void setValue(float value) { Value = value; }
 	public String getUnit() {
 		return Unit;
 	}
