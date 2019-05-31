@@ -9,9 +9,9 @@ import java.io.IOException;
 import java.awt.image.BufferedImage;
 
 public class Imagen {
-    int altura=100;
-    int ancho=100;
-    BufferedImage image;
+    private int altura=100;
+    private int ancho=100;
+    BufferedImage imagen;
 
     Imagen(String nombreDeArchivo) throws IOException {
 
@@ -25,6 +25,6 @@ public class Imagen {
         g2d.drawImage(tmp, 0, 0, null);        //Dibuja la tmp (imagen con resolucion y tamano normalizado) en imagenNormalizada
         g2d.dispose();                                          //Libera recursos Graphics2D pedidos (g2d)
 
-        image = imagenNormalizada;
+        imagen = imagenNormalizada;
     }
 }
