@@ -7,8 +7,16 @@ class Usuario {
    List<Atuendo> atuendosAceptados
    List<Atuendo> atuendosRechazados
    TipoDeUsuario tipoDeUsuario
+
+   obtenerSugerenciasDeTodosSusGuardarropas(Meteorologo meteorologo)
    obtenerSugerencias()
+   cargarEvento(nombreEvento,fechaYHora,lugar)
+   List<Atuendo> recibirSugerenciasEvento(nombreEvento,fechaEvento)
+   deshacerUltimaDecision()
+   aceptarSugerencia(Atuendo atuendo)
+   rechazarSugerencia(Atuendo atuendo)
 }
+
 
 enum TipoDeUsuario{
     PREMIUM
@@ -21,7 +29,7 @@ class Evento{
     	String lugar
     	Usuario usuario
     	List<Atuendo> sugerenciasObtenidas
-	generarSugerencias()
+	generarSugerencias(meteorologo)
 	List<Atuendo> obtenerSugerencias()
 
 }
@@ -46,7 +54,8 @@ class Prenda{
     Color colorPrimario
     Color colorSecundario
     Trama trama
-    Imagen imagen	
+    Imagen imagen
+    definirImagen(pathDeArchivo)	
 }
 
 class Imagen{
@@ -61,10 +70,20 @@ class Color{
 class TipoDePrenda{
    Categoria categoria
    List<Material> materialesValidos
+   TemperaturaAdecuadaPrenda temperatura
    boolean permiteMaterial(material)
    Categoria categoria()
+   temperaturaResistida()
+   esAptaParaTemperatura(int temperatura)	
+
 }
 
+class TemperaturaAdecuadaPrenda {
+    int rangoMaximo
+    int rangoMinimo
+    boolean importaLaTemperatura
+    boolean temperaturaSeEncuentraEnElRango(int temperatura)
+}
 
 class BorradorPrenda{
     tipoPrenda
@@ -81,11 +100,12 @@ class BorradorPrenda{
     Prenda crearPrenda()
 }
 class Atuendo{
-    prendaSuperior
-    prendaInferior
-    calzado
-    accesorio
+    List<Prenda>prendaSuperior
+    Prenda prendaInferior
+    Prenda calzado
+    Prenda accesorio
     Estado estado
+    
 }
 
 enum Estado {
@@ -100,15 +120,23 @@ abstract class Guardarropas{
     calzados
     accesorios
     TipoDeUsuario tipoDeUsuarioQueAcepta()
-    sugerirAtuendo()
+    sugerirAtuendo(meteorologo)
 }
 
 class GuardarropasLimitado{
-	 cantidadPrendasPermitidas()
-	 TipoDeUsuario tipoDeUsuarioQueAcepta()
+	prendasSuperiores
+	prendasInferiores
+	calzados
+	accesorios
+	cantidadPrendasPermitidas()
+	TipoDeUsuario tipoDeUsuarioQueAcepta()
 }
 class GuardarropasPremium{
-	 TipoDeUsuario tipoDeUsuarioQueAcepta()
+	prendasSuperiores
+	prendasInferiores
+	calzados
+	accesorios
+	TipoDeUsuario tipoDeUsuarioQueAcepta()
 }
 
 
@@ -168,6 +196,8 @@ Prenda-->Trama
 Prenda-->Material
 Prenda-->TipoDePrenda
 Prenda-->Imagen
+
+TipoDePrenda --> TemperaturaAdecuadaPrenda
 TipoDePrenda-->"*"Material
 TipoDePrenda-->Categoria
 BorradorPrenda"constructor" ..>Prenda
@@ -192,8 +222,6 @@ Meteorologo ..> Clima
 
 Clima<|--TemperaturaAccuWeather
 Clima<|--TemperaturaOpenWeather
-
-
 
 Usuario-->"*"Guardarropas
 Usuario-->"*"Atuendo
