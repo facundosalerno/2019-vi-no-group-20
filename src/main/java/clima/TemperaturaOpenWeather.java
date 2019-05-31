@@ -1,7 +1,7 @@
 package clima;
 
 public class TemperaturaOpenWeather extends Clima {
-
+	double temp;
     double pressure;
     double humidity;
     double temp_min;
