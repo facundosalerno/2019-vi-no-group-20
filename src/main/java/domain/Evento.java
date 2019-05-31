@@ -2,6 +2,7 @@ package domain;
 
 import clima.Meteorologo;
 import exceptions.NoHaySugerenciasParaElEvento;
+import exceptions.TodaviaNoEstaCercaElEvento;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,7 +18,7 @@ public class Evento {
     private Usuario usuario;
     private List<Atuendo> sugerenciasObtenidas;
 
-    public Evento(String nombre, LocalDateTime fechaYHora, String lugar,Usuario usuario){
+    public Evento(String nombre, LocalDateTime fechaYHora, String lugar, Usuario usuario){
         this.nombre = nombre;
         this.fecha = fechaYHora;
         this.lugar=lugar;
@@ -25,8 +26,10 @@ public class Evento {
     }
 
     public void generarSugerencias(Meteorologo meteorologo){
-        if(DAYS.between(fecha, LocalDateTime.now()) <= diasDeProximidadAEventos()){
+        if(DAYS.between(fecha, LocalDateTime.now()) <= diasDeProximidadAEventos()){ //TODO: hay un problema en esa funcion
             sugerenciasObtenidas = usuario.obtenerSugerenciasDeTodosSusGuardarropas(meteorologo);
+        }else{
+            throw new TodaviaNoEstaCercaElEvento();
         }
     }
 
