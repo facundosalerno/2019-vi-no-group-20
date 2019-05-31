@@ -1,6 +1,5 @@
-package JSON;
+package Meteorologo;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import org.junit.Assert;
@@ -13,7 +12,7 @@ import clima.TemperaturaOpenWeather;
 
 
 
-public class TestsJsonTemperatura {
+public class TestMeteorologos {
 
 	//verificar con postman las temperaturas antes del hacer el test
 	@Test

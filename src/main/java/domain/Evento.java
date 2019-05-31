@@ -1,5 +1,6 @@
 package domain;
 
+import clima.Meteorologo;
 import exceptions.NoHaySugerenciasParaElEvento;
 
 import java.time.LocalDateTime;
@@ -15,7 +16,6 @@ public class Evento {
     private String lugar;
     private Usuario usuario;
     private List<Atuendo> sugerenciasObtenidas;
-    private int diasDeProximidadAEventos = 1;
 
     public Evento(String nombre, LocalDateTime fechaYHora, String lugar,Usuario usuario){
         this.nombre = nombre;
@@ -24,10 +24,14 @@ public class Evento {
         this.usuario=usuario;
     }
 
-    public void generarSugerencias(){
-        if(DAYS.between(fecha, LocalDateTime.now()) <= diasDeProximidadAEventos){
-            sugerenciasObtenidas = usuario.obtenerSugerenciasDeTodosSusGuardarropas();
+    public void generarSugerencias(Meteorologo meteorologo){
+        if(DAYS.between(fecha, LocalDateTime.now()) <= diasDeProximidadAEventos()){
+            sugerenciasObtenidas = usuario.obtenerSugerenciasDeTodosSusGuardarropas(meteorologo);
         }
+    }
+
+    private int diasDeProximidadAEventos(){
+        return 1;
     }
 
     public List<Atuendo> obtenerSugerencias(){
@@ -49,8 +53,7 @@ public class Evento {
         if (this == o) return true;
         if (!(o instanceof Evento)) return false;
         Evento evento = (Evento) o;
-        return diasDeProximidadAEventos == evento.diasDeProximidadAEventos &&
-                Objects.equals(nombre, evento.nombre) &&
+        return Objects.equals(nombre, evento.nombre) &&
                 Objects.equals(fecha, evento.fecha) &&
                 Objects.equals(lugar, evento.lugar) &&
                 Objects.equals(usuario, evento.usuario) &&
@@ -59,6 +62,6 @@ public class Evento {
 
     @Override
     public int hashCode() {
-        return Objects.hash(nombre, fecha, lugar, usuario, sugerenciasObtenidas, diasDeProximidadAEventos);
+        return Objects.hash(nombre, fecha, lugar, usuario, sugerenciasObtenidas);
     }
 }

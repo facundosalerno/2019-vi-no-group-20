@@ -1,11 +1,14 @@
 package domain;
 
 
+import clima.Clima;
+import clima.Meteorologo;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import exceptions.NoPerteneceALaCategoriaException;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -19,8 +22,10 @@ public abstract class Guardarropas {
     protected List<Prenda> accesorios;
 
 
-    public List<Atuendo> sugerirAtuendo(){
-        int temperaturaActual = 20; //Simula la temperatura actual mientras la API del clima no este disponible
+
+    public List<Atuendo> sugerirAtuendo(Meteorologo meteorologo){
+        Clima climaActual = meteorologo.obtenerClima();
+        int temperaturaActual = (int) climaActual.getTemperature();
         int elementosDelGrupo = 2; //Determina la cantidad de prendas superpuestas del atuendo
         int variacionTemperatura = 5; //Determina cuantos grados de diferencia puede haber para que el atuendo sea sugerido. En 0 solamente sugeririamos atuendos para la temperatura ambiente actual sin flexibilidad.
 
@@ -40,13 +45,11 @@ public abstract class Guardarropas {
 
     private List<Prenda> obtenerSugerenciasPrendasSuperiores(int temperaturaActual, int elementosDelGrupo, int variacionTemperatura){
         Collections.shuffle(prendasSuperiores);
-        return Sets.combinations(ImmutableSet.copyOf(prendasSuperiores.stream().filter(prenda -> prenda.getTipoPrenda().esAptaParaTemperatura(temperaturaActual)).collect(Collectors.toSet())), elementosDelGrupo) //Hace la combinatoria de la prendas superiores filtradas.
+        return new ArrayList<>(Sets.combinations(ImmutableSet.copyOf(prendasSuperiores.stream().filter(prenda -> prenda.esAptaParaTemperatura(temperaturaActual)).collect(Collectors.toSet())), elementosDelGrupo) //Hace la combinatoria de la prendas superiores filtradas.
                 .stream()
                 .filter(subgrupoDeNelementos -> prendasAbriganBien(subgrupoDeNelementos, temperaturaActual, variacionTemperatura))
                 .collect(Collectors.toList())
-                .get(0)
-                .stream()
-                .collect(Collectors.toList());
+                .get(0));
     }
 
 

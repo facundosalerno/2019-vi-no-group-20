@@ -1,9 +1,11 @@
 package domain;
 
+import clima.Meteorologo;
 import exceptions.NoExisteGuardarropasException;
 import exceptions.NoHayDecisionesParaDeshacer;
 import exceptions.ElGuardarropasNoEsAptoException;
 
+import java.lang.reflect.Member;
 import java.time.LocalDateTime;
 import java.util.Deque;
 import java.util.List;
@@ -26,16 +28,16 @@ public class Usuario {
         this.guardarropas = guardarropas;
     }
 
-    public List<Atuendo> obtenerSugerenciasDeTodosSusGuardarropas(){
+    public List<Atuendo> obtenerSugerenciasDeTodosSusGuardarropas(Meteorologo meteorologo){
         return guardarropas.stream()
-                .flatMap(guardarropas -> guardarropas.sugerirAtuendo().stream())
+                .flatMap(guardarropas -> guardarropas.sugerirAtuendo(meteorologo).stream())
                 .collect(Collectors.toList());
     }
 
-    public List<Atuendo> obtenerSugerencias(int indexGuardarropas){
+    public List<Atuendo> obtenerSugerencias(int indexGuardarropas, Meteorologo meteorologo){
         if(indexGuardarropas<0 || guardarropas.size() >= indexGuardarropas)
             throw new NoExisteGuardarropasException();
-        return guardarropas.get(indexGuardarropas).sugerirAtuendo();
+        return guardarropas.get(indexGuardarropas).sugerirAtuendo(meteorologo);
     }
 
     public void cargarEvento(String nombreEvento, LocalDateTime fechaYHora, String lugar){
