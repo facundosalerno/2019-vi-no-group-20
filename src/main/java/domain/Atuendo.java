@@ -50,6 +50,9 @@ public class Atuendo {
     public Prenda getPrendaInferior() {return prendaInferior;}
     public Prenda getCalzado() {return calzado;}
     public Prenda getAccesorio() {return accesorio;}
+    public Estado getEstado(){
+        return this.estado;
+    }
 
 
     @Override

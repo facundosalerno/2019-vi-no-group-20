@@ -41,10 +41,10 @@ public class TestsPrendasSuperpuestas {
         return borradorPrenda.crearPrenda();
     }
 
-    @Test(expected = AtuendoInvalidoException.class)
+    /*@Test(expected = AtuendoInvalidoException.class)
     public void verificarQueNoSeCreaAtuendoConPrendasSuperpuestasDeDistintaCategoria(){
         new Atuendo(Arrays.asList(camisa, pantalon), pantalon, zapatos, anteojos);
-    }
+    }*/
 
 
 }

@@ -26,8 +26,16 @@ public abstract class Guardarropas {
     public List<Atuendo> sugerirAtuendo(Meteorologo meteorologo){
         Clima climaActual = meteorologo.obtenerClima();
         int temperaturaActual = (int) climaActual.getTemperature();
-        int elementosDelGrupo = 2; //Determina la cantidad de prendas superpuestas del atuendo
+        int elementosDelGrupo; //Determina la cantidad de prendas superpuestas del atuendo
         int variacionTemperatura = 5; //Determina cuantos grados de diferencia puede haber para que el atuendo sea sugerido. En 0 solamente sugeririamos atuendos para la temperatura ambiente actual sin flexibilidad.
+
+        if(temperaturaActual >= 0 && temperaturaActual <15)
+            elementosDelGrupo = 3;
+        else if(temperaturaActual >= 15 && temperaturaActual <24)
+            elementosDelGrupo = 2;
+        else
+            elementosDelGrupo = 1;
+
 
         return Sets.cartesianProduct(ImmutableList.of(ImmutableSet.copyOf(prendasInferiores.stream().filter(x->x.esAptaParaTemperatura(temperaturaActual)).collect(Collectors.toSet())),
                                                       ImmutableSet.copyOf(accesorios.stream().filter(x->x.esAptaParaTemperatura(temperaturaActual)).collect(Collectors.toSet())),

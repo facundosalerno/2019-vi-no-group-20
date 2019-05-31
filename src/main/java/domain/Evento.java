@@ -4,6 +4,7 @@ import clima.Meteorologo;
 import exceptions.NoHaySugerenciasParaElEvento;
 import exceptions.TodaviaNoEstaCercaElEvento;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -26,7 +27,7 @@ public class Evento {
     }
 
     public void generarSugerencias(Meteorologo meteorologo){
-        if(DAYS.between(fecha, LocalDateTime.now()) <= diasDeProximidadAEventos()){ //TODO: hay un problema en esa funcion
+        if(Math.abs(DAYS.between(fecha.toLocalDate(), LocalDate.now())) <= diasDeProximidadAEventos()){
             sugerenciasObtenidas = usuario.obtenerSugerenciasDeTodosSusGuardarropas(meteorologo);
         }else{
             throw new TodaviaNoEstaCercaElEvento();

@@ -7,18 +7,15 @@ import exceptions.ElGuardarropasNoEsAptoException;
 
 import java.lang.reflect.Member;
 import java.time.LocalDateTime;
-import java.util.Deque;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Usuario {
-    private List<Evento> eventos;
-    private Deque<Decision> decisiones;
-    private List<Atuendo> atuendosAceptados;
-    private List<Atuendo> atuendosRechazados;
+    private List<Evento> eventos=new ArrayList<>();
+    private Deque<Decision> decisiones=new ArrayDeque<>();
+    private List<Atuendo> atuendosAceptados=new ArrayList<>();
+    private List<Atuendo> atuendosRechazados=new ArrayList<>();
     private TipoDeUsuario tipoDeUsuario;
-
     private List<Guardarropas> guardarropas;
     
     public Usuario(List<Guardarropas> guardarropas, TipoDeUsuario tipoDeUsuario) {
@@ -52,14 +49,14 @@ public class Usuario {
     }
 
     public void deshacerUltimaDecision(){
-        if(decisiones.isEmpty())
+        if(this.decisiones.isEmpty())
             throw new NoHayDecisionesParaDeshacer();
         decisiones.pop().deshacer();
     }
 
     public void aceptarSugerencia(Atuendo atuendo){
-        decisiones.push(new Aceptar(atuendo));
-        atuendosAceptados.add(atuendo);
+        this.decisiones.push(new Aceptar(atuendo));
+        this.atuendosAceptados.add(atuendo);
     }
 
     public void rechazarSugerencia(Atuendo atuendo){
