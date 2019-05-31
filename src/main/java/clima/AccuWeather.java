@@ -5,12 +5,11 @@ import com.google.gson.*;
 import conexionesUrl.NetClientGet;
 
 
-public class AccuWeather implements ApiExterna {
+public class AccuWeather implements Meteorologo {
     private final String URI = "http://dataservice.accuweather.com/currentconditions/v1/7894?apikey=HV798EVNbOimEhbHAHcvlUkqLs3MwO7N";
-    private TemperaturaAccuWeather climaActual;
     private String jsonData;
 
-    public void obtenerClima() {
+    public TemperaturaAccuWeather obtenerClima() {
         jsonData = NetClientGet.main(URI);
         final Gson gson = new Gson();
 
@@ -23,13 +22,8 @@ public class AccuWeather implements ApiExterna {
         JsonObject element3 = (JsonObject)parser.parse(Temperature.toString());
         JsonElement Metric = element3.get("Metric");
 
-	    this.climaActual = gson.fromJson(Metric, TemperaturaAccuWeather.class);
+	   return gson.fromJson(Metric, TemperaturaAccuWeather.class);
     }
 
-
-    public TemperaturaAccuWeather devolverClima() {
-
-        return climaActual;
-    }
 }
     

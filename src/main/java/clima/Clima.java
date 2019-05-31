@@ -1,7 +1,8 @@
 package clima;
 
-public interface Clima {
-    
+public abstract class Clima {
+
+	double temp;
 	/*public String getWeatherText();
 
     public void setWeatherText(String weatherText);
@@ -10,6 +11,6 @@ public interface Clima {
 
     public void setTemperature(TemperaturaAccuWeather temperature);*/
 	
-	public double getTemperature();
+	public abstract double getTemperature();
 	
 }

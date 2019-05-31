@@ -7,12 +7,11 @@ import com.google.gson.JsonParser;
 
 import conexionesUrl.NetClientGet;
 
-public class OpenWeather implements ApiExterna{
+public class OpenWeather implements Meteorologo {
     private final String URI = "https://api.openweathermap.org/data/2.5/weather?q=Buenos%20Aires,%20AR&appid=a4eb7e978f43ec94e5cf3885b5dc3b2c";
-    private TemperaturaOpenWeather climaActual;
     private String jsonData;
 
-    public void obtenerClima() {
+    public TemperaturaOpenWeather obtenerClima() {
         jsonData = NetClientGet.main(URI);    
       
         final Gson gson = new Gson();
@@ -22,11 +21,9 @@ public class OpenWeather implements ApiExterna{
 
 		JsonElement Main = objetoParseado.get("main");
 
-	    this.climaActual = gson.fromJson(Main, TemperaturaOpenWeather.class);
+	    return  gson.fromJson(Main, TemperaturaOpenWeather.class);
     }
 
-    public TemperaturaOpenWeather devolverClima() {
-        return climaActual;
-    }
+
 
 }

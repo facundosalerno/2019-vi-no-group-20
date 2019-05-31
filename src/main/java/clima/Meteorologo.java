@@ -1,6 +1,5 @@
 package clima;
 
-public interface ApiExterna {
-    public void obtenerClima();
-    public Clima devolverClima();
+public interface Meteorologo {
+    Clima obtenerClima();
 }
