@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class TestsValidacionAtuendo {
         remera = armarUnaPrenda(TipoDePrenda.REMERA, Material.ALGODON, azul, rojo, Trama.CUADROS);
         pantalon = armarUnaPrenda(TipoDePrenda.PANTALON, Material.JEAN, verde, rojo, Trama.RAYADA);
         anteojos= armarUnaPrenda(TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA);
-        camisa = armarUnaPrenda(TipoDePrenda.CAMISA, Material.ALGODON, blanco, blanco, Trama.LISA);
+        camisa = armarUnaPrenda(TipoDePrenda.CAMISA, Material.ALGODON, blanco, rojo, Trama.LISA);
 
     }
 
@@ -47,7 +48,7 @@ public class TestsValidacionAtuendo {
     @Test
     public void crearAtuendoValido() {
         try{
-            new Atuendo(remera,camisa, pantalon, zapatos, anteojos);
+            new Atuendo(Arrays.asList(remera), pantalon, zapatos, anteojos);
         }catch (AtuendoInvalidoException exc){
             Assert.fail();
         }
@@ -56,6 +57,6 @@ public class TestsValidacionAtuendo {
     //Test para verificar que no deberia crearse un atuendo invalido
     @Test (expected = AtuendoInvalidoException.class)
     public void crearAtuendoInvalido() {
-        new Atuendo(pantalon,remera, pantalon, zapatos, anteojos);
+        new Atuendo(Arrays.asList(pantalon), pantalon, zapatos, anteojos);
     }
 }

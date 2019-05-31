@@ -29,6 +29,7 @@ public class GuardarropasPremium extends Guardarropas{
         this.accesorios= accesorios;
     }
 
+    @Override
     public TipoDeUsuario tipoDeUsuarioQueAcepta() {
         return TipoDeUsuario.PREMIUM;
     }
