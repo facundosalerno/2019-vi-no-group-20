@@ -35,4 +35,20 @@ public class TestsJsonTemperatura {
 		Assert.assertEquals(10.94, nuevoClima.getTemperature(), 0.5);
 		
 	}
+	
+	@Test
+	public  void mokitoJsonAccuWweather(){
+		TemperaturaAccuWeather nuevoClima =	mock(TemperaturaAccuWeather.class);
+		when(nuevoClima.getTemperature()).thenReturn(10.2);
+		Assert.assertEquals(nuevoClima.getTemperature(), 10.2, 0.5);
+
+	}
+
+	@Test
+	public  void mokitoJsonOpenWweather(){
+		TemperaturaOpenWeather nuevoClima =	mock(TemperaturaOpenWeather.class);
+		when(nuevoClima.getTemperature()).thenReturn(11.2);
+		Assert.assertEquals(nuevoClima.getTemperature(), 11.2, 0.5);
+
+	}
 }
