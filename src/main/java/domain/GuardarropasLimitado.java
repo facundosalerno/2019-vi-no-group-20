@@ -1,6 +1,7 @@
 package domain;
 
 
+import exceptions.NoAceptaCantidadPrendasException;
 import exceptions.NoPermiteGuardarropaIncompletoException;
 
 import java.util.List;
@@ -11,25 +12,21 @@ import java.util.stream.Stream;
 
 public class GuardarropasLimitado extends Guardarropas {
 
-    private LinkedBlockingDeque<Integer> totalPrendas;
 
-
-    //revisar, algo esta mal aca
-    private setCantidadPrendasAceptadas(int cantidadPrendasAceptadas){
-        totalPrendas = new LinkedBlockingDeque<>(cantidadPrendasAceptadas);
-    }
-
-
-    @Override
     public GuardarropasLimitado (List<Prenda> prendasSuperiores, List<Prenda> prendasInferiores, List<Prenda> calzados, List<Prenda> accesorios) {
         if(prendasSuperiores.isEmpty() || prendasInferiores.isEmpty() || calzados.isEmpty() || accesorios.isEmpty())
             throw new NoPermiteGuardarropaIncompletoException();
+
+        if(prendasSuperiores.size() > cantidadPrendasPermitidas() || prendasInferiores.size() > cantidadPrendasPermitidas() || calzados.size() > cantidadPrendasPermitidas() || accesorios.size() > cantidadPrendasPermitidas())
+            throw new NoAceptaCantidadPrendasException();
+
+
         prendasCoincidenConCategoria(prendasSuperiores, Categoria.PARTE_SUPERIOR);
         prendasCoincidenConCategoria(prendasInferiores, Categoria.PARTE_INFERIOR);
         prendasCoincidenConCategoria(calzados, Categoria.CALZADO);
         prendasCoincidenConCategoria(accesorios, Categoria.ACCESORIOS);
 
-        totalPrendas.Stream.of(prendasInferiores, prendasSuperiores,calzados,accesorios).forEach(totalPrendas::addAll); //aca tira el error propio de linkedBl
+
 
         this.prendasSuperiores = prendasSuperiores;
         this.prendasInferiores = prendasInferiores;
@@ -39,4 +36,12 @@ public class GuardarropasLimitado extends Guardarropas {
 
     }
 
+    private static int cantidadPrendasPermitidas(){
+        return 4;
+    }
+
+    @Override
+    public TipoDeUsuario tipoDeUsuarioQueAcepta() {
+        return TipoDeUsuario.GRATIS;
+    }
 }

@@ -13,20 +13,10 @@ import java.util.stream.Collectors;
 
 public abstract class Guardarropas {
 
-    public List<Prenda> prendasSuperiores;
-    public List<Prenda> prendasInferiores;
-    public List<Prenda> calzados;
-    public List<Prenda> accesorios;
-    public TipoDeUsuario tipoUsuarioQueAcepta = tipoUsuarioQueAcepta;
-
-    public abstract Guardarropas(List<Prenda> prendasSuperiores, List<Prenda> prendasInferiores, List<Prenda> calzados, List<Prenda> accesorios) {
-    }
-
-    public TipoDeUsuario tipoDeUsuarioQueAcepta(){
-
-        return tipoUsuarioQueAcepta;
-    }
-
+    protected List<Prenda> prendasSuperiores;
+    protected List<Prenda> prendasInferiores;
+    protected List<Prenda> calzados;
+    protected List<Prenda> accesorios;
 
 
     public List<Atuendo> sugerirAtuendo(){
@@ -45,8 +35,7 @@ public abstract class Guardarropas {
                 .collect(Collectors.toList());
     }
 
-
-
+    public abstract TipoDeUsuario tipoDeUsuarioQueAcepta();
 
 
     private List<Prenda> obtenerSugerenciasPrendasSuperiores(int temperaturaActual, int elementosDelGrupo, int variacionTemperatura){

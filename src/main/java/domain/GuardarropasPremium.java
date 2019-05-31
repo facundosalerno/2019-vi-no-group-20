@@ -13,8 +13,6 @@ import java.util.stream.Collectors;
 
 public class GuardarropasPremium extends Guardarropas{
 
-
-    @Override
     public GuardarropasPremium(List<Prenda> prendasSuperiores, List<Prenda> prendasInferiores, List<Prenda> calzados, List<Prenda> accesorios) {
 
         if(prendasSuperiores.isEmpty() || prendasInferiores.isEmpty() || calzados.isEmpty() || accesorios.isEmpty())
@@ -31,6 +29,9 @@ public class GuardarropasPremium extends Guardarropas{
         this.accesorios= accesorios;
     }
 
+    public TipoDeUsuario tipoDeUsuarioQueAcepta() {
+        return TipoDeUsuario.PREMIUM;
+    }
 
 
 }
