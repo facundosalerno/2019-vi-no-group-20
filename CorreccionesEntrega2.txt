@@ -1,0 +1,44 @@
+No esta bueno catchear NullPointerException, puede encubrir un error grave
+
+Contemplar que no haya accesorios
+
+Problema que sea random (shuffle) las combinatorias de las prendas superiores
+
+Que no se repita el tipo de prenda y no sean tipos parecidos (camisas, remera, remera manga corta
+
+Que pueda no tener un accesorio
+Accesorios sin temperatura
+Atuendos con prendas inferiores superpuestas
+
+Se puede:
+	tener niveles de prendas (ej: remera nivel 0, buso nivel 1)
+	Que se sepan las combinaciones posibles de antemano (tipo una plantilla)
+
+Poder agregar prendas al guardarropas una vez instanciado, viendo en el limitado de no pasar el limite
+
+Codigo repetido en los constructores de guardarropas
+
+Eventos:
+	
+
+Decisiones:
+	Atributo protected(Atuendo)
+	Tener el evento en la decision (no esta mal no tenerla, es mas que nada para cuando el usuario quiere deshacer)
+	Remover de lista aceptado/rechazado cuando se deshace la ultima accion
+
+	Que pasa con las sugerencias que da el guardarropas sin un evento (tener en cuenta si se acepta o rechaza por fuera del evento)
+
+Adapter:
+	Metido en el json (ojo)
+	No poner main de nombre en NetClientGet
+
+Imagen:
+	Hace perder la inmutabilidad, meterla en el builder
+
+Tests:
+	Uso de mocks al usar meteorologos (No pegarle a las APIs)
+
+	Faltan tests, testear que las sugerencias se puedan aceptar y rechazar por parte del usuario
+	Testear funcionalidad
+	Testear que el usuario tenga en lista de aceptados lo que acepto
+
