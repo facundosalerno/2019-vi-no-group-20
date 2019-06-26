@@ -1,4 +1,7 @@
-package domain;
+package domain.decision;
+
+import domain.atuendo.Atuendo;
+import domain.atuendo.Estado;
 
 public class Aceptar extends Decision {
 

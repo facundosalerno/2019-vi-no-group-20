@@ -2,6 +2,9 @@ package domain;
 
 import clima.AccuWeather;
 import clima.TemperaturaAccuWeather;
+import domain.guardarropas.Guardarropas;
+import domain.guardarropas.GuardarropasPremium;
+import domain.prenda.*;
 import org.junit.Before;
 import org.junit.Test;
 

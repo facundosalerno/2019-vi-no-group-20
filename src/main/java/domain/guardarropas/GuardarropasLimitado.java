@@ -1,6 +1,9 @@
-package domain;
+package domain.guardarropas;
 
 
+import domain.prenda.Categoria;
+import domain.prenda.Prenda;
+import domain.usuario.TipoDeUsuario;
 import exceptions.NoAceptaCantidadPrendasException;
 import exceptions.NoPermiteGuardarropaIncompletoException;
 

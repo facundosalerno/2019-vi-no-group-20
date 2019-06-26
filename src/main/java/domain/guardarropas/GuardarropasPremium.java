@@ -1,9 +1,12 @@
-package domain;
+package domain.guardarropas;
 
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
+import domain.prenda.Categoria;
+import domain.prenda.Prenda;
+import domain.usuario.TipoDeUsuario;
 import exceptions.NoPermiteGuardarropaIncompletoException;
 
 import java.util.Collections;

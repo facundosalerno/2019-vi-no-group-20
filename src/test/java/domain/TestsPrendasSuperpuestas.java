@@ -1,5 +1,7 @@
 package domain;
 
+import domain.atuendo.Atuendo;
+import domain.prenda.*;
 import exceptions.AtuendoInvalidoException;
 import org.checkerframework.checker.units.qual.A;
 import org.junit.Before;

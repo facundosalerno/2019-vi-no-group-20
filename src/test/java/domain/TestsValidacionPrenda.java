@@ -1,5 +1,6 @@
 package domain;
 
+import domain.prenda.*;
 import exceptions.*;
 import org.checkerframework.checker.units.qual.A;
 import org.junit.Assert;

@@ -1,5 +1,11 @@
 package domain;
 
+import domain.atuendo.Atuendo;
+import domain.guardarropas.GuardarropasLimitado;
+import domain.guardarropas.GuardarropasPremium;
+import domain.prenda.*;
+import domain.usuario.TipoDeUsuario;
+import domain.usuario.Usuario;
 import exceptions.ElGuardarropasNoEsAptoException;
 import exceptions.NoAceptaCantidadPrendasException;
 import org.junit.Before;

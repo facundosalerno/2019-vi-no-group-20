@@ -1,5 +1,12 @@
 package domain;
 
+import domain.atuendo.Atuendo;
+import domain.atuendo.Estado;
+import domain.guardarropas.Guardarropas;
+import domain.guardarropas.GuardarropasPremium;
+import domain.prenda.*;
+import domain.usuario.TipoDeUsuario;
+import domain.usuario.Usuario;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

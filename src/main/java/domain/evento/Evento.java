@@ -1,6 +1,8 @@
-package domain;
+package domain.evento;
 
 import clima.Meteorologo;
+import domain.atuendo.Atuendo;
+import domain.usuario.Usuario;
 import exceptions.NoHaySugerenciasParaElEvento;
 import exceptions.TodaviaNoEstaCercaElEvento;
 

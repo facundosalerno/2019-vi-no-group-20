@@ -1,4 +1,4 @@
-package domain;
+package domain.guardarropas;
 
 
 import clima.Clima;
@@ -6,6 +6,10 @@ import clima.Meteorologo;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
+import domain.atuendo.Atuendo;
+import domain.prenda.Categoria;
+import domain.prenda.Prenda;
+import domain.usuario.TipoDeUsuario;
 import exceptions.NoPerteneceALaCategoriaException;
 
 import java.util.ArrayList;

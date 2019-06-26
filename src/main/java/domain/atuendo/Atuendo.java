@@ -1,7 +1,8 @@
-package domain;
+package domain.atuendo;
 
+import domain.prenda.Categoria;
+import domain.prenda.Prenda;
 import exceptions.AtuendoInvalidoException;
-
 import java.util.List;
 import java.util.Objects;
 

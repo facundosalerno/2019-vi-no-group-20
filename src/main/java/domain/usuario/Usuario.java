@@ -1,6 +1,12 @@
-package domain;
+package domain.usuario;
 
 import clima.Meteorologo;
+import domain.atuendo.Atuendo;
+import domain.decision.Aceptar;
+import domain.decision.Decision;
+import domain.decision.Rechazar;
+import domain.evento.Evento;
+import domain.guardarropas.Guardarropas;
 import exceptions.NoExisteGuardarropasException;
 import exceptions.NoHayDecisionesParaDeshacer;
 import exceptions.ElGuardarropasNoEsAptoException;

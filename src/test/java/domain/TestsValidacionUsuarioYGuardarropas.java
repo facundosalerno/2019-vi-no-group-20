@@ -1,5 +1,7 @@
 package domain;
 
+import domain.guardarropas.GuardarropasPremium;
+import domain.prenda.*;
 import exceptions.*;
 import org.junit.Assert;
 import org.junit.Before;
