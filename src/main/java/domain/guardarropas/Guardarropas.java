@@ -28,7 +28,7 @@ public abstract class Guardarropas {
 
 
     public List<Atuendo> sugerirAtuendo(Meteorologo meteorologo){
-        Clima climaActual = meteorologo.obtenerClima();
+        /*Clima climaActual = meteorologo.obtenerClima();
         int temperaturaActual = (int) climaActual.getTemperature();
         int elementosDelGrupo; //Determina la cantidad de prendas superpuestas del atuendo
         int variacionTemperatura = 5; //Determina cuantos grados de diferencia puede haber para que el atuendo sea sugerido. En 0 solamente sugeririamos atuendos para la temperatura ambiente actual sin flexibilidad.
@@ -49,7 +49,8 @@ public abstract class Guardarropas {
                                          list.get(0),
                                          list.get(1),
                                          list.get(2)))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList());*/
+        return null;
     }
 
     public abstract TipoDeUsuario tipoDeUsuarioQueAcepta();

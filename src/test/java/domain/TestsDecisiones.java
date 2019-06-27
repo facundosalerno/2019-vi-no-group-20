@@ -2,6 +2,8 @@ package domain;
 
 import domain.atuendo.Atuendo;
 import domain.atuendo.Estado;
+import domain.capaPrenda.Capa;
+import domain.capaPrenda.CapaSimple;
 import domain.guardarropas.Guardarropas;
 import domain.guardarropas.GuardarropasPremium;
 import domain.prenda.*;
@@ -10,32 +12,38 @@ import domain.usuario.Usuario;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.util.Arrays;
-
-import static org.mockito.ArgumentMatchers.isNull;
 
 public class TestsDecisiones {
     private Usuario batman;
     private Guardarropas guardarropasVeranoBatman;
     private Atuendo trajeBatman;
-    private Prenda botaNegra;
-    private Prenda armaduraNegra;
-    private Prenda pantalonNegro;
-    private Prenda antifazDeMurcielago;
+    private Prenda prendaBotaNegra;
+    private Prenda prendaArmaduraNegra;
+    private Prenda prendaPantalonNegro;
+    private Prenda prendaAntifazDeMurcielago;
+    private Capa botaNegra;
+    private Capa armaduraNegra;
+    private Capa pantalonNegro;
+    private Capa antifazDeMurcielago;
 
     @Before
     public void init(){
         Color negro = new Color(0, 0, 0);
 
-        botaNegra = armarUnaPrenda(TipoDePrenda.ZAPATO, Material.CUERO, negro, Trama.GASTADO);
-        armaduraNegra = armarUnaPrenda(TipoDePrenda.REMERA, Material.ALGODON, negro, Trama.CUADROS);
-        pantalonNegro = armarUnaPrenda(TipoDePrenda.PANTALON, Material.JEAN, negro, Trama.RAYADA);
-        antifazDeMurcielago = armarUnaPrenda(TipoDePrenda.ANTEOJOS, Material.PLASTICO, negro, Trama.LISA);
+        prendaBotaNegra = armarUnaPrenda(TipoDePrenda.ZAPATO, Material.CUERO, negro, Trama.GASTADO);
+        prendaArmaduraNegra = armarUnaPrenda(TipoDePrenda.REMERA, Material.ALGODON, negro, Trama.CUADROS);
+        prendaPantalonNegro = armarUnaPrenda(TipoDePrenda.PANTALON, Material.JEAN, negro, Trama.RAYADA);
+        prendaAntifazDeMurcielago = armarUnaPrenda(TipoDePrenda.ANTEOJOS, Material.PLASTICO, negro, Trama.LISA);
 
-        trajeBatman = new Atuendo(Arrays.asList(armaduraNegra), pantalonNegro, botaNegra, antifazDeMurcielago);
+        botaNegra = new CapaSimple(prendaBotaNegra);
+        armaduraNegra = new CapaSimple(prendaArmaduraNegra);
+        pantalonNegro = new CapaSimple(prendaPantalonNegro);
+        antifazDeMurcielago = new CapaSimple(prendaAntifazDeMurcielago);
 
-        guardarropasVeranoBatman = new GuardarropasPremium(Arrays.asList(armaduraNegra), Arrays.asList(pantalonNegro), Arrays.asList(botaNegra), Arrays.asList(antifazDeMurcielago));
+        trajeBatman = new Atuendo(armaduraNegra, pantalonNegro, botaNegra, antifazDeMurcielago);
+
+        guardarropasVeranoBatman = new GuardarropasPremium(Arrays.asList(prendaArmaduraNegra), Arrays.asList(prendaPantalonNegro), Arrays.asList(prendaBotaNegra), Arrays.asList(prendaAntifazDeMurcielago));
 
         batman = new Usuario(Arrays.asList(guardarropasVeranoBatman), TipoDeUsuario.PREMIUM);
     }

@@ -1,5 +1,6 @@
 package domain.atuendo;
 
+import domain.capaPrenda.Capa;
 import domain.prenda.Categoria;
 import domain.prenda.Prenda;
 import exceptions.AtuendoInvalidoException;
@@ -9,13 +10,13 @@ import java.util.Objects;
 
 public class Atuendo {
 
-    private List<Prenda> prendaSuperior;
-    private Prenda prendaInferior;
-    private Prenda calzado;
-    private Prenda accesorio;
+    private Capa prendaSuperior;
+    private Capa prendaInferior;
+    private Capa calzado;
+    private Capa accesorio;
     private Estado estado;
 
-    public Atuendo(List<Prenda> prendaSuperior, Prenda prendaInferior, Prenda calzado, Prenda accesorio){
+    public Atuendo(Capa prendaSuperior, Capa prendaInferior, Capa calzado, Capa accesorio){
         if(!atuendoEsValido(prendaSuperior, prendaInferior, calzado, accesorio))
             throw new AtuendoInvalidoException();
         this.prendaSuperior = prendaSuperior;
@@ -26,31 +27,27 @@ public class Atuendo {
     }
 
 
+
     public void cambiarEstado(Estado estado){
         this.estado=estado;
     }
     
      //TODO: la logica de esta funcion es bastante parecida a la que se usa en el guardarropas para decir si una lista de prendas es valida. Revisar eso
-    public boolean atuendoEsValido(List<Prenda> prendaSuperior, Prenda prendaInferior, Prenda calzado, Prenda accesorio) {
+    public boolean atuendoEsValido(Capa prendaSuperior, Capa prendaInferior, Capa calzado, Capa accesorio) {
         return (esCategoria(prendaSuperior, Categoria.PARTE_SUPERIOR) && esCategoria(prendaInferior, Categoria.PARTE_INFERIOR)
                 && esCategoria(calzado, Categoria.CALZADO) && esCategoria(accesorio,Categoria.ACCESORIOS));
         		
 
     }
 
-    public boolean esCategoria(Prenda prenda, Categoria categoria){
+    public boolean esCategoria(Capa prenda, Categoria categoria){
         return (prenda.getCategoria() == categoria);
     }
-    public boolean esCategoria(List<Prenda> prendas, Categoria categoria){
-        return prendas.stream().allMatch(prenda -> prenda.getCategoria() == categoria);
-    }
+
 
 
     //Getters
-    public List<Prenda> getPrendaSuperior() {return prendaSuperior;}
-    public Prenda getPrendaInferior() {return prendaInferior;}
-    public Prenda getCalzado() {return calzado;}
-    public Prenda getAccesorio() {return accesorio;}
+
     public Estado getEstado(){
         return this.estado;
     }

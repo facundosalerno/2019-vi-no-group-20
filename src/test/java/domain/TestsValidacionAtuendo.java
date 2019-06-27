@@ -1,21 +1,23 @@
 package domain;
 
 import domain.atuendo.Atuendo;
+import domain.capaPrenda.Capa;
+import domain.capaPrenda.CapaSimple;
 import domain.prenda.*;
 import exceptions.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.List;
-
 public class TestsValidacionAtuendo {
-    private Prenda zapatos;
-    private Prenda remera;
-    private Prenda pantalon;
-    private Prenda anteojos;
+    private Prenda prendaZapatos;
+    private Prenda prendaRemera;
+    private Prenda prendaPantalon;
+    private Prenda prendaAnteojos;
+    private Capa zapatos;
+    private Capa remera;
+    private Capa pantalon;
+    private Capa anteojos;
 
     @Before
     public void init() {
@@ -24,10 +26,15 @@ public class TestsValidacionAtuendo {
         Color verde = new Color(0, 255, 0);
         Color azul = new Color(0, 0, 255);
 
-        zapatos = armarUnaPrenda(TipoDePrenda.ZAPATO, Material.CUERO, rojo, azul, Trama.GASTADO);
-        remera = armarUnaPrenda(TipoDePrenda.REMERA, Material.ALGODON, azul, rojo, Trama.CUADROS);
-        pantalon = armarUnaPrenda(TipoDePrenda.PANTALON, Material.JEAN, verde, rojo, Trama.RAYADA);
-        anteojos= armarUnaPrenda(TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA);
+        prendaZapatos = armarUnaPrenda(TipoDePrenda.ZAPATO, Material.CUERO, rojo, azul, Trama.GASTADO);
+        prendaRemera = armarUnaPrenda(TipoDePrenda.REMERA, Material.ALGODON, azul, rojo, Trama.CUADROS);
+        prendaPantalon = armarUnaPrenda(TipoDePrenda.PANTALON, Material.JEAN, verde, rojo, Trama.RAYADA);
+        prendaAnteojos = armarUnaPrenda(TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA);
+
+        zapatos = new CapaSimple(prendaZapatos);
+        remera = new CapaSimple(prendaRemera);
+        pantalon = new CapaSimple(prendaPantalon);
+        anteojos = new CapaSimple(prendaAnteojos);
 
     }
 
@@ -46,7 +53,7 @@ public class TestsValidacionAtuendo {
     @Test
     public void crearAtuendoValido() {
         try{
-            new Atuendo(Arrays.asList(remera), pantalon, zapatos, anteojos);
+            new Atuendo(remera, pantalon, zapatos, anteojos);
         }catch (AtuendoInvalidoException exc){
             Assert.fail();
         }
@@ -55,6 +62,6 @@ public class TestsValidacionAtuendo {
     //Test para verificar que no deberia crearse un atuendo invalido
     @Test (expected = AtuendoInvalidoException.class)
     public void crearAtuendoInvalido() {
-        new Atuendo(Arrays.asList(pantalon), pantalon, zapatos, anteojos);
+        new Atuendo(pantalon, pantalon, zapatos, anteojos);
     }
 }
