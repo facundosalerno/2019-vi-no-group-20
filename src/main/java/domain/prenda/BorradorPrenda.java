@@ -1,5 +1,6 @@
 package domain.prenda;
 
+import domain.capaPrenda.NivelDeAbrigo;
 import exceptions.*;
 
 import java.io.IOException;
@@ -13,6 +14,7 @@ public class BorradorPrenda {
     private Color colorPrimario;
     private Color colorSecundario;
     private Trama trama = Trama.LISA;
+    private NivelDeAbrigo nivelDeAbrigo;
 
     public void definirTipo(TipoDePrenda tipoPrenda) {
         requireNonNull(tipoPrenda, "Por ahora no admitimos un tipo de prenda null");
@@ -53,12 +55,16 @@ public class BorradorPrenda {
 
     }
 
+    public void definirNivelDeAbrigo(NivelDeAbrigo nivelDeAbrigo){
+        this.nivelDeAbrigo = nivelDeAbrigo;
+    }
+
     public Prenda crearPrenda() {
         requireNonNull(tipoPrenda, "tipo de prenda es obligatorio");
         requireNonNull(material, "material es obligatorio");
         requireNonNull(colorPrimario, "color es obligatorio");
         requireNonNull(trama, "tipo de prenda es obligatorio");
-        return new Prenda(tipoPrenda, colorPrimario, colorSecundario, material, trama);
+        return new Prenda(tipoPrenda, colorPrimario, colorSecundario, material, trama, nivelDeAbrigo);
     }
 
 }

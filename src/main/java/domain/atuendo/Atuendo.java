@@ -27,6 +27,9 @@ public class Atuendo {
     }
 
 
+    public boolean abrigaBien(){
+        return true;
+    }
 
     public void cambiarEstado(Estado estado){
         this.estado=estado;

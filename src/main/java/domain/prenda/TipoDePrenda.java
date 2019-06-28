@@ -20,11 +20,6 @@ public class TipoDePrenda {
         materialesValidos = materiales;
     }
 
-    public boolean esAptaParaTemperatura(int temperatura){
-        if(this.temperatura == null)
-            return true;
-        return this.temperatura.temperaturaSeEncuentraEnElRango(temperatura);
-    }
 
     public int temperaturaResistida(){
         if(temperatura == null)

@@ -18,15 +18,11 @@ public class TemperaturaAdecuadaPrenda {
     }
 
 
-    public boolean temperaturaSeEncuentraEnElRango(int temperatura){
-            return temperatura > rangoMinimo && temperatura < rangoMaximo;
-    }
-
     public int getRangoMaximo(){
         return rangoMaximo;
     }
 
-    static int getRangoMaximoTeorico(){
+    static public int getRangoMaximoTeorico(){
         return getRangoMaximoTeorico();
     }
 }

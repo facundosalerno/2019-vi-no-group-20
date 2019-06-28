@@ -7,6 +7,9 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import domain.atuendo.Atuendo;
+import domain.capaPrenda.Capa;
+import domain.capaPrenda.CapaCompuesta;
+import domain.capaPrenda.CapaSimple;
 import domain.prenda.Categoria;
 import domain.prenda.Prenda;
 import domain.usuario.TipoDeUsuario;
@@ -25,62 +28,28 @@ public abstract class Guardarropas {
     protected List<Prenda> calzados;
     protected List<Prenda> accesorios;
 
-
-
-    public List<Atuendo> sugerirAtuendo(Meteorologo meteorologo){
-        /*Clima climaActual = meteorologo.obtenerClima();
-        int temperaturaActual = (int) climaActual.getTemperature();
-        int elementosDelGrupo; //Determina la cantidad de prendas superpuestas del atuendo
-        int variacionTemperatura = 5; //Determina cuantos grados de diferencia puede haber para que el atuendo sea sugerido. En 0 solamente sugeririamos atuendos para la temperatura ambiente actual sin flexibilidad.
-
-        if(temperaturaActual >= 0 && temperaturaActual <15)
-            elementosDelGrupo = 3;
-        else if(temperaturaActual >= 15 && temperaturaActual <24)
-            elementosDelGrupo = 2;
-        else
-            elementosDelGrupo = 1;
-
-
-        return Sets.cartesianProduct(ImmutableList.of(ImmutableSet.copyOf(prendasInferiores.stream().filter(x->x.esAptaParaTemperatura(temperaturaActual)).collect(Collectors.toSet())),
-                                                      ImmutableSet.copyOf(accesorios.stream().filter(x->x.esAptaParaTemperatura(temperaturaActual)).collect(Collectors.toSet())),
-                                                      ImmutableSet.copyOf(calzados.stream().filter(x->x.esAptaParaTemperatura(temperaturaActual)).collect(Collectors.toSet()))))
-                .stream()
-                .map(list -> new Atuendo(this.obtenerSugerenciasPrendasSuperiores(temperaturaActual, elementosDelGrupo, variacionTemperatura),
-                                         list.get(0),
-                                         list.get(1),
-                                         list.get(2)))
-                .collect(Collectors.toList());*/
-        return null;
-    }
-
     public abstract TipoDeUsuario tipoDeUsuarioQueAcepta();
 
+    public List<Atuendo> sugerirAtuendo(Meteorologo meteorologo){
+        Clima climaActual = meteorologo.obtenerClima();
 
-    private List<Prenda> obtenerSugerenciasPrendasSuperiores(int temperaturaActual, int elementosDelGrupo, int variacionTemperatura){
-        Collections.shuffle(prendasSuperiores);
-        return new ArrayList<>(Sets.combinations(ImmutableSet.copyOf(prendasSuperiores.stream().filter(prenda -> prenda.esAptaParaTemperatura(temperaturaActual)).collect(Collectors.toSet())), elementosDelGrupo) //Hace la combinatoria de la prendas superiores filtradas.
+        return Sets.cartesianProduct(ImmutableList.of(ImmutableSet.copyOf(generarCapasCompuestas(prendasSuperiores)), ImmutableSet.copyOf(generarCapasSimples(prendasInferiores)), ImmutableSet.copyOf(generarCapasSimples(calzados)), ImmutableSet.copyOf(generarCapasSimples(accesorios))))
                 .stream()
-                .filter(subgrupoDeNelementos -> prendasAbriganBien(subgrupoDeNelementos, temperaturaActual, variacionTemperatura))
-                .collect(Collectors.toList())
-                .get(0));
+                .map(list -> new Atuendo(list.get(0), list.get(1), list.get(2), list.get(3)))
+                .collect(Collectors.toList());
     }
 
-
-
-
-
-    //TODO: Hacer una algoritmo para cuando la temperatura es menos a 0. Este solo da resultados coherentes con temperaturaActual >= 0
-    private boolean prendasAbriganBien(Set<Prenda> prendas, int temperaturaActual, int margenDeFlexibilidad){
-        int temperaturaAcorde = prendas.iterator().next().getTipoPrenda().temperaturaResistida();
-        while(prendas.iterator().hasNext()){
-            temperaturaAcorde -= prendas.iterator().next().getTipoPrenda().temperaturaResistida();
-        }
-        return temperaturaActual + margenDeFlexibilidad >= Math.abs(temperaturaAcorde) && temperaturaActual - margenDeFlexibilidad <= Math.abs(temperaturaAcorde);
+    private List<CapaCompuesta> generarCapasCompuestas(List<Prenda> prendas){
+        return Sets.combinations(ImmutableSet.copyOf(prendas), 4)
+                .stream()
+                .map(set -> new CapaCompuesta(generarCapasSimples(ImmutableList.copyOf(set))))
+                .collect(Collectors.toList());
     }
 
+    private List<CapaSimple> generarCapasSimples(List<Prenda> prendas){
+        return prendas.stream().map(prenda -> new CapaSimple(prenda)).collect(Collectors.toList());
+    }
 
-
-    
 
     //TODO: El nombre de la excepcion esta bien, pero deberia agregarse otra del estilo GuardarropasInvalidoExcepcion para usar en el constructor del guardarropas
     public void prendasCoincidenConCategoria(List<Prenda> prendas, Categoria categoria){

@@ -1,5 +1,7 @@
 package domain.prenda;
 
+import domain.capaPrenda.NivelDeAbrigo;
+
 import java.io.IOException;
 import java.util.Objects;
 
@@ -12,13 +14,15 @@ public class Prenda {
     private Color colorSecundario;
     private Trama trama;
     private Imagen imagen;
+    private NivelDeAbrigo nivelDeAbrigo;
 
-    public Prenda(TipoDePrenda tipo, Color colorPrimario, Color colorSecundario, Material material, Trama trama) {
+    public Prenda(TipoDePrenda tipo, Color colorPrimario, Color colorSecundario, Material material, Trama trama, NivelDeAbrigo nivelDeAbrigo) {
         this.tipoPrenda = tipo;
         this.material = material;
         this.colorPrimario = colorPrimario;
         this.colorSecundario = colorSecundario;
         this.trama = trama;
+        this.nivelDeAbrigo = nivelDeAbrigo;
     }
 
     public void definirImagen(String pathDeArchivo) throws IOException {
@@ -26,8 +30,8 @@ public class Prenda {
         imagen=new Imagen(pathDeArchivo);
     }
 
-    public boolean esAptaParaTemperatura(int temperatura){
-        return this.tipoPrenda.esAptaParaTemperatura(temperatura);
+    public int temperaturaResistida(){
+        return tipoPrenda.temperaturaResistida();
     }
 
 
