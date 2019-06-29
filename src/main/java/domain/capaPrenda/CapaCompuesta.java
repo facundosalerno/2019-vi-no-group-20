@@ -17,10 +17,6 @@ public class CapaCompuesta extends Capa {
             throw new capasPrendasSimplesRequiereNonNull();
         if(capasPrendas.isEmpty())
             throw new capasPrendasSimplesRequiereNonNull();
-        if(!coincideLaCategoria(capasPrendas))
-            throw new NoPerteneceALaCategoriaException();
-        if(seRepiteNivelAbrigo(capasPrendas))
-            throw new SeRepiteNivelAbrigoException();
         this.capasPrendas = capasPrendas;
     }
 
@@ -31,7 +27,10 @@ public class CapaCompuesta extends Capa {
 
     @Override
     public boolean abrigaBien(Clima climaActual) {
-        return true;
+        if(!coincideLaCategoria(capasPrendas))
+            return false;
+        if(seRepiteNivelAbrigo(capasPrendas))
+            return false;
     }
 
     private boolean coincideLaCategoria(List<CapaSimple> capasPrendas){
@@ -39,6 +38,10 @@ public class CapaCompuesta extends Capa {
     }
 
     private boolean seRepiteNivelAbrigo(List<CapaSimple> capasPrendas){
-        return true;
+        return capasPrendas.stream().;
+    }
+
+    private boolean estanOrdenadas(CapaSimple capaDeAbajo, CapaSimple capaDeArriba){
+        return capaDeAbajo.
     }
 }

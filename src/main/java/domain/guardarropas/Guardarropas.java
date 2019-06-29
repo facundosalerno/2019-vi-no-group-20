@@ -1,24 +1,19 @@
 package domain.guardarropas;
 
-
 import clima.Clima;
 import clima.Meteorologo;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import domain.atuendo.Atuendo;
-import domain.capaPrenda.Capa;
 import domain.capaPrenda.CapaCompuesta;
 import domain.capaPrenda.CapaSimple;
 import domain.prenda.Categoria;
 import domain.prenda.Prenda;
+import domain.prenda.TemperaturaMaximaDeUso;
 import domain.usuario.TipoDeUsuario;
 import exceptions.NoPerteneceALaCategoriaException;
-
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public abstract class Guardarropas {
@@ -33,16 +28,17 @@ public abstract class Guardarropas {
     public List<Atuendo> sugerirAtuendo(Meteorologo meteorologo){
         Clima climaActual = meteorologo.obtenerClima();
 
-        return Sets.cartesianProduct(ImmutableList.of(ImmutableSet.copyOf(generarCapasCompuestas(prendasSuperiores)), ImmutableSet.copyOf(generarCapasSimples(prendasInferiores)), ImmutableSet.copyOf(generarCapasSimples(calzados)), ImmutableSet.copyOf(generarCapasSimples(accesorios))))
+        return Sets.cartesianProduct(ImmutableList.of(ImmutableSet.copyOf(generarCapasCompuestas(prendasSuperiores, climaActual)), ImmutableSet.copyOf(generarCapasSimples(prendasInferiores)), ImmutableSet.copyOf(generarCapasSimples(calzados)), ImmutableSet.copyOf(generarCapasSimples(accesorios))))
                 .stream()
                 .map(list -> new Atuendo(list.get(0), list.get(1), list.get(2), list.get(3)))
                 .collect(Collectors.toList());
     }
 
-    private List<CapaCompuesta> generarCapasCompuestas(List<Prenda> prendas){
-        return Sets.combinations(ImmutableSet.copyOf(prendas), 4)
+    private List<CapaCompuesta> generarCapasCompuestas(List<Prenda> prendas, Clima climaActual){
+        return Sets.combinations(ImmutableSet.copyOf(prendas), TemperaturaMaximaDeUso.getNivelDeCapa(climaActual).capas())
                 .stream()
                 .map(set -> new CapaCompuesta(generarCapasSimples(ImmutableList.copyOf(set))))
+                .filter(capa -> capa.abrigaBien(climaActual))
                 .collect(Collectors.toList());
     }
 

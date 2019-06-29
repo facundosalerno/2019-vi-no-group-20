@@ -11,6 +11,10 @@ public class CapaSimple extends Capa {
         this.prenda = prenda;
     }
 
+    public NivelDeCapa getNivelDeCapa(){
+        return prenda.getTipoPrenda().
+    }
+
     @Override
     public Categoria getCategoria(){
         return prenda.getCategoria();
