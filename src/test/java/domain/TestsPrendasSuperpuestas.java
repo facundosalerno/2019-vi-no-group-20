@@ -1,11 +1,18 @@
 package domain;
 
 import domain.atuendo.Atuendo;
+import domain.capaPrenda.NivelDeCapa;
 import domain.prenda.*;
 import exceptions.AtuendoInvalidoException;
 import org.checkerframework.checker.units.qual.A;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import clima.TemperaturaAccuWeather;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
@@ -48,5 +55,11 @@ public class TestsPrendasSuperpuestas {
         new Atuendo(Arrays.asList(camisa, pantalon), pantalon, zapatos, anteojos);
     }*/
 
+    @Test
+	public  void ordinalNivelCapa(){
+		
+		Assert.assertEquals(NivelDeCapa.LIVIANO.ordinal(),1);
+
+	}
 
 }
