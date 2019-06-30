@@ -8,6 +8,7 @@ import exceptions.SeRepiteNivelAbrigoException;
 import exceptions.capasPrendasSimplesRequiereNonNull;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CapaCompuesta extends Capa {
     private List<CapaSimple> capasPrendas;
@@ -38,7 +39,11 @@ public class CapaCompuesta extends Capa {
     }
 
     private boolean seRepiteNivelAbrigo(List<CapaSimple> capasPrendas){
-        return capasPrendas.stream().;
+         
+        	// listo los distintos y comparo con original
+    	
+    	return capasPrendas.stream().map(p->p.getNivelDeCapa()).distinct().collect(Collectors.toList()).size()== capasPrendas.stream().map(p->p.getNivelDeCapa()).collect(Collectors.toList()).size();
+        		
     }
 
     private boolean estanOrdenadas(CapaSimple capaDeAbajo, CapaSimple capaDeArriba){
