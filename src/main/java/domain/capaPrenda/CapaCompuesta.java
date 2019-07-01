@@ -57,7 +57,7 @@ public class CapaCompuesta extends Capa {
     
     private boolean estanOrdenadas(List<CapaSimple> capasPrendas){
        
-    	return this.ordenarCapa(capasPrendas)==capasPrendas & this.nivelesContiguos(capasPrendas) ;
+    	return this.ordenarCapa(capasPrendas)==capasPrendas && this.nivelesContiguos(capasPrendas) ;
     }
     
     
