@@ -7,9 +7,15 @@ import exceptions.NoPerteneceALaCategoriaException;
 import exceptions.SeRepiteNivelAbrigoException;
 import exceptions.capasPrendasSimplesRequiereNonNull;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.stream.Collectors;
+
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterators;
+
 
 public class CapaCompuesta extends Capa {
     private List<CapaSimple> capasPrendas;
@@ -51,8 +57,9 @@ public class CapaCompuesta extends Capa {
     
     private boolean estanOrdenadas(List<CapaSimple> capasPrendas){
        
-    	return this.ordenarCapa(capasPrendas)==capasPrendas;
+    	return this.ordenarCapa(capasPrendas)==capasPrendas & this.nivelesContiguos(capasPrendas) ;
     }
+    
     
     private List<CapaSimple> ordenarCapa(List<CapaSimple> capasPrendas){
     	return  capasPrendas.stream()
@@ -60,12 +67,20 @@ public class CapaCompuesta extends Capa {
     			.collect(Collectors.toList());
     }
     
-    /*
-    private boolean nivelesContiguos(List<CapaSimple> capasPrendas) {
     
-    return	 capasPrendas.stream()
-    			.sorted(Comparator.comparing(p->p.getNivelDeCapa().ordinal()))
-    			.collect(Collectors.toList()).stream().allMatch((p1->p1.getNivelDeCapa().ordinal());
+    private boolean nivelesContiguos(List<CapaSimple> capasPrendas) {
+      	
+    	int resultado =0;
+    	int tamañoCapas = capasPrendas.stream().collect(Collectors.toList()).size();
+    	ArrayList<NivelDeCapa> nivelesDeCapa =(ArrayList<NivelDeCapa>) capasPrendas.stream().map(p->p.getNivelDeCapa()).collect(Collectors.toList());
+    	  	
+    	for (int i: tamañoCapas)  {
+    		if(nivelesDeCapa.get(i).ordinal()!=nivelesDeCapa.get(i+1).ordinal()-1) {{resultado+=1;}}
+    	}
+    	
+    	
+    return	 resultado==0;
+    		
     }
-    */
+    
 }
