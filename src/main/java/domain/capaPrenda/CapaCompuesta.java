@@ -7,6 +7,7 @@ import exceptions.NoPerteneceALaCategoriaException;
 import exceptions.SeRepiteNivelAbrigoException;
 import exceptions.capasPrendasSimplesRequiereNonNull;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,11 +43,21 @@ public class CapaCompuesta extends Capa {
          
         	// listo los distintos y comparo con original
     	
-    	return capasPrendas.stream().map(p->p.getNivelDeCapa()).distinct().collect(Collectors.toList()).size()== capasPrendas.stream().map(p->p.getNivelDeCapa()).collect(Collectors.toList()).size();
+    	return capasPrendas.stream().map(p->p.getNivelDeCapa()).distinct().collect(Collectors.toList()).size() == 
+    			capasPrendas.stream().map(p->p.getNivelDeCapa()).collect(Collectors.toList()).size();
         		
     }
 
+    /*
     private boolean estanOrdenadas(CapaSimple capaDeAbajo, CapaSimple capaDeArriba){
-        return capaDeAbajo.
+       
+    	return capaDeAbajo.
+    }
+    */
+    private boolean ordenaryValidarNivelesContiguos(List<CapaSimple> capasPrendas){
+        
+    	return capasPrendas.stream()
+    			.sorted(Comparator.comparing(p->p.getNivelDeCapa().ordinal()))
+    			.collect(Collectors.toList()).stream().allMatch(p->p.getNivelDeCapa().ordinal());
     }
 }
