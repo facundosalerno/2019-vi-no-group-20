@@ -48,16 +48,24 @@ public class CapaCompuesta extends Capa {
         		
     }
 
-    /*
-    private boolean estanOrdenadas(CapaSimple capaDeAbajo, CapaSimple capaDeArriba){
+    
+    private boolean estanOrdenadas(List<CapaSimple> capasPrendas){
        
-    	return capaDeAbajo.
+    	return this.ordenarCapa(capasPrendas)==capasPrendas;
+    }
+    
+    private List<CapaSimple> ordenarCapa(List<CapaSimple> capasPrendas){
+    	return  capasPrendas.stream()
+    			.sorted(Comparator.comparing(p->p.getNivelDeCapa().ordinal()))
+    			.collect(Collectors.toList());
+    }
+    
+    /*
+    private boolean nivelesContiguos(List<CapaSimple> capasPrendas) {
+    
+    return	 capasPrendas.stream()
+    			.sorted(Comparator.comparing(p->p.getNivelDeCapa().ordinal()))
+    			.collect(Collectors.toList()).stream().allMatch((p1->p1.getNivelDeCapa().ordinal());
     }
     */
-    private boolean ordenaryValidarNivelesContiguos(List<CapaSimple> capasPrendas){
-        
-    	return capasPrendas.stream()
-    			.sorted(Comparator.comparing(p->p.getNivelDeCapa().ordinal()))
-    			.collect(Collectors.toList()).stream().allMatch(p->p.getNivelDeCapa().ordinal());
-    }
 }
