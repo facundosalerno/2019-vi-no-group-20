@@ -44,7 +44,7 @@ public class Prenda {
     public Color getColorSecundario() { return colorSecundario;}
     public Trama getTrama() { return trama;}
 
-    public NivelDeCapa getNivelDeCapa(){return tipoPrenda.}
+    public NivelDeCapa getNivelDeCapa(){return null;}
 
 
 

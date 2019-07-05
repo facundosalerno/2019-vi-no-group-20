@@ -39,6 +39,7 @@ public class CapaCompuesta extends Capa {
             return false;
         if(seRepiteNivelAbrigo(capasPrendas))
             return false;
+        return true;
     }
 
     private boolean coincideLaCategoria(List<CapaSimple> capasPrendas){
@@ -63,24 +64,20 @@ public class CapaCompuesta extends Capa {
     
     private List<CapaSimple> ordenarCapa(List<CapaSimple> capasPrendas){
     	return  capasPrendas.stream()
-    			.sorted(Comparator.comparing(p->p.getNivelDeCapa().ordinal()))
+    			.sorted(Comparator.comparing(p->p.getNivelDeCapa().capas()))
     			.collect(Collectors.toList());
     }
     
     
     private boolean nivelesContiguos(List<CapaSimple> capasPrendas) {
-      	
-    	int resultado =0;
-    	int tamañoCapas = capasPrendas.stream().collect(Collectors.toList()).size();
+    	int tamaÃ±oCapas = capasPrendas.stream().collect(Collectors.toList()).size();
     	ArrayList<NivelDeCapa> nivelesDeCapa =(ArrayList<NivelDeCapa>) capasPrendas.stream().map(p->p.getNivelDeCapa()).collect(Collectors.toList());
     	  	
-    	for (int i: tamañoCapas)  {
-    		if(nivelesDeCapa.get(i).ordinal()!=nivelesDeCapa.get(i+1).ordinal()-1) {{resultado+=1;}}
+    	for (int i=0; i<tamaÃ±oCapas-1; ++i)  {
+    		if(nivelesDeCapa.get(i).capas() >= nivelesDeCapa.get(i+1).capas())
+    		    return false;
     	}
-    	
-    	
-    return	 resultado==0;
-    		
+        return true;
     }
     
 }

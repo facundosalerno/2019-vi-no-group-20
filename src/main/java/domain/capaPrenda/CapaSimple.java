@@ -12,7 +12,7 @@ public class CapaSimple extends Capa {
     }
 
     public NivelDeCapa getNivelDeCapa(){
-        return prenda.getTipoPrenda().
+        return null;
     }
 
     @Override

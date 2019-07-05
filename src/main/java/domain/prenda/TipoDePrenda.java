@@ -1,5 +1,7 @@
 package domain.prenda;
 
+import domain.capaPrenda.NivelDeCapa;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,8 +17,8 @@ public class TipoDePrenda {
         this.temperatura = temperatura;
     }
 
-    public getNivelDeCapa(){
-        return 
+    public NivelDeCapa getNivelDeCapa(){
+        return null;
     }
 
     public Categoria categoria() {
