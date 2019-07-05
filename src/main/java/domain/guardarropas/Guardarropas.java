@@ -49,7 +49,7 @@ public abstract class Guardarropas {
 
     //TODO: El nombre de la excepcion esta bien, pero deberia agregarse otra del estilo GuardarropasInvalidoExcepcion para usar en el constructor del guardarropas
     public void prendasCoincidenConCategoria(List<Prenda> prendas, Categoria categoria){
-        if(!prendas.stream().allMatch(prenda -> prenda.getCategoria()==categoria)){
+        if(!prendas.stream().allMatch(prenda -> prenda.esDeCategoria(categoria))){
             throw new NoPerteneceALaCategoriaException();
         }
     }
