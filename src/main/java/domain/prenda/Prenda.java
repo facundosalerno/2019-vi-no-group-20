@@ -30,10 +30,17 @@ public class Prenda {
 
 
 
+    public boolean esDeCategoria(Categoria categoria){
+    
+        return this.getCategoria()==categoria;
+    }
+    
     //Getters
     public Categoria getCategoria() {
         return this.tipoPrenda.categoria();
     }
+    
+   
     public TipoDePrenda getTipoPrenda(){
         return this.tipoPrenda;
     }
