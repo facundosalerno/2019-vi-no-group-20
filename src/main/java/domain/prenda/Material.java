@@ -11,5 +11,6 @@ public enum Material{
     JEAN,
     GAMUZA,
     GOMA,
-    PLASTICO
+    PLASTICO,
+    GABARDINA
 }
