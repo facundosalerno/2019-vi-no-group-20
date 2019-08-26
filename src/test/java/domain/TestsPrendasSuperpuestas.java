@@ -45,7 +45,10 @@ public class TestsPrendasSuperpuestas {
         borradorPrenda.definirTipo(tipoDePrenda);
         borradorPrenda.definirMaterial(material);
         borradorPrenda.definirColorPrimario(colorPrimario);
-        borradorPrenda.definirColorSecundario(colorSecundario);
+        if(colorSecundario != null) {
+
+            borradorPrenda.definirColorSecundario(colorSecundario);
+        }
         borradorPrenda.definirTrama(trama);
         return borradorPrenda.crearPrenda();
     }
@@ -58,7 +61,7 @@ public class TestsPrendasSuperpuestas {
     @Test
 	public  void ordinalNivelCapa(){
 		
-		Assert.assertEquals(NivelDeCapa.LIVIANO.ordinal(),1);
+		Assert.assertEquals(NivelDeCapa.LIVIANO.ordinal(),0);
 
 	}
 

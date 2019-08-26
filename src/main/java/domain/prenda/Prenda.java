@@ -15,18 +15,16 @@ public class Prenda {
     private Trama trama;
     private Imagen imagen;
 
-    public Prenda(TipoDePrenda tipo, Color colorPrimario, Color colorSecundario, Material material, Trama trama) {
+    public Prenda(TipoDePrenda tipo, Color colorPrimario, Color colorSecundario, Material material, Trama trama, Imagen imagen) {
         this.tipoPrenda = tipo;
         this.material = material;
         this.colorPrimario = colorPrimario;
         this.colorSecundario = colorSecundario;
         this.trama = trama;
+        this.imagen=imagen;
     }
 
-    public void definirImagen(String pathDeArchivo) throws IOException {
-        requireNonNull(pathDeArchivo, "El path del archivo no es valido");
-        imagen=new Imagen(pathDeArchivo);
-    }
+
 
 
 
@@ -51,7 +49,7 @@ public class Prenda {
     public Color getColorSecundario() { return colorSecundario;}
     public Trama getTrama() { return trama;}
 
-    public NivelDeCapa getNivelDeCapa(){return null;}
+    public NivelDeCapa getNivelDeCapa(){return tipoPrenda.getNivelDeCapa();}
 
 
 

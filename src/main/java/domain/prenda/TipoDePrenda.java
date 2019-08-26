@@ -47,7 +47,7 @@ public class TipoDePrenda {
     public static final TipoDePrenda ANTEOJOS = new TipoDePrenda(Categoria.ACCESORIOS, Arrays.asList(Material.PLASTICO), new TemperaturaMaximaDeUso(35), NivelDeCapa.LIVIANO);
     public static final TipoDePrenda BUSO = new TipoDePrenda(Categoria.PARTE_SUPERIOR, Arrays.asList(Material.ALGODON), new TemperaturaMaximaDeUso(20), NivelDeCapa.MEDIO);
     public static final TipoDePrenda SWEATER = new TipoDePrenda(Categoria.PARTE_SUPERIOR, Arrays.asList(Material.LINO), new TemperaturaMaximaDeUso(23), NivelDeCapa.MEDIO);
-    public static final TipoDePrenda CAMPERA = new TipoDePrenda(Categoria.PARTE_SUPERIOR, Arrays.asList(Material.GABARDINA), new TemperaturaMaximaDeUso(15), NivelDeCapa.ELEVADO);
+    public static final TipoDePrenda CAMPERA = new TipoDePrenda(Categoria.PARTE_SUPERIOR, Arrays.asList(Material.GABARDINA,Material.JEAN, Material.ALGODON), new TemperaturaMaximaDeUso(15), NivelDeCapa.ELEVADO);
 
 
 }

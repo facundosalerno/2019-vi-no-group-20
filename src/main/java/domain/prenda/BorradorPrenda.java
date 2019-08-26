@@ -3,6 +3,8 @@ package domain.prenda;
 import domain.capaPrenda.NivelDeCapa;
 import exceptions.*;
 
+import java.io.IOException;
+
 import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 
@@ -12,6 +14,7 @@ public class BorradorPrenda {
     private Color colorPrimario;
     private Color colorSecundario;
     private Trama trama = Trama.LISA;
+    private Imagen imagen;
 
     public void definirTipo(TipoDePrenda tipoPrenda) {
         requireNonNull(tipoPrenda, "Por ahora no admitimos un tipo de prenda null");
@@ -52,13 +55,17 @@ public class BorradorPrenda {
 
     }
 
+    public void definirImagen(String pathDeArchivo) throws IOException {
+        requireNonNull(pathDeArchivo, "El path del archivo no es valido");
+        imagen=new Imagen(pathDeArchivo);
+    }
 
     public Prenda crearPrenda() {
         requireNonNull(tipoPrenda, "tipo de prenda es obligatorio");
         requireNonNull(material, "material es obligatorio");
         requireNonNull(colorPrimario, "color es obligatorio");
         requireNonNull(trama, "tipo de prenda es obligatorio");
-        return new Prenda(tipoPrenda, colorPrimario, colorSecundario, material, trama);
+        return new Prenda(tipoPrenda, colorPrimario, colorSecundario, material, trama, imagen);
     }
 
 }

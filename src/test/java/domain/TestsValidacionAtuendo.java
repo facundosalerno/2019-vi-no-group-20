@@ -2,6 +2,7 @@ package domain;
 
 import domain.atuendo.Atuendo;
 import domain.capaPrenda.Capa;
+import domain.capaPrenda.CapaCompuesta;
 import domain.capaPrenda.CapaSimple;
 import domain.prenda.*;
 import exceptions.*;
@@ -9,15 +10,23 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 public class TestsValidacionAtuendo {
     private Prenda prendaZapatos;
     private Prenda prendaRemera;
+    private Prenda prendaBuso;
+    private Prenda prendaCampera;
     private Prenda prendaPantalon;
     private Prenda prendaAnteojos;
-    private Capa zapatos;
-    private Capa remera;
-    private Capa pantalon;
-    private Capa anteojos;
+
+    private CapaSimple zapatos;
+    private CapaSimple remera;
+    private CapaSimple buso;
+    private CapaSimple campera;
+    private CapaSimple pantalon;
+    private CapaSimple anteojos;
+    private Capa parteSuperiorInvierno;
 
     @Before
     public void init() {
@@ -31,19 +40,29 @@ public class TestsValidacionAtuendo {
         prendaPantalon = armarUnaPrenda(TipoDePrenda.PANTALON, Material.JEAN, verde, rojo, Trama.RAYADA);
         prendaAnteojos = armarUnaPrenda(TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA);
 
+        prendaBuso = armarUnaPrenda(TipoDePrenda.BUSO, Material.ALGODON, azul, verde, Trama.LISA);
+        prendaCampera = armarUnaPrenda(TipoDePrenda.CAMPERA, Material.JEAN, verde, null, Trama.GASTADO);
+
+
         zapatos = new CapaSimple(prendaZapatos);
         remera = new CapaSimple(prendaRemera);
+        buso = new CapaSimple(prendaBuso);
         pantalon = new CapaSimple(prendaPantalon);
         anteojos = new CapaSimple(prendaAnteojos);
 
+        parteSuperiorInvierno = new CapaCompuesta(Arrays.asList(remera, buso, campera));
+
     }
 
-    public Prenda armarUnaPrenda(TipoDePrenda tipoDePrenda, Material material, Color colorPrimario, Color colorSecundario, Trama trama){
+    public Prenda armarUnaPrenda(TipoDePrenda tipoDePrenda, Material material, Color colorPrimario, Color colorSecundario, Trama trama) {
         BorradorPrenda borradorPrenda = new BorradorPrenda();
         borradorPrenda.definirTipo(tipoDePrenda);
         borradorPrenda.definirMaterial(material);
         borradorPrenda.definirColorPrimario(colorPrimario);
-        borradorPrenda.definirColorSecundario(colorSecundario);
+        if(colorSecundario != null) {
+
+            borradorPrenda.definirColorSecundario(colorSecundario);
+        }
         borradorPrenda.definirTrama(trama);
         return borradorPrenda.crearPrenda();
     }
@@ -52,16 +71,21 @@ public class TestsValidacionAtuendo {
     //Test para verificar que podemos crear un atuendo correctamente
     @Test
     public void crearAtuendoValido() {
-        try{
+        try {
             new Atuendo(remera, pantalon, zapatos, anteojos);
-        }catch (AtuendoInvalidoException exc){
+        } catch (AtuendoInvalidoException exc) {
             Assert.fail();
         }
     }
 
     //Test para verificar que no deberia crearse un atuendo invalido
-    @Test (expected = AtuendoInvalidoException.class)
+    @Test(expected = AtuendoInvalidoException.class)
     public void crearAtuendoInvalido() {
         new Atuendo(pantalon, pantalon, zapatos, anteojos);
     }
+
+    //TODO:Test para verificar la creacion de un atuendo con prendas superpuestas para determinada temperatura
+
+    //TODO:Test para verificar que ante la imposibilidad de crear un atuendo para una temperatura determinada, se crea una excepcion
+
 }

@@ -1,6 +1,8 @@
 package domain.capaPrenda;
 
 import clima.Clima;
+import com.google.common.collect.Comparators;
+import com.google.common.collect.Ordering;
 import domain.prenda.Categoria;
 import domain.prenda.Prenda;
 import exceptions.NoPerteneceALaCategoriaException;
@@ -56,28 +58,36 @@ public class CapaCompuesta extends Capa {
     }
 
     
-    private boolean estanOrdenadas(List<CapaSimple> capasPrendas){
+    public boolean estanOrdenadas(){
        
-    	return this.ordenarCapa(capasPrendas)==capasPrendas && this.nivelesContiguos(capasPrendas) ;
+    	return  this.nivelesContiguos(capasPrendas) ;
     }
     
     
-    private List<CapaSimple> ordenarCapa(List<CapaSimple> capasPrendas){
+    public List<CapaSimple> ordenarCapa(List<CapaSimple> capasPrendas){
     	return  capasPrendas.stream()
     			.sorted(Comparator.comparing(p->p.getNivelDeCapa().capas()))
     			.collect(Collectors.toList());
     }
-    
-    
+
+
     private boolean nivelesContiguos(List<CapaSimple> capasPrendas) {
-    	int tamañoCapas = capasPrendas.stream().collect(Collectors.toList()).size();
+
+        List<NivelDeCapa> nivelesDeCapas = capasPrendas.stream().map(capaSimple -> capaSimple.getNivelDeCapa()).collect(Collectors.toList());
+
+        return Comparators.isInOrder(nivelesDeCapas, Comparator.<NivelDeCapa> naturalOrder());
+
+
+
+        /*int tamañoCapas = capasPrendas.stream().collect(Collectors.toList()).size();
     	ArrayList<NivelDeCapa> nivelesDeCapa =(ArrayList<NivelDeCapa>) capasPrendas.stream().map(p->p.getNivelDeCapa()).collect(Collectors.toList());
-    	  	
+
     	for (int i=0; i<tamañoCapas-1; ++i)  {
     		if(nivelesDeCapa.get(i).capas() >= nivelesDeCapa.get(i+1).capas())
     		    return false;
     	}
         return true;
+    */
     }
-    
+
 }

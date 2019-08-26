@@ -10,7 +10,7 @@ import clima.OpenWeather;
 import clima.TemperaturaAccuWeather;
 import clima.TemperaturaOpenWeather;
 
-
+/*
 
 public class TestMeteorologos {
 
@@ -50,3 +50,4 @@ public class TestMeteorologos {
 
 	}
 }
+*/
