@@ -19,14 +19,12 @@ import org.uqbar.arena.windows.MainWindow;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
-
 /**
  * Punto 7: Interfaz de escritorio que permita Listar todos los eventos (de un usuario en particular) entre dos fechas,
  * mostrando la fecha, el título del evento, y si ya se cuentan con sugerencias para el mismo.
  */
 
 public class EventoWindow extends MainWindow<Usuario> {
-
     static Prenda zapatos;
     static Prenda remera;
     static Prenda pantalon;
@@ -39,6 +37,8 @@ public class EventoWindow extends MainWindow<Usuario> {
     static Usuario yo;
     static Evento cumpleañosDePancho;
     static LocalDateTime fechaCumpleDePancho;
+
+
 
 
 
@@ -60,6 +60,10 @@ public class EventoWindow extends MainWindow<Usuario> {
         /* Parte importante */
         new EventoWindow().startApplication();
     }
+
+
+
+
 
     static Prenda armarUnaPrenda(TipoDePrenda tipoDePrenda, Material material, domain.prenda.Color colorPrimario, domain.prenda.Color colorSecundario, Trama trama){
         BorradorPrenda borradorPrenda = new BorradorPrenda();
@@ -88,39 +92,69 @@ public class EventoWindow extends MainWindow<Usuario> {
     /* Enlazar botones con acciones */
     @Override
     public void createContents(Panel mainPanel){
-        int windowWidth = 400;
+        configurar_ventana_principal(mainPanel);
+        crear_panel_fechas(mainPanel);
+        crear_boton_listar_eventos(mainPanel);
+        crear_tabla_eventos(mainPanel);
+    }
 
+
+
+
+
+    private void configurar_ventana_principal(Panel mainPanel){
         /* Titulo de la ventana */
         this.setTitle("Mis eventos");
-        this.setMinWidth(windowWidth);
+        this.setMinWidth(400);
 
         /* Layout de la ventana: significa que los elementos se acumulan en forma de pila o stack, por eso es verticalLayout. El orden esta definido por el orden en que se llama a cada elemento */
         mainPanel.setLayout(new VerticalLayout());
-        mainPanel.setWidth(windowWidth);
+        mainPanel.setWidth(400);
+    }
 
-        Panel subPanelFechaInicio = new Panel(mainPanel).setLayout(new HorizontalLayout());
+
+
+
+
+    private void crear_panel_fechas(Panel panelPadre){
+        Panel subPanelFechaInicio = new Panel(panelPadre).setLayout(new HorizontalLayout());
         new Label(subPanelFechaInicio).setText("Fecha de inicio").alignLeft();
         // Nota, el atributo filtroEventoInicial tiene que tener getter y setter por que si no, no arranca.
         new TextBox(subPanelFechaInicio).setWidth(290).alignRight().bindValueToProperty("filtroEventoInicial").setTransformer(new LocalDateTimeTransformer());
 
-        Panel subPanelFechaFin = new Panel(mainPanel).setWidth(windowWidth).setLayout(new HorizontalLayout());
+        Panel subPanelFechaFin = new Panel(panelPadre).setLayout(new HorizontalLayout());
         // Nota, no pude hacer andar los align
         new Label(subPanelFechaFin).setText("Fecha de fin    ").alignLeft();
         new TextBox(subPanelFechaFin).setWidth(290).alignRight().bindValueToProperty("filtroEventoFinal").setTransformer(new LocalDateTimeTransformer());
-
-        new Button(mainPanel).setCaption("Listar eventos")
-                .onClick(()->this.getModelObject().filtrarEventosEntreRangoDeFechas());
-
-        Table<Evento> tablaEventos = new Table<Evento>(mainPanel, Evento.class);
-        tablaEventos.bindItemsToProperty("eventosFiltrados");
-        //tablaEventos.bindValueToProperty("celularSeleccionado");
-
-        new Column<Evento>(tablaEventos).setTitle("Titulo").bindContentsToProperty("nombre");
-        new Column<Evento>(tablaEventos).setTitle("Fecha").bindContentsToProperty("fecha");
-        new Column<Evento>(tablaEventos).setTitle("Sugerencias").bindContentsToProperty("existenSugerencias");
     }
 
+
+
+
+
+    private void crear_boton_listar_eventos(Panel mainPanel){
+        new Button(mainPanel).setCaption("Listar eventos").onClick(()->this.getModelObject().filtrarEventosEntreRangoDeFechas());
+    }
+
+
+
+
+
+    private void crear_tabla_eventos(Panel mainPanel){
+        Table<Evento> tablaEventos = new Table<Evento>(mainPanel, Evento.class);
+        tablaEventos.setWidth(400);
+        tablaEventos.bindItemsToProperty("eventosFiltrados");
+        //tablaEventos.bindValueToProperty("celularSeleccionado");
+        //Nota, tampoco pude hacer andar los fixedSize
+        new Column<Evento>(tablaEventos).setTitle("Titulo                                         ").setFixedSize(200).bindContentsToProperty("nombre");
+        new Column<Evento>(tablaEventos).setTitle("Fecha                                         ").setFixedSize(130).bindContentsToProperty("fecha");
+        new Column<Evento>(tablaEventos).setTitle("Sugerencias").setFixedSize(70).bindContentsToProperty("existenSugerencias");
+    }
 }
+
+
+
+
 
 /** Transformar de String a LocalDateTime. Se espera que se ingrese con el formato YYYY-MM-DD-hh-mm-ss y para cumplir con LocalDateTime se le agrega con el formato YYYY-MM-DD-hh-mm-ss.zzz (milisegundos)*/
 class LocalDateTimeTransformer implements ValueTransformer<LocalDateTime, String>{
