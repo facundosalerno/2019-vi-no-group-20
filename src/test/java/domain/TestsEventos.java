@@ -42,6 +42,7 @@ public class TestsEventos {
         panchoPepeGil = new Usuario(Arrays.asList(new GuardarropasPremium(Arrays.asList(remera, remera), Arrays.asList(pantalon, pantalon, pantalon), Arrays.asList(zapatos, zapatos, zapatos), Arrays.asList(anteojos))), TipoDeUsuario.PREMIUM);
         LocalDateTime fechaCumpleWilly= LocalDateTime.of(2020,06,20,20,30);
         cumpleañosDeWillyWonka = new Evento("Cumpleaños de juan", fechaCumpleWilly,"Casa de Juan", panchoPepeGil);
+        //Nota: no esta cargando el evento en el usuario, esta mal hecho.
     }
 
     public Prenda armarUnaPrenda(TipoDePrenda tipoDePrenda, Material material, Color colorPrimario, Color colorSecundario, Trama trama){

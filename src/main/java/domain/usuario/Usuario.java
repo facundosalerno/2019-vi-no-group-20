@@ -12,10 +12,15 @@ import exceptions.NoHayDecisionesParaDeshacer;
 import exceptions.ElGuardarropasNoEsAptoException;
 
 import java.lang.reflect.Member;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import org.mockito.cglib.core.Local;
+import org.uqbar.commons.model.annotations.Observable;
+
+@Observable /** Necesario para poder usarse con arena */
 public class Usuario {
     private List<Evento> eventos=new ArrayList<>();
     private Deque<Decision> decisiones=new ArrayDeque<>();
@@ -23,6 +28,7 @@ public class Usuario {
     private List<Atuendo> atuendosRechazados=new ArrayList<>();
     private TipoDeUsuario tipoDeUsuario;
     private List<Guardarropas> guardarropas;
+
     
     public Usuario(List<Guardarropas> guardarropas, TipoDeUsuario tipoDeUsuario) {
         this.tipoDeUsuario=tipoDeUsuario;
@@ -43,8 +49,8 @@ public class Usuario {
         return guardarropas.get(indexGuardarropas).sugerirAtuendo(meteorologo);
     }
 
-    public void cargarEvento(String nombreEvento, LocalDateTime fechaYHora, String lugar){
-        eventos.add(new Evento(nombreEvento, fechaYHora,lugar, this));
+    public void cargarEvento(Evento evento){
+        eventos.add(evento);
     }
 
     public List<Atuendo> recibirSugerenciasEvento(String nombreEvento, LocalDateTime fechaEvento){ //Tambien podriamos haber usado index en la lista
@@ -72,7 +78,53 @@ public class Usuario {
 
 
 
-    //Equals y hashCode
+
+
+    /** Metodos y atributos para arena */
+
+    private LocalDateTime filtroEventoInicial = LocalDateTime.now();
+    private LocalDateTime filtroEventoFinal = LocalDateTime.now();
+
+    private List<Evento> eventosFiltrados = new ArrayList<>();
+
+    public void filtrarEventosEntreRangoDeFechas(){
+        eventosFiltrados = eventos.stream().filter(evento -> evento.estaEntre(filtroEventoInicial, filtroEventoFinal)).collect(Collectors.toList());
+    }
+
+    public void setFiltroEventoInicial(LocalDateTime filtroEventoInicial) {
+        this.filtroEventoInicial = filtroEventoInicial;
+    }
+
+    public void setFiltroEventoFinal(LocalDateTime filtroEventoFinal) {
+        this.filtroEventoFinal = filtroEventoFinal;
+    }
+
+    public LocalDateTime getFiltroEventoInicial() {
+        return filtroEventoInicial;
+    }
+
+    public LocalDateTime getFiltroEventoFinal() {
+        return filtroEventoFinal;
+    }
+
+    public List<Evento> getEventos() {
+        return eventos;
+    }
+
+    public void setEventos(List<Evento> eventos) {
+        this.eventos = eventos;
+    }
+
+    public List<Evento> getEventosFiltrados() {
+        return eventosFiltrados;
+    }
+
+    public void setEventosFiltrados(List<Evento> eventosFiltrados) {
+        this.eventosFiltrados = eventosFiltrados;
+    }
+
+
+    /** Equals y hashCode */
 
     @Override
     public boolean equals(Object o) {
