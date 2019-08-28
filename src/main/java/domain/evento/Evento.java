@@ -9,6 +9,7 @@ import org.uqbar.commons.model.annotations.Observable;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,15 +22,23 @@ public class Evento {
     private LocalDateTime fecha;
     private String lugar;
     private Usuario usuario;
-    private List<Atuendo> sugerenciasObtenidas;
-    private boolean existenSugerencias = false;
+    private FrecuenciaEvento frecuencia;
+    private List<Atuendo> sugerenciasObtenidas = new ArrayList<>();
+    private boolean existenSugerencias = !sugerenciasObtenidas.isEmpty(); //TODO revisar este cacho de codigo
 
-    public Evento(String nombre, LocalDateTime fechaYHora, String lugar, Usuario usuario){
+    public Evento(String nombre, LocalDateTime fechaYHora, FrecuenciaEvento frecuencia, String lugar, Usuario usuario){
         this.nombre = nombre;
         this.fecha = fechaYHora;
         this.lugar=lugar;
         this.usuario=usuario;
+        this.frecuencia = frecuencia;
     }
+
+
+
+
+
+    /** Metodos */
 
     public void generarSugerencias(Meteorologo meteorologo){
         if(Math.abs(DAYS.between(fecha.toLocalDate(), LocalDate.now())) <= diasDeProximidadAEventos()){
@@ -45,10 +54,8 @@ public class Evento {
 
     public List<Atuendo> obtenerSugerencias(){
         if(sugerenciasObtenidas.isEmpty()){
-            existenSugerencias = false;
             throw new NoHaySugerenciasParaElEvento();
         }
-        existenSugerencias = true;
         return sugerenciasObtenidas;
     }
 
@@ -65,7 +72,11 @@ public class Evento {
         return fecha.isAfter(fechaInicio) && fecha.isBefore(fechaFin);
     }
 
-    /** Metodos y atributos para arena */
+
+
+
+
+    /** Getters y setters */
 
     public String getNombre() {
         return nombre;
@@ -90,6 +101,9 @@ public class Evento {
     public void setExistenSugerencias(boolean existenSugerencias) {
         this.existenSugerencias = existenSugerencias;
     }
+
+
+
 
 
     /** Equals y hashcode */

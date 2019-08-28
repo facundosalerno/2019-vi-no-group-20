@@ -22,6 +22,7 @@ import org.uqbar.commons.model.annotations.Observable;
 
 @Observable /** Necesario para poder usarse con arena */
 public class Usuario {
+
     private List<Evento> eventos=new ArrayList<>();
     private Deque<Decision> decisiones=new ArrayDeque<>();
     private List<Atuendo> atuendosAceptados=new ArrayList<>();
@@ -29,7 +30,12 @@ public class Usuario {
     private TipoDeUsuario tipoDeUsuario;
     private List<Guardarropas> guardarropas;
 
-    
+
+
+
+
+    /** Metodos */
+
     public Usuario(List<Guardarropas> guardarropas, TipoDeUsuario tipoDeUsuario) {
         this.tipoDeUsuario=tipoDeUsuario;
         if (!guardarropas.stream().allMatch(guardarropa -> guardarropa.tipoDeUsuarioQueAcepta() == tipoDeUsuario))
@@ -80,16 +86,21 @@ public class Usuario {
 
 
 
-    /** Metodos y atributos para arena */
+    /** Arena */
 
     private LocalDateTime filtroEventoInicial = LocalDateTime.now();
     private LocalDateTime filtroEventoFinal = LocalDateTime.now();
-
     private List<Evento> eventosFiltrados = new ArrayList<>();
 
     public void filtrarEventosEntreRangoDeFechas(){
         eventosFiltrados = eventos.stream().filter(evento -> evento.estaEntre(filtroEventoInicial, filtroEventoFinal)).collect(Collectors.toList());
     }
+
+
+
+
+
+    /** Getters y setters */
 
     public void setFiltroEventoInicial(LocalDateTime filtroEventoInicial) {
         this.filtroEventoInicial = filtroEventoInicial;
@@ -122,6 +133,9 @@ public class Usuario {
     public void setEventosFiltrados(List<Evento> eventosFiltrados) {
         this.eventosFiltrados = eventosFiltrados;
     }
+
+
+
 
 
     /** Equals y hashCode */

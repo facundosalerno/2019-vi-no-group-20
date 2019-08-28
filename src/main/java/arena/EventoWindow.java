@@ -1,6 +1,7 @@
 package arena;
 
 import domain.evento.Evento;
+import domain.evento.FrecuenciaEvento;
 import domain.guardarropas.GuardarropasPremium;
 import domain.prenda.*;
 import domain.usuario.TipoDeUsuario;
@@ -54,7 +55,7 @@ public class EventoWindow extends MainWindow<Usuario> {
         anteojos= armarUnaPrenda(TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA);
         panchoPepeGil = new Usuario(Arrays.asList(new GuardarropasPremium(Arrays.asList(remera, remera), Arrays.asList(pantalon, pantalon, pantalon), Arrays.asList(zapatos, zapatos, zapatos), Arrays.asList(anteojos))), TipoDeUsuario.PREMIUM);
         LocalDateTime fechaCumpleDePancho= LocalDateTime.of(2020,06,20,20,30);
-        cumpleañosDePancho = new Evento("Cumpleaños de juan", fechaCumpleDePancho,"Casa de Juan", panchoPepeGil);
+        cumpleañosDePancho = new Evento("Cumpleaños de juan", fechaCumpleDePancho, FrecuenciaEvento.ANUAL,"Casa de Juan", panchoPepeGil);
         yo = new Usuario(Arrays.asList(new GuardarropasPremium(Arrays.asList(remera, remera), Arrays.asList(pantalon, pantalon, pantalon), Arrays.asList(zapatos, zapatos, zapatos), Arrays.asList(anteojos))), TipoDeUsuario.PREMIUM);
         yo.cargarEvento(cumpleañosDePancho);
         /* Parte importante */

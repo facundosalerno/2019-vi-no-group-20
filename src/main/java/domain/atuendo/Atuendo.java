@@ -28,16 +28,24 @@ public class Atuendo {
 
 
 
+
+
+    /** Metodos */
+
     public void cambiarEstado(Estado estado){
         this.estado=estado;
     }
     
-     //TODO: la logica de esta funcion es bastante parecida a la que se usa en el guardarropas para decir si una lista de prendas es valida. Revisar eso
     public boolean atuendoEsValido(Capa prendaSuperior, Capa prendaInferior, Capa calzado, Capa accesorio) {
         return (esCategoria(prendaSuperior, Categoria.PARTE_SUPERIOR) && esCategoria(prendaInferior, Categoria.PARTE_INFERIOR)
                 && esCategoria(calzado, Categoria.CALZADO) && esCategoria(accesorio,Categoria.ACCESORIOS));
         		
 
+    }
+
+    /* Si un usuario acepta el atuendo, entonces ya no sera elegible por otro usuario que comparta el mismo guardarropas */
+    public boolean esElegible(){
+        return estado == Estado.ACEPTADO; //TODO: agregarlo al algoritmo de sugerencias
     }
 
     public boolean esCategoria(Capa prenda, Categoria categoria){
@@ -46,12 +54,19 @@ public class Atuendo {
 
 
 
-    //Getters
+
+
+    /** Getters y setters */
 
     public Estado getEstado(){
         return this.estado;
     }
 
+
+
+
+
+    /** Equals y hashcode */
 
     @Override
     public boolean equals(Object o) {
