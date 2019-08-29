@@ -58,11 +58,6 @@ public class TestsPrendasSuperpuestas {
         new Atuendo(Arrays.asList(camisa, pantalon), pantalon, zapatos, anteojos);
     }*/
 
-    @Test
-	public  void ordinalNivelCapa(){
-		
-		Assert.assertEquals(NivelDeCapa.LIVIANO.ordinal(),0);
 
-	}
 
 }

@@ -2,12 +2,12 @@ package domain.prenda;
 
 import clima.Clima;
 import domain.capaPrenda.NivelDeCapa;
-
-public class TemperaturaMaximaDeUso {
+/*
+public class TemperaturaAdecuada {
     private int temperaturaMaximaDeUso;
     private NivelDeCapa nivelDeCapa;
 
-    public TemperaturaMaximaDeUso(int temperatura){
+    public TemperaturaAdecuada(int temperatura){
         temperaturaMaximaDeUso = temperatura;
     }
 
@@ -29,3 +29,4 @@ public class TemperaturaMaximaDeUso {
     }
 
 }
+*/

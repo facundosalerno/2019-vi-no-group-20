@@ -78,7 +78,7 @@ public class TestNiveldeCapa {
 	//TODO:Test para verificar que las capas estan ordenadas
 	@Test
 	public void capasEstanOrdenadas(){
-		Assert.assertTrue(parteSuperiorInvierno.estanOrdenadas());
+		Assert.assertTrue(parteSuperiorInvierno.estaBienOrdenada());
 
 	}
 	//TODO:Test para verificar que se dispara una excepcion si no hay capas creadas debido a que no se satisface la temperatura

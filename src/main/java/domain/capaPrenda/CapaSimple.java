@@ -1,6 +1,7 @@
 package domain.capaPrenda;
 
 import clima.Clima;
+import domain.atuendo.Estado;
 import domain.prenda.Categoria;
 import domain.prenda.Prenda;
 
@@ -11,8 +12,20 @@ public class CapaSimple extends Capa {
         this.prenda = prenda;
     }
 
-    public NivelDeCapa getNivelDeCapa(){
-        return prenda.getNivelDeCapa();
+
+
+
+
+    /** Metodos */
+
+    @Override
+    public void cambiarEstado(Estado estado){
+        prenda.cambiarEstado(estado);
+    }
+
+    @Override
+    public boolean capaFueAceptada() {
+        return prenda.getEstado() == Estado.ACEPTADO;
     }
 
     @Override
@@ -22,6 +35,11 @@ public class CapaSimple extends Capa {
 
     @Override
     public boolean abrigaBien(Clima climaActual) {
-        return true;
+        return prenda.abrigaBien(climaActual);
     }
+
+    public NivelDeCapa getNivelDeCapa(){
+        return prenda.getNivelDeCapa();
+    }
+
 }

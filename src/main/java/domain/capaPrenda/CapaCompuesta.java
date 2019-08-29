@@ -2,25 +2,19 @@ package domain.capaPrenda;
 
 import clima.Clima;
 import com.google.common.collect.Comparators;
-import com.google.common.collect.Ordering;
+import domain.atuendo.Estado;
 import domain.prenda.Categoria;
-import domain.prenda.Prenda;
-import exceptions.NoPerteneceALaCategoriaException;
-import exceptions.SeRepiteNivelAbrigoException;
 import exceptions.capasPrendasSimplesRequiereNonNull;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.stream.Collectors;
-
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterators;
 
 
 public class CapaCompuesta extends Capa {
-    private List<CapaSimple> capasPrendas;
+
+    private List<CapaSimple> capasPrendas = new ArrayList<>();
 
     public CapaCompuesta(List<CapaSimple> capasPrendas){
         if(capasPrendas == null)
@@ -30,6 +24,12 @@ public class CapaCompuesta extends Capa {
         this.capasPrendas = capasPrendas;
     }
 
+
+
+
+
+    /** Metodos */
+
     @Override
     public Categoria getCategoria(){
         return capasPrendas.get(0).getCategoria();
@@ -37,57 +37,42 @@ public class CapaCompuesta extends Capa {
 
     @Override
     public boolean abrigaBien(Clima climaActual) {
-        if(!coincideLaCategoria(capasPrendas))
-            return false;
-        if(seRepiteNivelAbrigo(capasPrendas))
-            return false;
-        return true;
+        return capasPrendas.stream().allMatch(capa -> capa.abrigaBien(climaActual));
     }
 
-    private boolean coincideLaCategoria(List<CapaSimple> capasPrendas){
-        return capasPrendas.stream().allMatch(capa -> capa.getCategoria() == capasPrendas.get(0).getCategoria());
+    @Override
+    public void cambiarEstado(Estado estado) {
+        capasPrendas.stream().forEach(capa -> capa.cambiarEstado(estado));
     }
 
-    private boolean seRepiteNivelAbrigo(List<CapaSimple> capasPrendas){
-         
-        	// listo los distintos y comparo con original
-    	
-    	return capasPrendas.stream().map(p->p.getNivelDeCapa()).distinct().collect(Collectors.toList()).size() == 
-    			capasPrendas.stream().map(p->p.getNivelDeCapa()).collect(Collectors.toList()).size();
-        		
+    @Override /* Con que algun elemento de la capa este aceptado entonces no lo podemos usar... es medio una limitacion */
+    public boolean capaFueAceptada() {
+        return capasPrendas.stream().anyMatch(capa -> capa.capaFueAceptada());
     }
 
-    
-    public boolean estanOrdenadas(){
-       
-    	return  this.nivelesContiguos(capasPrendas) ;
-    }
-    
-    
-    public List<CapaSimple> ordenarCapa(List<CapaSimple> capasPrendas){
-    	return  capasPrendas.stream()
-    			.sorted(Comparator.comparing(p->p.getNivelDeCapa().capas()))
-    			.collect(Collectors.toList());
+    /* Verifica si la capa compuesta tiene las capas simples bien ordenadas, es decir, segun su NivelDeCapa */
+    public boolean estaBienOrdenada() {
+        return nivelesDeCapaOrdenadosCoherentemente() && tieneAlMenosUnaParteBaja() && !hayNivelesDuplicados();
     }
 
-
-    private boolean nivelesContiguos(List<CapaSimple> capasPrendas) {
-
+    /* Verifica si la capa compuesta tiene las prendas ordenadas por nivel de capa, empezando de la mas baja en adelante */
+    private boolean nivelesDeCapaOrdenadosCoherentemente(){
         List<NivelDeCapa> nivelesDeCapas = capasPrendas.stream().map(capaSimple -> capaSimple.getNivelDeCapa()).collect(Collectors.toList());
-
         return Comparators.isInOrder(nivelesDeCapas, Comparator.<NivelDeCapa> naturalOrder());
+    }
 
+    /* Una capa compuesta deberia empezar siempre por una prenda que tenga NivelDeCapa ABAJO */
+    private boolean tieneAlMenosUnaParteBaja(){
+        return capasPrendas.stream().anyMatch(capa -> capa.getNivelDeCapa() == NivelDeCapa.ABAJO);
+    }
 
-
-        /*int tamañoCapas = capasPrendas.stream().collect(Collectors.toList()).size();
-    	ArrayList<NivelDeCapa> nivelesDeCapa =(ArrayList<NivelDeCapa>) capasPrendas.stream().map(p->p.getNivelDeCapa()).collect(Collectors.toList());
-
-    	for (int i=0; i<tamañoCapas-1; ++i)  {
-    		if(nivelesDeCapa.get(i).capas() >= nivelesDeCapa.get(i+1).capas())
-    		    return false;
-    	}
-        return true;
-    */
+    /* Verifica que la capa compuesta no tenga dos niveles de capa repetidos, ejemplo dos remeras */
+    private boolean hayNivelesDuplicados(){
+        for(int i=0; i < capasPrendas.size()-1 ; ++i){
+            if(capasPrendas.get(i) == capasPrendas.get(i+1))
+                return true;
+        }
+        return false;
     }
 
 }

@@ -32,8 +32,13 @@ public class Atuendo {
 
     /** Metodos */
 
+    /* El estado debe cambiar tambien para sus componentes ya que en base a eso, un atuendo podria ser o no elegible */
     public void cambiarEstado(Estado estado){
         this.estado=estado;
+        this.prendaSuperior.cambiarEstado(estado);
+        this.prendaInferior.cambiarEstado(estado);
+        this.calzado.cambiarEstado(estado);
+        this.accesorio.cambiarEstado(estado);
     }
     
     public boolean atuendoEsValido(Capa prendaSuperior, Capa prendaInferior, Capa calzado, Capa accesorio) {
@@ -43,9 +48,13 @@ public class Atuendo {
 
     }
 
-    /* Si un usuario acepta el atuendo, entonces ya no sera elegible por otro usuario que comparta el mismo guardarropas */
+    /* Si un usuario acepta el atuendo, entonces acepta todas sus prendas (capas) y ya no sera elegible por otro usuario que comparta el mismo guardarropas */
     public boolean esElegible(){
-        return estado == Estado.ACEPTADO; //TODO: agregarlo al algoritmo de sugerencias
+        return estado != Estado.ACEPTADO && ningunaPrendaFueAceptada();
+    }
+
+    private boolean ningunaPrendaFueAceptada(){
+        return !prendaSuperior.capaFueAceptada() && !prendaInferior.capaFueAceptada() && !calzado.capaFueAceptada() && !accesorio.capaFueAceptada();
     }
 
     public boolean esCategoria(Capa prenda, Categoria categoria){

@@ -10,7 +10,6 @@ import domain.capaPrenda.CapaCompuesta;
 import domain.capaPrenda.CapaSimple;
 import domain.prenda.Categoria;
 import domain.prenda.Prenda;
-import domain.prenda.TemperaturaMaximaDeUso;
 import domain.usuario.TipoDeUsuario;
 import exceptions.NoPerteneceALaCategoriaException;
 import java.util.List;
@@ -31,14 +30,15 @@ public abstract class Guardarropas {
         return Sets.cartesianProduct(ImmutableList.of(ImmutableSet.copyOf(generarCapasCompuestas(prendasSuperiores, climaActual)), ImmutableSet.copyOf(generarCapasSimples(prendasInferiores)), ImmutableSet.copyOf(generarCapasSimples(calzados)), ImmutableSet.copyOf(generarCapasSimples(accesorios))))
                 .stream()
                 .map(list -> new Atuendo(list.get(0), list.get(1), list.get(2), list.get(3)))
+                .filter(atuendo -> atuendo.esElegible())
                 .collect(Collectors.toList());
     }
 
     private List<CapaCompuesta> generarCapasCompuestas(List<Prenda> prendas, Clima climaActual){
-        return Sets.combinations(ImmutableSet.copyOf(prendas), TemperaturaMaximaDeUso.getNivelDeCapa(climaActual).capas())
+        return Sets.combinations(ImmutableSet.copyOf(prendas), 3)
                 .stream()
                 .map(set -> new CapaCompuesta(generarCapasSimples(ImmutableList.copyOf(set))))
-                .filter(capa -> capa.abrigaBien(climaActual))
+                .filter(capa -> capa.abrigaBien(climaActual) && capa.estaBienOrdenada())
                 .collect(Collectors.toList());
     }
 
@@ -47,8 +47,7 @@ public abstract class Guardarropas {
     }
 
 
-    //TODO: El nombre de la excepcion esta bien, pero deberia agregarse otra del estilo GuardarropasInvalidoExcepcion para usar en el constructor del guardarropas
-    public void prendasCoincidenConCategoria(List<Prenda> prendas, Categoria categoria){
+     public void prendasCoincidenConCategoria(List<Prenda> prendas, Categoria categoria){
         if(!prendas.stream().allMatch(prenda -> prenda.esDeCategoria(categoria))){
             throw new NoPerteneceALaCategoriaException();
         }
