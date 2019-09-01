@@ -2,7 +2,7 @@ package domain.capaPrenda;
 
 import clima.Clima;
 
-public class CantidadDeCapas {
+public class CapasPorTemperatura {
 
     /** Modificadores */
     private static double menorTemperaturaPosible = -5;

@@ -6,7 +6,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import domain.atuendo.Atuendo;
-import domain.capaPrenda.CantidadDeCapas;
+import domain.capaPrenda.CapasPorTemperatura;
 import domain.capaPrenda.CapaCompuesta;
 import domain.capaPrenda.CapaSimple;
 import domain.prenda.Categoria;
@@ -36,7 +36,7 @@ public abstract class Guardarropas {
     }
 
     private List<CapaCompuesta> generarCapasCompuestas(List<Prenda> prendas, Clima climaActual){
-        return Sets.combinations(ImmutableSet.copyOf(prendas), CantidadDeCapas.capasDeAbrigoParaClima(climaActual))
+        return Sets.combinations(ImmutableSet.copyOf(prendas), CapasPorTemperatura.capasDeAbrigoParaClima(climaActual))
                 .stream()
                 .map(set -> new CapaCompuesta(generarCapasSimples(ImmutableList.copyOf(set))))
                 .filter(capa -> capa.abrigaBien(climaActual) && capa.estaBienOrdenada())
