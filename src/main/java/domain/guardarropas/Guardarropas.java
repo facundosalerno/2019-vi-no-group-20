@@ -26,7 +26,7 @@ public abstract class Guardarropas {
     public abstract TipoDeUsuario tipoDeUsuarioQueAcepta();
 
     public List<Atuendo> sugerirAtuendo(Meteorologo meteorologo){
-        Clima climaActual = meteorologo.obtenerClima();
+        Clima climaActual = meteorologo.obtenerClima();  //TODO: SI mejor le paso el meteorologo?
 
         return Sets.cartesianProduct(ImmutableList.of(ImmutableSet.copyOf(generarCapasCompuestas(prendasSuperiores, climaActual)), ImmutableSet.copyOf(generarCapasSimples(prendasInferiores)), ImmutableSet.copyOf(generarCapasSimples(calzados)), ImmutableSet.copyOf(generarCapasSimples(accesorios))))
                 .stream()

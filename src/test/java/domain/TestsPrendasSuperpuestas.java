@@ -1,51 +1,92 @@
 package domain;
 
+import clima.TemperaturaOpenWeather;
 import domain.atuendo.Atuendo;
-import domain.capaPrenda.NivelDeCapa;
+import domain.guardarropas.Guardarropas;
+import domain.guardarropas.GuardarropasPremium;
 import domain.prenda.*;
-import exceptions.AtuendoInvalidoException;
-import org.checkerframework.checker.units.qual.A;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import clima.TemperaturaAccuWeather;
+import static org.mockito.Mockito.*;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.List;
 
 public class TestsPrendasSuperpuestas {
     private Atuendo atuendo;
-    private Prenda zapatos;
-    private Prenda remera;
-    private Prenda camisa;
-    private Prenda pantalon;
+
+    private Prenda zapatosFormales;
+    private Prenda zapatosSalida;   //TODO: Para tests guardarropas
+
+    private Prenda pantalonParaSalida;
+    private Prenda pantalonFormal;   //TODO: Para tests guardarropas
+
     private Prenda anteojos;
 
+    private Prenda camperaParaSalida;
+    private Prenda camperaMichelin;
+    private Prenda busoInformal;
+    private Prenda busoFormal;
+    private Prenda sweaterFormal;
+    private Prenda remeraCanchera;
+    private Prenda remeraDeDia;
+    private Prenda camisaFormalBlanca;
+    private Prenda camisaFormalAzul;
+    private Prenda camisaSalida;
+
+    private Guardarropas guardarropasInvierno;
+
     @Before
-    public void init(){
+    public void init() {
         //Instanciaciones previas a los TEST
         Color rojo = new Color(255, 0, 0);
         Color verde = new Color(0, 255, 0);
         Color azul = new Color(0, 0, 255);
         Color blanco = new Color(255, 255, 255);
+        Color negro = new Color(0, 0, 0);
 
-        zapatos = armarUnaPrenda(TipoDePrenda.ZAPATO, Material.CUERO, rojo, azul, Trama.GASTADO);
-        remera = armarUnaPrenda(TipoDePrenda.REMERA, Material.ALGODON, azul, rojo, Trama.CUADROS);
-        pantalon = armarUnaPrenda(TipoDePrenda.PANTALON, Material.JEAN, verde, rojo, Trama.RAYADA);
-        anteojos= armarUnaPrenda(TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA);
-        camisa = armarUnaPrenda(TipoDePrenda.CAMISA, Material.ALGODON, blanco, rojo, Trama.LISA);
+        zapatosSalida = armarUnaPrenda(TipoDePrenda.ZAPATO, Material.GAMUZA, azul, null, Trama.GASTADO);
+        //zapatosFormales = armarUnaPrenda(TipoDePrenda.ZAPATO, Material.CUERO, negro, null, Trama.LISA); //TODO: Para tests guardarropas
+
+        pantalonParaSalida = armarUnaPrenda(TipoDePrenda.PANTALON, Material.JEAN, blanco, null, Trama.GASTADO);
+        //pantalonFormal = armarUnaPrenda(TipoDePrenda.PANTALON, Material.POLIESTER, negro, null, Trama.LISA);  //TODO: Para tests guardarropas
+
+        anteojos = armarUnaPrenda(TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA);
+
+
+        //busoFormal = armarUnaPrenda(TipoDePrenda.BUSO, Material.ALGODON, azul, null, Trama.LISA);   //TODO: Para tests guardarropas
+        busoInformal = armarUnaPrenda(TipoDePrenda.BUSO, Material.ALGODON, azul, verde, Trama.RAYADA);
+        sweaterFormal = armarUnaPrenda(TipoDePrenda.SWEATER,Material.LINO, azul, null, Trama.LISA);
+
+        camperaParaSalida = armarUnaPrenda(TipoDePrenda.CAMPERA, Material.JEAN, verde, null, Trama.GASTADO);
+        camperaMichelin = armarUnaPrenda(TipoDePrenda.CAMPERA, Material.PLUMA, azul, null, Trama.LISA);
+
+        camisaSalida = armarUnaPrenda(TipoDePrenda.CAMISA, Material.JEAN, azul, blanco, Trama.ESCOCESA);
+        //camisaFormalAzul = armarUnaPrenda(TipoDePrenda.CAMISA, Material.SEDA, azul, null, Trama.LISA);  //TODO: Para tests guardarropas
+        camisaFormalBlanca = armarUnaPrenda(TipoDePrenda.CAMISA, Material.LINO, blanco, null, Trama.LISA);
+
+        //remeraCanchera = armarUnaPrenda(TipoDePrenda.REMERA, Material.ALGODON, azul, rojo, Trama.RAYADA);  //TODO: Para tests guardarropas
+        remeraDeDia = armarUnaPrenda(TipoDePrenda.REMERA, Material.ALGODON, azul, null, Trama.LISA);
+
+        guardarropasInvierno = new GuardarropasPremium(Arrays.asList(sweaterFormal,remeraDeDia, camisaSalida, busoInformal, camperaParaSalida, camisaFormalBlanca, camperaMichelin), Arrays.asList(pantalonParaSalida), Arrays.asList(zapatosFormales), Arrays.asList(anteojos));
+
+        TemperaturaOpenWeather nuevoClima =	mock(TemperaturaOpenWeather.class);
+        when(nuevoClima.getTemperature()).thenReturn(11.2);
+
+        //TODO: cada atuendo tiene capas, entonces tengo que generar las capas de los atuendos para compararlas con el resultado de sugerirAtuendo. VER TEMA Clima en sugerir atuendo
+
+       // Assert.assertEquals(guardarropasInvierno.sugerirAtuendo(nuevoClima), Arrays.asList());
+
     }
 
-    public Prenda armarUnaPrenda(TipoDePrenda tipoDePrenda, Material material, Color colorPrimario, Color colorSecundario, Trama trama){
+    public Prenda armarUnaPrenda(TipoDePrenda tipoDePrenda, Material material, Color colorPrimario, Color colorSecundario, Trama trama) {
         BorradorPrenda borradorPrenda = new BorradorPrenda();
         borradorPrenda.definirTipo(tipoDePrenda);
         borradorPrenda.definirMaterial(material);
         borradorPrenda.definirColorPrimario(colorPrimario);
-        if(colorSecundario != null) {
+        if (colorSecundario != null) {
 
             borradorPrenda.definirColorSecundario(colorSecundario);
         }
@@ -58,6 +99,17 @@ public class TestsPrendasSuperpuestas {
         new Atuendo(Arrays.asList(camisa, pantalon), pantalon, zapatos, anteojos);
     }*/
 
+    //TODO: Test para verificar que siempre se crean capas con prendas de igual categoria
 
+    //TODO:Test para verificar que se dispara una excepcion si no hay capas creadas debido a que no se satisface la temperatura
+
+    @Test
+    public void generarAtuendoTiraExcepcionSiNohayCapasQueSatisfaganLaTemperatura() {
+
+    }
+
+    //TODO: Test para verificar que las capas generadas esten ordenadas
+
+    //TODO: Test para verificar que todas las capas son de distinto nivel
 
 }

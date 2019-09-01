@@ -12,5 +12,6 @@ public enum Material{
     GAMUZA,
     GOMA,
     PLASTICO,
+    PLUMA,
     GABARDINA
 }

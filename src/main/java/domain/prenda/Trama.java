@@ -4,5 +4,6 @@ public enum Trama {
     LISA,
     RAYADA,
     CUADROS,
-    GASTADO
+    GASTADO,
+    ESCOCESA
 }
