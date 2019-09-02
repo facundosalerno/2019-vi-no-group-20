@@ -1,15 +1,17 @@
 package domain.usuario;
 
 import clima.Meteorologo;
+import cron.Cron;
 import domain.atuendo.Atuendo;
 import domain.decision.Aceptar;
 import domain.decision.Decision;
 import domain.decision.Rechazar;
 import domain.evento.Evento;
+import domain.evento.FrecuenciaEvento;
 import domain.guardarropas.Guardarropas;
-import exceptions.NoExisteGuardarropasException;
-import exceptions.NoHayDecisionesParaDeshacer;
-import exceptions.ElGuardarropasNoEsAptoException;
+import domain.notificaciones.InteresadoAlertaMeteorologica;
+import domain.notificaciones.InteresadoEvento;
+import exceptions.*;
 
 import java.lang.reflect.Member;
 import java.time.LocalDate;
@@ -21,7 +23,7 @@ import org.mockito.cglib.core.Local;
 import org.uqbar.commons.model.annotations.Observable;
 
 @Observable /** Necesario para poder usarse con arena */
-public class Usuario {
+public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica {
 
     private List<Evento> eventos=new ArrayList<>();
     private Deque<Decision> decisiones=new ArrayDeque<>();
@@ -41,6 +43,8 @@ public class Usuario {
         if (!guardarropas.stream().allMatch(guardarropa -> guardarropa.tipoDeUsuarioQueAcepta() == tipoDeUsuario))
                   throw new ElGuardarropasNoEsAptoException();
         this.guardarropas = guardarropas;
+        Cron.getRepoInstance().agregarUsuario(this);
+
     }
 
     public List<Atuendo> obtenerSugerenciasDeTodosSusGuardarropas(Meteorologo meteorologo){
@@ -55,8 +59,8 @@ public class Usuario {
         return guardarropas.get(indexGuardarropas).sugerirAtuendo(meteorologo);
     }
 
-    public void cargarEvento(Evento evento){
-        eventos.add(evento);
+    public void crearEvento(String nombre, LocalDateTime fechaYHora, FrecuenciaEvento frecuencia, String lugar){
+        eventos.add(new Evento(nombre, fechaYHora, frecuencia, lugar, this));
     }
 
     public List<Atuendo> recibirSugerenciasEvento(String nombreEvento, LocalDateTime fechaEvento){ //Tambien podriamos haber usado index en la lista
@@ -132,6 +136,22 @@ public class Usuario {
 
     public void setEventosFiltrados(List<Evento> eventosFiltrados) {
         this.eventosFiltrados = eventosFiltrados;
+    }
+
+
+
+
+
+    /** Observer */
+
+    @Override /* El usuario va a recibir el evento que este cerca y con sugerencias preparadas */
+    public void recibirNotificacionEventoCerca(Evento evento) {
+
+    }
+
+    @Override
+    public void recibirNotificacionAlertaMeteorologica() {
+
     }
 
 

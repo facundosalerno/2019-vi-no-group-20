@@ -34,10 +34,7 @@ public class EventoWindow extends MainWindow<Usuario> {
     static domain.prenda.Color verde;
     static domain.prenda.Color azul;
     static domain.prenda.Color gray;
-    static Usuario panchoPepeGil;
     static Usuario yo;
-    static Evento cumpleañosDePancho;
-    static LocalDateTime fechaCumpleDePancho;
 
 
 
@@ -53,11 +50,10 @@ public class EventoWindow extends MainWindow<Usuario> {
         remera = armarUnaPrenda(TipoDePrenda.REMERA, Material.ALGODON, azul, rojo, Trama.CUADROS);
         pantalon = armarUnaPrenda(TipoDePrenda.PANTALON, Material.JEAN, verde, rojo, Trama.RAYADA);
         anteojos= armarUnaPrenda(TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA);
-        panchoPepeGil = new Usuario(Arrays.asList(new GuardarropasPremium(Arrays.asList(remera, remera), Arrays.asList(pantalon, pantalon, pantalon), Arrays.asList(zapatos, zapatos, zapatos), Arrays.asList(anteojos))), TipoDeUsuario.PREMIUM);
-        LocalDateTime fechaCumpleDePancho= LocalDateTime.of(2020,06,20,20,30);
-        cumpleañosDePancho = new Evento("Cumpleaños de juan", fechaCumpleDePancho, FrecuenciaEvento.ANUAL,"Casa de Juan", panchoPepeGil);
+
         yo = new Usuario(Arrays.asList(new GuardarropasPremium(Arrays.asList(remera, remera), Arrays.asList(pantalon, pantalon, pantalon), Arrays.asList(zapatos, zapatos, zapatos), Arrays.asList(anteojos))), TipoDeUsuario.PREMIUM);
-        yo.cargarEvento(cumpleañosDePancho);
+        LocalDateTime fechaCumpleDePancho = LocalDateTime.of(2020,06,20,20,30);
+        yo.crearEvento("Cumpleaños de pancho", fechaCumpleDePancho, FrecuenciaEvento.ANUAL, "Casa de pancho");
         /* Parte importante */
         new EventoWindow().startApplication();
     }

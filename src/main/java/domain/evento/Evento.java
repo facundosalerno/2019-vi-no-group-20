@@ -2,6 +2,7 @@ package domain.evento;
 
 import clima.Meteorologo;
 import domain.atuendo.Atuendo;
+import domain.notificaciones.Notificable;
 import domain.usuario.Usuario;
 import exceptions.NoHaySugerenciasParaElEvento;
 import exceptions.TodaviaNoEstaCercaElEvento;
@@ -16,7 +17,7 @@ import java.util.Objects;
 import static java.time.temporal.ChronoUnit.DAYS;
 
 @Observable
-public class Evento {
+public class Evento implements Notificable {
     //Contemplar  la temperatura al momento del evento.
     private String nombre;
     private LocalDateTime fecha;
@@ -26,6 +27,7 @@ public class Evento {
     private List<Atuendo> sugerenciasObtenidas = new ArrayList<>();
     private boolean existenSugerencias = !sugerenciasObtenidas.isEmpty(); //TODO revisar este cacho de codigo
 
+    /** Warning: crear desde el usuario */
     public Evento(String nombre, LocalDateTime fechaYHora, FrecuenciaEvento frecuencia, String lugar, Usuario usuario){
         this.nombre = nombre;
         this.fecha = fechaYHora;
@@ -70,6 +72,27 @@ public class Evento {
 
     public boolean estaEntre(LocalDateTime fechaInicio, LocalDateTime fechaFin){
         return fecha.isAfter(fechaInicio) && fecha.isBefore(fechaFin);
+    }
+
+
+
+
+
+    /** Observer */
+
+    @Override
+    public void agregarNotificado(Usuario usuario) {
+        /* No hay que agregar nada por que no hay lista de notoficados, solo esta el usuario que creo el evento que quiere ser notificado */
+    }
+
+    @Override
+    public void eliminarNotificado(Usuario usuario) {
+        /*  No hay que agregar nada por que no hay lista de notoficados, solo esta el usuario que creo el evento que quiere ser notificado */
+    }
+
+    @Override /* Cuando un evento esta cerca se auto preparan las sugerencias y se le notifica al usuario*/
+    public void notificar() {
+        usuario.recibirNotificacionEventoCerca(this);
     }
 
 

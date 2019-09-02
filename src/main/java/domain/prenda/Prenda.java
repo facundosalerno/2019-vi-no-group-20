@@ -19,6 +19,7 @@ public class Prenda {
     private Imagen imagen;
     private Estado estado;
 
+    /** Warning: construir con BorradorPrenda */
     public Prenda(TipoDePrenda tipo, Color colorPrimario, Color colorSecundario, Material material, Trama trama, Imagen imagen) {
         this.tipoPrenda = tipo;
         this.material = material;

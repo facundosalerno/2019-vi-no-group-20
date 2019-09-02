@@ -23,7 +23,6 @@ import static org.mockito.Mockito.when;
 
 public class TestsEventos {
     private Usuario panchoPepeGil;
-    private Evento cumpleañosDeWillyWonka;
     private Prenda zapatos;
     private Prenda remera;
     private Prenda pantalon;
@@ -41,9 +40,8 @@ public class TestsEventos {
         anteojos= armarUnaPrenda(TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA);
 
         panchoPepeGil = new Usuario(Arrays.asList(new GuardarropasPremium(Arrays.asList(remera, remera), Arrays.asList(pantalon, pantalon, pantalon), Arrays.asList(zapatos, zapatos, zapatos), Arrays.asList(anteojos))), TipoDeUsuario.PREMIUM);
-        LocalDateTime fechaCumpleWilly= LocalDateTime.of(2020,06,20,20,30);
-        cumpleañosDeWillyWonka = new Evento("Cumpleaños de juan", fechaCumpleWilly, FrecuenciaEvento.ANUAL,"Casa de Juan", panchoPepeGil);
-        //Nota: no esta cargando el evento en el usuario, esta mal hecho.
+        LocalDateTime fechaCumpleWilly = LocalDateTime.of(2020,06,20,20,30);
+        panchoPepeGil.crearEvento("Cumpleaños de juan", fechaCumpleWilly, FrecuenciaEvento.ANUAL,"Casa de Juan");
     }
 
     public Prenda armarUnaPrenda(TipoDePrenda tipoDePrenda, Material material, Color colorPrimario, Color colorSecundario, Trama trama){
@@ -62,8 +60,8 @@ public class TestsEventos {
         TemperaturaAccuWeather temperaturaImpostora= mock(TemperaturaAccuWeather.class);
         temperaturaImpostora.setValue(20);
         when(meteorologoAccuweather.obtenerClima()).thenReturn(temperaturaImpostora);
-
-        cumpleañosDeWillyWonka.generarSugerencias(meteorologoAccuweather);
+        //TODO terminar de hacer
+        //panchoPepeGil./*talEventoDeLaLista*/.generarSugerencias(meteorologoAccuweather);
     }
 
 
