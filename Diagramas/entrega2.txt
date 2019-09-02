@@ -100,12 +100,29 @@ class BorradorPrenda{
     Prenda crearPrenda()
 }
 class Atuendo{
-    List<Prenda>prendaSuperior
-    Prenda prendaInferior
-    Prenda calzado
-    Prenda accesorio
+    Capa prendaSuperior
+    Capa prendaInferior
+    Capa calzado
+    Capa accesorio
     Estado estado
     
+}
+
+abstract class Capa{
+  Categoria getCategoria()
+  boolean abrigaBien()
+  void cambiarEstado(Estado)
+  boolean capaFueAceptada()
+}
+
+class CapaSimple{
+  Prenda prenda
+}
+
+class CapaCompuesta{
+  List<CapaSimple> capasPrendas
+  boolean estaBienOrdenada()
+
 }
 
 enum Estado {
@@ -202,14 +219,24 @@ TipoDePrenda-->"*"Material
 TipoDePrenda-->Categoria
 BorradorPrenda"constructor" ..>Prenda
 
-Atuendo-->Prenda
+Atuendo-->Capa
+Atuendo-->Capa
+Atuendo-->Capa
+Atuendo-->Capa
 Atuendo-->Estado
+
+Capa<|--CapaSimple
+Capa<|--CapaCompuesta
+
+CapaCompuesta-->"*"CapaSimple
+CapaSimple-->Prenda
 
 Guardarropas-->"*"Prenda
 Guardarropas-->"*"Prenda
 Guardarropas-->"*"Prenda
 Guardarropas-->"*"Prenda
 Guardarropas..>Atuendo
+Guardarropas..>Capa
 
 Guardarropas<|--GuardarropasLimitado
 Guardarropas<|--GuardarropasPremium
