@@ -54,7 +54,7 @@ public class TipoDePrenda {
 
     public static final TipoDePrenda ZAPATO = new TipoDePrenda(Categoria.CALZADO, Arrays.asList(Material.CUERO, Material.GAMUZA), new RangoTemperatura(10, 25), NivelDeCapa.MEDIO);
     public static final TipoDePrenda REMERA = new TipoDePrenda(Categoria.PARTE_SUPERIOR, Arrays.asList(Material.ALGODON), new CualquierTemperatura(), NivelDeCapa.ABAJO);
-    public static final TipoDePrenda CAMISA = new TipoDePrenda(Categoria.PARTE_SUPERIOR, Arrays.asList(Material.ALGODON,Material.POLIESTER), new RangoTemperatura(1, 30), NivelDeCapa.ABAJO);
+    public static final TipoDePrenda CAMISA = new TipoDePrenda(Categoria.PARTE_SUPERIOR, Arrays.asList(Material.ALGODON,Material.POLIESTER, Material.JEAN,Material.LINO), new RangoTemperatura(1, 30), NivelDeCapa.ABAJO);
     public static final TipoDePrenda PANTALON = new TipoDePrenda(Categoria.PARTE_INFERIOR, Arrays.asList(Material.JEAN), new RangoTemperatura(-5, 28), NivelDeCapa.MEDIO);
     public static final TipoDePrenda SHORT = new TipoDePrenda(Categoria.PARTE_INFERIOR, Arrays.asList(Material.ALGODON,Material.JEAN), new RangoTemperatura(20, 40), NivelDeCapa.MEDIO);
     public static final TipoDePrenda BLUSA = new TipoDePrenda(Categoria.PARTE_SUPERIOR, Arrays.asList(Material.ALGODON), new RangoTemperatura(10, 25), NivelDeCapa.MEDIO);
@@ -66,5 +66,5 @@ public class TipoDePrenda {
     public static final TipoDePrenda ANTEOJOS = new TipoDePrenda(Categoria.ACCESORIOS, Arrays.asList(Material.PLASTICO), new CualquierTemperatura(), NivelDeCapa.ABAJO);
     public static final TipoDePrenda BUSO = new TipoDePrenda(Categoria.PARTE_SUPERIOR, Arrays.asList(Material.ALGODON), new RangoTemperatura(5, 25), NivelDeCapa.MEDIO);
     public static final TipoDePrenda SWEATER = new TipoDePrenda(Categoria.PARTE_SUPERIOR, Arrays.asList(Material.LINO), new RangoTemperatura(5, 25), NivelDeCapa.MEDIO);
-    public static final TipoDePrenda CAMPERA = new TipoDePrenda(Categoria.PARTE_SUPERIOR, Arrays.asList(Material.GABARDINA,Material.JEAN, Material.ALGODON), new RangoTemperatura(5, 25), NivelDeCapa.ARRIBA);
+    public static final TipoDePrenda CAMPERA = new TipoDePrenda(Categoria.PARTE_SUPERIOR, Arrays.asList(Material.GABARDINA,Material.JEAN, Material.ALGODON, Material.PLUMA), new RangoTemperatura(5, 25), NivelDeCapa.ARRIBA);
 }

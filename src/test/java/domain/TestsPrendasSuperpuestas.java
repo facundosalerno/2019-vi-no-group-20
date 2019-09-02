@@ -1,7 +1,10 @@
 package domain;
 
+import clima.OpenWeather;
 import clima.TemperaturaOpenWeather;
 import domain.atuendo.Atuendo;
+import domain.capaPrenda.CapaCompuesta;
+import domain.capaPrenda.CapaSimple;
 import domain.guardarropas.Guardarropas;
 import domain.guardarropas.GuardarropasPremium;
 import domain.prenda.*;
@@ -17,8 +20,8 @@ import java.util.List;
 public class TestsPrendasSuperpuestas {
     private Atuendo atuendo;
 
-    private Prenda zapatosFormales;
-    private Prenda zapatosSalida;   //TODO: Para tests guardarropas
+    private Prenda zapatosFormales;   //TODO: Para tests guardarropas
+    private Prenda zapatosSalida;
 
     private Prenda pantalonParaSalida;
     private Prenda pantalonFormal;   //TODO: Para tests guardarropas
@@ -36,7 +39,23 @@ public class TestsPrendasSuperpuestas {
     private Prenda camisaFormalAzul;
     private Prenda camisaSalida;
 
+    private CapaSimple capaZapatosFormales;
+    private CapaSimple capaPantalonParaSalida;
+    private CapaSimple capaAnteojos;
+    private CapaSimple capaCamperaParaSalida;
+    private CapaSimple capaCamperaMichelin;
+    private CapaSimple capaBusoInformal;
+    private CapaSimple capaSweaterFormal;
+    private CapaSimple capaRemeraDeDia;
+    private CapaSimple capaCamisaFormalBlanca;
+    private CapaSimple capaCamisaSalida;
+
+
+
     private Guardarropas guardarropasInvierno;
+
+    TemperaturaOpenWeather nuevoClima;
+    OpenWeather nuevoMeteorologo;
 
     @Before
     public void init() {
@@ -47,8 +66,8 @@ public class TestsPrendasSuperpuestas {
         Color blanco = new Color(255, 255, 255);
         Color negro = new Color(0, 0, 0);
 
-        zapatosSalida = armarUnaPrenda(TipoDePrenda.ZAPATO, Material.GAMUZA, azul, null, Trama.GASTADO);
-        //zapatosFormales = armarUnaPrenda(TipoDePrenda.ZAPATO, Material.CUERO, negro, null, Trama.LISA); //TODO: Para tests guardarropas
+        //zapatosSalida = armarUnaPrenda(TipoDePrenda.ZAPATO, Material.GAMUZA, azul, null, Trama.GASTADO);  //TODO: Para tests guardarropas
+        zapatosFormales = armarUnaPrenda(TipoDePrenda.ZAPATO, Material.CUERO, negro, null, Trama.LISA);
 
         pantalonParaSalida = armarUnaPrenda(TipoDePrenda.PANTALON, Material.JEAN, blanco, null, Trama.GASTADO);
         //pantalonFormal = armarUnaPrenda(TipoDePrenda.PANTALON, Material.POLIESTER, negro, null, Trama.LISA);  //TODO: Para tests guardarropas
@@ -72,10 +91,34 @@ public class TestsPrendasSuperpuestas {
 
         guardarropasInvierno = new GuardarropasPremium(Arrays.asList(sweaterFormal,remeraDeDia, camisaSalida, busoInformal, camperaParaSalida, camisaFormalBlanca, camperaMichelin), Arrays.asList(pantalonParaSalida), Arrays.asList(zapatosFormales), Arrays.asList(anteojos));
 
-        TemperaturaOpenWeather nuevoClima =	mock(TemperaturaOpenWeather.class);
+
+
+        nuevoClima =	mock(TemperaturaOpenWeather.class);
         when(nuevoClima.getTemperature()).thenReturn(11.2);
 
+        nuevoMeteorologo = mock (OpenWeather.class);
+        when (nuevoMeteorologo.obtenerClima()).thenReturn(nuevoClima);
+
         //TODO: cada atuendo tiene capas, entonces tengo que generar las capas de los atuendos para compararlas con el resultado de sugerirAtuendo. VER TEMA Clima en sugerir atuendo
+
+
+        capaCamperaParaSalida= new CapaSimple(camperaParaSalida);
+        capaCamperaMichelin= new CapaSimple(camperaMichelin);
+        capaBusoInformal= new CapaSimple(busoInformal);
+        capaSweaterFormal= new CapaSimple(sweaterFormal);
+        capaRemeraDeDia= new CapaSimple(remeraDeDia);
+        capaCamisaFormalBlanca= new CapaSimple(camisaFormalBlanca);
+        capaCamisaSalida= new CapaSimple(camisaSalida);
+
+        capaPantalonParaSalida= new CapaSimple(pantalonParaSalida);;
+        capaAnteojos= new CapaSimple(anteojos);
+        capaZapatosFormales = new CapaSimple(zapatosFormales);
+
+
+       // CapaCompuesta parteSuperiorInvierno = new CapaCompuesta(Arrays.asList(remera, buso, campera));
+
+
+
 
        // Assert.assertEquals(guardarropasInvierno.sugerirAtuendo(nuevoClima), Arrays.asList());
 
@@ -112,4 +155,15 @@ public class TestsPrendasSuperpuestas {
 
     //TODO: Test para verificar que todas las capas son de distinto nivel
 
+    @Test
+
+
+
+    public void seGeneranAtuendosEsperados(){
+        System.out.println(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo));
+
+        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo(new CapaCompuesta(Arrays.asList(capaRemeraDeDia,capaBusoInformal,capaCamperaParaSalida)),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos))));
+        //Assert.assertEquals(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo),Arrays.asList(new Atuendo(new CapaCompuesta(),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos),new Atuendo(new CapaCompuesta(),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos),new Atuendo(new CapaCompuesta(),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos),new Atuendo(new CapaCompuesta(),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos),new Atuendo(new CapaCompuesta(),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos),new Atuendo(new CapaCompuesta(),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos),new Atuendo(new CapaCompuesta(),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos),new Atuendo(new CapaCompuesta(),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos),new Atuendo(new CapaCompuesta(),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos),new Atuendo(new CapaCompuesta(),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos),new Atuendo(new CapaCompuesta(),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos),new Atuendo(new CapaCompuesta(),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos)));
+
+    }
 }
