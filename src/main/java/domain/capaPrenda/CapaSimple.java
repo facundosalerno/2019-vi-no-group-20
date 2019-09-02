@@ -5,6 +5,8 @@ import domain.atuendo.Estado;
 import domain.prenda.Categoria;
 import domain.prenda.Prenda;
 
+import java.util.Objects;
+
 public class CapaSimple extends Capa {
     private Prenda prenda;
 
@@ -42,4 +44,16 @@ public class CapaSimple extends Capa {
         return prenda.getNivelDeCapa();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CapaSimple)) return false;
+        CapaSimple that = (CapaSimple) o;
+        return prenda.equals(that.prenda);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(prenda);
+    }
 }
