@@ -14,6 +14,7 @@ import domain.prenda.Prenda;
 import domain.usuario.TipoDeUsuario;
 import exceptions.NoPerteneceALaCategoriaException;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public abstract class Guardarropas {
@@ -23,7 +24,25 @@ public abstract class Guardarropas {
     protected List<Prenda> calzados;
     protected List<Prenda> accesorios;
 
+
+
+
+
+    /** Abstract */
+
     public abstract TipoDeUsuario tipoDeUsuarioQueAcepta();
+
+
+
+
+
+    /** Metodos */
+
+    public void prendasCoincidenConCategoria(List<Prenda> prendas, Categoria categoria){
+        if(!prendas.stream().allMatch(prenda -> prenda.esDeCategoria(categoria))){
+            throw new NoPerteneceALaCategoriaException();
+        }
+    }
 
     public List<Atuendo> sugerirAtuendo(Meteorologo meteorologo){
         Clima climaActual = meteorologo.obtenerClima();
@@ -48,9 +67,24 @@ public abstract class Guardarropas {
     }
 
 
-     public void prendasCoincidenConCategoria(List<Prenda> prendas, Categoria categoria){
-        if(!prendas.stream().allMatch(prenda -> prenda.esDeCategoria(categoria))){
-            throw new NoPerteneceALaCategoriaException();
-        }
+
+
+
+    /** Equals y hashcode */
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Guardarropas)) return false;
+        Guardarropas that = (Guardarropas) o;
+        return Objects.equals(prendasSuperiores, that.prendasSuperiores) &&
+                Objects.equals(prendasInferiores, that.prendasInferiores) &&
+                Objects.equals(calzados, that.calzados) &&
+                Objects.equals(accesorios, that.accesorios);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(prendasSuperiores, prendasInferiores, calzados, accesorios);
     }
 }

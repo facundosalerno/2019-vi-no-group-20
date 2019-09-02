@@ -11,6 +11,7 @@ import domain.evento.FrecuenciaEvento;
 import domain.guardarropas.Guardarropas;
 import domain.notificaciones.InteresadoAlertaMeteorologica;
 import domain.notificaciones.InteresadoEvento;
+import domain.notificaciones.MedioDeNotificacion;
 import exceptions.*;
 
 import java.lang.reflect.Member;
@@ -25,12 +26,13 @@ import org.uqbar.commons.model.annotations.Observable;
 @Observable /** Necesario para poder usarse con arena */
 public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica {
 
-    private List<Evento> eventos=new ArrayList<>();
-    private Deque<Decision> decisiones=new ArrayDeque<>();
-    private List<Atuendo> atuendosAceptados=new ArrayList<>();
-    private List<Atuendo> atuendosRechazados=new ArrayList<>();
+    private List<Evento> eventos = new ArrayList<>();
+    private Deque<Decision> decisiones = new ArrayDeque<>();
+    private List<Atuendo> atuendosAceptados = new ArrayList<>();
+    private List<Atuendo> atuendosRechazados = new ArrayList<>();
     private TipoDeUsuario tipoDeUsuario;
     private List<Guardarropas> guardarropas;
+    private List<MedioDeNotificacion> mediosDeNotificacion = new ArrayList<>();
 
 
 
@@ -84,6 +86,11 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
     public void rechazarSugerencia(Atuendo atuendo){
         decisiones.push(new Rechazar(atuendo));
         atuendosRechazados.add(atuendo);
+    }
+
+    public void agregarMedioNotificacion(MedioDeNotificacion medio){
+        if(!mediosDeNotificacion.contains(medio))
+            mediosDeNotificacion.add(medio);
     }
 
 
@@ -146,7 +153,7 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
 
     @Override /* El usuario va a recibir el evento que este cerca y con sugerencias preparadas */
     public void recibirNotificacionEventoCerca(Evento evento) {
-
+        mediosDeNotificacion.stream().forEach(medio -> medio.lanzarNotificacion());
     }
 
     @Override
