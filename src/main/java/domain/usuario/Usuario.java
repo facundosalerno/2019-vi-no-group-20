@@ -4,6 +4,7 @@ import clima.Meteorologo;
 import cron.Cron;
 import domain.atuendo.Atuendo;
 import domain.decision.Aceptar;
+import domain.decision.Calificar;
 import domain.decision.Decision;
 import domain.decision.Rechazar;
 import domain.evento.Evento;
@@ -80,7 +81,11 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
 
     public void aceptarSugerencia(Atuendo atuendo){
         this.decisiones.push(new Aceptar(atuendo));
-        this.atuendosAceptados.add(atuendo);
+        this.atuendosAceptados.add(atuendo);        //TODO: podria obtenerse a partir de filtrar las decisiones del usuario
+    }
+
+    public void calificarSugerencia(Atuendo atuendo, int calificacion){
+        this.decisiones.push(new Calificar(atuendo,calificacion));
     }
 
     public void rechazarSugerencia(Atuendo atuendo){
