@@ -8,7 +8,7 @@ public class Cron {
     private static RepositorioUsuarios repo = null;
 
     public static void main(String[] args){
-        repo = RepositorioUsuarios.Init();
+        repo = RepositorioUsuarios.getInstance();
 
         Timer timer = new Timer();
         long oneDayInMiliseconds = 86400000; //1 dia
@@ -18,12 +18,6 @@ public class Cron {
 
         VerificarAlertasMeteorologicas alertasMeteorologicas = new VerificarAlertasMeteorologicas();
         timer.scheduleAtFixedRate(alertasMeteorologicas, 0, oneDayInMiliseconds);
-    }
-
-    public static RepositorioUsuarios getRepoInstance(){
-        if(repo == null)
-            throw new RepositorioDeUsuariosNoEstaInstanciado();
-        return repo;
     }
 }
 

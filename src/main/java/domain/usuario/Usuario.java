@@ -2,6 +2,7 @@ package domain.usuario;
 
 import clima.Meteorologo;
 import cron.Cron;
+import cron.RepositorioUsuarios;
 import domain.atuendo.Atuendo;
 import domain.decision.Aceptar;
 import domain.decision.Decision;
@@ -45,7 +46,7 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
         if (!guardarropas.stream().allMatch(guardarropa -> guardarropa.tipoDeUsuarioQueAcepta() == tipoDeUsuario))
                   throw new ElGuardarropasNoEsAptoException();
         this.guardarropas = guardarropas;
-        Cron.getRepoInstance().agregarUsuario(this);
+        RepositorioUsuarios.getInstance().agregarUsuario(this);
 
     }
 

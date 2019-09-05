@@ -7,19 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RepositorioUsuarios {
-    static boolean estaInstanciado = false;
+    static private RepositorioUsuarios instancia = null;
     private List<Usuario> listaDeUsuarios = new ArrayList<>();
 
     private RepositorioUsuarios(){
 
     }
 
-    public static RepositorioUsuarios Init(){
-        if(!estaInstanciado){
-            estaInstanciado = true;
-            return new RepositorioUsuarios();
+    public static RepositorioUsuarios getInstance(){
+        if(instancia == null){
+            return instancia = new RepositorioUsuarios();
         }
-        throw new RepositorioDeUsuariosEstaInstanciado("No se puede crear el repositorio por que ya fue creado");
+        return instancia;
     }
 
 
