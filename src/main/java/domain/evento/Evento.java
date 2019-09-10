@@ -74,6 +74,10 @@ public class Evento implements Notificable {
         return fecha.isAfter(fechaInicio) && fecha.isBefore(fechaFin);
     }
 
+    public void renovarFrecuencia(){
+        frecuencia.renovarEvento(this);
+    }
+
 
 
 
