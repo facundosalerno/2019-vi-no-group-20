@@ -1,10 +1,7 @@
 package domain.evento;
 
-import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-import java.time.temporal.TemporalAdjusters;
 
-/** https://stackoverflow.com/questions/35365571/get-the-next-localdatetime-for-a-given-day-of-week */
 
 public enum FrecuenciaEvento {
     NO_SE_REPITE{

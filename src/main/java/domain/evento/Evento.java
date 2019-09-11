@@ -70,6 +70,10 @@ public class Evento implements Notificable {
         return this.fecha.isEqual(fecha);
     }
 
+    public boolean eshoy(){
+        return esEnLaFecha(LocalDateTime.now());
+    }
+
     public boolean estaEntre(LocalDateTime fechaInicio, LocalDateTime fechaFin){
         return fecha.isAfter(fechaInicio) && fecha.isBefore(fechaFin);
     }
