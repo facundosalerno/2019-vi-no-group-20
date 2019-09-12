@@ -44,7 +44,7 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
 
     public Usuario(List<Guardarropas> guardarropas, TipoDeUsuario tipoDeUsuario) {
         this.tipoDeUsuario=tipoDeUsuario;
-        
+
         //if (!guardarropas.stream().allMatch(guardarropa -> guardarropa.tipoDeUsuarioQueAcepta() == tipoDeUsuario))
         //        throw new ElGuardarropasNoEsAptoException();
         guardarropas.stream().forEach( guardarropasAValidar -> validarTipoDeGuardarropas(guardarropasAValidar,this));

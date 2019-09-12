@@ -32,10 +32,6 @@ public abstract class Guardarropas {
 
     public abstract TipoDeUsuario tipoDeUsuarioQueAcepta();
 
-
-
-
-
     /** Metodos */
 
     public void prendasCoincidenConCategoria(List<Prenda> prendas, Categoria categoria){
@@ -66,9 +62,37 @@ public abstract class Guardarropas {
         return prendas.stream().map(prenda -> new CapaSimple(prenda)).collect(Collectors.toList());
     }
 
+    public void agregarPrendaSuperior(Prenda prendaAgregada) {
+        if (prendaAgregada.getCategoria() != Categoria.PARTE_SUPERIOR){
+            throw new NoPerteneceALaCategoriaException();
+        }
 
+        this.prendasSuperiores.add(prendaAgregada);
+    }
 
+    public void agregarPrendaInferior(Prenda prendaAgregada) {
+        if (prendaAgregada.getCategoria() != Categoria.PARTE_INFERIOR){
+            throw new NoPerteneceALaCategoriaException();
+        }
 
+        this.prendasInferiores.add(prendaAgregada);
+    }
+
+    public void agregarPrendaCalzado(Prenda prendaAgregada) {
+        if (prendaAgregada.getCategoria() != Categoria.CALZADO){
+            throw new NoPerteneceALaCategoriaException();
+        }
+
+        this.calzados.add(prendaAgregada);
+    }
+
+    public void agregarPrendaAccesorio(Prenda prendaAgregada) {
+        if (prendaAgregada.getCategoria() != Categoria.ACCESORIOS){
+            throw new NoPerteneceALaCategoriaException();
+        }
+
+        this.accesorios.add(prendaAgregada);
+    }
 
     /** Equals y hashcode */
 
