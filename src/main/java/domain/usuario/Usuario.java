@@ -44,13 +44,26 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
 
     public Usuario(List<Guardarropas> guardarropas, TipoDeUsuario tipoDeUsuario) {
         this.tipoDeUsuario=tipoDeUsuario;
-        if (!guardarropas.stream().allMatch(guardarropa -> guardarropa.tipoDeUsuarioQueAcepta() == tipoDeUsuario))
-                  throw new ElGuardarropasNoEsAptoException();
+        
+        //if (!guardarropas.stream().allMatch(guardarropa -> guardarropa.tipoDeUsuarioQueAcepta() == tipoDeUsuario))
+        //        throw new ElGuardarropasNoEsAptoException();
+        guardarropas.stream().forEach( guardarropasAValidar -> validarTipoDeGuardarropas(guardarropasAValidar,this));
         this.guardarropas = guardarropas;
         RepositorioUsuarios.getInstance().agregarUsuario(this);
 
     }
 
+
+    public void agregarGuardarropas (Guardarropas guardarropasAgregado){
+        validarTipoDeGuardarropas(guardarropasAgregado,this);
+        this.guardarropas.add(guardarropasAgregado);
+    }
+
+    public void validarTipoDeGuardarropas(Guardarropas guardarropasAValidar, Usuario usuario){
+           if((guardarropasAValidar.tipoDeUsuarioQueAcepta() == tipoDeUsuario)){
+               throw new ElGuardarropasNoEsAptoException();
+           }
+    }
     public List<Atuendo> obtenerSugerenciasDeTodosSusGuardarropas(Meteorologo meteorologo){
         return guardarropas.stream()
                 .flatMap(guardarropas -> guardarropas.sugerirAtuendo(meteorologo).stream())
