@@ -1,5 +1,6 @@
 package domain.atuendo;
 
+import clima.Clima;
 import domain.capaPrenda.Capa;
 import domain.prenda.Categoria;
 import domain.prenda.Prenda;
@@ -64,11 +65,18 @@ public class Atuendo {
 
     public void calificar(int calificacion) {        //Solo se usa al momento de generar una decision de calificar
         if (this.estado == Estado.ACEPTADO) {
-            this.calificacion = calificacion > 10 ? 10 : calificacion;
+            this.calificacion = calificacion > 10 ? 10 : calificacion < 0 ? 0 : calificacion;
         }else{
             throw new NoCumpleRequisitoParaCalificarException();
         }
 
+    }
+
+    public boolean revalidadAtuendo(Clima climaActual){
+        return prendaSuperior.abrigaBien(climaActual) &&
+                prendaInferior.abrigaBien(climaActual) &&
+                calzado.abrigaBien(climaActual) &&
+                accesorio.abrigaBien(climaActual);
     }
 
     /**

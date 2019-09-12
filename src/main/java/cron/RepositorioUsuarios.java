@@ -1,7 +1,6 @@
 package cron;
 
 import domain.usuario.Usuario;
-import exceptions.RepositorioDeUsuariosEstaInstanciado;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -79,8 +79,7 @@ public class TestsValidacionUsuarioYGuardarropas {
     @Test(expected= NoPermiteGuardarropaIncompletoException.class)
     public void pedirSugerenciaConGuardarropaIncompleto(){
         GuardarropasPremium guardarropasDeportivo= new GuardarropasPremium (Arrays.asList(),Arrays.asList(pantalon),Arrays.asList(zapatillas), Arrays.asList(anteojos));
-}
+    }
 
 }
-    //TODO: preguntar alguna manera copada de testear las sugerencias de guardarropas
 

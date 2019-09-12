@@ -52,6 +52,7 @@ public class TipoDePrenda {
 
     /** Atributos estaticos de prueba */
 
+    public static final TipoDePrenda SIN_ACCESORIO = new TipoDePrenda(Categoria.ACCESORIOS, Arrays.asList(Material.NINGUNO), new CualquierTemperatura(), NivelDeCapa.ABAJO);
     public static final TipoDePrenda ZAPATO = new TipoDePrenda(Categoria.CALZADO, Arrays.asList(Material.CUERO, Material.GAMUZA), new RangoTemperatura(10, 25), NivelDeCapa.MEDIO);
     public static final TipoDePrenda REMERA = new TipoDePrenda(Categoria.PARTE_SUPERIOR, Arrays.asList(Material.ALGODON), new CualquierTemperatura(), NivelDeCapa.ABAJO);
     public static final TipoDePrenda CAMISA = new TipoDePrenda(Categoria.PARTE_SUPERIOR, Arrays.asList(Material.ALGODON,Material.POLIESTER, Material.JEAN,Material.LINO), new RangoTemperatura(1, 30), NivelDeCapa.ABAJO);

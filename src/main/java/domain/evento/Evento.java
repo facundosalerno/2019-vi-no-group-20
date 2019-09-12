@@ -66,8 +66,9 @@ public class Evento implements Notificable {
         return this.nombre.equals(nombre);
     }
 
+    /* Precision de año mes y dia */
     public boolean esEnLaFecha(LocalDateTime fecha){
-        return this.fecha.isEqual(fecha);
+        return this.fecha.getYear() == fecha.getYear() && this.fecha.getMonthValue() == fecha.getMonthValue() && this.fecha.getDayOfMonth() == fecha.getDayOfMonth();
     }
 
     public boolean eshoy(){

@@ -1,5 +1,6 @@
 package domain.usuario;
 
+import clima.Clima;
 import clima.Meteorologo;
 import cron.Cron;
 import cron.RepositorioUsuarios;
@@ -198,8 +199,9 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
     }
 
     @Override
-    public void recibirNotificacionAlertaMeteorologica() {
-
+    public void recibirNotificacionAlertaMeteorologica(Clima climaActual) {
+        if(atuendosAceptados.stream().anyMatch(atuendo -> atuendo.revalidadAtuendo(climaActual)))
+            mediosDeNotificacion.stream().forEach(medio -> medio.lanzarNotificacion());
     }
 
 

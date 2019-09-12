@@ -66,7 +66,7 @@ public abstract class Guardarropas {
     public List<Atuendo> sugerirAtuendo(Meteorologo meteorologo){
         Clima climaActual = meteorologo.obtenerClima();
 
-        return Sets.cartesianProduct(ImmutableList.of(ImmutableSet.copyOf(generarCapasCompuestas(prendasSuperiores, climaActual)), ImmutableSet.copyOf(generarCapasSimples(prendasInferiores)), ImmutableSet.copyOf(generarCapasSimples(calzados)), ImmutableSet.copyOf(generarCapasSimples(accesorios))))
+        return Sets.cartesianProduct(ImmutableList.of(ImmutableSet.copyOf(generarCapasCompuestas(prendasSuperiores, climaActual)), ImmutableSet.copyOf(generarCapasSimples(prendasInferiores, climaActual)), ImmutableSet.copyOf(generarCapasSimples(calzados, climaActual)), ImmutableSet.copyOf(generarCapasSimples(accesorios, climaActual))))
                 .stream()
                 .map(list -> new Atuendo(list.get(0), list.get(1), list.get(2), list.get(3)))
                 .filter(atuendo -> atuendo.esElegible())
@@ -76,12 +76,16 @@ public abstract class Guardarropas {
     private List<CapaCompuesta> generarCapasCompuestas(List<Prenda> prendas, Clima climaActual){
         return Sets.combinations(ImmutableSet.copyOf(prendas), CapasPorTemperatura.capasDeAbrigoParaClima(climaActual))
                 .stream()
-                .map(set -> new CapaCompuesta(generarCapasSimples(ImmutableList.copyOf(set))))
+                .map(set -> new CapaCompuesta(transformarPrendaEnCapa(ImmutableList.copyOf(set))))
                 .filter(capa -> capa.abrigaBien(climaActual) && capa.estaBienOrdenada())
                 .collect(Collectors.toList());
     }
 
-    private List<CapaSimple> generarCapasSimples(List<Prenda> prendas){
+    private List<CapaSimple> generarCapasSimples(List<Prenda> prendas, Clima climaActual){
+        return prendas.stream().filter(prenda -> prenda.abrigaBien(climaActual)).map(prenda -> new CapaSimple(prenda)).collect(Collectors.toList());
+    }
+
+    private List<CapaSimple> transformarPrendaEnCapa(List<Prenda> prendas){
         return prendas.stream().map(prenda -> new CapaSimple(prenda)).collect(Collectors.toList());
     }
 

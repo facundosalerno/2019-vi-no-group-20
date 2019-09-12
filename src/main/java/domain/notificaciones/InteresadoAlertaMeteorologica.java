@@ -1,5 +1,7 @@
 package domain.notificaciones;
 
+import clima.Clima;
+
 public interface InteresadoAlertaMeteorologica {
-    void recibirNotificacionAlertaMeteorologica();
+    void recibirNotificacionAlertaMeteorologica(Clima climaActual);
 }
