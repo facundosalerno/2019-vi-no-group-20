@@ -8,12 +8,15 @@ import exceptions.NoAceptaCantidadPrendasException;
 import exceptions.NoPermiteGuardarropaIncompletoException;
 import exceptions.NoPerteneceALaCategoriaException;
 
+import javax.persistence.*;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.stream.Stream;
 
 
 
+@Entity
+@DiscriminatorValue(value="Limitado")
 public class GuardarropasLimitado extends Guardarropas {
 
     public GuardarropasLimitado (List<Prenda> prendasSuperiores, List<Prenda> prendasInferiores, List<Prenda> calzados, List<Prenda> accesorios) {

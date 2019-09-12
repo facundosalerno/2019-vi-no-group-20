@@ -32,19 +32,19 @@ public abstract class Guardarropas {
     Long id;
 
     @OneToMany
-    @JoinTable(name = "guardarropas_superiores")
+    @JoinColumn(name = "guardarropas_superiores")
     protected List<Prenda> prendasSuperiores;
 
     @OneToMany
-    @JoinTable(name = "guardarropas_inferiores")
+    @JoinColumn(name = "guardarropas_inferiores")
     protected List<Prenda> prendasInferiores;
 
     @OneToMany
-    @JoinTable(name = "guardarropas_calzados")
+    @JoinColumn(name = "guardarropas_calzados")
     protected List<Prenda> calzados;
 
     @OneToMany
-    @JoinTable(name = "guardarropas_accesorios  ")
+    @JoinColumn(name = "guardarropas_accesorios  ")
     protected List<Prenda> accesorios;
 
 

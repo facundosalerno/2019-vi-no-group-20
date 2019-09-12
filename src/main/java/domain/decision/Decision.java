@@ -2,9 +2,19 @@ package domain.decision;
 
 import domain.atuendo.Atuendo;
 
+import javax.persistence.*;
+
 import java.util.Objects;
 
+@Entity
+@DiscriminatorColumn(name="tipo_decision")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Decision {
+    @Id
+    @GeneratedValue
+    Long id;
+
+    @OneToOne
     Atuendo atuendo;
 
     public abstract void deshacer();

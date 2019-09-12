@@ -3,6 +3,11 @@ package domain.decision;
 import domain.atuendo.Atuendo;
 import domain.atuendo.Estado;
 
+import javax.persistence.*;
+
+
+@Entity
+@DiscriminatorValue(value="Rechazar")
 public class Rechazar extends Decision{
 
     public Rechazar (Atuendo atuendo){

@@ -37,6 +37,9 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
     Long id;
 
     private List<Evento> eventos = new ArrayList<>();
+
+    @JoinColumn(name= "usuarioId")
+    @OneToMany
     private Deque<Decision> decisiones = new ArrayDeque<>();
 
     @Transient
@@ -48,7 +51,7 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
     private TipoDeUsuario tipoDeUsuario;
 
 
-    @JoinColumn(name = "usuario_id")
+    @JoinColumn(name = "usuarioId")
     @OneToMany
     private List<Guardarropas> guardarropas;
 
