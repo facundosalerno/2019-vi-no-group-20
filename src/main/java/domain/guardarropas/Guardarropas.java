@@ -13,6 +13,7 @@ import domain.prenda.Categoria;
 import domain.prenda.Prenda;
 import domain.usuario.TipoDeUsuario;
 import exceptions.NoPerteneceALaCategoriaException;
+import exceptions.NoSePuedenGenerarSugerenciasEx;
 
 import javax.persistence.*;
 import java.nio.file.ProviderNotFoundException;
@@ -73,8 +74,13 @@ public abstract class Guardarropas {
                 .collect(Collectors.toList());
     }
 
-    private List<CapaCompuesta> generarCapasCompuestas(List<Prenda> prendas, Clima climaActual){
-        return Sets.combinations(ImmutableSet.copyOf(prendas), CapasPorTemperatura.capasDeAbrigoParaClima(climaActual))
+    private List<CapaCompuesta> generarCapasCompuestas(List<Prenda> prendas, Clima climaActual) {
+        int capas = CapasPorTemperatura.capasDeAbrigoParaClima(climaActual);
+        if (prendas.size() < capas){ /* Fix para: java.lang.IllegalArgumentException: size (2) must be <= set.size() (1) */
+            throw new NoSePuedenGenerarSugerenciasEx("No hay suficientes prendas en el guardarropas para satisfacer el clima actual");
+        }
+
+        return Sets.combinations(ImmutableSet.copyOf(prendas), capas)
                 .stream()
                 .map(set -> new CapaCompuesta(transformarPrendaEnCapa(ImmutableList.copyOf(set))))
                 .filter(capa -> capa.abrigaBien(climaActual) && capa.estaBienOrdenada())

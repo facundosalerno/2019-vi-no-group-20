@@ -16,7 +16,6 @@ public class RangoTemperatura extends TemperaturaPrenda{
     @Override /* Se adapta solo si esta dentro del rango */
     public boolean seAdapta(Clima climaActual) {
         double temperatura = climaActual.getTemperature();
-        System.out.println("temperatura mock: "+temperatura+"\nrangoInferior: "+rangoInferior+"\nrangoSuperior: "+rangoSuperior+"\n");
         return temperatura >= rangoInferior && temperatura <= rangoSuperior;
     }
 }

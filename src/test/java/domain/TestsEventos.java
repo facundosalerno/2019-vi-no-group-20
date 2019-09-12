@@ -30,6 +30,8 @@ public class TestsEventos {
     private Prenda remera;
     private Prenda pantalon;
     private Prenda anteojos;
+    private Prenda buso;
+    private Prenda campera;
 
     @Before
     public void init(){
@@ -41,8 +43,10 @@ public class TestsEventos {
         remera = armarUnaPrenda(TipoDePrenda.REMERA, Material.ALGODON, azul, rojo, Trama.CUADROS);
         pantalon = armarUnaPrenda(TipoDePrenda.PANTALON, Material.JEAN, verde, rojo, Trama.RAYADA);
         anteojos= armarUnaPrenda(TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA);
+        buso = armarUnaPrenda(TipoDePrenda.BUSO, Material.ALGODON, azul, verde, Trama.LISA);
+        campera = armarUnaPrenda(TipoDePrenda.CAMPERA, Material.JEAN, verde, azul, Trama.GASTADO);
 
-        panchoPepeGil = new Usuario(Arrays.asList(new GuardarropasPremium(Arrays.asList(remera, remera), Arrays.asList(pantalon, pantalon, pantalon), Arrays.asList(zapatos, zapatos, zapatos), Arrays.asList(anteojos))), TipoDeUsuario.PREMIUM);
+        panchoPepeGil = new Usuario(Arrays.asList(new GuardarropasPremium(Arrays.asList(remera, buso, campera), Arrays.asList(pantalon), Arrays.asList(zapatos), Arrays.asList(anteojos))), TipoDeUsuario.PREMIUM);
 
     }
 
@@ -75,11 +79,13 @@ public class TestsEventos {
         LocalDateTime fechaCumpleWilly = LocalDateTime.now();
         panchoPepeGil.crearEvento("Cumpleaños de juan", fechaCumpleWilly, FrecuenciaEvento.ANUAL,"Casa de Juan");
 
-        AccuWeather meteorologoAccuweather = mock(AccuWeather.class);
-        TemperaturaAccuWeather temperaturaImpostora= mock(TemperaturaAccuWeather.class);
-        temperaturaImpostora.setValue(30);
-        when(meteorologoAccuweather.obtenerClima()).thenReturn(temperaturaImpostora);
-        panchoPepeGil.getEventos().get(0).generarSugerencias(meteorologoAccuweather);
+        TemperaturaAccuWeather temperatura = mock(TemperaturaAccuWeather.class);
+        when(temperatura.getTemperature()).thenReturn(25.0); //TODO con temperaturas bajas falla. Aparentemente el problema es cuando el n de las combinatorias es mayor a 1.
+
+        AccuWeather meteorologo = mock(AccuWeather.class);
+        when(meteorologo.obtenerClima()).thenReturn(temperatura);
+
+        panchoPepeGil.getEventos().get(0).generarSugerencias(meteorologo);
         Assert.assertTrue(panchoPepeGil.getEventos().get(0).existenSugerencias());
     }
 
