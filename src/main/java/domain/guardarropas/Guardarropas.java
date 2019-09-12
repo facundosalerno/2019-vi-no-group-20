@@ -27,9 +27,24 @@ import java.util.stream.Collectors;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Guardarropas {
 
+    @Id
+    @GeneratedValue
+    Long id;
+
+    @OneToMany
+    @JoinTable(name = "guardarropas_superiores")
     protected List<Prenda> prendasSuperiores;
+
+    @OneToMany
+    @JoinTable(name = "guardarropas_inferiores")
     protected List<Prenda> prendasInferiores;
+
+    @OneToMany
+    @JoinTable(name = "guardarropas_calzados")
     protected List<Prenda> calzados;
+
+    @OneToMany
+    @JoinTable(name = "guardarropas_accesorios  ")
     protected List<Prenda> accesorios;
 
 
