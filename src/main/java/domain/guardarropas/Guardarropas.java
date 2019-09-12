@@ -13,10 +13,18 @@ import domain.prenda.Categoria;
 import domain.prenda.Prenda;
 import domain.usuario.TipoDeUsuario;
 import exceptions.NoPerteneceALaCategoriaException;
+
+import javax.persistence.*;
+import java.nio.file.ProviderNotFoundException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+
+@Entity
+@DiscriminatorColumn(name="tipo_guardarropas")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Guardarropas {
 
     protected List<Prenda> prendasSuperiores;
@@ -63,15 +71,16 @@ public abstract class Guardarropas {
     }
 
     public void agregarPrendaSuperior(Prenda prendaAgregada) {
-        if (prendaAgregada.getCategoria() != Categoria.PARTE_SUPERIOR){
+        if (!prendaAgregada.esDeCategoria(Categoria.PARTE_SUPERIOR)){
             throw new NoPerteneceALaCategoriaException();
         }
 
         this.prendasSuperiores.add(prendaAgregada);
+
     }
 
     public void agregarPrendaInferior(Prenda prendaAgregada) {
-        if (prendaAgregada.getCategoria() != Categoria.PARTE_INFERIOR){
+        if (!prendaAgregada.esDeCategoria(Categoria.PARTE_INFERIOR)){
             throw new NoPerteneceALaCategoriaException();
         }
 
@@ -79,7 +88,7 @@ public abstract class Guardarropas {
     }
 
     public void agregarPrendaCalzado(Prenda prendaAgregada) {
-        if (prendaAgregada.getCategoria() != Categoria.CALZADO){
+        if (!prendaAgregada.esDeCategoria(Categoria.CALZADO)){
             throw new NoPerteneceALaCategoriaException();
         }
 
@@ -87,7 +96,7 @@ public abstract class Guardarropas {
     }
 
     public void agregarPrendaAccesorio(Prenda prendaAgregada) {
-        if (prendaAgregada.getCategoria() != Categoria.ACCESORIOS){
+        if (!prendaAgregada.esDeCategoria(Categoria.ACCESORIOS)){
             throw new NoPerteneceALaCategoriaException();
         }
 

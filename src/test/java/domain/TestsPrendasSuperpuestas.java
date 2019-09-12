@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import static org.mockito.Mockito.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -75,7 +76,7 @@ public class TestsPrendasSuperpuestas {
         anteojos = armarUnaPrenda(TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA);
 
 
-        //busoFormal = armarUnaPrenda(TipoDePrenda.BUSO, Material.ALGODON, azul, null, Trama.LISA);   //TODO: Para tests guardarropas
+        busoFormal = armarUnaPrenda(TipoDePrenda.BUSO, Material.ALGODON, azul, null, Trama.LISA);   //TODO: Para tests guardarropas
         busoInformal = armarUnaPrenda(TipoDePrenda.BUSO, Material.ALGODON, azul, verde, Trama.RAYADA);
         sweaterFormal = armarUnaPrenda(TipoDePrenda.SWEATER,Material.LINO, azul, null, Trama.LISA);
 
@@ -89,10 +90,7 @@ public class TestsPrendasSuperpuestas {
         //remeraCanchera = armarUnaPrenda(TipoDePrenda.REMERA, Material.ALGODON, azul, rojo, Trama.RAYADA);  //TODO: Para tests guardarropas
         remeraDeDia = armarUnaPrenda(TipoDePrenda.REMERA, Material.ALGODON, azul, null, Trama.LISA);
 
-        guardarropasInvierno = new GuardarropasPremium(Arrays.asList(sweaterFormal,remeraDeDia, camisaSalida, busoInformal, camperaParaSalida, camisaFormalBlanca, camperaMichelin), Arrays.asList(pantalonParaSalida), Arrays.asList(zapatosFormales), Arrays.asList(anteojos));
-
-        guardarropasInvierno = new GuardarropasPremium(Arrays.asList(sweaterFormal,remeraDeDia, camisaSalida, busoInformal, camperaParaSalida, camisaFormalBlanca, camperaMichelin), Arrays.asList(pantalonParaSalida), Arrays.asList(zapatosFormales), Arrays.asList(anteojos));
-
+        guardarropasInvierno = new GuardarropasPremium(new ArrayList<Prenda>(Arrays.asList(sweaterFormal,remeraDeDia, camisaSalida, busoInformal, camperaParaSalida, camisaFormalBlanca, camperaMichelin)), new ArrayList<Prenda>(Arrays.asList(pantalonParaSalida)), new ArrayList<Prenda>(Arrays.asList(zapatosFormales)), new ArrayList<Prenda>(Arrays.asList(anteojos)));
 
         nuevoClima =	mock(TemperaturaOpenWeather.class);
         when(nuevoClima.getTemperature()).thenReturn(8.0);
@@ -162,7 +160,9 @@ public class TestsPrendasSuperpuestas {
 
 
     public void seGeneranAtuendosEsperados(){      //TODO: REVISAR CASOS DE FALLO QUE ESTAN COMENTADOS
-        
+
+
+
         Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).size() == 12);
 
         Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo(new CapaCompuesta(Arrays.asList(capaRemeraDeDia,capaBusoInformal,capaCamperaParaSalida)),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos))));
@@ -192,5 +192,7 @@ public class TestsPrendasSuperpuestas {
         new Atuendo(new CapaCompuesta(Arrays.asList(capaCamisaSalida,capaSweaterFormal,capaCamperaMichelin)),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos),
         new Atuendo(new CapaCompuesta(Arrays.asList(capaCamisaSalida,capaBusoInformal,capaCamperaMichelin)),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos))));
         */
+
+        guardarropasInvierno.agregarPrendaSuperior(busoFormal);
     }
 }

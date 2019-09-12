@@ -25,15 +25,34 @@ import java.util.stream.Collectors;
 import org.mockito.cglib.core.Local;
 import org.uqbar.commons.model.annotations.Observable;
 
+import javax.persistence.*;
+
 @Observable /** Necesario para poder usarse con arena */
+
+@Entity
 public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica {
+
+    @Id
+    @GeneratedValue
+    Long id;
 
     private List<Evento> eventos = new ArrayList<>();
     private Deque<Decision> decisiones = new ArrayDeque<>();
+
+    @Transient
     private List<Atuendo> atuendosAceptados = new ArrayList<>();
+    @Transient
     private List<Atuendo> atuendosRechazados = new ArrayList<>();
+
+    @Enumerated(EnumType.STRING)
     private TipoDeUsuario tipoDeUsuario;
+
+
+    @JoinColumn(name = "usuario_id")
+    @OneToMany
     private List<Guardarropas> guardarropas;
+
+    @Transient
     private List<MedioDeNotificacion> mediosDeNotificacion = new ArrayList<>();
 
 

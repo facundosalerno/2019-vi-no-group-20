@@ -38,21 +38,22 @@ public class GuardarropasLimitado extends Guardarropas {
         return 4;
     }
 
-    private void validarQueNoSuperaCantidadPermitida(List<Prenda> prendas){
-        if (prendas.size() == cantidadPrendasPermitidas() ){
-            throw new NoAceptaCantidadPrendasException();
-        }
-    }
+
 
     @Override
     public TipoDeUsuario tipoDeUsuarioQueAcepta() {
         return TipoDeUsuario.GRATIS;
     }
 
+    private void validarQueNoSuperaCantidadPermitida(List<Prenda> prendas){
+        if (prendas.size() == cantidadPrendasPermitidas() ){
+            throw new NoAceptaCantidadPrendasException();
+        }
+    }
     @Override
     public void agregarPrendaSuperior(Prenda prendaAgregada) {
         validarQueNoSuperaCantidadPermitida(prendasSuperiores);
-        if (prendaAgregada.getCategoria() != Categoria.PARTE_SUPERIOR){
+        if (!prendaAgregada.esDeCategoria(Categoria.PARTE_SUPERIOR)){
             throw new NoPerteneceALaCategoriaException();
         }
 
@@ -62,7 +63,7 @@ public class GuardarropasLimitado extends Guardarropas {
     public void agregarPrendaInferior(Prenda prendaAgregada) {
         validarQueNoSuperaCantidadPermitida(prendasInferiores);
 
-        if (prendaAgregada.getCategoria() != Categoria.PARTE_INFERIOR){
+        if(!prendaAgregada.esDeCategoria(Categoria.PARTE_INFERIOR)){
             throw new NoPerteneceALaCategoriaException();
         }
 
@@ -72,7 +73,7 @@ public class GuardarropasLimitado extends Guardarropas {
     @Override
     public void agregarPrendaCalzado(Prenda prendaAgregada) {
         validarQueNoSuperaCantidadPermitida(calzados);
-        if (prendaAgregada.getCategoria() != Categoria.CALZADO){
+        if (!prendaAgregada.esDeCategoria(Categoria.CALZADO)){
             throw new NoPerteneceALaCategoriaException();
         }
         this.calzados.add(prendaAgregada);
@@ -81,7 +82,7 @@ public class GuardarropasLimitado extends Guardarropas {
     @Override
     public void agregarPrendaAccesorio(Prenda prendaAgregada) {
         validarQueNoSuperaCantidadPermitida(accesorios);
-        if (prendaAgregada.getCategoria() != Categoria.ACCESORIOS){
+        if (!prendaAgregada.esDeCategoria(Categoria.ACCESORIOS)){
             throw new NoPerteneceALaCategoriaException();
         }
         this.accesorios.add(prendaAgregada);
