@@ -2,9 +2,13 @@ package domain;
 
 import clima.AccuWeather;
 import clima.TemperaturaAccuWeather;
+import domain.atuendo.Atuendo;
+import domain.capaPrenda.Capa;
+import domain.capaPrenda.CapaSimple;
 import domain.guardarropas.Guardarropas;
 import domain.guardarropas.GuardarropasPremium;
 import domain.prenda.*;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,14 +24,19 @@ public class TestsSugerencias {
 
     private Prenda musculosa;
     private Prenda remeraMangaLarga;
-
     private Prenda pantalon;
     private Prenda trajeDeBaño;
-
     private Prenda zapatos;
     private Prenda ojotas;
-
     private Prenda anteojos;
+
+    private Capa cmusculosa;
+    private Capa cremeraMangaLarga;
+    private Capa cpantalon;
+    private Capa ctrajeDeBaño;
+    private Capa czapatos;
+    private Capa cojotas;
+    private Capa canteojos;
 
     @Before
     public void init(){
@@ -35,18 +44,23 @@ public class TestsSugerencias {
         Color verde = new Color(0, 255, 0);
         Color azul = new Color(0, 0, 255);
 
-        musculosa = armarUnaPrenda(TipoDePrenda.ZAPATO, Material.CUERO, rojo, azul, Trama.GASTADO);
+        musculosa = armarUnaPrenda(TipoDePrenda.REMERA, Material.ALGODON, rojo, azul, Trama.GASTADO);
         remeraMangaLarga = armarUnaPrenda(TipoDePrenda.REMERA, Material.ALGODON, azul, rojo, Trama.CUADROS);
-
         pantalon = armarUnaPrenda(TipoDePrenda.PANTALON, Material.JEAN, verde, rojo, Trama.RAYADA);
         trajeDeBaño = armarUnaPrenda(TipoDePrenda.SHORT, Material.ALGODON, verde, rojo, Trama.LISA);
-
         zapatos = armarUnaPrenda(TipoDePrenda.ZAPATO, Material.CUERO, rojo, azul, Trama.GASTADO);
-        ojotas = armarUnaPrenda(TipoDePrenda.OJOTAS, Material.PLASTICO, azul, rojo, Trama.CUADROS);
-
+        ojotas = armarUnaPrenda(TipoDePrenda.OJOTAS, Material.GOMA, azul, rojo, Trama.CUADROS);
         anteojos= armarUnaPrenda(TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA);
 
-        guardarropasDeWilly = new GuardarropasPremium(Arrays.asList(musculosa, remeraMangaLarga), Arrays.asList(pantalon, trajeDeBaño), Arrays.asList(zapatos, ojotas), Arrays.asList(anteojos));
+        cmusculosa = new CapaSimple(musculosa);
+        cremeraMangaLarga = new CapaSimple(remeraMangaLarga);
+        cpantalon = new CapaSimple(pantalon);
+        ctrajeDeBaño = new CapaSimple(trajeDeBaño);
+        czapatos = new CapaSimple(zapatos);
+        cojotas = new CapaSimple(ojotas);
+        canteojos = new CapaSimple(anteojos);
+
+        guardarropasDeWilly = new GuardarropasPremium(Arrays.asList(musculosa), Arrays.asList(trajeDeBaño), Arrays.asList(ojotas), Arrays.asList(anteojos));
 
     }
 
@@ -59,25 +73,36 @@ public class TestsSugerencias {
         borradorPrenda.definirTrama(trama);
         return borradorPrenda.crearPrenda();
     }
-/*
+
     @Test
     public void verificarSugerenciasAcordeAlVerano(){
-        AccuWeather meteorologoAccuweather = mock(AccuWeather.class);
-        TemperaturaAccuWeather temperaturaImpostora= mock(TemperaturaAccuWeather.class);
-        temperaturaImpostora.setValue(32);
-        when(meteorologoAccuweather.obtenerClima()).thenReturn(temperaturaImpostora);
+        TemperaturaAccuWeather temperatura = mock(TemperaturaAccuWeather.class);
+        when(temperatura.getTemperature()).thenReturn(31.0);
+        AccuWeather meteorologo = mock(AccuWeather.class);
+        when(meteorologo.obtenerClima()).thenReturn(temperatura);
 
-        List<Atuendo> sugerencias = guardarropasDeWilly.sugerirAtuendo(meteorologoAccuweather);
-        Atuendo posibleAtuendoSugerido = new Atuendo(Arrays.asList(musculosa), trajeDeBaño, ojotas, anteojos);
+        List<Atuendo> sugerencias = guardarropasDeWilly.sugerirAtuendo(meteorologo);
+        Atuendo posibleAtuendoSugerido = new Atuendo(cmusculosa, ctrajeDeBaño, cojotas, canteojos);
+        Assert.assertTrue(sugerencias.contains(posibleAtuendoSugerido));
     }
 
     @Test
     public void verificarSugerenciasAcordeAlInvierno(){
-        AccuWeather meteorologoAccuweather = mock(AccuWeather.class);
-        TemperaturaAccuWeather temperaturaImpostora= mock(TemperaturaAccuWeather.class);
-        temperaturaImpostora.setValue(10);
-        when(meteorologoAccuweather.obtenerClima()).thenReturn(temperaturaImpostora);
+        TemperaturaAccuWeather temperatura = mock(TemperaturaAccuWeather.class);
+        when(temperatura.getTemperature()).thenReturn(25.0);
+        AccuWeather meteorologo = mock(AccuWeather.class);
+        when(meteorologo.obtenerClima()).thenReturn(temperatura);
 
-        guardarropasDeWilly.sugerirAtuendo(meteorologoAccuweather);
-    }*/
+        guardarropasDeWilly.sugerirAtuendo(meteorologo);
+    }
+
+    @Test
+    public void testRevalidacionAtuendo(){
+        TemperaturaAccuWeather temperatura = mock(TemperaturaAccuWeather.class);
+        when(temperatura.getTemperature()).thenReturn(25.0);
+        AccuWeather meteorologo = mock(AccuWeather.class);
+        when(meteorologo.obtenerClima()).thenReturn(temperatura);
+
+
+    }
 }

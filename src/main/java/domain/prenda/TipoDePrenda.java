@@ -8,6 +8,7 @@ import domain.temperaturaPrenda.TemperaturaPrenda;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 
 public class TipoDePrenda {
@@ -68,4 +69,20 @@ public class TipoDePrenda {
     public static final TipoDePrenda BUSO = new TipoDePrenda(Categoria.PARTE_SUPERIOR, Arrays.asList(Material.ALGODON), new RangoTemperatura(5, 25), NivelDeCapa.MEDIO);
     public static final TipoDePrenda SWEATER = new TipoDePrenda(Categoria.PARTE_SUPERIOR, Arrays.asList(Material.LINO), new RangoTemperatura(5, 25), NivelDeCapa.MEDIO);
     public static final TipoDePrenda CAMPERA = new TipoDePrenda(Categoria.PARTE_SUPERIOR, Arrays.asList(Material.GABARDINA,Material.JEAN, Material.ALGODON, Material.PLUMA), new RangoTemperatura(5, 25), NivelDeCapa.ARRIBA);
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TipoDePrenda)) return false;
+        TipoDePrenda that = (TipoDePrenda) o;
+        return categoria == that.categoria &&
+                Objects.equals(materialesValidos, that.materialesValidos) &&
+                Objects.equals(temperaturaSoportada, that.temperaturaSoportada) &&
+                nivelDeCapa == that.nivelDeCapa;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(categoria, materialesValidos, temperaturaSoportada, nivelDeCapa);
+    }
 }

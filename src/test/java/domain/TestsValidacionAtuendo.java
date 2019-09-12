@@ -1,5 +1,7 @@
 package domain;
 
+import clima.AccuWeather;
+import clima.TemperaturaAccuWeather;
 import domain.atuendo.Atuendo;
 import domain.capaPrenda.Capa;
 import domain.capaPrenda.CapaCompuesta;
@@ -11,6 +13,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class TestsValidacionAtuendo {
     private Prenda prendaZapatos;
@@ -83,9 +88,5 @@ public class TestsValidacionAtuendo {
     public void crearAtuendoInvalido() {
         new Atuendo(pantalon, pantalon, zapatos, anteojos);
     }
-
-    //TODO:Test para verificar la creacion de un atuendo con prendas superpuestas para determinada temperatura
-
-    //TODO:Test para verificar que ante la imposibilidad de crear un atuendo para una temperatura determinada, se crea una excepcion
 
 }

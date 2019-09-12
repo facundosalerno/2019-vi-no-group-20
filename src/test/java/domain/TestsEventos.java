@@ -80,7 +80,7 @@ public class TestsEventos {
         panchoPepeGil.crearEvento("Cumpleaños de juan", fechaCumpleWilly, FrecuenciaEvento.ANUAL,"Casa de Juan");
 
         TemperaturaAccuWeather temperatura = mock(TemperaturaAccuWeather.class);
-        when(temperatura.getTemperature()).thenReturn(25.0); //TODO con temperaturas bajas falla. Aparentemente el problema es cuando el n de las combinatorias es mayor a 1.
+        when(temperatura.getTemperature()).thenReturn(25.0);
 
         AccuWeather meteorologo = mock(AccuWeather.class);
         when(meteorologo.obtenerClima()).thenReturn(temperatura);
