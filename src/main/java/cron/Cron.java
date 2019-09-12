@@ -5,10 +5,7 @@ import java.util.Timer;
 
 public class Cron {
 
-    private static RepositorioUsuarios repo = null;
-
     public static void main(String[] args){
-        repo = RepositorioUsuarios.getInstance();
 
         Timer timer = new Timer();
         long oneDayInMiliseconds = 86400000; //1 dia
@@ -18,6 +15,9 @@ public class Cron {
 
         VerificarAlertasMeteorologicas alertasMeteorologicas = new VerificarAlertasMeteorologicas();
         timer.scheduleAtFixedRate(alertasMeteorologicas, 0, oneDayInMiliseconds);
+
+        RenovarFrecuenciasEventos eventosRecurrentes = new RenovarFrecuenciasEventos();
+        timer.scheduleAtFixedRate(eventosRecurrentes, 0, oneDayInMiliseconds);
     }
 }
 
