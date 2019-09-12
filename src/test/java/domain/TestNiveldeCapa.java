@@ -1,7 +1,11 @@
 package domain;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
+import clima.AccuWeather;
+import clima.TemperaturaAccuWeather;
 import domain.capaPrenda.Capa;
 import domain.capaPrenda.CapaCompuesta;
 import domain.capaPrenda.CapaSimple;
@@ -43,7 +47,7 @@ public class TestNiveldeCapa {
 		prendaPantalon = armarUnaPrenda(TipoDePrenda.PANTALON, Material.JEAN, verde, rojo, Trama.RAYADA);
 		prendaAnteojos = armarUnaPrenda(TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA);
 		prendaBuso = armarUnaPrenda(TipoDePrenda.BUSO, Material.ALGODON, azul, verde, Trama.LISA);
-		prendaCampera = armarUnaPrenda(TipoDePrenda.CAMPERA, Material.JEAN, verde, null, Trama.GASTADO);
+		prendaCampera = armarUnaPrenda(TipoDePrenda.CAMPERA, Material.JEAN, verde, azul, Trama.GASTADO);
 
 
 		zapatos = new CapaSimple(prendaZapatos);
@@ -51,8 +55,8 @@ public class TestNiveldeCapa {
 		buso = new CapaSimple(prendaBuso);
 		pantalon = new CapaSimple(prendaPantalon);
 		anteojos = new CapaSimple(prendaAnteojos);
+		campera = new CapaSimple(prendaCampera);
 
-		parteSuperiorInvierno = new CapaCompuesta(Arrays.asList(remera, buso, campera));
 
 	}
 
@@ -61,29 +65,31 @@ public class TestNiveldeCapa {
 		borradorPrenda.definirTipo(tipoDePrenda);
 		borradorPrenda.definirMaterial(material);
 		borradorPrenda.definirColorPrimario(colorPrimario);
-		if(colorSecundario != null) {
-
-			borradorPrenda.definirColorSecundario(colorSecundario);
-		}
+		borradorPrenda.definirColorSecundario(colorSecundario);
 		borradorPrenda.definirTrama(trama);
 		return borradorPrenda.crearPrenda();
 	}
-	@Test
-	public  void ordinalNivelCapa(){
-		
-		Assert.assertEquals(NivelDeCapa.MEDIO.ordinal(),1);
 
+	@Test
+	public  void capasMalOrdenadasSeFiltran(){
+		parteSuperiorInvierno = new CapaCompuesta(Arrays.asList(buso, remera, campera));
+		Assert.assertTrue(!parteSuperiorInvierno.estaBienOrdenada());
 	}
 
-	//TODO:Test para verificar que las capas estan ordenadas
 	@Test
 	public void capasEstanOrdenadas(){
+		parteSuperiorInvierno = new CapaCompuesta(Arrays.asList(remera, buso, campera));
 		Assert.assertTrue(parteSuperiorInvierno.estaBienOrdenada());
 
 	}
-	//TODO:Test para verificar que se dispara una excepcion si no hay capas creadas debido a que no se satisface la temperatura
-	@Test
-	public void generarAtuendoTiraExcepcionSiNohayCapasQueSatisfaganLaTemperatura(){
 
+
+	@Test
+	public void testCapaAbrigaBien(){
+		TemperaturaAccuWeather temperaturaImpostora = mock(TemperaturaAccuWeather.class);
+		when(temperaturaImpostora.getTemperature()).thenReturn(21.0);
+
+		parteSuperiorInvierno = new CapaCompuesta(Arrays.asList(remera, buso, campera));
+		Assert.assertTrue(parteSuperiorInvierno.abrigaBien(temperaturaImpostora));
 	}
 }

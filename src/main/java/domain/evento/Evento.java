@@ -25,7 +25,6 @@ public class Evento implements Notificable {
     private Usuario usuario;
     private FrecuenciaEvento frecuencia;
     private List<Atuendo> sugerenciasObtenidas = new ArrayList<>();
-    private boolean existenSugerencias = !sugerenciasObtenidas.isEmpty(); //TODO revisar este cacho de codigo
 
     /** Warning: crear desde el usuario */
     public Evento(String nombre, LocalDateTime fechaYHora, FrecuenciaEvento frecuencia, String lugar, Usuario usuario){
@@ -43,7 +42,7 @@ public class Evento implements Notificable {
     /** Metodos */
 
     public void generarSugerencias(Meteorologo meteorologo){
-        if(Math.abs(DAYS.between(fecha.toLocalDate(), LocalDate.now())) <= diasDeProximidadAEventos()){
+        if(Math.abs(fecha.getDayOfMonth() - LocalDateTime.now().getDayOfMonth()) <= diasDeProximidadAEventos()){
             sugerenciasObtenidas = usuario.obtenerSugerenciasDeTodosSusGuardarropas(meteorologo);
         }else{
             throw new TodaviaNoEstaCercaElEvento();
@@ -77,6 +76,10 @@ public class Evento implements Notificable {
 
     public boolean estaEntre(LocalDateTime fechaInicio, LocalDateTime fechaFin){
         return fecha.isAfter(fechaInicio) && fecha.isBefore(fechaFin);
+    }
+
+    public boolean existenSugerencias(){
+        return !sugerenciasObtenidas.isEmpty();
     }
 
     public void renovarFrecuencia(){
@@ -124,14 +127,6 @@ public class Evento implements Notificable {
 
     public LocalDateTime getFecha() {
         return fecha;
-    }
-
-    public boolean getExistenSugerencias(){
-        return existenSugerencias;
-    }
-
-    public void setExistenSugerencias(boolean existenSugerencias) {
-        this.existenSugerencias = existenSugerencias;
     }
 
 
