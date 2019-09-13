@@ -6,16 +6,21 @@ import domain.atuendo.Estado;
 import domain.prenda.Categoria;
 import exceptions.capasPrendasSimplesRequiereNonNull;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-
+@DiscriminatorValue("capaCompuesta")
+@Entity
 public class CapaCompuesta extends Capa {
 
+    @ManyToMany
     private List<CapaSimple> capasPrendas = new ArrayList<>();
+
+    public CapaCompuesta(){}
 
     public CapaCompuesta(List<CapaSimple> capasPrendas){
         if(capasPrendas == null)

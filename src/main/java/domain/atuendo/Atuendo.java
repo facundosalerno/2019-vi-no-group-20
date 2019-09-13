@@ -7,25 +7,32 @@ import domain.prenda.Prenda;
 import exceptions.AtuendoInvalidoException;
 import exceptions.NoCumpleRequisitoParaCalificarException;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
-//@Entity
+@Entity
 public class Atuendo {
 
-  //  @Id
-//   @GeneratedValue
-  //  Long id;
+    @Id
+    @GeneratedValue
+    Long id;
 
+    @OneToOne
     private Capa prendaSuperior;
+    @OneToOne
     private Capa prendaInferior;
+    @OneToOne
     private Capa calzado;
+    @OneToOne
     private Capa accesorio;
+
+    @Enumerated
     private Estado estado;
+
     private int calificacion;
+
+    public Atuendo(){}
 
     public Atuendo(Capa prendaSuperior, Capa prendaInferior, Capa calzado, Capa accesorio) {
         if (!atuendoEsValido(prendaSuperior, prendaInferior, calzado, accesorio))

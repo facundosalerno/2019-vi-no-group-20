@@ -5,18 +5,21 @@ import domain.atuendo.Estado;
 import domain.prenda.Categoria;
 import domain.prenda.Prenda;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@DiscriminatorValue("capaSimple")
+@Entity
 public class CapaSimple extends Capa {
+
+    @OneToOne
     private Prenda prenda;
+
+    public CapaSimple(){}
 
     public CapaSimple(Prenda prenda){
         this.prenda = prenda;
     }
-
-
-
-
 
     /** Metodos */
 
