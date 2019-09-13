@@ -33,20 +33,22 @@ import javax.persistence.*;
 @Entity
 public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    @Transient
+
+
+    @OneToMany
+    @JoinColumn(name="usuarioId")
     private List<Evento> eventos = new ArrayList<>();
-    
+
     private String nombre;
 
-    
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name= "usuarioId")
-
     private List<Decision> decisiones = new ArrayList<>();
-    
+
     @Transient
     private List<Atuendo> atuendosAceptados = new ArrayList<>();
     @Transient
@@ -57,23 +59,23 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
 
 
     @OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "usuarioId", nullable = false)
+    @JoinColumn(name = "usuarioId", nullable = false)
     private List<Guardarropas> guardarropas;
 
     @Transient
     private List<MedioDeNotificacion> mediosDeNotificacion = new ArrayList<>();
 
-	
+
 
 
     //Solo para que sea compatible con JPA
-    protected Usuario() {}; 
+    protected Usuario() {};
 
 
     /** Metodos */
 
     public Usuario(String nombre,List<Guardarropas> guardarropas, TipoDeUsuario tipoDeUsuario) {
-    	this.nombre=nombre;
+        this.nombre=nombre;
         this.tipoDeUsuario=tipoDeUsuario;
         guardarropas.stream().forEach( guardarropasAValidar -> validarTipoDeGuardarropas(guardarropasAValidar));
         this.guardarropas = guardarropas;
@@ -89,9 +91,9 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
 
     public void validarTipoDeGuardarropas(Guardarropas guardarropasAValidar){
 
-           if((guardarropasAValidar.tipoDeUsuarioQueAcepta() != tipoDeUsuario)){
-               throw new ElGuardarropasNoEsAptoException();
-           }
+        if((guardarropasAValidar.tipoDeUsuarioQueAcepta() != tipoDeUsuario)){
+            throw new ElGuardarropasNoEsAptoException();
+        }
     }
     public List<Atuendo> obtenerSugerenciasDeTodosSusGuardarropas(Meteorologo meteorologo){
         return guardarropas.stream()
@@ -117,7 +119,7 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
     }
 
     private Decision popDecision(){
-       return decisiones.remove(decisiones.size()-1);
+        return decisiones.remove(decisiones.size()-1);
     }
 
     public void deshacerUltimaDecision(){
@@ -199,8 +201,8 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
     }
 
     public Guardarropas getGuardarropas(int posicion) {
-    	return guardarropas.get(posicion);
-	}
+        return guardarropas.get(posicion);
+    }
 
 
 
