@@ -91,20 +91,24 @@ public class Atuendo {
     /**
      * Equals y hashcode
      */
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Atuendo)) return false;
         Atuendo atuendo = (Atuendo) o;
-        return Objects.equals(prendaSuperior, atuendo.prendaSuperior) &&
+        return calificacion == atuendo.calificacion &&
+                Objects.equals(prendaSuperior, atuendo.prendaSuperior) &&
                 Objects.equals(prendaInferior, atuendo.prendaInferior) &&
                 Objects.equals(calzado, atuendo.calzado) &&
-                Objects.equals(accesorio, atuendo.accesorio);
+                Objects.equals(accesorio, atuendo.accesorio) &&
+                estado == atuendo.estado;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(prendaSuperior, prendaInferior, calzado, accesorio);
+        return Objects.hash(prendaSuperior, prendaInferior, calzado, accesorio, estado, calificacion);
     }
+
+
+
 }
