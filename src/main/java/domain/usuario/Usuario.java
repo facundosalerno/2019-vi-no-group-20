@@ -44,6 +44,7 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
     
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name= "usuarioId")
+    
     private Deque<Decision> decisiones = new ArrayDeque<>();
 
     @Transient
@@ -65,7 +66,8 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
 	
 
 
-
+    //Solo para que sea compatible con JPA
+    protected Usuario() {}; 
 
 
     /** Metodos */

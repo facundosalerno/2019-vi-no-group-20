@@ -15,6 +15,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class GuardarropasPremium extends Guardarropas{
+	
+	//Solo para que sea compatible con JPA
+    protected GuardarropasPremium() {};
 
     public GuardarropasPremium(List<Prenda> prendasSuperiores, List<Prenda> prendasInferiores, List<Prenda> calzados, List<Prenda> accesorios) {
 

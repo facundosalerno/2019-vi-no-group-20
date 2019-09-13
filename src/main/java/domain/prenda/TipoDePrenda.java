@@ -17,6 +17,9 @@ public class TipoDePrenda {
     private List<Material> materialesValidos;
     private TemperaturaPrenda temperaturaSoportada;
     private NivelDeCapa nivelDeCapa;
+    
+    //Solo para que sea compatible con JPA
+    protected TipoDePrenda() {}; 
 
     public TipoDePrenda(Categoria categoria, List<Material> materiales, TemperaturaPrenda temperatura, NivelDeCapa nivelDeCapa) {
         this.categoria = categoria;
