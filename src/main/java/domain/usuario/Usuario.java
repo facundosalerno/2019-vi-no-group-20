@@ -38,9 +38,12 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
     Long id;
 
     private List<Evento> eventos = new ArrayList<>();
+    
+    private String nombre;
 
+    
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name= "usuarioId")
-    @OneToMany
     private Deque<Decision> decisiones = new ArrayDeque<>();
 
     @Transient
@@ -52,12 +55,14 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
     private TipoDeUsuario tipoDeUsuario;
 
 
-    @JoinColumn(name = "usuarioId")
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "usuarioId", nullable = false)
     private List<Guardarropas> guardarropas;
 
     @Transient
     private List<MedioDeNotificacion> mediosDeNotificacion = new ArrayList<>();
+
+	
 
 
 
@@ -65,7 +70,8 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
 
     /** Metodos */
 
-    public Usuario(List<Guardarropas> guardarropas, TipoDeUsuario tipoDeUsuario) {
+    public Usuario(String nombre,List<Guardarropas> guardarropas, TipoDeUsuario tipoDeUsuario) {
+    	this.nombre=nombre;
         this.tipoDeUsuario=tipoDeUsuario;
         guardarropas.stream().forEach( guardarropasAValidar -> validarTipoDeGuardarropas(guardarropasAValidar));
         this.guardarropas = guardarropas;
@@ -185,7 +191,9 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
         this.eventosFiltrados = eventosFiltrados;
     }
 
-
+    public Guardarropas getGuardarropas(int posicion) {
+    	return guardarropas.get(posicion);
+	}
 
 
 

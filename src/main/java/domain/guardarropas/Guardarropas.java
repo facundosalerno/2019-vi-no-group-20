@@ -127,6 +127,14 @@ public abstract class Guardarropas {
 
         this.accesorios.add(prendaAgregada);
     }
+    
+ // getters y setters
+    
+	public Long getId() {return id;}
+	public List<Prenda> getPrendasSuperiores() {return prendasSuperiores;}
+	public List<Prenda> getPrendasInferiores() {return prendasInferiores;}
+	public List<Prenda> getCalzados() {return calzados;}
+	public List<Prenda> getAccesorios() {return accesorios;}
 
     /** Equals y hashcode */
 
