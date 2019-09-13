@@ -19,17 +19,22 @@ public class Atuendo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     
-    @Transient
+   
+    @OneToOne
     private Capa prendaSuperior;
-    @Transient
+    @OneToOne
     private Capa prendaInferior;
-    @Transient
+    @OneToOne
     private Capa calzado;
-    @Transient
+    @OneToOne
     private Capa accesorio;
-    @Transient
+
+    @Enumerated
     private Estado estado;
+
     private int calificacion;
+
+    public Atuendo(){}
 
     public Atuendo(Capa prendaSuperior, Capa prendaInferior, Capa calzado, Capa accesorio) {
         if (!atuendoEsValido(prendaSuperior, prendaInferior, calzado, accesorio))
