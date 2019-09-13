@@ -8,7 +8,7 @@ import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
 import domain.evento.Evento;
 
-
+//TODO: Crear en el fixture los eventos necesarios para persistir
 public class TestsPersistenciaEvento  extends AbstractPersistenceTest implements WithGlobalEntityManager{
 
 	@Test
