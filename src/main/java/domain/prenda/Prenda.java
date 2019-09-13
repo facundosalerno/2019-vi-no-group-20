@@ -7,17 +7,36 @@ import domain.capaPrenda.NivelDeCapa;
 import java.io.IOException;
 import java.util.Objects;
 
+import javax.persistence.*;
+
+
 import static java.util.Objects.requireNonNull;
 
+import java.beans.Transient;
+@Entity
+@Table(name = "PRENDAS")
 public class Prenda {
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="tipoPrenda_id")
     private TipoDePrenda tipoPrenda;
+	@Enumerated(EnumType.STRING)
     private Material material;
-    private Color colorPrimario;
-    private Color colorSecundario;
-    private Trama trama;
-    private Imagen imagen;
-    private Estado estado;
+	@Embedded
+	@Column(name = "colorPrimario")
+	private Color colorPrimario;
+	@Transient
+	private Color colorSecundario;
+	@Enumerated(EnumType.STRING)
+	private Trama trama;
+	@Transient
+	private Imagen imagen;
+	@Enumerated(EnumType.STRING)
+	private Estado estado;
+    
 
     /** Warning: construir con BorradorPrenda */
     //Solo para que sea compatible con JPA
