@@ -9,7 +9,8 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		
 		<class>domain.prenda.Material</class>
-		<class>domain.prenda.TipoDePrenda</class>		
+		<class>domain.prenda.TipoDePrenda</class>	
+		<class>domain.prenda.Imagen</class>		
 		<class>domain.prenda.Color</class>		
 		<class>domain.prenda.Trama</class>		
 		<class>domain.prenda.Categoria</class>

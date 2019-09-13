@@ -8,11 +8,12 @@ import java.io.IOException;
 import java.util.Objects;
 
 import javax.persistence.*;
+import javax.persistence.Transient;
 
 
 import static java.util.Objects.requireNonNull;
 
-import java.beans.Transient;
+
 @Entity
 @Table(name = "PRENDAS")
 public class Prenda {
@@ -28,10 +29,12 @@ public class Prenda {
 	@Embedded
 	@Column(name = "colorPrimario")
 	private Color colorPrimario;
+	
 	@Transient
 	private Color colorSecundario;
 	@Enumerated(EnumType.STRING)
 	private Trama trama;
+	
 	@Transient
 	private Imagen imagen;
 	@Enumerated(EnumType.STRING)

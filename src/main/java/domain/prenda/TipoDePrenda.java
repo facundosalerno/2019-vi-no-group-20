@@ -10,14 +10,24 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.*;
 
+@Entity
 public class TipoDePrenda {
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long tipoPrenda_id;
+	@Enumerated(EnumType.STRING)
     private Categoria categoria;
+	
+	@ElementCollection
+	@CollectionTable(name = "MATERIALES_VALIDOS", joinColumns = @JoinColumn(name = "tipoPrenda_id"))
+    @Column(name = "material",columnDefinition="VARCHAR(40)")
     private List<Material> materialesValidos;
+	@Transient
     private TemperaturaPrenda temperaturaSoportada;
+    @Enumerated(EnumType.STRING)
     private NivelDeCapa nivelDeCapa;
-    
     //Solo para que sea compatible con JPA
     protected TipoDePrenda() {}; 
 
