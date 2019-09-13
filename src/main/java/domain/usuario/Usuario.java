@@ -36,7 +36,7 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
     @Id
     @GeneratedValue
     Long id;
-
+    @Transient
     private List<Evento> eventos = new ArrayList<>();
     
     private String nombre;
@@ -153,6 +153,7 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
 
     private LocalDateTime filtroEventoInicial = LocalDateTime.now();
     private LocalDateTime filtroEventoFinal = LocalDateTime.now();
+    @Transient
     private List<Evento> eventosFiltrados = new ArrayList<>();
 
     public void filtrarEventosEntreRangoDeFechas(){
