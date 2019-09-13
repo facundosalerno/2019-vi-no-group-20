@@ -14,7 +14,8 @@ public abstract class Decision {
     @GeneratedValue
     Long id;
 
-    @OneToOne
+    //@OneToOne
+    @Transient
     Atuendo atuendo;
 
     public abstract void deshacer();

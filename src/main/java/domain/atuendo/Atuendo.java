@@ -13,12 +13,12 @@ import javax.persistence.Id;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
+//@Entity
 public class Atuendo {
 
-    @Id
-    @GeneratedValue
-    Long id;
+  //  @Id
+//   @GeneratedValue
+  //  Long id;
 
     private Capa prendaSuperior;
     private Capa prendaInferior;

@@ -28,24 +28,24 @@ import java.util.stream.Collectors;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Guardarropas {
 
-    @Id
-    @GeneratedValue
-    Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "guardarropas_superiores")
+	protected List<Prenda> prendasSuperiores;
 
-    @OneToMany
-    @JoinColumn(name = "guardarropas_superiores")
-    protected List<Prenda> prendasSuperiores;
-
-    @OneToMany
-    @JoinColumn(name = "guardarropas_inferiores")
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "guardarropas_inferiores")
     protected List<Prenda> prendasInferiores;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "guardarropas_calzados")
+	protected List<Prenda> calzados;
 
-    @OneToMany
-    @JoinColumn(name = "guardarropas_calzados")
-    protected List<Prenda> calzados;
-
-    @OneToMany
-    @JoinColumn(name = "guardarropas_accesorios  ")
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "guardarropas_accesorios")
     protected List<Prenda> accesorios;
 
 
