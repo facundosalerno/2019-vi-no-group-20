@@ -16,6 +16,7 @@
 		<class>domain.prenda.Categoria</class>
 		<class>domain.prenda.Prenda</class>		
 		<class>domain.prenda.Decision</class>		
+		<class>domain.atuendo.Atuendo</class>
 		<class>domain.guardarropas.GuardarropasLimitado</class>
 		<class>domain.guardarropas.GuardarropasPremium</class>
 		<class>domain.guardarropas.Guardarropas</class>

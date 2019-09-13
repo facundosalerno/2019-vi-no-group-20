@@ -33,8 +33,8 @@ import javax.persistence.*;
 @Entity
 public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica {
 
-    @Id
-    @GeneratedValue
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     @Transient
     private List<Evento> eventos = new ArrayList<>();

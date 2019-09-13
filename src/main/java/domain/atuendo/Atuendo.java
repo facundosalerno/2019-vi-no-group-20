@@ -7,23 +7,27 @@ import domain.prenda.Prenda;
 import exceptions.AtuendoInvalidoException;
 import exceptions.NoCumpleRequisitoParaCalificarException;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+
 import java.util.List;
 import java.util.Objects;
 
-//@Entity
+@Entity
 public class Atuendo {
 
-  //  @Id
-//   @GeneratedValue
-  //  Long id;
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
+    
+    @Transient
     private Capa prendaSuperior;
+    @Transient
     private Capa prendaInferior;
+    @Transient
     private Capa calzado;
+    @Transient
     private Capa accesorio;
+    @Transient
     private Estado estado;
     private int calificacion;
 
