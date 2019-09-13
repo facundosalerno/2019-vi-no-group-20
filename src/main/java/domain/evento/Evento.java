@@ -7,6 +7,8 @@ import domain.usuario.Usuario;
 import exceptions.NoHaySugerenciasParaElEvento;
 import exceptions.TodaviaNoEstaCercaElEvento;
 import org.uqbar.commons.model.annotations.Observable;
+import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
+import org.uqbarproject.jpa.java8.extras.convert.LocalDateTimeConverter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -29,6 +31,7 @@ public class Evento implements Notificable {
     Long id;
 
     private String nombre;
+    @Convert(converter = LocalDateTimeConverter.class)
     private LocalDateTime fecha;
     private String lugar;
 
