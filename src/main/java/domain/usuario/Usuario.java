@@ -44,7 +44,7 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
     
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name= "usuarioId")
-    private Deque<Decision> decisiones = new ArrayDeque<>();
+    private List<Decision> decisiones = new ArrayList<>();
 
     @Transient
     private List<Atuendo> atuendosAceptados = new ArrayList<>();
@@ -114,23 +114,27 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
                 .get(0).obtenerSugerencias();
     }
 
+    private Decision popDecision(){
+       return decisiones.remove(decisiones.size()-1);
+    }
+
     public void deshacerUltimaDecision(){
         if(this.decisiones.isEmpty())
             throw new NoHayDecisionesParaDeshacer();
-        decisiones.pop().deshacer();
+        popDecision().deshacer();
     }
 
     public void aceptarSugerencia(Atuendo atuendo){
-        this.decisiones.push(new Aceptar(atuendo));
+        this.decisiones.add(new Aceptar(atuendo));
         this.atuendosAceptados.add(atuendo);        //TODO: podria obtenerse a partir de filtrar las decisiones del usuario
     }
 
     public void calificarSugerencia(Atuendo atuendo, int calificacion){
-        this.decisiones.push(new Calificar(atuendo,calificacion));
+        this.decisiones.add(new Calificar(atuendo,calificacion));
     }
 
     public void rechazarSugerencia(Atuendo atuendo){
-        decisiones.push(new Rechazar(atuendo));
+        decisiones.add(new Rechazar(atuendo));
         atuendosRechazados.add(atuendo);
     }
 

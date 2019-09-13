@@ -46,7 +46,7 @@ public class TestsEventos {
         buso = armarUnaPrenda(TipoDePrenda.BUSO, Material.ALGODON, azul, verde, Trama.LISA);
         campera = armarUnaPrenda(TipoDePrenda.CAMPERA, Material.JEAN, verde, azul, Trama.GASTADO);
 
-        panchoPepeGil = new Usuario(Arrays.asList(new GuardarropasPremium(Arrays.asList(remera, buso, campera), Arrays.asList(pantalon), Arrays.asList(zapatos), Arrays.asList(anteojos))), TipoDeUsuario.PREMIUM);
+        panchoPepeGil = new Usuario("Facundo Salerno",Arrays.asList(new GuardarropasPremium(Arrays.asList(remera, buso, campera), Arrays.asList(pantalon), Arrays.asList(zapatos), Arrays.asList(anteojos))), TipoDeUsuario.PREMIUM);
 
     }
 

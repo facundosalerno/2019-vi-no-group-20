@@ -45,7 +45,7 @@ public class TestsDecisiones {
 
         guardarropasVeranoBatman = new GuardarropasPremium(Arrays.asList(prendaArmaduraNegra), Arrays.asList(prendaPantalonNegro), Arrays.asList(prendaBotaNegra), Arrays.asList(prendaAntifazDeMurcielago));
 
-        batman = new Usuario(Arrays.asList(guardarropasVeranoBatman), TipoDeUsuario.PREMIUM);
+        batman = new Usuario("Facundo Salerno",Arrays.asList(guardarropasVeranoBatman), TipoDeUsuario.PREMIUM);
     }
 
     public Prenda armarUnaPrenda(TipoDePrenda tipoDePrenda, Material material, Color colorPrimario, Trama trama){

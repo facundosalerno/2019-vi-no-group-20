@@ -7,11 +7,18 @@ import domain.prenda.Prenda;
 import exceptions.AtuendoInvalidoException;
 import exceptions.NoCumpleRequisitoParaCalificarException;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.List;
 import java.util.Objects;
 
-
+@Entity
 public class Atuendo {
+
+    @Id
+    @GeneratedValue
+    Long id;
 
     private Capa prendaSuperior;
     private Capa prendaInferior;

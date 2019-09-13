@@ -56,11 +56,11 @@ public class TestsGuardarropasVariados {
 
     @Test(expected = ElGuardarropasNoEsAptoException.class)
     public void asignarGuardarropasLimitadoUsuarioPremium(){
-        new Usuario(Arrays.asList(new GuardarropasLimitado(Arrays.asList(remera, remera), Arrays.asList(pantalon, pantalon, pantalon), Arrays.asList(zapatos, zapatos, zapatos), Arrays.asList(anteojos))), TipoDeUsuario.PREMIUM);
+        new Usuario("Facundo Salerno",Arrays.asList(new GuardarropasLimitado(Arrays.asList(remera, remera), Arrays.asList(pantalon, pantalon, pantalon), Arrays.asList(zapatos, zapatos, zapatos), Arrays.asList(anteojos))), TipoDeUsuario.PREMIUM);
     }
 
     @Test (expected = ElGuardarropasNoEsAptoException.class)
     public void asignarGuardarropasPremiumUsuarioGratis(){
-        new Usuario(Arrays.asList(new GuardarropasPremium(Arrays.asList(remera, remera), Arrays.asList(pantalon, pantalon, pantalon), Arrays.asList(zapatos, zapatos, zapatos), Arrays.asList(anteojos))), TipoDeUsuario.GRATIS);
+        new Usuario("Facundo Salerno",Arrays.asList(new GuardarropasPremium(Arrays.asList(remera, remera), Arrays.asList(pantalon, pantalon, pantalon), Arrays.asList(zapatos, zapatos, zapatos), Arrays.asList(anteojos))), TipoDeUsuario.GRATIS);
     }
 }

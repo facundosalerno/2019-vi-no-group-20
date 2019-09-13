@@ -26,7 +26,7 @@
             <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver" />
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/quemepongodb?serverTimezone=UTC" /> 
             <property name="hibernate.connection.username" value="root" /> 
-            <property name="hibernate.connection.password" value="Quemepongo1!" /> 
+            <property name="hibernate.connection.password" value="12345678" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
 <!--		
             <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver"/>
