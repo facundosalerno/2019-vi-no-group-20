@@ -20,6 +20,8 @@ public class Prenda {
     private Estado estado;
 
     /** Warning: construir con BorradorPrenda */
+    //Solo para que sea compatible con JPA
+    protected Prenda() {}; 
     public Prenda(TipoDePrenda tipo, Color colorPrimario, Color colorSecundario, Material material, Trama trama, Imagen imagen) {
         this.tipoPrenda = tipo;
         this.material = material;

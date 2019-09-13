@@ -44,8 +44,9 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
     
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name= "usuarioId")
-    private List<Decision> decisiones = new ArrayList<>();
 
+    private List<Decision> decisiones = new ArrayList<>();
+    
     @Transient
     private List<Atuendo> atuendosAceptados = new ArrayList<>();
     @Transient
@@ -65,7 +66,8 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
 	
 
 
-
+    //Solo para que sea compatible con JPA
+    protected Usuario() {}; 
 
 
     /** Metodos */

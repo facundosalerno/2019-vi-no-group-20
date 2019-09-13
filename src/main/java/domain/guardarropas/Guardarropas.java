@@ -57,6 +57,8 @@ public abstract class Guardarropas {
     public abstract TipoDeUsuario tipoDeUsuarioQueAcepta();
 
     /** Metodos */
+    
+    
 
     public void prendasCoincidenConCategoria(List<Prenda> prendas, Categoria categoria){
         if(!prendas.stream().allMatch(prenda -> prenda.esDeCategoria(categoria))){
