@@ -7,7 +7,10 @@ import domain.usuario.Usuario;
 import exceptions.NoHaySugerenciasParaElEvento;
 import exceptions.TodaviaNoEstaCercaElEvento;
 import org.uqbar.commons.model.annotations.Observable;
+import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
+import org.uqbarproject.jpa.java8.extras.convert.LocalDateTimeConverter;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -16,16 +19,34 @@ import java.util.Objects;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
-@Observable
+//TODO: VER TEMA DE QUE SEA UNA IMPLEMENTACION DE NOTIFICABLE, LAS INTERFACES NO SE MAPPEAN
+
+
+@Entity
 public class Evento implements Notificable {
-    //Contemplar  la temperatura al momento del evento.
+    //TODO:Contemplar  la temperatura al momento del evento.
+
+    @Id
+    @GeneratedValue
+    Long id;
+
     private String nombre;
+    @Convert(converter = LocalDateTimeConverter.class)
     private LocalDateTime fecha;
     private String lugar;
+
+    @ManyToOne
     private Usuario usuario;
+
+    @Enumerated
     private FrecuenciaEvento frecuencia;
+
+    //Los atuendos pueden ser muchos para muchos eventos o solo hay muchos atuendos para un unico evento?
+    @ManyToMany
     private List<Atuendo> sugerenciasObtenidas = new ArrayList<>();
 
+
+    public Evento (){}
     /** Warning: crear desde el usuario */
     public Evento(String nombre, LocalDateTime fechaYHora, FrecuenciaEvento frecuencia, String lugar, Usuario usuario){
         this.nombre = nombre;
