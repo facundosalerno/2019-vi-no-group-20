@@ -102,17 +102,20 @@ public class Prenda {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Prenda)) return false;
         Prenda prenda = (Prenda) o;
-        return Objects.equals(getTipoPrenda(), prenda.getTipoPrenda()) &&
-                getMaterial() == prenda.getMaterial() &&
-                Objects.equals(getColorPrimario(), prenda.getColorPrimario()) &&
-                Objects.equals(getColorSecundario(), prenda.getColorSecundario()) &&
-                getTrama() == prenda.getTrama();
+        return Objects.equals(id, prenda.id) &&
+                Objects.equals(tipoPrenda, prenda.tipoPrenda) &&
+                material == prenda.material &&
+                Objects.equals(colorPrimario, prenda.colorPrimario) &&
+                Objects.equals(colorSecundario, prenda.colorSecundario) &&
+                trama == prenda.trama &&
+                Objects.equals(imagen, prenda.imagen) &&
+                estado == prenda.estado;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getTipoPrenda(), getMaterial(), getColorPrimario(), getColorSecundario(), getTrama());
+        return Objects.hash(id, tipoPrenda, material, colorPrimario, colorSecundario, trama, imagen, estado);
     }
 }

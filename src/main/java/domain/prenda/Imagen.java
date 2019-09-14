@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
+import java.util.Objects;
 
 public class Imagen {
     private int altura=100;
@@ -26,5 +27,20 @@ public class Imagen {
         g2d.dispose();                                          //Libera recursos Graphics2D pedidos (g2d)
 
         imagen = imagenNormalizada;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Imagen)) return false;
+        Imagen imagen1 = (Imagen) o;
+        return altura == imagen1.altura &&
+                ancho == imagen1.ancho &&
+                Objects.equals(imagen, imagen1.imagen);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(altura, ancho, imagen);
     }
 }

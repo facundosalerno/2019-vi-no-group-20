@@ -115,7 +115,4 @@ public class Atuendo {
     public int hashCode() {
         return Objects.hash(prendaSuperior, prendaInferior, calzado, accesorio, estado, calificacion);
     }
-
-
-
 }

@@ -8,4 +8,6 @@ public class    CualquierTemperatura extends TemperaturaPrenda{
     public boolean seAdapta(Clima climaActual) {
         return true;
     }
+
+
 }

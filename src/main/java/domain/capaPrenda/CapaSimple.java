@@ -49,7 +49,7 @@ public class CapaSimple extends Capa {
         if (this == o) return true;
         if (!(o instanceof CapaSimple)) return false;
         CapaSimple that = (CapaSimple) o;
-        return prenda.equals(that.prenda);
+        return Objects.equals(prenda, that.prenda);
     }
 
     @Override
