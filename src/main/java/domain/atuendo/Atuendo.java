@@ -3,7 +3,6 @@ package domain.atuendo;
 import clima.Clima;
 import domain.capaPrenda.Capa;
 import domain.prenda.Categoria;
-import domain.prenda.Prenda;
 import exceptions.AtuendoInvalidoException;
 import exceptions.NoCumpleRequisitoParaCalificarException;
 import org.apache.commons.lang.StringUtils;
@@ -11,7 +10,6 @@ import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
 import javax.persistence.*;
 
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -23,9 +21,9 @@ public class Atuendo {
     
    
     @OneToOne
-    private Capa prendaSuperior;
+    private Capa capaSuperior;
     @OneToOne
-    private Capa prendaInferior;
+    private Capa capaInferior;
     @OneToOne
     private Capa calzado;
     @OneToOne
@@ -41,8 +39,8 @@ public class Atuendo {
     public Atuendo(Capa prendaSuperior, Capa prendaInferior, Capa calzado, Capa accesorio) {
         if (!atuendoEsValido(prendaSuperior, prendaInferior, calzado, accesorio))
             throw new AtuendoInvalidoException();
-        this.prendaSuperior = prendaSuperior;
-        this.prendaInferior = prendaInferior;
+        this.capaSuperior = prendaSuperior;
+        this.capaInferior = prendaInferior;
         this.calzado = calzado;
         this.accesorio = accesorio;
         estado = Estado.NUEVO;
@@ -56,8 +54,8 @@ public class Atuendo {
     /* El estado debe cambiar tambien para sus componentes ya que en base a eso, un atuendo podria ser o no elegible */
     public void cambiarEstado(Estado estado) {
         this.estado = estado;
-        this.prendaSuperior.cambiarEstado(estado);
-        this.prendaInferior.cambiarEstado(estado);
+        this.capaSuperior.cambiarEstado(estado);
+        this.capaInferior.cambiarEstado(estado);
         this.calzado.cambiarEstado(estado);
         this.accesorio.cambiarEstado(estado);
     }
@@ -74,7 +72,7 @@ public class Atuendo {
     }
 
     private boolean ningunaPrendaFueAceptada() {
-        return !prendaSuperior.capaFueAceptada() && !prendaInferior.capaFueAceptada() && !calzado.capaFueAceptada() && !accesorio.capaFueAceptada();
+        return !capaSuperior.capaFueAceptada() && !capaInferior.capaFueAceptada() && !calzado.capaFueAceptada() && !accesorio.capaFueAceptada();
     }
 
     public boolean esCategoria(Capa prenda, Categoria categoria) {
@@ -91,8 +89,8 @@ public class Atuendo {
     }
 
     public boolean revalidadAtuendo(Clima climaActual){
-        return prendaSuperior.abrigaBien(climaActual) &&
-                prendaInferior.abrigaBien(climaActual) &&
+        return capaSuperior.abrigaBien(climaActual) &&
+                capaInferior.abrigaBien(climaActual) &&
                 calzado.abrigaBien(climaActual) &&
                 accesorio.abrigaBien(climaActual);
     }
@@ -115,8 +113,8 @@ public class Atuendo {
         if (!(o instanceof Atuendo)) return false;
         Atuendo atuendo = (Atuendo) o;
         return calificacion == atuendo.calificacion &&
-                Objects.equals(prendaSuperior, atuendo.prendaSuperior) &&
-                Objects.equals(prendaInferior, atuendo.prendaInferior) &&
+                Objects.equals(capaSuperior, atuendo.capaSuperior) &&
+                Objects.equals(capaInferior, atuendo.capaInferior) &&
                 Objects.equals(calzado, atuendo.calzado) &&
                 Objects.equals(accesorio, atuendo.accesorio) &&
                 estado == atuendo.estado;
@@ -124,7 +122,7 @@ public class Atuendo {
 
     @Override
     public int hashCode() {
-        return Objects.hash(prendaSuperior, prendaInferior, calzado, accesorio, estado, calificacion);
+        return Objects.hash(capaSuperior, capaInferior, calzado, accesorio, estado, calificacion);
     }
 
     @Override

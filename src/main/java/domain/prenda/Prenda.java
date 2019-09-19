@@ -15,29 +15,39 @@ import static java.util.Objects.requireNonNull;
 
 
 @Entity
-@Table(name = "PRENDAS")
 public class Prenda {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="tipoPrenda_id")
+	@ManyToOne
     private TipoDePrenda tipoPrenda;
+
 	@Enumerated(EnumType.STRING)
     private Material material;
-	@Embedded
-	@Column(name = "colorPrimario")
-    //@AttributeOverride()
+
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride( name = "rojo", column = @Column(name = "rojo_color_primario")),
+            @AttributeOverride( name = "verde", column = @Column(name = "azul_color_primario")),
+            @AttributeOverride( name = "azul", column = @Column(name = "verde_color_primario")),
+    })
 	private Color colorPrimario;
-	
-	@Transient
+
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride( name = "rojo", column = @Column(name = "rojo_color_secundario")),
+            @AttributeOverride( name = "verde", column = @Column(name = "azul_color_secundario")),
+            @AttributeOverride( name = "azul", column = @Column(name = "verde_color_secundario")),
+    })
 	private Color colorSecundario;
+
 	@Enumerated(EnumType.STRING)
 	private Trama trama;
 	
 	@Transient
 	private Imagen imagen;
+
 	@Enumerated(EnumType.STRING)
 	private Estado estado;
     

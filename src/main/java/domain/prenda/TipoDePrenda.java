@@ -19,18 +19,23 @@ public class TipoDePrenda {
 	private Long tipoPrenda_id;
 	@Enumerated(EnumType.STRING)
     private Categoria categoria;
-	
+
+
+	//TODO: VERIFICAR
 	@ElementCollection
 	@CollectionTable(name = "MATERIALES_VALIDOS", joinColumns = @JoinColumn(name = "tipoPrenda_id"))
     @Column(name = "material",columnDefinition="VARCHAR(40)")
     @Enumerated(EnumType.STRING)
     private List<Material> materialesValidos;
+
 	@Transient
     private TemperaturaPrenda temperaturaSoportada;
-    @Enumerated(EnumType.STRING)
+
+	@Enumerated(EnumType.STRING)
     private NivelDeCapa nivelDeCapa;
-    //Solo para que sea compatible con JPA
-    protected TipoDePrenda() {}; 
+
+	//Solo para que sea compatible con JPA
+    protected TipoDePrenda() {}
 
     public TipoDePrenda(Categoria categoria, List<Material> materiales, TemperaturaPrenda temperatura, NivelDeCapa nivelDeCapa) {
         this.categoria = categoria;
