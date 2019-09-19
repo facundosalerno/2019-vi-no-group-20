@@ -39,14 +39,14 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
 
 
     @OneToMany
-    @JoinColumn(name="usuarioId")
+    @JoinColumn(name="usuarioId_eventos")
     private List<Evento> eventos = new ArrayList<>();
 
     private String nombre;
 
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name= "usuarioId")
+    @JoinColumn(name= "usuarioId_decisiones")
     private List<Decision> decisiones = new ArrayList<>();
 
     @Transient
@@ -59,7 +59,7 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
 
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "usuarioId", nullable = false)
+    @JoinColumn(name = "usuarioId_guardarropas")
     private List<Guardarropas> guardarropas;
 
     @Transient
