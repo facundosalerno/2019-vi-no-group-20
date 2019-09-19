@@ -23,6 +23,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.mockito.cglib.core.Local;
 import org.uqbar.commons.model.annotations.Observable;
 
@@ -240,5 +241,10 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
     @Override
     public int hashCode() {
         return Objects.hash(eventos, decisiones, atuendosAceptados, atuendosRechazados, guardarropas);
+    }
+
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this);
     }
 }
