@@ -83,7 +83,7 @@ public class TestsSugerencias {
 
         List<Atuendo> sugerencias = guardarropasDeWilly.sugerirAtuendo(meteorologo);
         Atuendo posibleAtuendoSugerido = new Atuendo(cmusculosa, ctrajeDeBaño, cojotas, canteojos);
-        Assert.assertTrue(sugerencias.stream().anyMatch(atuendo -> atuendo.equals(posibleAtuendoSugerido)));
+        Assert.assertTrue("el atuendo " + posibleAtuendoSugerido + "  debe estar en " + sugerencias, sugerencias.stream().anyMatch(atuendo -> atuendo.equals(posibleAtuendoSugerido)));
     }
 
     @Test

@@ -14,9 +14,7 @@ public class TestsPersistorDominio implements WithGlobalEntityManager {
 	}
 
 	private Boolean fixturePersistido() {
-		if (entityManager().find(Usuario.class, 1L) == null)
-			return Boolean.FALSE;
-		return Boolean.TRUE;
+		return (entityManager().find(Usuario.class, 1L) == null);
 	}
 
 	private void dbSetup() {

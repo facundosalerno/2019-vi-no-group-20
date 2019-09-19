@@ -6,6 +6,8 @@ import domain.prenda.Categoria;
 import domain.prenda.Prenda;
 import exceptions.AtuendoInvalidoException;
 import exceptions.NoCumpleRequisitoParaCalificarException;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
 import javax.persistence.*;
 
@@ -123,5 +125,10 @@ public class Atuendo {
     @Override
     public int hashCode() {
         return Objects.hash(prendaSuperior, prendaInferior, calzado, accesorio, estado, calificacion);
+    }
+
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this);
     }
 }

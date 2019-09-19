@@ -23,6 +23,7 @@ public class TipoDePrenda {
 	@ElementCollection
 	@CollectionTable(name = "MATERIALES_VALIDOS", joinColumns = @JoinColumn(name = "tipoPrenda_id"))
     @Column(name = "material",columnDefinition="VARCHAR(40)")
+    @Enumerated(EnumType.STRING)
     private List<Material> materialesValidos;
 	@Transient
     private TemperaturaPrenda temperaturaSoportada;

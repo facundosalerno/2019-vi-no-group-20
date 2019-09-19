@@ -28,6 +28,7 @@ public class Prenda {
     private Material material;
 	@Embedded
 	@Column(name = "colorPrimario")
+    //@AttributeOverride()
 	private Color colorPrimario;
 	
 	@Transient
