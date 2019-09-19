@@ -33,19 +33,19 @@ public abstract class Guardarropas {
 	private Long id;
 	
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "guardarropas_superiores")
+	@JoinColumn(name = "guardarropas_superiores_id")
 	protected List<Prenda> prendasSuperiores;
 
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "guardarropas_inferiores")
+	@JoinColumn(name = "guardarropas_inferiores_id")
     protected List<Prenda> prendasInferiores;
 	
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "guardarropas_calzados")
+	@JoinColumn(name = "guardarropas_calzados_id")
 	protected List<Prenda> calzados;
 
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "guardarropas_accesorios")
+	@JoinColumn(name = "guardarropas_accesorios_id")
     protected List<Prenda> accesorios;
 
 

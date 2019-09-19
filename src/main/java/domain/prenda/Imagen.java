@@ -1,6 +1,9 @@
 package domain.prenda;
 
 import javax.imageio.ImageIO;
+import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -9,14 +12,18 @@ import java.io.IOException;
 import java.awt.image.BufferedImage;
 import java.util.Objects;
 
+@Embeddable
 public class Imagen {
-    private int altura=100;
-    private int ancho=100;
-    BufferedImage imagen;
+    final private int altura=100;
+    final private int ancho=100;
+    final private String url;
 
-    Imagen(String nombreDeArchivo) throws IOException {
+    Imagen(String nombreDeArchivo) {
+        url = nombreDeArchivo;
+    }
 
-        BufferedImage imagenDeArchivo = ImageIO.read(new File(nombreDeArchivo));                     //Abre la imagen desde un path
+    public BufferedImage getImagen()throws IOException{
+        BufferedImage imagenDeArchivo = ImageIO.read(new File(url));                     //Abre la imagen desde un path
 
         Image tmp = imagenDeArchivo.getScaledInstance (ancho, altura, Image.SCALE_SMOOTH);         //Crea una instancia de Image con un tamano especifio (100x100)
 
@@ -26,21 +33,21 @@ public class Imagen {
         g2d.drawImage(tmp, 0, 0, null);        //Dibuja la tmp (imagen con resolucion y tamano normalizado) en imagenNormalizada
         g2d.dispose();                                          //Libera recursos Graphics2D pedidos (g2d)
 
-        imagen = imagenNormalizada;
+        return imagenNormalizada;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Imagen)) return false;
-        Imagen imagen1 = (Imagen) o;
-        return altura == imagen1.altura &&
-                ancho == imagen1.ancho &&
-                Objects.equals(imagen, imagen1.imagen);
+        Imagen imagen = (Imagen) o;
+        return altura == imagen.altura &&
+                ancho == imagen.ancho &&
+                Objects.equals(url, imagen.url);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(altura, ancho, imagen);
+        return Objects.hash(altura, ancho, url);
     }
 }

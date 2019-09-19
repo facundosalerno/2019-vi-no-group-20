@@ -45,8 +45,8 @@ public class Prenda {
 
 	@Enumerated(EnumType.STRING)
 	private Trama trama;
-	
-	@Transient
+
+    @Embedded
 	private Imagen imagen;
 
 	@Enumerated(EnumType.STRING)

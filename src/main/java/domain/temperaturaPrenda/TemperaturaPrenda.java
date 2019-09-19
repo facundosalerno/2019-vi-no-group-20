@@ -10,6 +10,6 @@ import javax.persistence.InheritanceType;
 @Inheritance(strategy= InheritanceType.TABLE_PER_CLASS)
 public abstract class TemperaturaPrenda {
     @Id
-    private long id;
+    Long id;
     public abstract boolean seAdapta(Clima climaActual);
 }

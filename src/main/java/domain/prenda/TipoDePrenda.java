@@ -29,7 +29,7 @@ public class TipoDePrenda {
     @Enumerated(EnumType.STRING)
     private List<Material> materialesValidos;
 
-	@Transient
+	@OneToOne //TODO sacar la herencia de la temperatura para transformarla el @Embedded
     private TemperaturaPrenda temperaturaSoportada;
 
 	@Enumerated(EnumType.STRING)

@@ -25,6 +25,10 @@
         <class>domain.usuario.TipoDeUsuario</class>
         <class>domain.usuario.Usuario</class>
         <class>domain.evento.Evento</class>
+        <class>domain.prenda.Imagen</class>
+        <class>domain.temperaturaPrenda.TemperaturaPrenda</class>
+        <class>domain.temperaturaPrenda.RangoTemperatura</class>
+        <class>domain.temperaturaPrenda.CualquierTemperatura</class>
 
         <properties>
             <property name="hibernate.archive.autodetection" value="class"/>
