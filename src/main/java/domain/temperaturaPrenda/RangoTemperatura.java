@@ -1,9 +1,10 @@
 package domain.temperaturaPrenda;
 
 import clima.Clima;
-
+import javax.persistence.Entity;
 import java.util.Objects;
 
+@Entity
 public class RangoTemperatura extends TemperaturaPrenda{
 
     double rangoSuperior = 0;
