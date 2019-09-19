@@ -5,6 +5,7 @@ import domain.capaPrenda.NivelDeCapa;
 import domain.temperaturaPrenda.CualquierTemperatura;
 import domain.temperaturaPrenda.RangoTemperatura;
 import domain.temperaturaPrenda.TemperaturaPrenda;
+import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
 import java.util.Arrays;
 import java.util.List;
@@ -103,5 +104,10 @@ public class TipoDePrenda {
     @Override
     public int hashCode() {
         return Objects.hash(categoria, materialesValidos, temperaturaSoportada, nivelDeCapa);
+    }
+
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this);
     }
 }

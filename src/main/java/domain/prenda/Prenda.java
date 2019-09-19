@@ -3,6 +3,7 @@ package domain.prenda;
 import clima.Clima;
 import domain.atuendo.Estado;
 import domain.capaPrenda.NivelDeCapa;
+import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -128,5 +129,10 @@ public class Prenda {
     @Override
     public int hashCode() {
         return Objects.hash(id, tipoPrenda, material, colorPrimario, colorSecundario, trama, imagen, estado);
+    }
+
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this);
     }
 }

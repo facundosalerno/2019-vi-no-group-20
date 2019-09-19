@@ -1,5 +1,7 @@
 package domain.prenda;
 
+import org.apache.commons.lang.builder.ReflectionToStringBuilder;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -29,5 +31,10 @@ public class Color {
     @Override
     public int hashCode() {
         return Objects.hash(rojo, verde, azul);
+    }
+
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this);
     }
 }
