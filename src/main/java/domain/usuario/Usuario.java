@@ -35,8 +35,7 @@ import javax.persistence.*;
 public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
 
     @OneToMany

@@ -16,8 +16,7 @@ import java.util.Objects;
 public class Atuendo {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+	private Long id;
     
    
     @OneToOne
