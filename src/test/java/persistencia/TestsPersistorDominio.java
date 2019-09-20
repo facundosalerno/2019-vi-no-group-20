@@ -21,8 +21,7 @@ public class TestsPersistorDominio implements WithGlobalEntityManager {
 		Usuario usu1= Persistibles.getInstance().getUsuarioLimitado();
 		//Usuario usu2= Persistibles.getInstance().getUsuarioPremium();
 		entityManager().persist(usu1);
-		//entityManager().persist(usu2);
-		entityManager().getTransaction().commit();
+		
 		
 	}
 }
