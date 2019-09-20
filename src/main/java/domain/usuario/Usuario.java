@@ -46,26 +46,33 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
     private String nombre;
 
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     @JoinColumn(name= "usuarioId_decisiones")
     private List<Decision> decisiones = new ArrayList<>();
 
-    @Transient
+    @OneToMany
+    @JoinColumn(name = "usuarioId_atuendosAceptados")
     private List<Atuendo> atuendosAceptados = new ArrayList<>();
-    @Transient
+
+    @OneToMany
+    @JoinColumn(name = "usuarioId_atuendosRechazados")
     private List<Atuendo> atuendosRechazados = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private TipoDeUsuario tipoDeUsuario;
 
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "usuarioId_guardarropas")
+    /*TODO: VER TEMA GUARDARROPAS COMPARTIDO.
+     TODO: SE PUEDE ARMAR LA IDEA A PARTIR DE LA LOGICA DEL DOMINIO?
+     TODO: ES UNA CLASE EN PARALELO CON PREMIUM Y LIMITADO O HACE QUE ESTAS HEREDEN DE EL O DE UNO COMUN?
+     TODO: DENTRO DE LA LISTA DE GUARDARROPAS DEL USUARIO O UNA LISTA PARALELA DE GUARDARROPAS COMPARTIDOS?
+    */
+    @ManyToMany
     private List<Guardarropas> guardarropas;
 
-    @Transient
-    private List<MedioDeNotificacion> mediosDeNotificacion = new ArrayList<>();
-
+    @OneToMany
+    @JoinColumn(name = "usuarioId_mediosDeNotificacion")
+    private Set<MedioDeNotificacion> mediosDeNotificacion = new HashSet<>();
 
 
 
