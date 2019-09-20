@@ -37,7 +37,6 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
     @Id
     private Long id;
 
-
     @OneToMany
     @JoinColumn(name="usuarioId_eventos")
     private List<Evento> eventos = new ArrayList<>();
