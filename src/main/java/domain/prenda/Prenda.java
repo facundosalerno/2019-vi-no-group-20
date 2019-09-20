@@ -17,8 +17,7 @@ import static java.util.Objects.requireNonNull;
 
 @Entity
 public class Prenda {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id	
 	private Long id;
 	
 	@ManyToOne

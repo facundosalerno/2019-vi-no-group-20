@@ -1,7 +1,7 @@
 package domain.prenda;
 
 import javax.imageio.ImageIO;
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.swing.*;
@@ -14,7 +14,9 @@ import java.util.Objects;
 
 @Embeddable
 public class Imagen {
+	@Transient
     final private int altura=100;
+	@Transient
     final private int ancho=100;
     final private String url;
 

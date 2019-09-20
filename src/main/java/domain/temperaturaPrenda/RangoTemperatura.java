@@ -1,11 +1,13 @@
 package domain.temperaturaPrenda;
 
 import clima.Clima;
+
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import java.util.Objects;
 
-@Entity
-public class RangoTemperatura extends TemperaturaPrenda{
+@Embeddable
+public class RangoTemperatura{
 
     double rangoSuperior = 0;
     double rangoInferior = 0;
@@ -16,7 +18,6 @@ public class RangoTemperatura extends TemperaturaPrenda{
     }
 
 
-    @Override /* Se adapta solo si esta dentro del rango */
     public boolean seAdapta(Clima climaActual) {
         double temperatura = climaActual.getTemperature();
         return temperatura >= rangoInferior && temperatura <= rangoSuperior;

@@ -2,9 +2,7 @@ package domain.prenda;
 
 import clima.Clima;
 import domain.capaPrenda.NivelDeCapa;
-import domain.temperaturaPrenda.CualquierTemperatura;
 import domain.temperaturaPrenda.RangoTemperatura;
-import domain.temperaturaPrenda.TemperaturaPrenda;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
 import java.util.Arrays;
@@ -16,8 +14,7 @@ import javax.persistence.*;
 @Entity
 public class TipoDePrenda {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long tipoPrenda_id;
+	private Long id;
 	@Enumerated(EnumType.STRING)
     private Categoria categoria;
 
@@ -29,8 +26,8 @@ public class TipoDePrenda {
     @Enumerated(EnumType.STRING)
     private List<Material> materialesValidos;
 
-	@OneToOne //TODO sacar la herencia de la temperatura para transformarla el @Embedded
-    private TemperaturaPrenda temperaturaSoportada;
+    @Embedded
+    private RangoTemperatura temperaturaSoportada;
 
 	@Enumerated(EnumType.STRING)
     private NivelDeCapa nivelDeCapa;
@@ -38,7 +35,7 @@ public class TipoDePrenda {
 	//Solo para que sea compatible con JPA
     protected TipoDePrenda() {}
 
-    public TipoDePrenda(Categoria categoria, List<Material> materiales, TemperaturaPrenda temperatura, NivelDeCapa nivelDeCapa) {
+    public TipoDePrenda(Categoria categoria, List<Material> materiales, RangoTemperatura temperatura, NivelDeCapa nivelDeCapa) {
         this.categoria = categoria;
         this.materialesValidos = materiales;
         this.temperaturaSoportada = temperatura;
@@ -73,19 +70,19 @@ public class TipoDePrenda {
 
     /** Atributos estaticos de prueba */
 
-    public static final TipoDePrenda SIN_ACCESORIO = new TipoDePrenda(Categoria.ACCESORIOS, Arrays.asList(Material.NINGUNO), new CualquierTemperatura(), NivelDeCapa.ABAJO);
+    public static final TipoDePrenda SIN_ACCESORIO = new TipoDePrenda(Categoria.ACCESORIOS, Arrays.asList(Material.NINGUNO), new RangoTemperatura(-20, 40), NivelDeCapa.ABAJO);
     public static final TipoDePrenda ZAPATO = new TipoDePrenda(Categoria.CALZADO, Arrays.asList(Material.CUERO, Material.GAMUZA), new RangoTemperatura(10, 25), NivelDeCapa.MEDIO);
-    public static final TipoDePrenda REMERA = new TipoDePrenda(Categoria.PARTE_SUPERIOR, Arrays.asList(Material.ALGODON), new CualquierTemperatura(), NivelDeCapa.ABAJO);
+    public static final TipoDePrenda REMERA = new TipoDePrenda(Categoria.PARTE_SUPERIOR, Arrays.asList(Material.ALGODON), new RangoTemperatura(-20, 40), NivelDeCapa.ABAJO);
     public static final TipoDePrenda CAMISA = new TipoDePrenda(Categoria.PARTE_SUPERIOR, Arrays.asList(Material.ALGODON,Material.POLIESTER, Material.JEAN,Material.LINO), new RangoTemperatura(1, 30), NivelDeCapa.ABAJO);
     public static final TipoDePrenda PANTALON = new TipoDePrenda(Categoria.PARTE_INFERIOR, Arrays.asList(Material.JEAN), new RangoTemperatura(-5, 28), NivelDeCapa.MEDIO);
     public static final TipoDePrenda SHORT = new TipoDePrenda(Categoria.PARTE_INFERIOR, Arrays.asList(Material.ALGODON,Material.JEAN), new RangoTemperatura(20, 40), NivelDeCapa.MEDIO);
     public static final TipoDePrenda BLUSA = new TipoDePrenda(Categoria.PARTE_SUPERIOR, Arrays.asList(Material.ALGODON), new RangoTemperatura(10, 25), NivelDeCapa.MEDIO);
-    public static final TipoDePrenda ZAPATILLA = new TipoDePrenda(Categoria.CALZADO, Arrays.asList(Material.GAMUZA), new CualquierTemperatura(), NivelDeCapa.MEDIO);
+    public static final TipoDePrenda ZAPATILLA = new TipoDePrenda(Categoria.CALZADO, Arrays.asList(Material.GAMUZA), new RangoTemperatura(-20, 40), NivelDeCapa.MEDIO);
     public static final TipoDePrenda POLLERA = new TipoDePrenda(Categoria.PARTE_INFERIOR, Arrays.asList(Material.POLIESTER), new RangoTemperatura(20, 30), NivelDeCapa.MEDIO);
     public static final TipoDePrenda OJOTAS = new TipoDePrenda(Categoria.CALZADO, Arrays.asList(Material.GOMA), new RangoTemperatura(25, 40), NivelDeCapa.ABAJO);
     public static final TipoDePrenda ALPARGATAS = new TipoDePrenda(Categoria.CALZADO, Arrays.asList(Material.ALGODON), new RangoTemperatura(15, 30), NivelDeCapa.MEDIO);
-    public static final TipoDePrenda PULSERA = new TipoDePrenda(Categoria.ACCESORIOS, Arrays.asList(Material.PLASTICO), new CualquierTemperatura(), NivelDeCapa.ABAJO);
-    public static final TipoDePrenda ANTEOJOS = new TipoDePrenda(Categoria.ACCESORIOS, Arrays.asList(Material.PLASTICO), new CualquierTemperatura(), NivelDeCapa.ABAJO);
+    public static final TipoDePrenda PULSERA = new TipoDePrenda(Categoria.ACCESORIOS, Arrays.asList(Material.PLASTICO), new RangoTemperatura(-20, 40), NivelDeCapa.ABAJO);
+    public static final TipoDePrenda ANTEOJOS = new TipoDePrenda(Categoria.ACCESORIOS, Arrays.asList(Material.PLASTICO), new RangoTemperatura(-20, 40), NivelDeCapa.ABAJO);
     public static final TipoDePrenda BUSO = new TipoDePrenda(Categoria.PARTE_SUPERIOR, Arrays.asList(Material.ALGODON), new RangoTemperatura(5, 25), NivelDeCapa.MEDIO);
     public static final TipoDePrenda SWEATER = new TipoDePrenda(Categoria.PARTE_SUPERIOR, Arrays.asList(Material.LINO), new RangoTemperatura(5, 25), NivelDeCapa.MEDIO);
     public static final TipoDePrenda CAMPERA = new TipoDePrenda(Categoria.PARTE_SUPERIOR, Arrays.asList(Material.GABARDINA,Material.JEAN, Material.ALGODON, Material.PLUMA), new RangoTemperatura(5, 25), NivelDeCapa.ARRIBA);
