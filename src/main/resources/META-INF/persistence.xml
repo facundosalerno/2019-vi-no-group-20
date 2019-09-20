@@ -27,6 +27,10 @@
         <class>domain.evento.Evento</class>
         <class>domain.prenda.Imagen</class>
         <class>domain.temperaturaPrenda.RangoTemperatura</class>
+        <class>domain.notificaciones.MedioDeNotificacion</class>
+        <class>domain.notificaciones.SMS</class>
+        <class>domain.notificaciones.Email</class>
+        <class>domain.notificaciones.WhatsApp</class>
 
         <properties>
             <property name="hibernate.archive.autodetection" value="class"/>
