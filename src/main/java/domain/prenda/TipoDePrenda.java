@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class TipoDePrenda {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long tipoPrenda_id;
+	private Long id;
 	@Enumerated(EnumType.STRING)
     private Categoria categoria;
 
