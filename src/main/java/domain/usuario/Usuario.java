@@ -15,6 +15,7 @@ import domain.guardarropas.Guardarropas;
 import domain.notificaciones.InteresadoAlertaMeteorologica;
 import domain.notificaciones.InteresadoEvento;
 import domain.notificaciones.MedioDeNotificacion;
+import domain.prenda.Prenda;
 import exceptions.*;
 
 import java.lang.reflect.Member;
@@ -34,27 +35,29 @@ import javax.persistence.*;
 @Entity
 public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica {
 
+
     @Id
+    @GeneratedValue
     private Long id;
 
     @OneToMany
     @JoinColumn(name="usuarioId_eventos")
-    private List<Evento> eventos = new ArrayList<>();
+    private List<Evento> eventos = new ArrayList<Evento>();
 
     private String nombre;
 
 
     @OneToMany
     @JoinColumn(name= "usuarioId_decisiones")
-    private List<Decision> decisiones = new ArrayList<>();
+    private List<Decision> decisiones = new ArrayList<Decision>();
 
     @OneToMany
     @JoinColumn(name = "usuarioId_atuendosAceptados")
-    private List<Atuendo> atuendosAceptados = new ArrayList<>();
+    private List<Atuendo> atuendosAceptados = new ArrayList<Atuendo>();
 
     @OneToMany
     @JoinColumn(name = "usuarioId_atuendosRechazados")
-    private List<Atuendo> atuendosRechazados = new ArrayList<>();
+    private List<Atuendo> atuendosRechazados = new ArrayList<Atuendo>();
 
     @Enumerated(EnumType.STRING)
     private TipoDeUsuario tipoDeUsuario;
@@ -66,7 +69,7 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
      TODO: DENTRO DE LA LISTA DE GUARDARROPAS DEL USUARIO O UNA LISTA PARALELA DE GUARDARROPAS COMPARTIDOS?
     */
     @ManyToMany
-    private List<Guardarropas> guardarropas;
+    private List<Guardarropas> guardarropas=new ArrayList<Guardarropas>();
 
     @OneToMany
     @JoinColumn(name = "usuarioId_mediosDeNotificacion")
@@ -87,6 +90,10 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
         this.guardarropas = guardarropas;
         RepositorioUsuarios.getInstance().agregarUsuario(this);
 
+    }
+
+    public Long getId() {
+        return id;
     }
 
 

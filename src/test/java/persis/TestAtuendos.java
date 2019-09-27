@@ -73,22 +73,6 @@ public class TestAtuendos extends AbstractPersistenceTest implements WithGlobalE
 
     @Test
     public void sePersisteUnUsuarioConSuGuardarropas(){
-        /*
-        Cancha cancha = new Cancha("Cancha uno", new Color("rojo"));
 
-        Paleta paletaA = new Paleta();
-        Paleta paletaB = new Paleta();
-
-        Jugador jose = new JugadorAmateur();
-        jose.setPaleta(paletaA);
-        Jugador maria = new JugadorProfesional();
-        jose.setPaleta(paletaB);
-        entityManager().persist(jose);
-        entityManager().persist(maria);
-        cancha.reservar(LocalDateTime.now(),//
-                Arrays.asList(jose, maria));
-
-        repositorioCancha.registrar(cancha);
-*/
     }
 }

@@ -46,72 +46,74 @@ public class Evento implements Notificable {
     private List<Atuendo> sugerenciasObtenidas = new ArrayList<>();
 
 
-    public Evento (){}
-    /** Warning: crear desde el usuario */
-    public Evento(String nombre, LocalDateTime fechaYHora, FrecuenciaEvento frecuencia, String lugar, Usuario usuario){
+    public Evento() {
+    }
+
+    /**
+     * Warning: crear desde el usuario
+     */
+    public Evento(String nombre, LocalDateTime fechaYHora, FrecuenciaEvento frecuencia, String lugar, Usuario usuario) {
         this.nombre = nombre;
         this.fecha = fechaYHora;
-        this.lugar=lugar;
-        this.usuario=usuario;
+        this.lugar = lugar;
+        this.usuario = usuario;
         this.frecuencia = frecuencia;
     }
 
 
+    /**
+     * Metodos
+     */
 
-
-
-    /** Metodos */
-
-    public void generarSugerencias(Meteorologo meteorologo){
-        if(Math.abs(fecha.getDayOfMonth() - LocalDateTime.now().getDayOfMonth()) <= diasDeProximidadAEventos()){
+    public void generarSugerencias(Meteorologo meteorologo) {
+        if (Math.abs(fecha.getDayOfMonth() - LocalDateTime.now().getDayOfMonth()) <= diasDeProximidadAEventos()) {
             sugerenciasObtenidas = usuario.obtenerSugerenciasDeTodosSusGuardarropas(meteorologo);
-        }else{
+        } else {
             throw new TodaviaNoEstaCercaElEvento();
         }
     }
 
-    private int diasDeProximidadAEventos(){
+    private int diasDeProximidadAEventos() {
         return 1;
     }
 
-    public List<Atuendo> obtenerSugerencias(){
-        if(sugerenciasObtenidas.isEmpty()){
+    public List<Atuendo> obtenerSugerencias() {
+        if (sugerenciasObtenidas.isEmpty()) {
             throw new NoHaySugerenciasParaElEvento();
         }
         return sugerenciasObtenidas;
     }
 
 
-    public boolean seLlama(String nombre){
+    public boolean seLlama(String nombre) {
         return this.nombre.equals(nombre);
     }
 
     /* Precision de año mes y dia */
-    public boolean esEnLaFecha(LocalDateTime fecha){
+    public boolean esEnLaFecha(LocalDateTime fecha) {
         return this.fecha.getYear() == fecha.getYear() && this.fecha.getMonthValue() == fecha.getMonthValue() && this.fecha.getDayOfMonth() == fecha.getDayOfMonth();
     }
 
-    public boolean eshoy(){
+    public boolean eshoy() {
         return esEnLaFecha(LocalDateTime.now());
     }
 
-    public boolean estaEntre(LocalDateTime fechaInicio, LocalDateTime fechaFin){
+    public boolean estaEntre(LocalDateTime fechaInicio, LocalDateTime fechaFin) {
         return fecha.isAfter(fechaInicio) && fecha.isBefore(fechaFin);
     }
 
-    public boolean existenSugerencias(){
+    public boolean existenSugerencias() {
         return !sugerenciasObtenidas.isEmpty();
     }
 
-    public void renovarFrecuencia(){
+    public void renovarFrecuencia() {
         frecuencia.renovarEvento(this);
     }
 
 
-
-
-
-    /** Observer */
+    /**
+     * Observer
+     */
 
     @Override
     public void agregarNotificado(Usuario usuario) {
@@ -129,10 +131,9 @@ public class Evento implements Notificable {
     }
 
 
-
-
-
-    /** Getters y setters */
+    /**
+     * Getters y setters
+     */
 
     public String getNombre() {
         return nombre;
@@ -150,11 +151,12 @@ public class Evento implements Notificable {
         return fecha;
     }
 
-
-
-
-
-    /** Equals y hashcode */
+    public Long getId() {
+        return id;
+    }
+    /**
+     * Equals y hashcode
+     */
 
     @Override
     public boolean equals(Object o) {

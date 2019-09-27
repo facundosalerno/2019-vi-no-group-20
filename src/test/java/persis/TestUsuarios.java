@@ -1,17 +1,20 @@
 package persis;
 
 import domain.evento.FrecuenciaEvento;
+import domain.guardarropas.Guardarropas;
 import domain.guardarropas.GuardarropasLimitado;
 import domain.guardarropas.GuardarropasPremium;
 import domain.prenda.*;
 import domain.usuario.TipoDeUsuario;
 import domain.usuario.Usuario;
+import org.eclipse.core.runtime.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class TestUsuarios extends AbstractPersistenceTest implements WithGlobalEntityManager {
@@ -25,6 +28,7 @@ public class TestUsuarios extends AbstractPersistenceTest implements WithGlobalE
     private Prenda pantalon;
     private Prenda anteojos;
 
+    LocalDateTime fechaCumpleWilly;
     @Before
     public void init(){
         Color rojo = new Color(255, 0, 0);
@@ -39,8 +43,8 @@ public class TestUsuarios extends AbstractPersistenceTest implements WithGlobalE
         camisa = armarUnaPrenda(TipoDePrenda.CAMISA, Material.ALGODON, blanco, rojo, Trama.LISA);
 
 
-        LocalDateTime fechaCumpleWilly = LocalDateTime.of(2020,06,20,20,30);
-        //facundo.crearEvento("Cumpleaños de juan", fechaCumpleWilly, FrecuenciaEvento.ANUAL,"Casa de Juan");
+        fechaCumpleWilly = LocalDateTime.of(2020,06,20,20,30);
+
     }
 
     public Prenda armarUnaPrenda(TipoDePrenda tipoDePrenda, Material material, Color colorPrimario, Color colorSecundario, Trama trama){
@@ -54,29 +58,22 @@ public class TestUsuarios extends AbstractPersistenceTest implements WithGlobalE
     }
     @Test
     public void sePersisteUnUsuarioConSuGuardarropas(){
-        facundo = new Usuario("Facundo Salerno",Arrays.asList(new GuardarropasPremium(Arrays.asList(remera, camisa), Arrays.asList(pantalon), Arrays.asList(zapatos), Arrays.asList(anteojos))), TipoDeUsuario.PREMIUM);
-        guardarropasCasual = new GuardarropasPremium(Arrays.asList(camisa, remera), Arrays.asList(pantalon), Arrays.asList(zapatos), Arrays.asList(anteojos));
+        facundo = new Usuario("Facundo Salerno",new ArrayList<Guardarropas>(Arrays.asList(new GuardarropasPremium(Arrays.asList(remera, camisa), Arrays.asList(pantalon), Arrays.asList(zapatos), Arrays.asList(anteojos)))), TipoDeUsuario.PREMIUM);
+        guardarropasCasual = new GuardarropasPremium(new ArrayList<Prenda>(Arrays.asList(camisa, remera)), new ArrayList<Prenda>(Arrays.asList(pantalon)), new ArrayList<Prenda>(Arrays.asList(zapatos)), new ArrayList<Prenda>(Arrays.asList(anteojos)));
 
         facundo.agregarGuardarropas(guardarropasCasual);
 
         entityManager().persist(facundo);
-        /*
-        Cancha cancha = new Cancha("Cancha uno", new Color("rojo"));
 
-        Paleta paletaA = new Paleta();
-        Paleta paletaB = new Paleta();
-
-        Jugador jose = new JugadorAmateur();
-        jose.setPaleta(paletaA);
-        Jugador maria = new JugadorProfesional();
-        jose.setPaleta(paletaB);
-        entityManager().persist(jose);
-        entityManager().persist(maria);
-        cancha.reservar(LocalDateTime.now(),//
-                Arrays.asList(jose, maria));
-
-        repositorioCancha.registrar(cancha);
-*/
+        entityManager().find(Usuario.class,facundo.getId());
     }
 
+    @Test
+    public void sePersisteUnUsuarioConUnEvento(){
+        facundo = new Usuario("Facundo Salerno",new ArrayList<Guardarropas>(Arrays.asList(new GuardarropasPremium(Arrays.asList(remera, camisa), Arrays.asList(pantalon), Arrays.asList(zapatos), Arrays.asList(anteojos)))), TipoDeUsuario.PREMIUM);
+        facundo.crearEvento("Cumpleaños de juan", fechaCumpleWilly, FrecuenciaEvento.ANUAL,"Casa de Juan");
+        entityManager().persist(facundo);
+
+        entityManager().find(Usuario.class,facundo.getId());
+    }
 }
