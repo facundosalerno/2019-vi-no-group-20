@@ -14,13 +14,16 @@ import domain.prenda.Prenda;
 import domain.usuario.TipoDeUsuario;
 import exceptions.NoPerteneceALaCategoriaException;
 import exceptions.NoSePuedenGenerarSugerenciasEx;
+import org.apache.commons.collections.ListUtils;
 
 import javax.persistence.*;
 import java.nio.file.ProviderNotFoundException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 @Entity
@@ -34,21 +37,25 @@ public abstract class Guardarropas {
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "guardarropas_superiores_id")
-	protected List<Prenda> prendasSuperiores;
+	protected List<Prenda> prendasSuperiores = new ArrayList<Prenda>();
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "guardarropas_inferiores_id")
-    protected List<Prenda> prendasInferiores;
+    protected List<Prenda> prendasInferiores= new ArrayList<Prenda>();;
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "guardarropas_calzados_id")
-	protected List<Prenda> calzados;
+	protected List<Prenda> calzados= new ArrayList<Prenda>();;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "guardarropas_accesorios_id")
-    protected List<Prenda> accesorios;
+    protected List<Prenda> accesorios= new ArrayList<Prenda>();;
 
+    public String getNombre() {
+        return nombre;
+    }
 
+    String nombre;
 
 
 
@@ -58,7 +65,14 @@ public abstract class Guardarropas {
 
     /** Metodos */
     
-    
+    public List<Prenda> getPrendas(){
+        List <Prenda> todasLasPrendas = new ArrayList(prendasSuperiores);
+        todasLasPrendas.addAll(prendasInferiores);
+        todasLasPrendas.addAll(calzados);
+        todasLasPrendas.addAll(accesorios);
+        return todasLasPrendas;
+    }
+
 
     public void prendasCoincidenConCategoria(List<Prenda> prendas, Categoria categoria){
         if(!prendas.stream().allMatch(prenda -> prenda.esDeCategoria(categoria))){

@@ -19,7 +19,9 @@ import static java.util.Objects.requireNonNull;
 public class Prenda {
 	@Id	
 	private Long id;
-	
+
+	String nombre;
+
 	@ManyToOne
     private TipoDePrenda tipoPrenda;
 
@@ -46,7 +48,7 @@ public class Prenda {
 	private Trama trama;
 
     @Embedded
-	private Imagen imagen;
+	private Imagen imagen; //TODO: CHEQUEAR TEMA DE IMAGEN PARA WEB
 
 	@Enumerated(EnumType.STRING)
 	private Estado estado;
@@ -54,8 +56,10 @@ public class Prenda {
 
     /** Warning: construir con BorradorPrenda */
     //Solo para que sea compatible con JPA
-    protected Prenda() {}; 
-    public Prenda(TipoDePrenda tipo, Color colorPrimario, Color colorSecundario, Material material, Trama trama, Imagen imagen) {
+    protected Prenda() {};
+
+    public Prenda(String nombre,TipoDePrenda tipo, Color colorPrimario, Color colorSecundario, Material material, Trama trama, Imagen imagen) {
+        this.nombre=nombre;
         this.tipoPrenda = tipo;
         this.material = material;
         this.colorPrimario = colorPrimario;
@@ -106,7 +110,9 @@ public class Prenda {
     public NivelDeCapa getNivelDeCapa(){return tipoPrenda.getNivelDeCapa();}
 
 
-
+    public String getNombre(){
+        return nombre;
+    }
 
 
     /** Equals y hashCode */

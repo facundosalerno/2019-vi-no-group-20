@@ -78,7 +78,7 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
 
 
     //Solo para que sea compatible con JPA
-    protected Usuario() {};
+    public Usuario() {};
 
 
     /** Metodos */

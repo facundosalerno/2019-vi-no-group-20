@@ -19,6 +19,9 @@ public class GuardarropasPremium extends Guardarropas{
 	//Solo para que sea compatible con JPA
     protected GuardarropasPremium() {};
 
+    public GuardarropasPremium(String nombre){
+        this.nombre=nombre;
+    }
     public GuardarropasPremium(List<Prenda> prendasSuperiores, List<Prenda> prendasInferiores, List<Prenda> calzados, List<Prenda> accesorios) {
 
         if(prendasSuperiores.isEmpty() || prendasInferiores.isEmpty() || calzados.isEmpty() || accesorios.isEmpty())

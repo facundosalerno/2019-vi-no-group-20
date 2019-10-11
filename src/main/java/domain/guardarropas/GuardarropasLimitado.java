@@ -20,7 +20,12 @@ import java.util.stream.Stream;
 public class GuardarropasLimitado extends Guardarropas {
 
 	//Solo para que sea compatible con JPA
-    protected GuardarropasLimitado() {}; 
+    protected GuardarropasLimitado() {};
+
+    public GuardarropasLimitado(String nombre){
+        this.nombre=nombre;
+    }
+
     public GuardarropasLimitado (List<Prenda> prendasSuperiores, List<Prenda> prendasInferiores, List<Prenda> calzados, List<Prenda> accesorios) {
         if(prendasSuperiores.isEmpty() || prendasInferiores.isEmpty() || calzados.isEmpty() || accesorios.isEmpty())
             throw new NoPermiteGuardarropaIncompletoException();
