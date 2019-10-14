@@ -1,11 +1,19 @@
 {{#partial "login"}}
-    <form action="/login" method="POST">
-    <label>usuario</label>
-    <input type="text" name="user">
-    <label>contraseña</label>
-        <input type="text" name="pass">
-    <input type="submit">
-    </form>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand font-italic" href="#">Que Me Pongo</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form action="/login" method="POST" class="form-inline my-2 my-lg-0">
+                <label  class="text-light bg-primary mx-2">Usuario</label>
+                <input type="text" name="user">
+                <label class="text-light bg-primary mx-2">Contraseña</label>
+                <input type="password" name="pass">
+                <input type="submit" class="btn btn-outline-light my-2 my-sm-0 mx-2" value="Entrar">
+            </form>
+        </div>
+    </nav>
 {{/partial}}
 {{>layout.hbs}}
-
