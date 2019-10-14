@@ -1,0 +1,18 @@
+{{#partial "contenido"}}
+
+    <h1>
+        Nombre: {{ nombre }}
+    </h1>
+
+    {{#each prendas}}
+        <div class="prenda">
+            <img src="/remera.png" alt="remera" />
+            <div class="detallFes">
+                <h2>{{nombre}}</h2>
+                {{ color }}
+            </div>
+	    </div>
+{{/each}}
+
+{{/partial}}
+{{>layout.hbs}}
