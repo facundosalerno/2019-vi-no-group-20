@@ -1,10 +1,9 @@
 package server;
 
-import domain.guardarropas.Guardarropas;
-import domain.RepositorioGuardarropas;
-import domain.usuario.Usuario;
-import spark.ModelAndView;
+import controllers.ControllerGuardarropas;
+import controllers.ControllerSesion;
 import spark.Spark;
+import spark.TemplateEngine;
 import spark.debug.DebugScreen;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -14,15 +13,23 @@ public class Server {
         Spark.port(9010);
         Spark.staticFiles.location("/public");
         Spark.init();
-        ControllerGuardarropas controller =
+
+
+        /**GLUE CODE*/
+        TemplateEngine engine = new HandlebarsTemplateEngine();
+
+
+        ControllerGuardarropas controllerGuardarropas =
                 new ControllerGuardarropas();
 
         Spark.get("/guardarropa/prendas",
-                controller::prendas,
-                new HandlebarsTemplateEngine());
+                controllerGuardarropas::mostrarPrendas,
+                engine);
 
+        ControllerSesion controllerSesion= new ControllerSesion();
 
         DebugScreen.enableDebugScreen();
+
     }
 
 }

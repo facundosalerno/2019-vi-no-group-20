@@ -1,4 +1,4 @@
-package server;
+package controllers;
 
 import domain.guardarropas.Guardarropas;
 import domain.RepositorioGuardarropas;
@@ -11,7 +11,7 @@ import spark.Response;
 
 public class ControllerGuardarropas {
 
-    public ModelAndView prendas(Request req, Response res) {
+    public ModelAndView mostrarPrendas(Request req, Response res) {
         GuardarropasPremium guardarropas =
                 RepositorioGuardarropas.instance()
                         .findByUsuario(new Usuario());
