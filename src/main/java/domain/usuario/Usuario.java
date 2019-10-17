@@ -44,8 +44,9 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
     @JoinColumn(name="usuarioId_eventos")
     private List<Evento> eventos = new ArrayList<Evento>();
 
-    private String nombre;
 
+    private String nombre;
+    private String hashPass;
 
     @OneToMany
     @JoinColumn(name= "usuarioId_decisiones")
@@ -83,13 +84,24 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
 
     /** Metodos */
 
-    public Usuario(String nombre,List<Guardarropas> guardarropas, TipoDeUsuario tipoDeUsuario) {
+    public Usuario(String nombre, List<Guardarropas> guardarropas, TipoDeUsuario tipoDeUsuario) {
         this.nombre=nombre;
         this.tipoDeUsuario=tipoDeUsuario;
         guardarropas.stream().forEach( guardarropasAValidar -> validarTipoDeGuardarropas(guardarropasAValidar));
         this.guardarropas = guardarropas;
         RepositorioUsuarios.getInstance().agregarUsuario(this);
 
+    }
+
+    public Usuario(String nombre, String hashPass){
+        this.nombre=nombre;
+        this.hashPass=hashPass;
+        RepositorioUsuarios.getInstance().agregarUsuario(this);
+    }
+
+    public void validarContraseña(String hashPass){
+        if(!this.hashPass.equals(hashPass))
+            throw new ContraseñaInvalidaException();
     }
 
     public Long getId() {
@@ -215,6 +227,14 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
 
     public Guardarropas getGuardarropas(int posicion) {
         return guardarropas.get(posicion);
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
 
