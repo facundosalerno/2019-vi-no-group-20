@@ -46,7 +46,7 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
 
 
     private String nombre;
-    private String hashPass;
+    private int hashPass = 0;
 
     @OneToMany
     @JoinColumn(name= "usuarioId_decisiones")
@@ -93,14 +93,8 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
 
     }
 
-    public Usuario(String nombre, String hashPass){
-        this.nombre=nombre;
-        this.hashPass=hashPass;
-        RepositorioUsuarios.getInstance().agregarUsuario(this);
-    }
-
-    public void validarContraseña(String hashPass){
-        if(!this.hashPass.equals(hashPass))
+    public void validarContraseña(String password){
+        if(!(this.hashPass == password.hashCode()))
             throw new ContraseñaInvalidaException();
     }
 
@@ -237,7 +231,13 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
         this.nombre = nombre;
     }
 
+    public void setPassword(String password){
+        this.hashPass = password.hashCode();
+    }
 
+    public int getHashPass() {
+        return hashPass;
+    }
 
     /** Observer */
 

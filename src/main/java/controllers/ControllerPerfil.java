@@ -13,19 +13,14 @@ public class ControllerPerfil {
 
     public ModelAndView mostrar(Request req, Response res){
 
-        //Usuario usuario = RepositorioUsuarios.buscarPorId(req.params());
-
 
         //Usuario usuario = new Usuario("foo","foo");
         //Map<String,String> model = HashMap<>;
         //SE USA SOLO EL ID, SE RECUPERA DE LA COOKIE Y CON EL MISMO SE BUSCA EN LA BASE DE DATOS PARA OBTENER TODOS LOS OTROS DATOS
 
         String nombre= req.cookie("cookie_nombre"); //MAL
-        String id= req.cookie("cookie_id");
+        Usuario usuario = RepositorioUsuarios.getInstance().buscarUsuario(nombre);
 
-        //Usuario usuario=new Usuario(nombre, "pass"); //MAL
-
-        //return new ModelAndView(usuario, "perfil.hbs");
-        return null; //Borrar cuando este lo que corresponde
+        return new ModelAndView(usuario, "perfil.hbs");
     }
 }

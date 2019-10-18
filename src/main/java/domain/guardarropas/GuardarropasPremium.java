@@ -4,6 +4,7 @@ package domain.guardarropas;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
+import cron.RepositorioGuardarropas;
 import domain.prenda.Categoria;
 import domain.prenda.Prenda;
 import domain.usuario.TipoDeUsuario;
@@ -30,12 +31,11 @@ public class GuardarropasPremium extends Guardarropas{
         prendasCoincidenConCategoria(prendasInferiores, Categoria.PARTE_INFERIOR);
         prendasCoincidenConCategoria(calzados, Categoria.CALZADO);
         prendasCoincidenConCategoria(accesorios, Categoria.ACCESORIOS);
-
-
         this.prendasSuperiores = prendasSuperiores;
         this.prendasInferiores = prendasInferiores;
         this.calzados = calzados;
         this.accesorios= accesorios;
+        RepositorioGuardarropas.getInstance().agregarGuardarropas(this);
     }
 
     @Override

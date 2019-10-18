@@ -1,9 +1,13 @@
 package cron;
 
+import domain.usuario.TipoDeUsuario;
 import domain.usuario.Usuario;
+import exceptions.UsuarioInexistente;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RepositorioUsuarios {
     static private RepositorioUsuarios instancia = null;
@@ -31,7 +35,16 @@ public class RepositorioUsuarios {
             listaDeUsuarios.remove(usuario);
     }
 
+    public Usuario buscarUsuario(String nombre){
+        Usuario usuario = listaDeUsuarios.stream().filter(u -> u.getNombre().equals(nombre)).findFirst().orElse(null);
+        if(usuario == null)
+            throw new UsuarioInexistente();
+        return usuario;
+    }
+
     public List<Usuario> getListaDeUsuarios(){
         return listaDeUsuarios;
     }
+
+    static final public Usuario admin = new Usuario("admin", Arrays.asList(RepositorioGuardarropas.guardarropasDelAdmin), TipoDeUsuario.PREMIUM);
 }

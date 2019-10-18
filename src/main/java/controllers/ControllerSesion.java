@@ -1,15 +1,12 @@
 package controllers;
 
-import domain.guardarropas.*;
-import domain.RepositorioGuardarropas;
+import cron.RepositorioUsuarios;
 import domain.usuario.*;
 import exceptions.ContraseñaInvalidaException;
+import exceptions.UsuarioInexistente;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-
-import spark.Access;
-import java.util.List;
 
 
 public class ControllerSesion {
@@ -24,24 +21,21 @@ public class ControllerSesion {
     }
 
     public ModelAndView crear(Request req, Response res){
-        /* Usuario de ejemplo. Actualizar los constructores en el domain */
-        Usuario usuario= new Usuario("Admin","1234");
+        RepositorioUsuarios.admin.setPassword("12345"); //para test. la pass se hashea en el set
+        Usuario usuario = null;
 
         try{
-            //usuario = RepositorioUsuario.buscarPorNombre(req.params("nombre o email o algo parabuscarlo"));
+            usuario = RepositorioUsuarios.getInstance().buscarUsuario(req.queryParams("var_username"));
             usuario.validarContraseña(req.queryParams("var_password"));
-        }/*catch(UsuarioInexistente e){
+        }catch(UsuarioInexistente e){
             return null;
-        }*/catch (ContraseñaInvalidaException e){
+        }catch (ContraseñaInvalidaException e){
             return null;
         }
 
-        //NUNCA GUARDAR UN ID DE USUARIO EN LA COOKIE EN TEXTO PLANO
+        res.cookie("cookie_nombre", usuario.getNombre());
 
-        res.cookie("cookie_nombre",usuario.getNombre());
-        //res.cookie("cookie_id",usuario.getId().toString());
-
-        res.redirect("/perfil");
+        res.redirect("/usuarios/:nombre");
         return new ModelAndView(usuario, "perfil.hbs");
     }
 

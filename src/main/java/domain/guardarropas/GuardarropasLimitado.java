@@ -1,6 +1,7 @@
 package domain.guardarropas;
 
 
+import cron.RepositorioGuardarropas;
 import domain.prenda.Categoria;
 import domain.prenda.Prenda;
 import domain.usuario.TipoDeUsuario;
@@ -40,8 +41,7 @@ public class GuardarropasLimitado extends Guardarropas {
         this.prendasInferiores = prendasInferiores;
         this.calzados = calzados;
         this.accesorios= accesorios;
-
-
+        RepositorioGuardarropas.getInstance().agregarGuardarropas(this);
     }
 
     private static int cantidadPrendasPermitidas(){

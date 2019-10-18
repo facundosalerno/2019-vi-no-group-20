@@ -1,8 +1,6 @@
 package controllers;
 
-import domain.guardarropas.Guardarropas;
-import domain.RepositorioGuardarropas;
-import domain.guardarropas.GuardarropasLimitado;
+import cron.RepositorioGuardarropas;
 import domain.guardarropas.GuardarropasPremium;
 import domain.usuario.Usuario;
 import spark.ModelAndView;
@@ -13,7 +11,7 @@ public class ControllerGuardarropas {
 
     public ModelAndView mostrarPrendas(Request req, Response res) {
         GuardarropasPremium guardarropas =
-                RepositorioGuardarropas.instance()
+                RepositorioGuardarropas.getInstance()
                         .findByUsuario(new Usuario());
 
         return new ModelAndView(guardarropas, "guardarropas.hbs");
