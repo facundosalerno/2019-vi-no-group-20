@@ -223,6 +223,10 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
         return guardarropas.get(posicion);
     }
 
+    public List<Guardarropas> getGuardarropas() {
+        return this.guardarropas;
+    }
+
     public String getNombre() {
         return nombre;
     }

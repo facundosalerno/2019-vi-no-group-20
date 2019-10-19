@@ -2,9 +2,9 @@ package server;
 
 import controllers.ControllerGuardarropas;
 import controllers.ControllerPerfil;
+import controllers.ControllerPrendas;
 import controllers.ControllerSesion;
 import spark.Spark;
-import spark.TemplateEngine;
 import spark.debug.DebugScreen;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -21,14 +21,18 @@ public class Server {
         //TemplateEngine engine = new HandlebarsTemplateEngine();
 
         ControllerGuardarropas controllerGuardarropas = new ControllerGuardarropas();
-        Spark.get("/guardarropa/prendas", controllerGuardarropas::mostrarPrendas, new HandlebarsTemplateEngine());
+        Spark.get("/perfil/guardarropas", controllerGuardarropas::mostrarGuardarropas, new HandlebarsTemplateEngine());
 
         ControllerSesion controllerSesion= new ControllerSesion();
         Spark.get("/login", controllerSesion::mostrarLogin, new HandlebarsTemplateEngine());
         Spark.post("/login", controllerSesion::crear, new HandlebarsTemplateEngine());
+        Spark.post("/", controllerSesion::cerrarSesion, new HandlebarsTemplateEngine());
 
         ControllerPerfil controllerPerfil= new ControllerPerfil();
-        Spark.get("/usuarios/:id", controllerPerfil::mostrar, new HandlebarsTemplateEngine());
+        Spark.get("/perfil", controllerPerfil::mostrar, new HandlebarsTemplateEngine());
+
+        ControllerPrendas controllerPrendas = new ControllerPrendas();
+        Spark.get("/perfil/guardarropas/prendas", controllerPrendas::mostrarPrendas, new HandlebarsTemplateEngine());
 
         DebugScreen.enableDebugScreen();
 

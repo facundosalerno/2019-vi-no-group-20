@@ -70,5 +70,12 @@ public class RepositorioGuardarropas {
             Arrays.asList(armarUnaPrenda("anteojos", TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA))
     );
 
+    public static GuardarropasPremium guardarropasDelAdminAuxiliar = new GuardarropasPremium(
+            Arrays.asList(armarUnaPrenda("remera", TipoDePrenda.REMERA, Material.ALGODON, azul, rojo, Trama.CUADROS), armarUnaPrenda("buso", TipoDePrenda.BUSO, Material.ALGODON, azul, verde, Trama.LISA)),
+            Arrays.asList(armarUnaPrenda("pantalon", TipoDePrenda.PANTALON, Material.JEAN, verde, rojo, Trama.RAYADA)),
+            Arrays.asList(armarUnaPrenda("zapatos", TipoDePrenda.ZAPATO, Material.CUERO, rojo, azul, Trama.GASTADO)),
+            Arrays.asList(armarUnaPrenda("anteojos", TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA))
+    );
+
 
 }

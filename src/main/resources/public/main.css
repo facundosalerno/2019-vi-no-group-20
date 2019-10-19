@@ -22,6 +22,40 @@
     background-size: cover;
 }
 
+#button_plus{
+    border: none;
+    background: transparent;
+    outline: none;
+}
+
+#button_cerrarSesion{
+    border: none;
+    background: transparent;
+    outline: none;
+    height: 10px;
+}
+
+.contenedor-guardarropas{
+    display: flex;
+    flex-direction: row;
+    padding: 0 15%;
+    justify-content:center;
+    margin-top: 50px;
+}
+
+.guardarropa{
+    margin: 10px;
+    width: 14rem;
+    height:22.5rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    border-radius: 10px;
+}
+
+.guardarropa:hover{
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
 .detalles {
     display: inline-block;
     margin-left: 40px;
