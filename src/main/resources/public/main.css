@@ -26,6 +26,7 @@
     border: none;
     background: transparent;
     outline: none;
+    margin-top: 33%;
 }
 
 #button_cerrarSesion{
@@ -59,4 +60,13 @@
 .detalles {
     display: inline-block;
     margin-left: 40px;
+}
+
+.center-alert{
+    justify-content:center;
+    width: 600px;
+    position: absolute;
+    left: 33rem;
+    right: 33rem;
+    top: 10rem;
 }
