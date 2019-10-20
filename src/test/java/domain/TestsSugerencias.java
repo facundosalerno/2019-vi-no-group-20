@@ -3,8 +3,6 @@ package domain;
 import clima.AccuWeather;
 import clima.TemperaturaAccuWeather;
 import domain.atuendo.Atuendo;
-import domain.capaPrenda.Capa;
-import domain.capaPrenda.CapaSimple;
 import domain.guardarropas.Guardarropas;
 import domain.guardarropas.GuardarropasPremium;
 import domain.prenda.*;
@@ -30,14 +28,6 @@ public class TestsSugerencias {
     private Prenda ojotas;
     private Prenda anteojos;
 
-    private Capa cmusculosa;
-    private Capa cremeraMangaLarga;
-    private Capa cpantalon;
-    private Capa ctrajeDeBaño;
-    private Capa czapatos;
-    private Capa cojotas;
-    private Capa canteojos;
-
     @Before
     public void init(){
         Color rojo = new Color(255, 0, 0);
@@ -51,14 +41,6 @@ public class TestsSugerencias {
         zapatos = armarUnaPrenda(TipoDePrenda.ZAPATO, Material.CUERO, rojo, azul, Trama.GASTADO);
         ojotas = armarUnaPrenda(TipoDePrenda.OJOTAS, Material.GOMA, azul, rojo, Trama.CUADROS);
         anteojos= armarUnaPrenda(TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA);
-
-        cmusculosa = new CapaSimple(musculosa);
-        cremeraMangaLarga = new CapaSimple(remeraMangaLarga);
-        cpantalon = new CapaSimple(pantalon);
-        ctrajeDeBaño = new CapaSimple(trajeDeBaño);
-        czapatos = new CapaSimple(zapatos);
-        cojotas = new CapaSimple(ojotas);
-        canteojos = new CapaSimple(anteojos);
 
         guardarropasDeWilly = new GuardarropasPremium(Arrays.asList(musculosa), Arrays.asList(trajeDeBaño), Arrays.asList(ojotas), Arrays.asList(anteojos));
 
@@ -82,7 +64,7 @@ public class TestsSugerencias {
         when(meteorologo.obtenerClima()).thenReturn(temperatura);
 
         List<Atuendo> sugerencias = guardarropasDeWilly.sugerirAtuendo(meteorologo);
-        Atuendo posibleAtuendoSugerido = new Atuendo(cmusculosa, ctrajeDeBaño, cojotas, canteojos);
+        Atuendo posibleAtuendoSugerido = new Atuendo(Arrays.asList(musculosa), trajeDeBaño, ojotas, anteojos);
         Assert.assertTrue("el atuendo " + posibleAtuendoSugerido + "  debe estar en " + sugerencias, sugerencias.stream().anyMatch(atuendo -> atuendo.equals(posibleAtuendoSugerido)));
     }
 

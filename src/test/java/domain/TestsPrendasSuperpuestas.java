@@ -2,21 +2,21 @@ package domain;
 
 import clima.OpenWeather;
 import clima.TemperaturaOpenWeather;
+import com.google.common.collect.*;
 import domain.atuendo.Atuendo;
-import domain.capaPrenda.CapaCompuesta;
-import domain.capaPrenda.CapaSimple;
 import domain.guardarropas.Guardarropas;
 import domain.guardarropas.GuardarropasPremium;
 import domain.prenda.*;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.eclipse.swt.internal.C;
+import org.junit.*;
 
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TestsPrendasSuperpuestas {
     private Atuendo atuendo;
@@ -40,19 +40,6 @@ public class TestsPrendasSuperpuestas {
     private Prenda camisaFormalAzul;
     private Prenda camisaSalida;
 
-    private CapaSimple capaZapatosFormales;
-    private CapaSimple capaPantalonParaSalida;
-    private CapaSimple capaAnteojos;
-    private CapaSimple capaCamperaParaSalida;
-    private CapaSimple capaCamperaMichelin;
-    private CapaSimple capaBusoInformal;
-    private CapaSimple capaSweaterFormal;
-    private CapaSimple capaRemeraDeDia;
-    private CapaSimple capaCamisaFormalBlanca;
-    private CapaSimple capaCamisaSalida;
-
-
-
     private Guardarropas guardarropasInvierno;
 
     TemperaturaOpenWeather nuevoClima;
@@ -68,63 +55,43 @@ public class TestsPrendasSuperpuestas {
         Color negro = new Color(0, 0, 0);
 
         //zapatosSalida = armarUnaPrenda(TipoDePrenda.ZAPATO, Material.GAMUZA, azul, null, Trama.GASTADO);  //TODO: Para tests guardarropas
-        zapatosFormales = armarUnaPrenda(TipoDePrenda.ZAPATO, Material.CUERO, negro, null, Trama.LISA);
+        zapatosFormales = armarUnaPrenda("zapatosFormales",TipoDePrenda.ZAPATO, Material.CUERO, negro, null, Trama.LISA);
 
-        pantalonParaSalida = armarUnaPrenda(TipoDePrenda.PANTALON, Material.JEAN, blanco, null, Trama.GASTADO);
+        pantalonParaSalida = armarUnaPrenda("pantalonParaSalida",TipoDePrenda.PANTALON, Material.JEAN, blanco, null, Trama.GASTADO);
         //pantalonFormal = armarUnaPrenda(TipoDePrenda.PANTALON, Material.POLIESTER, negro, null, Trama.LISA);  //TODO: Para tests guardarropas
 
-        anteojos = armarUnaPrenda(TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA);
+        anteojos = armarUnaPrenda("anteojos",TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA);
 
 
-        busoFormal = armarUnaPrenda(TipoDePrenda.BUSO, Material.ALGODON, azul, null, Trama.LISA);   //TODO: Para tests guardarropas
-        busoInformal = armarUnaPrenda(TipoDePrenda.BUSO, Material.ALGODON, azul, verde, Trama.RAYADA);
-        sweaterFormal = armarUnaPrenda(TipoDePrenda.SWEATER,Material.LINO, azul, null, Trama.LISA);
+        busoFormal = armarUnaPrenda("busoFormal",TipoDePrenda.BUSO, Material.ALGODON, azul, null, Trama.LISA);   //TODO: Para tests guardarropas
+        busoInformal = armarUnaPrenda("busoInformal",TipoDePrenda.BUSO, Material.ALGODON, azul, verde, Trama.RAYADA);
+        sweaterFormal = armarUnaPrenda("sweaterFormal",TipoDePrenda.SWEATER,Material.LINO, azul, null, Trama.LISA);
 
-        camperaParaSalida = armarUnaPrenda(TipoDePrenda.CAMPERA, Material.JEAN, verde, null, Trama.GASTADO);
-        camperaMichelin = armarUnaPrenda(TipoDePrenda.CAMPERA, Material.PLUMA, azul, null, Trama.LISA);
+        camperaParaSalida = armarUnaPrenda("camperaParaSalida",TipoDePrenda.CAMPERA, Material.JEAN, verde, null, Trama.GASTADO);
+        camperaMichelin = armarUnaPrenda("camperaMichelin",TipoDePrenda.CAMPERA, Material.PLUMA, azul, null, Trama.LISA);
 
-        camisaSalida = armarUnaPrenda(TipoDePrenda.CAMISA, Material.JEAN, azul, blanco, Trama.ESCOCESA);
+        camisaSalida = armarUnaPrenda("camisaSalida",TipoDePrenda.CAMISA, Material.JEAN, azul, blanco, Trama.ESCOCESA);
         //camisaFormalAzul = armarUnaPrenda(TipoDePrenda.CAMISA, Material.SEDA, azul, null, Trama.LISA);  //TODO: Para tests guardarropas
-        camisaFormalBlanca = armarUnaPrenda(TipoDePrenda.CAMISA, Material.LINO, blanco, null, Trama.LISA);
+        camisaFormalBlanca = armarUnaPrenda("camisaFormalBlanca",TipoDePrenda.CAMISA, Material.LINO, blanco, null, Trama.LISA);
 
         //remeraCanchera = armarUnaPrenda(TipoDePrenda.REMERA, Material.ALGODON, azul, rojo, Trama.RAYADA);  //TODO: Para tests guardarropas
-        remeraDeDia = armarUnaPrenda(TipoDePrenda.REMERA, Material.ALGODON, azul, null, Trama.LISA);
+        remeraDeDia = armarUnaPrenda("remeraDeDia",TipoDePrenda.REMERA, Material.ALGODON, azul, null, Trama.LISA);
 
         guardarropasInvierno = new GuardarropasPremium(new ArrayList<Prenda>(Arrays.asList(sweaterFormal,remeraDeDia, camisaSalida, busoInformal, camperaParaSalida, camisaFormalBlanca, camperaMichelin)), new ArrayList<Prenda>(Arrays.asList(pantalonParaSalida)), new ArrayList<Prenda>(Arrays.asList(zapatosFormales)), new ArrayList<Prenda>(Arrays.asList(anteojos)));
 
         nuevoClima =	mock(TemperaturaOpenWeather.class);
-        when(nuevoClima.getTemperature()).thenReturn(8.0);
+
 
         nuevoMeteorologo = mock (OpenWeather.class);
         when (nuevoMeteorologo.obtenerClima()).thenReturn(nuevoClima);
-
-        //TODO: cada atuendo tiene capas, entonces tengo que generar las capas de los atuendos para compararlas con el resultado de sugerirAtuendo. VER TEMA Clima en sugerir atuendo
-
-
-        capaCamperaParaSalida= new CapaSimple(camperaParaSalida);
-        capaCamperaMichelin= new CapaSimple(camperaMichelin);
-        capaBusoInformal= new CapaSimple(busoInformal);
-        capaSweaterFormal= new CapaSimple(sweaterFormal);
-        capaRemeraDeDia= new CapaSimple(remeraDeDia);
-        capaCamisaFormalBlanca= new CapaSimple(camisaFormalBlanca);
-        capaCamisaSalida= new CapaSimple(camisaSalida);
-
-        capaPantalonParaSalida= new CapaSimple(pantalonParaSalida);;
-        capaAnteojos= new CapaSimple(anteojos);
-        capaZapatosFormales = new CapaSimple(zapatosFormales);
-
-
-       // CapaCompuesta parteSuperiorInvierno = new CapaCompuesta(Arrays.asList(remera, buso, campera));
-
-
-
 
        // Assert.assertEquals(guardarropasInvierno.sugerirAtuendo(nuevoClima), Arrays.asList());
 
     }
 
-    public Prenda armarUnaPrenda(TipoDePrenda tipoDePrenda, Material material, Color colorPrimario, Color colorSecundario, Trama trama) {
+    public Prenda armarUnaPrenda(String nombre, TipoDePrenda tipoDePrenda, Material material, Color colorPrimario, Color colorSecundario, Trama trama) {
         BorradorPrenda borradorPrenda = new BorradorPrenda();
+        borradorPrenda.definirNombre(nombre);
         borradorPrenda.definirTipo(tipoDePrenda);
         borradorPrenda.definirMaterial(material);
         borradorPrenda.definirColorPrimario(colorPrimario);
@@ -155,44 +122,26 @@ public class TestsPrendasSuperpuestas {
     //TODO: Test para verificar que todas las capas son de distinto nivel
 
     @Test
-
-
-
-
-    public void seGeneranAtuendosEsperados(){      //TODO: REVISAR CASOS DE FALLO QUE ESTAN COMENTADOS
-
-
+    public void seGeneranAtuendosEsperadosConUnaTemperaturaDe10Grados(){
+/*
+        System.out.println("Tamanio de lista es: "+ guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).size());
+        System.out.println("Capas por Temperatura: " +CapasPorTemperatura.capasDeAbrigoParaClima(nuevoClima));
+*/
+        when(nuevoClima.getTemperature()).thenReturn(10.0);
 
         Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).size() == 12);
 
-        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo(new CapaCompuesta(Arrays.asList(capaRemeraDeDia,capaBusoInformal,capaCamperaParaSalida)),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos))));
-//        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo(new CapaCompuesta(Arrays.asList(capaRemeraDeDia,capaSweaterFormal,capaCamperaParaSalida)),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos))));
-        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo(new CapaCompuesta(Arrays.asList(capaRemeraDeDia,capaBusoInformal,capaCamperaMichelin)),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos))));
-//        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo(new CapaCompuesta(Arrays.asList(capaRemeraDeDia,capaSweaterFormal,capaCamperaMichelin)),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos))));
-        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo(new CapaCompuesta(Arrays.asList(capaCamisaSalida,capaBusoInformal,capaCamperaParaSalida)),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos))));
-//        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo(new CapaCompuesta(Arrays.asList(capaCamisaSalida,capaSweaterFormal,capaCamperaParaSalida)),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos))));
-//        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo(new CapaCompuesta(Arrays.asList(capaCamisaFormalBlanca,capaSweaterFormal,capaCamperaParaSalida)),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos))));
-//        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo(new CapaCompuesta(Arrays.asList(capaCamisaFormalBlanca,capaBusoInformal,capaCamperaMichelin)),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos))));
-//        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo(new CapaCompuesta(Arrays.asList(capaCamisaFormalBlanca,capaSweaterFormal,capaCamperaMichelin)),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos))));
-//        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo(new CapaCompuesta(Arrays.asList(capaCamisaFormalBlanca,capaBusoInformal,capaCamperaParaSalida)),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos))));
-//        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo(new CapaCompuesta(Arrays.asList(capaCamisaSalida,capaSweaterFormal,capaCamperaMichelin)),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos))));
-        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo(new CapaCompuesta(Arrays.asList(capaCamisaSalida,capaBusoInformal,capaCamperaMichelin)),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos))));
-
-        /*Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().equals(Arrays.asList(new Atuendo(new CapaCompuesta(Arrays.asList(capaRemeraDeDia,capaBusoInformal,capaCamperaParaSalida)),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos),
-        new Atuendo(new CapaCompuesta(Arrays.asList(capaRemeraDeDia,capaSweaterFormal,capaCamperaParaSalida)),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos),
-        new Atuendo(new CapaCompuesta(Arrays.asList(capaRemeraDeDia,capaBusoInformal,capaCamperaMichelin)),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos),
-        new Atuendo(new CapaCompuesta(Arrays.asList(capaRemeraDeDia,capaSweaterFormal,capaCamperaMichelin)),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos),
-
-        new Atuendo(new CapaCompuesta(Arrays.asList(capaCamisaSalida,capaBusoInformal,capaCamperaParaSalida)),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos),
-        new Atuendo(new CapaCompuesta(Arrays.asList(capaCamisaSalida,capaSweaterFormal,capaCamperaParaSalida)),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos),
-        new Atuendo(new CapaCompuesta(Arrays.asList(capaCamisaFormalBlanca,capaSweaterFormal,capaCamperaParaSalida)),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos),
-        new Atuendo(new CapaCompuesta(Arrays.asList(capaCamisaFormalBlanca,capaBusoInformal,capaCamperaMichelin)),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos),
-        new Atuendo(new CapaCompuesta(Arrays.asList(capaCamisaFormalBlanca,capaSweaterFormal,capaCamperaMichelin)),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos),
-        new Atuendo(new CapaCompuesta(Arrays.asList(capaCamisaFormalBlanca,capaBusoInformal,capaCamperaParaSalida)),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos),
-        new Atuendo(new CapaCompuesta(Arrays.asList(capaCamisaSalida,capaSweaterFormal,capaCamperaMichelin)),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos),
-        new Atuendo(new CapaCompuesta(Arrays.asList(capaCamisaSalida,capaBusoInformal,capaCamperaMichelin)),capaPantalonParaSalida,capaZapatosFormales,capaAnteojos))));
-        */
-
-        guardarropasInvierno.agregarPrendaSuperior(busoFormal);
+        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo((Arrays.asList(remeraDeDia,busoInformal,camperaParaSalida)),pantalonParaSalida,zapatosFormales,anteojos))));
+        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo((Arrays.asList(remeraDeDia,sweaterFormal,camperaParaSalida)),pantalonParaSalida,zapatosFormales,anteojos))));
+        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo((Arrays.asList(remeraDeDia,busoInformal,camperaMichelin)),pantalonParaSalida,zapatosFormales,anteojos))));
+        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo((Arrays.asList(remeraDeDia,sweaterFormal,camperaMichelin)),pantalonParaSalida,zapatosFormales,anteojos))));
+        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo((Arrays.asList(camisaSalida,busoInformal,camperaParaSalida)),pantalonParaSalida,zapatosFormales,anteojos))));
+        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo((Arrays.asList(camisaSalida,sweaterFormal,camperaParaSalida)),pantalonParaSalida,zapatosFormales,anteojos))));
+        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo((Arrays.asList(camisaFormalBlanca,sweaterFormal,camperaParaSalida)),pantalonParaSalida,zapatosFormales,anteojos))));
+        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo((Arrays.asList(camisaFormalBlanca,busoInformal,camperaMichelin)),pantalonParaSalida,zapatosFormales,anteojos))));
+        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo((Arrays.asList(camisaFormalBlanca,sweaterFormal,camperaMichelin)),pantalonParaSalida,zapatosFormales,anteojos))));
+        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo((Arrays.asList(camisaFormalBlanca,busoInformal,camperaParaSalida)),pantalonParaSalida,zapatosFormales,anteojos))));
+        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo((Arrays.asList(camisaSalida,sweaterFormal,camperaMichelin)),pantalonParaSalida,zapatosFormales,anteojos))));
+        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo((Arrays.asList(camisaSalida,busoInformal,camperaMichelin)),pantalonParaSalida,zapatosFormales,anteojos))));
     }
 }

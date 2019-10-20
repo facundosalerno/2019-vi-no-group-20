@@ -2,54 +2,51 @@ package domain.guardarropas;
 
 import clima.Clima;
 import clima.Meteorologo;
+import com.google.common.collect.Comparators;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import domain.atuendo.Atuendo;
 import domain.capaPrenda.CapasPorTemperatura;
-import domain.capaPrenda.CapaCompuesta;
-import domain.capaPrenda.CapaSimple;
+import domain.capaPrenda.NivelDeCapa;
 import domain.prenda.Categoria;
 import domain.prenda.Prenda;
 import domain.usuario.TipoDeUsuario;
 import exceptions.NoPerteneceALaCategoriaException;
 import exceptions.NoSePuedenGenerarSugerenciasEx;
-import org.apache.commons.collections.ListUtils;
 
 import javax.persistence.*;
-import java.nio.file.ProviderNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 @Entity
-@DiscriminatorColumn(name="tipo_guardarropas")
+@DiscriminatorColumn(name = "tipo_guardarropas")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Guardarropas {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "guardarropas_superiores_id")
-	protected List<Prenda> prendasSuperiores = new ArrayList<Prenda>();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "guardarropas_inferiores_id")
-    protected List<Prenda> prendasInferiores= new ArrayList<Prenda>();;
-	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "guardarropas_calzados_id")
-	protected List<Prenda> calzados= new ArrayList<Prenda>();;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "guardarropas_superiores_id")
+    protected List<Prenda> prendasSuperiores = new ArrayList<Prenda>();
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "guardarropas_accesorios_id")
-    protected List<Prenda> accesorios= new ArrayList<Prenda>();;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "guardarropas_inferiores_id")
+    protected List<Prenda> prendasInferiores = new ArrayList<Prenda>();
+    ;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "guardarropas_calzados_id")
+    protected List<Prenda> calzados = new ArrayList<Prenda>();
+    ;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "guardarropas_accesorios_id")
+    protected List<Prenda> accesorios = new ArrayList<Prenda>();
+    ;
 
     public String getNombre() {
         return nombre;
@@ -58,15 +55,18 @@ public abstract class Guardarropas {
     String nombre;
 
 
-
-    /** Abstract */
+    /**
+     * Abstract
+     */
 
     public abstract TipoDeUsuario tipoDeUsuarioQueAcepta();
 
-    /** Metodos */
-    
-    public List<Prenda> getPrendas(){
-        List <Prenda> todasLasPrendas = new ArrayList(prendasSuperiores);
+    /**
+     * Metodos
+     */
+
+    public List<Prenda> getPrendas() {
+        List<Prenda> todasLasPrendas = new ArrayList(prendasSuperiores);
         todasLasPrendas.addAll(prendasInferiores);
         todasLasPrendas.addAll(calzados);
         todasLasPrendas.addAll(accesorios);
@@ -74,45 +74,54 @@ public abstract class Guardarropas {
     }
 
 
-    public void prendasCoincidenConCategoria(List<Prenda> prendas, Categoria categoria){
-        if(!prendas.stream().allMatch(prenda -> prenda.esDeCategoria(categoria))){
+    public void prendasCoincidenConCategoria(List<Prenda> prendas, Categoria categoria) {
+        if (!prendas.stream().allMatch(prenda -> prenda.esDeCategoria(categoria))) {
             throw new NoPerteneceALaCategoriaException();
         }
     }
 
-    public List<Atuendo> sugerirAtuendo(Meteorologo meteorologo){
+    public List<Atuendo> sugerirAtuendo(Meteorologo meteorologo) {
         Clima climaActual = meteorologo.obtenerClima();
 
-        return Sets.cartesianProduct(ImmutableList.of(ImmutableSet.copyOf(generarCapasCompuestas(prendasSuperiores, climaActual)), ImmutableSet.copyOf(generarCapasSimples(prendasInferiores, climaActual)), ImmutableSet.copyOf(generarCapasSimples(calzados, climaActual)), ImmutableSet.copyOf(generarCapasSimples(accesorios, climaActual))))
+        return Sets.cartesianProduct(ImmutableList.of(ImmutableSet.copyOf(superponerPrendas(prendasSuperiores, climaActual)), ImmutableSet.copyOf(obtenerPrendasParaClima(prendasInferiores, climaActual)), ImmutableSet.copyOf(obtenerPrendasParaClima(calzados, climaActual)), ImmutableSet.copyOf(obtenerPrendasParaClima(accesorios, climaActual))))
                 .stream()
-                .map(list -> new Atuendo(list.get(0), list.get(1), list.get(2), list.get(3)))
+                .map(list -> new Atuendo((List<Prenda>) list.get(0),(Prenda) list.get(1), (Prenda) list.get(2),(Prenda) list.get(3)))
                 .filter(atuendo -> atuendo.esElegible())
                 .collect(Collectors.toList());
     }
 
-    private List<CapaCompuesta> generarCapasCompuestas(List<Prenda> prendas, Clima climaActual) {
-        int capas = CapasPorTemperatura.capasDeAbrigoParaClima(climaActual);
-        if (prendas.size() < capas){ /* Fix para: java.lang.IllegalArgumentException: size (2) must be <= set.size() (1) */
+
+    public static List<List<Prenda>> superponerPrendas(List<Prenda> prendas, Clima climaActual) {  //TODO: IMPORTANTE private
+        int cantidadCapas = CapasPorTemperatura.capasDeAbrigoParaClima(climaActual);
+        if (prendas.size() < cantidadCapas) { /* Fix para: java.lang.IllegalArgumentException: size (2) must be <= set.size() (1) */
             throw new NoSePuedenGenerarSugerenciasEx("No hay suficientes prendas en el guardarropas para satisfacer el clima actual");
         }
 
-        return Sets.combinations(ImmutableSet.copyOf(prendas), capas)
+        return Sets.combinations(ImmutableSet.copyOf(prendas), CapasPorTemperatura.capasDeAbrigoParaClima(climaActual))//Genera combinatorias con la lista de prendas a partir de la cantidadCapas calculada
+                //Tipo Set<Set<Prenda>>
                 .stream()
-                .map(set -> new CapaCompuesta(transformarPrendaEnCapa(ImmutableList.copyOf(set))))
-                .filter(capa -> capa.abrigaBien(climaActual) && capa.estaBienOrdenada())
+                .map(listaPrenda -> listaPrenda.stream().sorted(Comparator.comparing(Prenda::getNivelDeCapa)).collect(Collectors.toList()))
+                .filter(listaPrenda -> estaOrdenada(listaPrenda))
                 .collect(Collectors.toList());
+
+
     }
 
-    private List<CapaSimple> generarCapasSimples(List<Prenda> prendas, Clima climaActual){
-        return prendas.stream().filter(prenda -> prenda.abrigaBien(climaActual)).map(prenda -> new CapaSimple(prenda)).collect(Collectors.toList());
+    private List<Prenda> obtenerPrendasParaClima(List<Prenda> prendas, Clima climaActual) {
+        return prendas.stream().filter(prenda -> prenda.abrigaBien(climaActual)).collect(Collectors.toList());
     }
 
-    private List<CapaSimple> transformarPrendaEnCapa(List<Prenda> prendas){
-        return prendas.stream().map(prenda -> new CapaSimple(prenda)).collect(Collectors.toList());
+    public static boolean estaOrdenada(List<Prenda> listaDePrendas) {
+        if (listaDePrendas.get(0).getNivelDeCapa() != NivelDeCapa.ABAJO) return false;
+        return Comparators.isInOrder(listaDePrendas, Comparator.<Prenda>naturalOrder());
+    }
+
+    public static boolean abrigaBien(List<Prenda> listaDePrendas, Clima climaActual) {
+        return listaDePrendas.stream().allMatch(capa -> capa.abrigaBien(climaActual));
     }
 
     public void agregarPrendaSuperior(Prenda prendaAgregada) {
-        if (!prendaAgregada.esDeCategoria(Categoria.PARTE_SUPERIOR)){
+        if (!prendaAgregada.esDeCategoria(Categoria.PARTE_SUPERIOR)) {
             throw new NoPerteneceALaCategoriaException();
         }
 
@@ -121,7 +130,7 @@ public abstract class Guardarropas {
     }
 
     public void agregarPrendaInferior(Prenda prendaAgregada) {
-        if (!prendaAgregada.esDeCategoria(Categoria.PARTE_INFERIOR)){
+        if (!prendaAgregada.esDeCategoria(Categoria.PARTE_INFERIOR)) {
             throw new NoPerteneceALaCategoriaException();
         }
 
@@ -129,7 +138,7 @@ public abstract class Guardarropas {
     }
 
     public void agregarPrendaCalzado(Prenda prendaAgregada) {
-        if (!prendaAgregada.esDeCategoria(Categoria.CALZADO)){
+        if (!prendaAgregada.esDeCategoria(Categoria.CALZADO)) {
             throw new NoPerteneceALaCategoriaException();
         }
 
@@ -137,22 +146,38 @@ public abstract class Guardarropas {
     }
 
     public void agregarPrendaAccesorio(Prenda prendaAgregada) {
-        if (!prendaAgregada.esDeCategoria(Categoria.ACCESORIOS)){
+        if (!prendaAgregada.esDeCategoria(Categoria.ACCESORIOS)) {
             throw new NoPerteneceALaCategoriaException();
         }
 
         this.accesorios.add(prendaAgregada);
     }
-    
- // getters y setters
-    
-	public Long getId() {return id;}
-	public List<Prenda> getPrendasSuperiores() {return prendasSuperiores;}
-	public List<Prenda> getPrendasInferiores() {return prendasInferiores;}
-	public List<Prenda> getCalzados() {return calzados;}
-	public List<Prenda> getAccesorios() {return accesorios;}
 
-    /** Equals y hashcode */
+    // getters y setters
+
+    public Long getId() {
+        return id;
+    }
+
+    public List<Prenda> getPrendasSuperiores() {
+        return prendasSuperiores;
+    }
+
+    public List<Prenda> getPrendasInferiores() {
+        return prendasInferiores;
+    }
+
+    public List<Prenda> getCalzados() {
+        return calzados;
+    }
+
+    public List<Prenda> getAccesorios() {
+        return accesorios;
+    }
+
+    /**
+     * Equals y hashcode
+     */
 
     @Override
     public boolean equals(Object o) {

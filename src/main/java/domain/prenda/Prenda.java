@@ -16,7 +16,7 @@ import static java.util.Objects.requireNonNull;
 
 
 @Entity
-public class Prenda {
+public class Prenda implements Comparable<Prenda>{
 	@Id	
 	private Long id;
 
@@ -115,6 +115,12 @@ public class Prenda {
     }
 
 
+
+    public boolean prendaFueAceptada(){
+        return this.getEstado() == Estado.ACEPTADO;
+    }
+
+
     /** Equals y hashCode */
     @Override
     public boolean equals(Object o) {
@@ -140,4 +146,11 @@ public class Prenda {
     public String toString() {
         return ReflectionToStringBuilder.toString(this);
     }
+
+    @Override
+    public int compareTo(Prenda prenda) {
+            if(this.getNivelDeCapa() == prenda.getNivelDeCapa()) return 1;
+            return 0;
+    }
 }
+
