@@ -30,17 +30,23 @@ public class ControllerSesion {
             usuario = RepositorioUsuarios.getInstance().buscarUsuario(req.queryParams("var_username"));
             usuario.validarContraseña(req.queryParams("var_password"));
         }catch(UsuarioInexistente e){
-            mensajeSesion = "Usuario inexistente.";
+            mensajeSesion = "Usuario inexistente o contraseña invalida.";
             return new ModelAndView(this, "login.hbs");
         }catch (ContraseñaInvalidaException e){
-            mensajeSesion = "Contraseña invalida.";
+            mensajeSesion = "Usuario inexistente o contraseña invalida.";
             return new ModelAndView(this, "login.hbs");
         }
 
         res.cookie("cookie_nombre", usuario.getNombre());
 
-        res.redirect("/usuarios/:nombre");
-        return new ModelAndView(usuario, "perfil.hbs");
+        res.redirect("/perfil");
+        return new ModelAndView(null, "perfil.hbs");
+    }
+
+    public ModelAndView cerrarSesion(Request req, Response res){
+        res.removeCookie("cookie_nombre");
+        res.redirect("/login");
+        return new ModelAndView(new ControllerSesion(), "login.hbs");
     }
 
     public String getMensajeSesion(){

@@ -100,6 +100,7 @@ public class TestsPrendasSuperpuestas {
             borradorPrenda.definirColorSecundario(colorSecundario);
         }
         borradorPrenda.definirTrama(trama);
+        borradorPrenda.definirNombre("a");
         return borradorPrenda.crearPrenda();
     }
 

@@ -46,5 +46,5 @@ public class RepositorioUsuarios {
         return listaDeUsuarios;
     }
 
-    static final public Usuario admin = new Usuario("admin", Arrays.asList(RepositorioGuardarropas.guardarropasDelAdmin), TipoDeUsuario.PREMIUM);
+    static final public Usuario admin = new Usuario("admin", Arrays.asList(RepositorioGuardarropas.guardarropasDelAdmin, RepositorioGuardarropas.guardarropasDelAdminAuxiliar), TipoDeUsuario.PREMIUM);
 }
