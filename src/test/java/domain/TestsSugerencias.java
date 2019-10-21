@@ -42,7 +42,7 @@ public class TestsSugerencias {
         ojotas = armarUnaPrenda(TipoDePrenda.OJOTAS, Material.GOMA, azul, rojo, Trama.CUADROS);
         anteojos= armarUnaPrenda(TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA);
 
-        guardarropasDeWilly = new GuardarropasPremium(Arrays.asList(musculosa), Arrays.asList(trajeDeBaño), Arrays.asList(ojotas), Arrays.asList(anteojos));
+        guardarropasDeWilly = new GuardarropasPremium("guardarropas casual", Arrays.asList(musculosa), Arrays.asList(trajeDeBaño), Arrays.asList(ojotas), Arrays.asList(anteojos));
 
     }
 

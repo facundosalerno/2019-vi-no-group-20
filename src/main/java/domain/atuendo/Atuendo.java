@@ -73,9 +73,8 @@ public class Atuendo {
 
     /* Si un usuario acepta el atuendo, entonces acepta todas sus prendas (capas) y ya no sera elegible por otro usuario que comparta el mismo guardarropas */
     public boolean esElegible() {
-        return ningunaPrendaEstaEnUso();
+        return this.estado != Estado.ACEPTADO && ningunaPrendaFueAceptada();
     }
-
 
     private boolean ningunaPrendaFueAceptada() {
         return !prendasSuperiores.stream().allMatch(prenda -> prenda.prendaFueAceptada()) && !prendaInferior.prendaFueAceptada() && !calzado.prendaFueAceptada() && !accesorio.prendaFueAceptada();
