@@ -19,9 +19,12 @@ public class ControllerPrendas {
 
         }catch (NoExisteGuardarropasException e){
             return new ModelAndView(null, "forbidden.hbs");
-        }finally {
-            res.removeCookie("cookie_nombreGuardarropas"); //Ya no la necesitamos
         }
         return new ModelAndView(guardarropas, "prendas.hbs");
+    }
+
+    public ModelAndView crearPrenda(Request req, Response res){
+
+        return new ModelAndView(null, "crearPrenda.hbs");
     }
 }

@@ -10,7 +10,6 @@ import spark.template.handlebars.HandlebarsTemplateEngine;
 
 public class Server {
     public static void main(String[] args) {
-        //RepositorioGuardarropas.instance().findByUsuario(new Usuario());
         Spark.port(9010);
         //Spark.staticFiles.location("/public");
         Spark.staticFileLocation("/public");
@@ -18,10 +17,6 @@ public class Server {
 
 
         /** GLUE CODE */
-
-        ControllerGuardarropas controllerGuardarropas = new ControllerGuardarropas();
-        Spark.get("/perfil/guardarropas", controllerGuardarropas::mostrarGuardarropas, new HandlebarsTemplateEngine());
-        Spark.post("/perfil/guardarropas/:nombre", controllerGuardarropas::seleccionarGuardarropas, new HandlebarsTemplateEngine());
 
         ControllerSesion controllerSesion= new ControllerSesion();
         Spark.get("/login", controllerSesion::mostrarLogin, new HandlebarsTemplateEngine());
@@ -31,9 +26,14 @@ public class Server {
         ControllerPerfil controllerPerfil= new ControllerPerfil();
         Spark.get("/perfil", controllerPerfil::mostrar, new HandlebarsTemplateEngine());
 
+        ControllerGuardarropas controllerGuardarropas = new ControllerGuardarropas();
+        Spark.get("/guardarropas", controllerGuardarropas::mostrarGuardarropas, new HandlebarsTemplateEngine());
+        Spark.post("/guardarropas/:nombre", controllerGuardarropas::seleccionarGuardarropas, new HandlebarsTemplateEngine());
+        /* POST /guardarropas para crear guardarropas */
+
         ControllerPrendas controllerPrendas = new ControllerPrendas();
-        Spark.get("/perfil/guardarropas/prendas", controllerPrendas::mostrarPrendas,  new HandlebarsTemplateEngine());
-        //Tambien podria poner un post de /perfil/guardarropas/:nombre/prendas y traerme el nombre sin la necesidad de usar cookies pero no se
+        Spark.get("/guardarropas/:nombre/prendas", controllerPrendas::mostrarPrendas,  new HandlebarsTemplateEngine());
+        Spark.post("/guardarropas/:nombre/prendas", controllerPrendas::crearPrenda,  new HandlebarsTemplateEngine());
 
         DebugScreen.enableDebugScreen();
 

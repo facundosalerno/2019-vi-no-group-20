@@ -18,6 +18,7 @@ body {
     border-radius: 10px;
 }
 
+/* Contenedor que muestra la lista guardarropas */
 .contenedor_guardarropas{
     display: flex;
     flex-direction: row;
@@ -26,6 +27,7 @@ body {
     margin-top: 50px;
 }
 
+/* Presentacion de cada guardarropas individualmente */
 .guardarropa{
     margin: 10px;
     width: 14rem;
@@ -56,11 +58,13 @@ body {
     background-color: #FAF2C9;
 }
 
+/* Contenedor de la imagen del perfil */
 .container_masthead{
     margin-top: 30px;
     background-color: #FAF7E6;
 }
 
+/* Contenedores que tienen las listas de prendas cuando se revisa un guardarropas */
 .contenedor_prendas{
     flex-direction: row;
     padding: 0 30%;
@@ -68,13 +72,26 @@ body {
     margin-top: 50px;
 }
 
+/* Presentacion de cada prenda individual */
 .prenda{
-   max-height: 100px;
+    border-radius: 10px;
 }
 
+/* La imagen que cada prenda puede tener */
 .imagen_prenda{
     object-fit: contain;
     max-height: 100px;
+}
+
+/* Contenedor de la creacion de prendas */
+.creador_prendas_wizard{
+    padding: 0 15%;
+    margin-top: 50px;
+}
+
+/* Cada tarjeta individual de creacion de prendas */
+.card_prendas_wizard{
+    border-radius: 10px;
 }
 
 

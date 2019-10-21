@@ -45,6 +45,7 @@ public class ControllerSesion {
 
     public ModelAndView cerrarSesion(Request req, Response res){
         res.removeCookie("cookie_nombre");
+        res.removeCookie("cookie_nombreGuardarropas");
         res.redirect("/login");
         return new ModelAndView(new ControllerSesion(), "login.hbs");
     }
