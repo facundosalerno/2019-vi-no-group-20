@@ -23,4 +23,11 @@ public class ControllerGuardarropas {
         return new ModelAndView(usuario, "guardarropas.hbs");
     }
 
+    public ModelAndView seleccionarGuardarropas(Request req, Response res){
+        String nombreGuardarropas = req.params(":nombre");
+        res.cookie("cookie_nombreGuardarropas", nombreGuardarropas); //No pude meter la variable en el redirect, asi que la mando por cookie. El problema era que no me cargaba el css
+        res.redirect("/perfil/guardarropas/prendas");
+        return new ModelAndView(null, "prendas.hbs");
+    }
+
 }

@@ -1,4 +1,90 @@
 {{#partial "body"}}
-
+    <div class="contenedor_prendas">
+        <h5 class="card-title text-capitalize">{{nombre}}</h5>
+        {{#each prendasSuperiores}}
+            <div class="card mb-3 shadow">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="/remera.png" class="card-img imagen_prenda" alt="Remera">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title text-capitalize">{{nombre}}</h5>
+                            <p class="card-text">
+                                {{#if estaEnUso}}
+                                    La prenda esta siendo usada por alguien mas.
+                                {{else}}
+                                    La prenda esta disponible para su uso.
+                                {{/if}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+        {{#each prendasInferiores}}
+            <div class="card mb-3 shadow">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="/remera.png" class="card-img imagen_prenda" alt="Remera">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title text-capitalize">{{nombre}}</h5>
+                            <p class="card-text">
+                                {{#if estaEnUso}}
+                                    La prenda esta siendo usada por alguien mas.
+                                {{else}}
+                                    La prenda esta disponible para su uso.
+                                {{/if}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+        {{#each accesorios}}
+            <div class="card mb-3 shadow">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="/remera.png" class="card-img imagen_prenda" alt="Remera">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title text-capitalize">{{nombre}}</h5>
+                            <p class="card-text">
+                                {{#if estaEnUso}}
+                                    La prenda esta siendo usada por alguien mas.
+                                {{else}}
+                                    La prenda esta disponible para su uso.
+                                {{/if}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+        {{#each calzados}}
+            <div class="card mb-3 shadow">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="/remera.png" class="card-img imagen_prenda" alt="Remera">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title text-capitalize">{{nombre}}</h5>
+                            <p class="card-text">
+                                {{#if estaEnUso}}
+                                    La prenda esta siendo usada por alguien mas.
+                                {{else}}
+                                    La prenda esta disponible para su uso.
+                                {{/if}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
 {{/partial}}
 {{>encabezado.hbs}}

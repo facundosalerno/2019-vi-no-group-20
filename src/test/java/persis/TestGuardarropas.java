@@ -36,8 +36,8 @@ public class TestGuardarropas {
         anteojos= armarUnaPrenda(TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA);
         camisa = armarUnaPrenda(TipoDePrenda.CAMISA, Material.ALGODON, blanco, rojo, Trama.LISA);
 
-        guardarropasPremium = new GuardarropasPremium(Arrays.asList(camisa, remera), Arrays.asList(pantalon), Arrays.asList(zapatos), Arrays.asList(anteojos));
-        guardarropasLimitado = new GuardarropasLimitado(Arrays.asList(camisa, remera), Arrays.asList(pantalon), Arrays.asList(zapatos), Arrays.asList(anteojos));
+        guardarropasPremium = new GuardarropasPremium("guardarropas premium", Arrays.asList(camisa, remera), Arrays.asList(pantalon), Arrays.asList(zapatos), Arrays.asList(anteojos));
+        guardarropasLimitado = new GuardarropasLimitado("guardarropas limitado", Arrays.asList(camisa, remera), Arrays.asList(pantalon), Arrays.asList(zapatos), Arrays.asList(anteojos));
     }
 
     public Prenda armarUnaPrenda(TipoDePrenda tipoDePrenda, Material material, Color colorPrimario, Color colorSecundario, Trama trama){

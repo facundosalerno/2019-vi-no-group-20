@@ -4,6 +4,8 @@ import domain.guardarropas.Guardarropas;
 import domain.guardarropas.GuardarropasPremium;
 import domain.prenda.*;
 import domain.usuario.Usuario;
+import exceptions.NoExisteGuardarropasException;
+import exceptions.UsuarioInexistente;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -61,9 +63,17 @@ public class RepositorioGuardarropas {
             listaDeGuardarropas.remove(guardarropas);
     }
 
+    public Guardarropas buscarGuardarropas(String nombre){
+        Guardarropas guardarropas = listaDeGuardarropas.stream().filter(g -> g.getNombre().equals(nombre)).findFirst().orElse(null);
+        if(guardarropas == null)
+            throw new NoExisteGuardarropasException();
+        return guardarropas;
+    }
+
 
 
     public static GuardarropasPremium guardarropasDelAdmin = new GuardarropasPremium(
+            "guardarropas principal",
             Arrays.asList(armarUnaPrenda("remera", TipoDePrenda.REMERA, Material.ALGODON, azul, rojo, Trama.CUADROS), armarUnaPrenda("buso", TipoDePrenda.BUSO, Material.ALGODON, azul, verde, Trama.LISA)),
             Arrays.asList(armarUnaPrenda("pantalon", TipoDePrenda.PANTALON, Material.JEAN, verde, rojo, Trama.RAYADA)),
             Arrays.asList(armarUnaPrenda("zapatos", TipoDePrenda.ZAPATO, Material.CUERO, rojo, azul, Trama.GASTADO)),
@@ -71,6 +81,7 @@ public class RepositorioGuardarropas {
     );
 
     public static GuardarropasPremium guardarropasDelAdminAuxiliar = new GuardarropasPremium(
+            "guardarropas de emergencia",
             Arrays.asList(armarUnaPrenda("remera", TipoDePrenda.REMERA, Material.ALGODON, azul, rojo, Trama.CUADROS), armarUnaPrenda("buso", TipoDePrenda.BUSO, Material.ALGODON, azul, verde, Trama.LISA)),
             Arrays.asList(armarUnaPrenda("pantalon", TipoDePrenda.PANTALON, Material.JEAN, verde, rojo, Trama.RAYADA)),
             Arrays.asList(armarUnaPrenda("zapatos", TipoDePrenda.ZAPATO, Material.CUERO, rojo, azul, Trama.GASTADO)),

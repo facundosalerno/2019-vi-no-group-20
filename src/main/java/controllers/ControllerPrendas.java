@@ -1,7 +1,10 @@
 package controllers;
 
+import cron.RepositorioGuardarropas;
 import cron.RepositorioUsuarios;
+import domain.guardarropas.Guardarropas;
 import domain.usuario.Usuario;
+import exceptions.NoExisteGuardarropasException;
 import exceptions.UsuarioInexistente;
 import spark.ModelAndView;
 import spark.Request;
@@ -9,14 +12,16 @@ import spark.Response;
 
 public class ControllerPrendas {
     public ModelAndView mostrarPrendas(Request req, Response res) {
-        String nombre= req.cookie("cookie_nombre");
-        Usuario usuario;
+        String nombreGuardarropas = req.cookie("cookie_nombreGuardarropas");
+        Guardarropas guardarropas;
         try{
-            usuario = RepositorioUsuarios.getInstance().buscarUsuario(nombre);
-        }catch (UsuarioInexistente e){
-            return new ModelAndView(null, "forbidden.hbs");
-        }
+            guardarropas = RepositorioGuardarropas.getInstance().buscarGuardarropas(nombreGuardarropas);
 
-        return new ModelAndView(usuario, "prendas.hbs");
+        }catch (NoExisteGuardarropasException e){
+            return new ModelAndView(null, "forbidden.hbs");
+        }finally {
+            res.removeCookie("cookie_nombreGuardarropas"); //Ya no la necesitamos
+        }
+        return new ModelAndView(guardarropas, "prendas.hbs");
     }
 }

@@ -90,7 +90,7 @@ public class TestsPrendasSuperpuestas {
         //remeraCanchera = armarUnaPrenda(TipoDePrenda.REMERA, Material.ALGODON, azul, rojo, Trama.RAYADA);  //TODO: Para tests guardarropas
         remeraDeDia = armarUnaPrenda(TipoDePrenda.REMERA, Material.ALGODON, azul, null, Trama.LISA);
 
-        guardarropasInvierno = new GuardarropasPremium(new ArrayList<Prenda>(Arrays.asList(sweaterFormal,remeraDeDia, camisaSalida, busoInformal, camperaParaSalida, camisaFormalBlanca, camperaMichelin)), new ArrayList<Prenda>(Arrays.asList(pantalonParaSalida)), new ArrayList<Prenda>(Arrays.asList(zapatosFormales)), new ArrayList<Prenda>(Arrays.asList(anteojos)));
+        guardarropasInvierno = new GuardarropasPremium("guardarropas de invierno", new ArrayList<Prenda>(Arrays.asList(sweaterFormal,remeraDeDia, camisaSalida, busoInformal, camperaParaSalida, camisaFormalBlanca, camperaMichelin)), new ArrayList<Prenda>(Arrays.asList(pantalonParaSalida)), new ArrayList<Prenda>(Arrays.asList(zapatosFormales)), new ArrayList<Prenda>(Arrays.asList(anteojos)));
 
         nuevoClima =	mock(TemperaturaOpenWeather.class);
         when(nuevoClima.getTemperature()).thenReturn(8.0);

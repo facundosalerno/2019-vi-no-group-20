@@ -60,7 +60,7 @@ public class TestsSugerencias {
         cojotas = new CapaSimple(ojotas);
         canteojos = new CapaSimple(anteojos);
 
-        guardarropasDeWilly = new GuardarropasPremium(Arrays.asList(musculosa), Arrays.asList(trajeDeBaño), Arrays.asList(ojotas), Arrays.asList(anteojos));
+        guardarropasDeWilly = new GuardarropasPremium("guardarropas de willy", Arrays.asList(musculosa), Arrays.asList(trajeDeBaño), Arrays.asList(ojotas), Arrays.asList(anteojos));
 
     }
 

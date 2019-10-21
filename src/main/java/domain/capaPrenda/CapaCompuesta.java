@@ -52,8 +52,18 @@ public class CapaCompuesta extends Capa {
     }
 
     @Override /* Con que algun elemento de la capa este aceptado entonces no lo podemos usar... es medio una limitacion */
-    public boolean capaFueAceptada() {
-        return capasPrendas.stream().anyMatch(capa -> capa.capaFueAceptada());
+    public boolean capaEstaEnUso() {
+        return capasPrendas.stream().anyMatch(capa -> capa.capaEstaEnUso());
+    }
+
+    @Override
+    public void marcarCapaEnUso() {
+        capasPrendas.stream().forEach(capa -> capa.marcarCapaEnUso());
+    }
+
+    @Override
+    public void marcarCapaSinUso() {
+        capasPrendas.stream().forEach(capa -> capa.marcarCapaSinUso());
     }
 
     /* Verifica si la capa compuesta tiene las capas simples bien ordenadas, es decir, segun su NivelDeCapa */

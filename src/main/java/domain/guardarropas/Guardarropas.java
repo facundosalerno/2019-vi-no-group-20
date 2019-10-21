@@ -159,14 +159,16 @@ public abstract class Guardarropas {
         if (this == o) return true;
         if (!(o instanceof Guardarropas)) return false;
         Guardarropas that = (Guardarropas) o;
-        return Objects.equals(prendasSuperiores, that.prendasSuperiores) &&
+        return Objects.equals(id, that.id) &&
+                Objects.equals(prendasSuperiores, that.prendasSuperiores) &&
                 Objects.equals(prendasInferiores, that.prendasInferiores) &&
                 Objects.equals(calzados, that.calzados) &&
-                Objects.equals(accesorios, that.accesorios);
+                Objects.equals(accesorios, that.accesorios) &&
+                Objects.equals(nombre, that.nombre);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(prendasSuperiores, prendasInferiores, calzados, accesorios);
+        return Objects.hash(id, prendasSuperiores, prendasInferiores, calzados, accesorios, nombre);
     }
 }

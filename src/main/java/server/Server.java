@@ -18,21 +18,22 @@ public class Server {
 
 
         /** GLUE CODE */
-        //TemplateEngine engine = new HandlebarsTemplateEngine();
 
         ControllerGuardarropas controllerGuardarropas = new ControllerGuardarropas();
         Spark.get("/perfil/guardarropas", controllerGuardarropas::mostrarGuardarropas, new HandlebarsTemplateEngine());
+        Spark.post("/perfil/guardarropas/:nombre", controllerGuardarropas::seleccionarGuardarropas, new HandlebarsTemplateEngine());
 
         ControllerSesion controllerSesion= new ControllerSesion();
         Spark.get("/login", controllerSesion::mostrarLogin, new HandlebarsTemplateEngine());
-        Spark.post("/login", controllerSesion::crear, new HandlebarsTemplateEngine());
+        Spark.post("/login", controllerSesion::iniciarSesion, new HandlebarsTemplateEngine());
         Spark.post("/", controllerSesion::cerrarSesion, new HandlebarsTemplateEngine());
 
         ControllerPerfil controllerPerfil= new ControllerPerfil();
         Spark.get("/perfil", controllerPerfil::mostrar, new HandlebarsTemplateEngine());
 
         ControllerPrendas controllerPrendas = new ControllerPrendas();
-        Spark.get("/perfil/guardarropas/prendas", controllerPrendas::mostrarPrendas, new HandlebarsTemplateEngine());
+        Spark.get("/perfil/guardarropas/prendas", controllerPrendas::mostrarPrendas,  new HandlebarsTemplateEngine());
+        //Tambien podria poner un post de /perfil/guardarropas/:nombre/prendas y traerme el nombre sin la necesidad de usar cookies pero no se
 
         DebugScreen.enableDebugScreen();
 

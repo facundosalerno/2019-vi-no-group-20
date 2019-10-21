@@ -5,7 +5,6 @@ import domain.capaPrenda.Capa;
 import domain.prenda.Categoria;
 import exceptions.AtuendoInvalidoException;
 import exceptions.NoCumpleRequisitoParaCalificarException;
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
 import javax.persistence.*;
@@ -67,12 +66,27 @@ public class Atuendo {
 
     /* Si un usuario acepta el atuendo, entonces acepta todas sus prendas (capas) y ya no sera elegible por otro usuario que comparta el mismo guardarropas */
     public boolean esElegible() {
-        return estado != Estado.ACEPTADO && ningunaPrendaFueAceptada();
+        return ningunaPrendaEstaEnUso();
     }
 
-    private boolean ningunaPrendaFueAceptada() {
-        return !capaSuperior.capaFueAceptada() && !capaInferior.capaFueAceptada() && !calzado.capaFueAceptada() && !accesorio.capaFueAceptada();
+    private boolean ningunaPrendaEstaEnUso() {
+        return !capaSuperior.capaEstaEnUso() && !capaInferior.capaEstaEnUso() && !calzado.capaEstaEnUso() && !accesorio.capaEstaEnUso();
     }
+
+    public void marcarAtuendoEnUso(){
+        capaSuperior.marcarCapaEnUso();
+        capaInferior.marcarCapaEnUso();
+        calzado.marcarCapaEnUso();
+        accesorio.marcarCapaEnUso();
+    }
+
+    public void marcarAtuendoSinUso(){
+        capaSuperior.marcarCapaSinUso();
+        capaInferior.marcarCapaSinUso();
+        calzado.marcarCapaSinUso();
+        accesorio.marcarCapaSinUso();
+    }
+
 
     public boolean esCategoria(Capa prenda, Categoria categoria) {
         return (prenda.getCategoria() == categoria);

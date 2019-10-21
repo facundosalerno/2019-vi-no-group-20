@@ -22,7 +22,7 @@ public class ControllerSesion {
         return new ModelAndView(new ControllerSesion(),"login.hbs");  //Indica con que se va a renderizar el template (.hbs)
     }
 
-    public ModelAndView crear(Request req, Response res){
+    public ModelAndView iniciarSesion(Request req, Response res){
         RepositorioUsuarios.admin.setPassword("12345"); //para test. la pass se hashea en el set
         Usuario usuario;
 

@@ -62,7 +62,7 @@ public class TestsValidacionUsuarioYGuardarropas {
     @Test
     public void crearUnGuardarropasValido(){
         try{
-            GuardarropasPremium guardarropasDeVerano = new GuardarropasPremium(Arrays.asList(remera, blusa), Arrays.asList(shorts, pantalon), Arrays.asList(zapatos, zapatillas),Arrays.asList(pulseras, anteojos));
+            GuardarropasPremium guardarropasDeVerano = new GuardarropasPremium("guardarropas de verano", Arrays.asList(remera, blusa), Arrays.asList(shorts, pantalon), Arrays.asList(zapatos, zapatillas),Arrays.asList(pulseras, anteojos));
         }catch (NoPerteneceALaCategoriaException ex){
             Assert.fail();
         }
@@ -72,13 +72,13 @@ public class TestsValidacionUsuarioYGuardarropas {
 
    @Test(expected= NoPermiteGuardarropaIncompletoException.class)
    public void pedirSugerenciaConGuardarropaVacio(){
-         GuardarropasPremium guardarropasDeInvierno= new GuardarropasPremium (Arrays.asList(),Arrays.asList(),Arrays.asList(),Arrays.asList());
+         GuardarropasPremium guardarropasDeInvierno= new GuardarropasPremium ("guardarropas de invierno", Arrays.asList(),Arrays.asList(),Arrays.asList(),Arrays.asList());
     }
 
     // Verificar que no de sugerencias si no tiene prenda superior
     @Test(expected= NoPermiteGuardarropaIncompletoException.class)
     public void pedirSugerenciaConGuardarropaIncompleto(){
-        GuardarropasPremium guardarropasDeportivo= new GuardarropasPremium (Arrays.asList(),Arrays.asList(pantalon),Arrays.asList(zapatillas), Arrays.asList(anteojos));
+        GuardarropasPremium guardarropasDeportivo= new GuardarropasPremium ("guardarropas deportivo", Arrays.asList(),Arrays.asList(pantalon),Arrays.asList(zapatillas), Arrays.asList(anteojos));
     }
 
 }

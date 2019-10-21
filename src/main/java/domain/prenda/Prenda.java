@@ -22,6 +22,8 @@ public class Prenda {
 
 	String nombre;
 
+	boolean estaEnUso = false;
+
 	@ManyToOne
     private TipoDePrenda tipoPrenda;
 
@@ -86,7 +88,15 @@ public class Prenda {
         return tipoPrenda.esAptoParaTemperatura(climaActual);
     }
 
+    public boolean getEstaEnUso(){ return estaEnUso; }
 
+    public void marcarEnUso() {
+        estaEnUso = true;
+    }
+
+    public void marcarSinUso() {
+        estaEnUso = false;
+    }
 
 
 

@@ -21,9 +21,10 @@ public class GuardarropasPremium extends Guardarropas{
     protected GuardarropasPremium() {};
 
     public GuardarropasPremium(String nombre){
-        this.nombre=nombre;
+        this.nombre = nombre;
     }
-    public GuardarropasPremium(List<Prenda> prendasSuperiores, List<Prenda> prendasInferiores, List<Prenda> calzados, List<Prenda> accesorios) {
+
+    public GuardarropasPremium(String nombre, List<Prenda> prendasSuperiores, List<Prenda> prendasInferiores, List<Prenda> calzados, List<Prenda> accesorios) {
 
         if(prendasSuperiores.isEmpty() || prendasInferiores.isEmpty() || calzados.isEmpty() || accesorios.isEmpty())
             throw new NoPermiteGuardarropaIncompletoException();
@@ -35,6 +36,7 @@ public class GuardarropasPremium extends Guardarropas{
         this.prendasInferiores = prendasInferiores;
         this.calzados = calzados;
         this.accesorios= accesorios;
+        this.nombre=nombre;
         RepositorioGuardarropas.getInstance().agregarGuardarropas(this);
     }
 

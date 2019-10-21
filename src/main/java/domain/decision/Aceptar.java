@@ -12,9 +12,11 @@ public class Aceptar extends Decision {
     public Aceptar(Atuendo atuendo){
         this.atuendo=atuendo;
         atuendo.cambiarEstado(Estado.ACEPTADO);
+        atuendo.marcarAtuendoEnUso();
     }
 
     public void deshacer(){
         atuendo.cambiarEstado(Estado.NUEVO);
+        atuendo.marcarAtuendoSinUso();
     }
 }

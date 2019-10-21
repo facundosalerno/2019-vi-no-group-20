@@ -29,8 +29,18 @@ public class CapaSimple extends Capa {
     }
 
     @Override
-    public boolean capaFueAceptada() {
-        return prenda.getEstado() == Estado.ACEPTADO;
+    public boolean capaEstaEnUso() {
+        return prenda.getEstaEnUso();
+    }
+
+    @Override
+    public void marcarCapaEnUso() {
+        prenda.marcarEnUso();
+    }
+
+    @Override
+    public void marcarCapaSinUso() {
+        prenda.marcarSinUso();
     }
 
     @Override

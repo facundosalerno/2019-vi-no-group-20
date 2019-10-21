@@ -19,7 +19,9 @@ public abstract class Capa {
     public abstract Categoria getCategoria();
     public abstract boolean abrigaBien(Clima climaActual);
     public abstract void cambiarEstado(Estado estado);
-    public abstract boolean capaFueAceptada();
+    public abstract boolean capaEstaEnUso();
+    public abstract void marcarCapaEnUso();
+    public abstract void marcarCapaSinUso();
 
     @Override
     public String toString() {
