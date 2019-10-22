@@ -13,6 +13,7 @@ import org.uqbarproject.jpa.java8.extras.convert.LocalDateTimeConverter;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -23,7 +24,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 
 @Entity
-public class Evento implements Notificable {
+public class Evento implements Notificable, Comparable<Evento> {
     //TODO:Contemplar  la temperatura al momento del evento.
 
     @Id
@@ -173,5 +174,10 @@ public class Evento implements Notificable {
     @Override
     public int hashCode() {
         return Objects.hash(nombre, fecha, lugar, usuario, sugerenciasObtenidas);
+    }
+
+    @Override
+    public int compareTo(Evento o) {
+        return Long.compare(this.fecha.toEpochSecond(ZoneOffset.UTC), o.fecha.toEpochSecond(ZoneOffset.UTC));
     }
 }

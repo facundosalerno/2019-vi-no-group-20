@@ -2,6 +2,7 @@ package controllers;
 
 import cron.RepositorioGuardarropas;
 import cron.RepositorioUsuarios;
+import domain.evento.FrecuenciaEvento;
 import domain.guardarropas.GuardarropasPremium;
 import domain.prenda.*;
 import domain.usuario.*;
@@ -10,6 +11,7 @@ import exceptions.UsuarioInexistente;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
+import spark.Spark;
 
 import java.util.Arrays;
 
@@ -25,7 +27,7 @@ public class ControllerSesion {
 
 
     public ModelAndView iniciarSesion(Request req, Response res) {
-        RepositorioUsuarios.admin.setPassword("12345");
+        iniciarUsuarioDePrueba();
         Usuario usuario;
 
         try {
@@ -56,6 +58,13 @@ public class ControllerSesion {
 
     public String getMensajeSesion() {
         return mensajeSesion;
+    }
+
+    public void iniciarUsuarioDePrueba(){
+        RepositorioUsuarios.admin.setPassword("12345");
+        RepositorioUsuarios.admin.crearEvento("Cumpleaños de juan", RepositorioUsuarios.fechaCumpleWilly, FrecuenciaEvento.NO_SE_REPITE,"Casa de Juan");
+        RepositorioUsuarios.admin.crearEvento("Cumpleaños de pepe", RepositorioUsuarios.fechaCumplePepe, FrecuenciaEvento.NO_SE_REPITE,"Casa de pepe");
+        RepositorioUsuarios.admin.crearEvento("Cumpleaños de robertito", RepositorioUsuarios.fechaCumpleRoberto, FrecuenciaEvento.NO_SE_REPITE,"Casa de roberto");
     }
 }
 

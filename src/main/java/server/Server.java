@@ -1,9 +1,6 @@
 package server;
 
-import controllers.ControllerGuardarropas;
-import controllers.ControllerPerfil;
-import controllers.ControllerPrendas;
-import controllers.ControllerSesion;
+import controllers.*;
 import spark.Spark;
 import spark.debug.DebugScreen;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -34,6 +31,9 @@ public class Server {
         Spark.get("/guardarropas/:nombre/prendas", controllerPrendas::mostrarPrendas,  new HandlebarsTemplateEngine());
         Spark.get("/guardarropas/:nombre/prendas/wizard", controllerPrendas::creacionPrenda,  new HandlebarsTemplateEngine());
         Spark.post("/guardarropas/:nombre/prendas", controllerPrendas::crearPrenda, new HandlebarsTemplateEngine());
+
+        ControllerCalendario controllerCalendario = new ControllerCalendario();
+        Spark.get("/calendario", controllerCalendario::mostrar, new HandlebarsTemplateEngine());
 
         DebugScreen.enableDebugScreen();
 
