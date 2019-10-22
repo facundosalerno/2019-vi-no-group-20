@@ -2,7 +2,7 @@
     <div class="contenedor_guardarropas">
     {{#each guardarropas}}
         <div class="card guardarropa">
-            <form action="/guardarropas/{{nombre}}" method="POST">
+            <form action="/guardarropas/{{nombre}}/prendas" method="GET">
                 <img src="/remera.png" class="card-img-top" alt="Remera">
                 <div class="card-body">
                     <h5 class="card-title text-capitalize">{{nombre}}</h5>
@@ -13,7 +13,7 @@
     {{/each}}
         <div class="card guardarropa">
             <div class="card-body text-center">
-                <button class="card-text text-center" id="button_plus">
+                <button class="card-text text-center" id="button_plus" onclick="alert('No disponible.')">
                     <img src="/ic_plus.png">
                 </button>
             </div>

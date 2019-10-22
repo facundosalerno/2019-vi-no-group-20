@@ -10,6 +10,7 @@ import exceptions.NoPermiteGuardarropaIncompletoException;
 import exceptions.NoPerteneceALaCategoriaException;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.stream.Stream;
@@ -37,10 +38,10 @@ public class GuardarropasLimitado extends Guardarropas {
         prendasCoincidenConCategoria(prendasInferiores, Categoria.PARTE_INFERIOR);
         prendasCoincidenConCategoria(calzados, Categoria.CALZADO);
         prendasCoincidenConCategoria(accesorios, Categoria.ACCESORIOS);
-        this.prendasSuperiores = prendasSuperiores;
-        this.prendasInferiores = prendasInferiores;
-        this.calzados = calzados;
-        this.accesorios= accesorios;
+        this.prendasSuperiores = new ArrayList<>(prendasSuperiores);
+        this.prendasInferiores = new ArrayList<>(prendasInferiores);
+        this.calzados = new ArrayList<>(calzados);
+        this.accesorios= new ArrayList<>(accesorios);
         this.nombre=nombre;
         RepositorioGuardarropas.getInstance().agregarGuardarropas(this);
     }

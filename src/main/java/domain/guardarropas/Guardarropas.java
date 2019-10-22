@@ -120,6 +120,8 @@ public abstract class Guardarropas {
         return listaDePrendas.stream().allMatch(capa -> capa.abrigaBien(climaActual));
     }
 
+
+    //TODO importante hacer estos metodos abstract para que los implemente cada clase
     public void agregarPrendaSuperior(Prenda prendaAgregada) {
         if (!prendaAgregada.esDeCategoria(Categoria.PARTE_SUPERIOR)) {
             throw new NoPerteneceALaCategoriaException();
@@ -151,6 +153,19 @@ public abstract class Guardarropas {
         }
 
         this.accesorios.add(prendaAgregada);
+    }
+
+    public void agregarPrenda(Prenda prenda){
+        switch (prenda.getCategoria()){
+            case PARTE_SUPERIOR:
+                prendasSuperiores.add(prenda);
+            case PARTE_INFERIOR:
+                prendasInferiores.add(prenda);
+            case CALZADO:
+                calzados.add(prenda);
+            case ACCESORIOS:
+                accesorios.add(prenda);
+        }
     }
 
     // getters y setters

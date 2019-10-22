@@ -13,8 +13,6 @@ import java.util.Map;
 public class ControllerPerfil {
 
     public ModelAndView mostrar(Request req, Response res){
-
-
         //Usuario usuario = new Usuario("foo","foo");
         //Map<String,String> model = HashMap<>;
         //SE USA SOLO EL ID, SE RECUPERA DE LA COOKIE Y CON EL MISMO SE BUSCA EN LA BASE DE DATOS PARA OBTENER TODOS LOS OTROS DATOS
@@ -26,9 +24,6 @@ public class ControllerPerfil {
         }catch (UsuarioInexistente e){
             return new ModelAndView(null, "forbidden.hbs");
         }
-
-        //cachear que se entre directo a /perfil y no haya cookies
-
         return new ModelAndView(usuario, "perfil.hbs");
     }
 }

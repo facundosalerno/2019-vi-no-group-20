@@ -28,12 +28,12 @@ public class Server {
 
         ControllerGuardarropas controllerGuardarropas = new ControllerGuardarropas();
         Spark.get("/guardarropas", controllerGuardarropas::mostrarGuardarropas, new HandlebarsTemplateEngine());
-        Spark.post("/guardarropas/:nombre", controllerGuardarropas::seleccionarGuardarropas, new HandlebarsTemplateEngine());
         /* POST /guardarropas para crear guardarropas */
 
         ControllerPrendas controllerPrendas = new ControllerPrendas();
         Spark.get("/guardarropas/:nombre/prendas", controllerPrendas::mostrarPrendas,  new HandlebarsTemplateEngine());
-        Spark.post("/guardarropas/:nombre/prendas", controllerPrendas::crearPrenda,  new HandlebarsTemplateEngine());
+        Spark.get("/guardarropas/:nombre/prendas/wizard", controllerPrendas::creacionPrenda,  new HandlebarsTemplateEngine());
+        Spark.post("/guardarropas/:nombre/prendas", controllerPrendas::crearPrenda, new HandlebarsTemplateEngine());
 
         DebugScreen.enableDebugScreen();
 

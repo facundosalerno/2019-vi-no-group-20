@@ -1,5 +1,5 @@
 {{#partial "body"}}
-    <form class="creador_prendas_wizard">
+    <form class="creador_prendas_wizard" action="/guardarropas/{{nombre}}/prendas" method="POST">
         <div class="container" style="margin-bottom: 20px;">
             <div class="row" style="padding-top:10px;">
                 <div class="col">
@@ -19,14 +19,13 @@
                         </button>
                     </h2>
                 </div>
-
                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                     <div class="card-body">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-default">Nombre</span>
                             </div>
-                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                            <input type="text" class="form-control" name="query_nombre" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                         </div>
                     </div>
                 </div>
@@ -45,7 +44,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Elegir</label>
-                            <select class="form-control" id="exampleFormControlSelect1">
+                            <select class="form-control" id="exampleFormControlSelect1" name="query_tipoPrenda">
                                 <option>Zapato</option>
                                 <option>Remera</option>
                                 <option>Camisa</option>
@@ -82,7 +81,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Elegir</label>
-                                <select class="form-control" id="exampleFormControlSelect1">
+                                <select class="form-control" id="exampleFormControlSelect1" name="query_material">
                                     <option>Ninguno</option>
                                     <option>Algodon</option>
                                     <option>Seda</option>
@@ -119,17 +118,17 @@
                             <div class="input-group-prepend" style="width: 180px">
                                 <span class="input-group-text" style="width: 180px">Primario</span>
                             </div>
-                            <input type="text" aria-label="First name" class="form-control" placeholder="R">
-                            <input type="text" aria-label="Last name" class="form-control" placeholder="G">
-                            <input type="text" aria-label="First name" class="form-control" placeholder="B">
+                            <input type="number" aria-label="First name" class="form-control" placeholder="R" name="query_colorp_r">
+                            <input type="number" aria-label="Last name" class="form-control" placeholder="G" name="query_colorp_g">
+                            <input type="number" aria-label="First name" class="form-control" placeholder="B" name="query_colorp_b">
                         </div>
                         <div class="input-group">
                             <div class="input-group-prepend" style="width: 180px">
                                 <span class="input-group-text" style="width: 180px">Secundario (opcional)</span>
                             </div>
-                            <input type="text" aria-label="First name" class="form-control" placeholder="R">
-                            <input type="text" aria-label="Last name" class="form-control" placeholder="G">
-                            <input type="text" aria-label="First name" class="form-control" placeholder="B">
+                            <input type="number" aria-label="First name" class="form-control" placeholder="R" name="query_colors_r">
+                            <input type="number" aria-label="Last name" class="form-control" placeholder="G" name="query_colors_g">
+                            <input type="number" aria-label="First name" class="form-control" placeholder="B" name="query_colors_b">
                         </div>
                     </div>
                 </div>
@@ -148,7 +147,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Elegir</label>
-                            <select class="form-control" id="exampleFormControlSelect1">
+                            <select class="form-control" id="exampleFormControlSelect1" name="query_trama">
                                 <option>Lisa</option>
                                 <option>Rayada</option>
                                 <option>Cuadros</option>
@@ -175,7 +174,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-default">URL</span>
                             </div>
-                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                            <input type="text" class="form-control" name="query_imagen" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                         </div>
                     </div>
                 </div>

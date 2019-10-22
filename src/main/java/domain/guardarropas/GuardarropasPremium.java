@@ -10,6 +10,7 @@ import domain.prenda.Prenda;
 import domain.usuario.TipoDeUsuario;
 import exceptions.NoPermiteGuardarropaIncompletoException;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -32,10 +33,10 @@ public class GuardarropasPremium extends Guardarropas{
         prendasCoincidenConCategoria(prendasInferiores, Categoria.PARTE_INFERIOR);
         prendasCoincidenConCategoria(calzados, Categoria.CALZADO);
         prendasCoincidenConCategoria(accesorios, Categoria.ACCESORIOS);
-        this.prendasSuperiores = prendasSuperiores;
-        this.prendasInferiores = prendasInferiores;
-        this.calzados = calzados;
-        this.accesorios= accesorios;
+        this.prendasSuperiores = new ArrayList<>(prendasSuperiores);
+        this.prendasInferiores = new ArrayList<>(prendasInferiores);
+        this.calzados = new ArrayList<>(calzados);
+        this.accesorios= new ArrayList<>(accesorios);
         this.nombre=nombre;
         RepositorioGuardarropas.getInstance().agregarGuardarropas(this);
     }
