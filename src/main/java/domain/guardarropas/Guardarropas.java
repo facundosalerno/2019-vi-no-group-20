@@ -159,12 +159,16 @@ public abstract class Guardarropas {
         switch (prenda.getCategoria()){
             case PARTE_SUPERIOR:
                 prendasSuperiores.add(prenda);
+                break;
             case PARTE_INFERIOR:
                 prendasInferiores.add(prenda);
+                break;
             case CALZADO:
                 calzados.add(prenda);
+                break;
             case ACCESORIOS:
                 accesorios.add(prenda);
+                break;
         }
     }
 

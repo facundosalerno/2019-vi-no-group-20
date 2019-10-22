@@ -19,24 +19,22 @@ public class ControllerSesion {
     private String mensajeSesion = "Nunca compartas tu contraseña con nadie.";
 
 
-
     public ModelAndView mostrarLogin(Request req, Response res) {
-        return new ModelAndView(new ControllerSesion(),"login.hbs");  //Indica con que se va a renderizar el template (.hbs)
+        return new ModelAndView(new ControllerSesion(), "login.hbs");  //Indica con que se va a renderizar el template (.hbs)
     }
 
 
-
-    public ModelAndView iniciarSesion(Request req, Response res){
-        crearUsuarioEjemplo();
+    public ModelAndView iniciarSesion(Request req, Response res) {
+        RepositorioUsuarios.admin.setPassword("12345");
         Usuario usuario;
 
-        try{
+        try {
             usuario = RepositorioUsuarios.getInstance().buscarUsuario(req.queryParams("query_username"));
             usuario.validarContraseña(req.queryParams("query_password"));
-        }catch(UsuarioInexistente e){
+        } catch (UsuarioInexistente e) {
             mensajeSesion = "Usuario inexistente o contraseña invalida.";
             return new ModelAndView(this, "login.hbs");
-        }catch (ContraseñaInvalidaException e){
+        } catch (ContraseñaInvalidaException e) {
             mensajeSesion = "Usuario inexistente o contraseña invalida.";
             return new ModelAndView(this, "login.hbs");
         }
@@ -48,8 +46,7 @@ public class ControllerSesion {
     }
 
 
-
-    public ModelAndView cerrarSesion(Request req, Response res){
+    public ModelAndView cerrarSesion(Request req, Response res) {
         res.removeCookie("cookie_nombre");
         res.removeCookie("cookie_nombreGuardarropas");
         res.redirect("/login");
@@ -57,45 +54,11 @@ public class ControllerSesion {
     }
 
 
-
-    public String getMensajeSesion(){
+    public String getMensajeSesion() {
         return mensajeSesion;
     }
-
-
-
-    public void crearUsuarioEjemplo(){
-        GuardarropasPremium guardarropasDelAdmin = new GuardarropasPremium(
-                "guardarropas principal",
-                Arrays.asList(armarUnaPrenda("remera", TipoDePrenda.REMERA, Material.ALGODON, new Color(0, 0, 255), new Color(255, 0, 0), Trama.CUADROS), armarUnaPrenda("buso", TipoDePrenda.BUSO, Material.ALGODON, new Color(0, 255, 0), new Color(0, 0, 255), Trama.LISA)),
-                Arrays.asList(armarUnaPrenda("pantalon", TipoDePrenda.PANTALON, Material.JEAN, new Color(0, 255, 0), new Color(255, 0, 0), Trama.RAYADA)),
-                Arrays.asList(armarUnaPrenda("zapatos", TipoDePrenda.ZAPATO, Material.CUERO, new Color(255, 0, 0), new Color(0, 0, 255), Trama.GASTADO)),
-                Arrays.asList(armarUnaPrenda("anteojos", TipoDePrenda.ANTEOJOS, Material.PLASTICO, new Color(0, 255, 0), new Color(255, 0, 0), Trama.LISA))
-        );
-
-        GuardarropasPremium guardarropasDelAdminAuxiliar = new GuardarropasPremium(
-                "guardarropas de emergencia",
-                Arrays.asList(armarUnaPrenda("remera", TipoDePrenda.REMERA, Material.ALGODON, new Color(0, 0, 255), new Color(255, 0, 0), Trama.CUADROS), armarUnaPrenda("buso", TipoDePrenda.BUSO, Material.ALGODON, new Color(0, 255, 0), new Color(0, 0, 255), Trama.LISA)),
-                Arrays.asList(armarUnaPrenda("pantalon", TipoDePrenda.PANTALON, Material.JEAN, new Color(0, 255, 0), new Color(255, 0, 0), Trama.RAYADA)),
-                Arrays.asList(armarUnaPrenda("zapatos", TipoDePrenda.ZAPATO, Material.CUERO, new Color(255, 0, 0), new Color(0, 0, 255), Trama.GASTADO)),
-                Arrays.asList(armarUnaPrenda("anteojos", TipoDePrenda.ANTEOJOS, Material.PLASTICO, new Color(0, 255, 0), new Color(255, 0, 0), Trama.LISA))
-        );
-
-        Usuario admin = new Usuario("admin", Arrays.asList(guardarropasDelAdmin, guardarropasDelAdminAuxiliar), TipoDeUsuario.PREMIUM);
-        admin.setPassword("12345");
-    }
-
-
-
-    public Prenda armarUnaPrenda(String nombre, TipoDePrenda tipoDePrenda, Material material, Color colorPrimario, Color colorSecundario, Trama trama){
-        BorradorPrenda borradorPrenda = new BorradorPrenda();
-        borradorPrenda.definirNombre(nombre);
-        borradorPrenda.definirTipo(tipoDePrenda);
-        borradorPrenda.definirMaterial(material);
-        borradorPrenda.definirColorPrimario(colorPrimario);
-        borradorPrenda.definirColorSecundario(colorSecundario);
-        borradorPrenda.definirTrama(trama);
-        //borradorPrenda.definirImagen("/public/remera.png");
-        return borradorPrenda.crearPrenda();
-    }
 }
+
+
+
+

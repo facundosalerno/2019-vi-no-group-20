@@ -22,11 +22,9 @@
                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                     <div class="card-body">
                         <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroup-sizing-default">Nombre</span>
-                            </div>
-                            <input type="text" class="form-control" name="query_nombre" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                            <input type="text" class="form-control" name="query_nombre" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Nombre">
                         </div>
+                        <a class="btn btn-primary"  data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne" id="idBoton" style="color: white;">Siguiente</a>
                     </div>
                 </div>
             </div>
@@ -63,6 +61,7 @@
                                 <option>Sin accesorio</option>
                             </select>
                         </div>
+                        <a class="btn btn-primary"  data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseTwo" id="idBoton" style="color: white;">Siguiente</a>
                     </div>
                 </div>
             </div>
@@ -98,6 +97,7 @@
                                     <option>Gabardina</option>
                                 </select>
                             </div>
+                            <a class="btn btn-primary"  data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseThree" id="idBoton" style="color: white;">Siguiente</a>
                         </div>
                     </div>
                 </div>
@@ -114,22 +114,33 @@
                 </div>
                 <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
                     <div class="card-body">
-                        <div class="input-group">
-                            <div class="input-group-prepend" style="width: 180px">
-                                <span class="input-group-text" style="width: 180px">Primario</span>
+                        <div class="input-group" style="padding: 4px 0;">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <input type="checkbox" aria-label="Checkbox for following text input" checked="checked" disabled name="query_colorp_enabled">
+                                </div>
                             </div>
-                            <input type="number" aria-label="First name" class="form-control" placeholder="R" name="query_colorp_r">
-                            <input type="number" aria-label="Last name" class="form-control" placeholder="G" name="query_colorp_g">
-                            <input type="number" aria-label="First name" class="form-control" placeholder="B" name="query_colorp_b">
-                        </div>
-                        <div class="input-group">
-                            <div class="input-group-prepend" style="width: 180px">
-                                <span class="input-group-text" style="width: 180px">Secundario (opcional)</span>
+                            <div class="input-group-prepend" style="width: 110px">
+                                <span class="input-group-text" style="width: 110px">Primario</span>
                             </div>
-                            <input type="number" aria-label="First name" class="form-control" placeholder="R" name="query_colors_r">
-                            <input type="number" aria-label="Last name" class="form-control" placeholder="G" name="query_colors_g">
-                            <input type="number" aria-label="First name" class="form-control" placeholder="B" name="query_colors_b">
+                            <input type="number" aria-label="First name" class="form-control" placeholder="R" value="0" name="query_colorp_r">
+                            <input type="number" aria-label="Last name" class="form-control" placeholder="G" value="0" name="query_colorp_g">
+                            <input type="number" aria-label="First name" class="form-control" placeholder="B" value="0" name="query_colorp_b">
                         </div>
+                        <div class="input-group" style="padding: 8px 0;">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <input type="checkbox" aria-label="Checkbox for following text input" name="query_colors_enabled">
+                                </div>
+                            </div>
+                            <div class="input-group-prepend" style="width: 110px">
+                                <span class="input-group-text" style="width: 110px">Secundario</span>
+                            </div>
+                            <input type="number" aria-label="First name" class="form-control" placeholder="R" value="0" name="query_colors_r">
+                            <input type="number" aria-label="Last name" class="form-control" placeholder="G" value="0" name="query_colors_g">
+                            <input type="number" aria-label="First name" class="form-control" placeholder="B" value="0" name="query_colors_b">
+                        </div>
+                        <a class="btn btn-primary"  data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFour" id="idBoton" style="color: white;">Siguiente</a>
                     </div>
                 </div>
             </div>
@@ -155,6 +166,7 @@
                                 <option>Escocesa</option>
                             </select>
                         </div>
+                        <a class="btn btn-primary"  data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseFive" id="idBoton" style="color: white;">Siguiente</a>
                     </div>
                 </div>
             </div>
@@ -174,7 +186,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-default">URL</span>
                             </div>
-                            <input type="text" class="form-control" name="query_imagen" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                            <input type="text" class="form-control" name="query_imagen" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="http://imagen.com/example">
                         </div>
                     </div>
                 </div>

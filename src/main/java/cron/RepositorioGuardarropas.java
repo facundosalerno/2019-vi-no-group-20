@@ -46,4 +46,34 @@ public class RepositorioGuardarropas {
             throw new NoExisteGuardarropasException();
         return guardarropas;
     }
+
+
+    public static Prenda armarUnaPrenda(String nombre, TipoDePrenda tipoDePrenda, Material material, Color colorPrimario, Color colorSecundario, Trama trama){
+        BorradorPrenda borradorPrenda = new BorradorPrenda();
+        borradorPrenda.definirNombre(nombre);
+        borradorPrenda.definirTipo(tipoDePrenda);
+        borradorPrenda.definirMaterial(material);
+        borradorPrenda.definirColorPrimario(colorPrimario);
+        borradorPrenda.definirColorSecundario(colorSecundario);
+        borradorPrenda.definirTrama(trama);
+        //borradorPrenda.definirImagen("/public/remera.png");
+        return borradorPrenda.crearPrenda();
+    }
+
+
+    public static GuardarropasPremium guardarropasDelAdmin = new GuardarropasPremium(
+            "guardarropas principal",
+            Arrays.asList(armarUnaPrenda("remera", TipoDePrenda.REMERA, Material.ALGODON, new Color(0, 0, 255), new Color(255, 0, 0), Trama.CUADROS), armarUnaPrenda("buso", TipoDePrenda.BUSO, Material.ALGODON, new Color(0, 255, 0), new Color(0, 0, 255), Trama.LISA)),
+            Arrays.asList(armarUnaPrenda("pantalon", TipoDePrenda.PANTALON, Material.JEAN, new Color(0, 255, 0), new Color(255, 0, 0), Trama.RAYADA)),
+            Arrays.asList(armarUnaPrenda("zapatos", TipoDePrenda.ZAPATO, Material.CUERO, new Color(255, 0, 0), new Color(0, 0, 255), Trama.GASTADO)),
+            Arrays.asList(armarUnaPrenda("anteojos", TipoDePrenda.ANTEOJOS, Material.PLASTICO, new Color(0, 255, 0), new Color(255, 0, 0), Trama.LISA))
+    );
+
+    public static GuardarropasPremium guardarropasDelAdminAuxiliar = new GuardarropasPremium(
+            "guardarropas de emergencia",
+            Arrays.asList(armarUnaPrenda("remera", TipoDePrenda.REMERA, Material.ALGODON, new Color(0, 0, 255), new Color(255, 0, 0), Trama.CUADROS), armarUnaPrenda("buso", TipoDePrenda.BUSO, Material.ALGODON, new Color(0, 255, 0), new Color(0, 0, 255), Trama.LISA)),
+            Arrays.asList(armarUnaPrenda("pantalon", TipoDePrenda.PANTALON, Material.JEAN, new Color(0, 255, 0), new Color(255, 0, 0), Trama.RAYADA)),
+            Arrays.asList(armarUnaPrenda("zapatos", TipoDePrenda.ZAPATO, Material.CUERO, new Color(255, 0, 0), new Color(0, 0, 255), Trama.GASTADO)),
+            Arrays.asList(armarUnaPrenda("anteojos", TipoDePrenda.ANTEOJOS, Material.PLASTICO, new Color(0, 255, 0), new Color(255, 0, 0), Trama.LISA))
+    );
 }
