@@ -3,14 +3,17 @@ package controllers;
 import cron.RepositorioUsuarios;
 import domain.usuario.Usuario;
 import exceptions.UsuarioInexistente;
+import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
+import javax.persistence.EntityManager;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ControllerPerfil {
+public class ControllerPerfil implements TransactionalOps, EntityManagerOps {
 
     public ModelAndView mostrar(Request req, Response res){
         //Usuario usuario = new Usuario("foo","foo");
@@ -25,5 +28,10 @@ public class ControllerPerfil {
             return new ModelAndView(null, "forbidden.hbs");
         }
         return new ModelAndView(usuario, "perfil.hbs");
+    }
+
+    @Override
+    public EntityManager entityManager() {
+        return null;
     }
 }

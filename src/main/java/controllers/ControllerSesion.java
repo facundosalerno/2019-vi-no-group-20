@@ -8,15 +8,21 @@ import domain.prenda.*;
 import domain.usuario.*;
 import exceptions.ContraseñaInvalidaException;
 import exceptions.UsuarioInexistente;
+import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-import spark.Spark;
+import spark.Spark.*;
+
+import javax.persistence.EntityManager;
+
+import static spark.Spark.after;
 
 import java.util.Arrays;
 
 
-public class ControllerSesion {
+public class ControllerSesion implements TransactionalOps, EntityManagerOps {
 
     private String mensajeSesion = "Nunca compartas tu contraseña con nadie.";
 
@@ -65,6 +71,11 @@ public class ControllerSesion {
         RepositorioUsuarios.admin.crearEvento("Cumpleaños de juan", RepositorioUsuarios.fechaCumpleWilly, FrecuenciaEvento.NO_SE_REPITE,"Casa de Juan");
         RepositorioUsuarios.admin.crearEvento("Cumpleaños de pepe", RepositorioUsuarios.fechaCumplePepe, FrecuenciaEvento.NO_SE_REPITE,"Casa de pepe");
         RepositorioUsuarios.admin.crearEvento("Cumpleaños de robertito", RepositorioUsuarios.fechaCumpleRoberto, FrecuenciaEvento.NO_SE_REPITE,"Casa de roberto");
+    }
+
+    @Override
+    public EntityManager entityManager() {
+        return null;
     }
 }
 

@@ -1,9 +1,12 @@
 package server;
 
 import controllers.*;
+import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 import spark.Spark;
 import spark.debug.DebugScreen;
 import spark.template.handlebars.HandlebarsTemplateEngine;
+
+import static spark.Spark.after;
 
 public class Server {
     public static void main(String[] args) {
@@ -36,6 +39,15 @@ public class Server {
         Spark.get("/calendario", controllerCalendario::mostrar, new HandlebarsTemplateEngine());
 
         DebugScreen.enableDebugScreen();
+
+
+        //TODO: OJO, VER AL MOMENTO DE ver tema TRANSACCIONES
+
+        after((request,response) -> {
+            PerThreadEntityManagers.getEntityManager();
+            PerThreadEntityManagers.closeEntityManager();
+        });
+
 
     }
 

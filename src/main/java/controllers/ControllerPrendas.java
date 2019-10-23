@@ -7,14 +7,17 @@ import domain.prenda.*;
 import domain.usuario.Usuario;
 import exceptions.*;
 import javassist.bytecode.analysis.ControlFlow;
+import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
+import javax.persistence.EntityManager;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class ControllerPrendas {
+public class ControllerPrendas implements TransactionalOps, EntityManagerOps {
 
     private String mensajeError;
 
@@ -154,5 +157,10 @@ public class ControllerPrendas {
 
     public String getMensajeError() {
         return mensajeError;
+    }
+
+    @Override
+    public EntityManager entityManager() {
+        return null;
     }
 }

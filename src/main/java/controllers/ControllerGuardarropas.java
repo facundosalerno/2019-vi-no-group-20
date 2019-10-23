@@ -5,11 +5,15 @@ import cron.RepositorioUsuarios;
 import domain.guardarropas.GuardarropasPremium;
 import domain.usuario.Usuario;
 import exceptions.UsuarioInexistente;
+import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-public class ControllerGuardarropas {
+import javax.persistence.EntityManager;
+
+public class ControllerGuardarropas implements TransactionalOps, EntityManagerOps {
 
     public ModelAndView mostrarGuardarropas(Request req, Response res) {
         String nombre= req.cookie("cookie_nombre");
@@ -23,4 +27,8 @@ public class ControllerGuardarropas {
         return new ModelAndView(usuario, "guardarropas.hbs");
     }
 
+    @Override
+    public EntityManager entityManager() {
+        return null;
+    }
 }
