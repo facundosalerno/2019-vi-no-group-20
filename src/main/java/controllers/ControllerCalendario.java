@@ -7,12 +7,15 @@ import domain.usuario.Usuario;
 import exceptions.UsuarioInexistente;
 import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
+import scala.Array;
 import scala.math.Ordering;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,11 +34,13 @@ public class ControllerCalendario implements TransactionalOps, EntityManagerOps 
             return new ModelAndView(null, "forbidden.hbs");
         }
         Collections.sort(usuario.getEventos());
-        return new ModelAndView(usuario, "calendario.hbs");
+        ControllerMonth controllerMonth = new ControllerMonth(usuario.getEventos());
+        return new ModelAndView(controllerMonth, "calendario.hbs");
     }
 
     @Override
     public EntityManager entityManager() {
         return null;
     }
+
 }

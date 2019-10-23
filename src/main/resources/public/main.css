@@ -109,3 +109,93 @@ body {
     height: 10px;
 }
 
+/* Calendario */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+td {
+	padding: 0;
+}
+
+.calendar-container {
+    margin-top: 50px;
+}
+
+.calendar-container header {
+	border-radius: 1em 1em 0 0;
+	background: #FAF2C9;
+	color: #FFFFFF;
+	padding: 3em 2em;
+	width: 523px;
+}
+
+.day {
+	font-size: 8em;
+	font-weight: 900;
+	line-height: 1em;
+	text-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+.month {
+	font-size: 4em;
+	line-height: 1em;
+	text-transform: lowercase;
+	text-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+.calendar {
+	background: #fff;
+	border-radius: 0 0 1em 1em;
+	/*-webkit-box-shadow: 0 2px 1px rgba(0, 0, 0, .2), 0 3px 1px #fff;*/
+	/*box-shadow: 0 2px 1px rgba(0, 0, 0, .2), 0 3px 1px #fff;*/
+	color: #555;
+	display: inline-block;
+	width: 523px;
+	padding: 2em;
+}
+
+.calendar thead {
+	color: #FFC300;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+.calendar td {
+	padding: .5em 1em;
+	text-align: center;
+}
+
+.calendar tbody{
+    display: grid;
+    grid-template-columns: repeat(7, auto);
+    grid-template-rows: repeat(5, auto);
+    justify-items: center;
+}
+
+.calendar tbody td:hover {
+	background: #cacaca;
+	color: #fff;
+}
+
+.current-day {
+	color: #FFC300;
+}
+
+.prev-month,
+.next-month {
+	color: #cacaca;
+}
+
+/* Lista de eventos container */
+.lista-de-eventos{
+    height: 100%;
+    border-radius: 0 0 1em 1em;
+    background: #FFFFFF;
+}
+
+.lista-de-eventos thead{
+    border-radius: 0 0 1em 1em; /* No funciona */
+    background: #FAF2C9;
+}

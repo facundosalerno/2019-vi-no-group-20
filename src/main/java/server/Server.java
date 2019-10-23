@@ -43,10 +43,10 @@ public class Server {
 
         //TODO: OJO, VER AL MOMENTO DE ver tema TRANSACCIONES
 
-        after((request,response) -> {
+        /*after((request,response) -> {
             PerThreadEntityManagers.getEntityManager();
             PerThreadEntityManagers.closeEntityManager();
-        });
+        });*/
 
 
     }

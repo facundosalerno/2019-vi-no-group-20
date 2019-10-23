@@ -155,6 +155,10 @@ public class Evento implements Notificable, Comparable<Evento> {
     public Long getId() {
         return id;
     }
+
+    public String getLugar() {
+        return lugar;
+    }
     /**
      * Equals y hashcode
      */

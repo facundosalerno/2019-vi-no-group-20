@@ -49,7 +49,8 @@ public class RepositorioUsuarios {
     }
 
     public static Usuario admin = new Usuario("admin", Arrays.asList(RepositorioGuardarropas.guardarropasDelAdmin, RepositorioGuardarropas.guardarropasDelAdminAuxiliar), TipoDeUsuario.PREMIUM);
-    public static LocalDateTime fechaCumpleWilly = LocalDateTime.of(2019,06,20,20,30);
-    public static LocalDateTime fechaCumplePepe = LocalDateTime.of(2019,06,20,20,30);
-    public static LocalDateTime fechaCumpleRoberto = LocalDateTime.of(2020,02,10,20,30);
+    public static LocalDateTime fechaCumpleWilly = LocalDateTime.of(2019,10,4,20,30);
+    public static LocalDateTime fechaCumplePepe = LocalDateTime.of(2019,10,19,20,30);
+    public static LocalDateTime fechaCumpleRoberto = LocalDateTime.of(2019,10,15,20,30);
+    public static LocalDateTime entregaDiseño = LocalDateTime.of(2019,10,25,20,30);
 }
