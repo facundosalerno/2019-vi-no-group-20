@@ -38,6 +38,10 @@ public class Server {
         ControllerCalendario controllerCalendario = new ControllerCalendario();
         Spark.get("/calendario", controllerCalendario::mostrar, new HandlebarsTemplateEngine());
 
+        ControllerEvento controllerEvento = new ControllerEvento();
+        Spark.get("/evento/wizard", controllerEvento::creacionEvento, new HandlebarsTemplateEngine());
+        Spark.post("/evento", controllerEvento::crear, new HandlebarsTemplateEngine());
+
         DebugScreen.enableDebugScreen();
 
 
