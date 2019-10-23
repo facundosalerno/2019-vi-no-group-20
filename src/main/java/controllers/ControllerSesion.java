@@ -1,38 +1,42 @@
 package controllers;
 
+import cron.RepositorioGuardarropas;
 import cron.RepositorioUsuarios;
+import domain.evento.FrecuenciaEvento;
+import domain.guardarropas.GuardarropasPremium;
+import domain.prenda.*;
 import domain.usuario.*;
 import exceptions.ContraseñaInvalidaException;
 import exceptions.UsuarioInexistente;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
+import spark.Spark;
+
+import java.util.Arrays;
 
 
 public class ControllerSesion {
 
-
-    // .../guardarropas/:id/prendas
-
-    // .../guardarropas/prendas
-
     private String mensajeSesion = "Nunca compartas tu contraseña con nadie.";
 
+
     public ModelAndView mostrarLogin(Request req, Response res) {
-        return new ModelAndView(new ControllerSesion(),"login.hbs");  //Indica con que se va a renderizar el template (.hbs)
+        return new ModelAndView(new ControllerSesion(), "login.hbs");  //Indica con que se va a renderizar el template (.hbs)
     }
 
-    public ModelAndView crear(Request req, Response res){
-        RepositorioUsuarios.admin.setPassword("12345"); //para test. la pass se hashea en el set
+
+    public ModelAndView iniciarSesion(Request req, Response res) {
+        iniciarUsuarioDePrueba();
         Usuario usuario;
 
-        try{
-            usuario = RepositorioUsuarios.getInstance().buscarUsuario(req.queryParams("var_username"));
-            usuario.validarContraseña(req.queryParams("var_password"));
-        }catch(UsuarioInexistente e){
+        try {
+            usuario = RepositorioUsuarios.getInstance().buscarUsuario(req.queryParams("query_username"));
+            usuario.validarContraseña(req.queryParams("query_password"));
+        } catch (UsuarioInexistente e) {
             mensajeSesion = "Usuario inexistente o contraseña invalida.";
             return new ModelAndView(this, "login.hbs");
-        }catch (ContraseñaInvalidaException e){
+        } catch (ContraseñaInvalidaException e) {
             mensajeSesion = "Usuario inexistente o contraseña invalida.";
             return new ModelAndView(this, "login.hbs");
         }
@@ -43,13 +47,27 @@ public class ControllerSesion {
         return new ModelAndView(null, "perfil.hbs");
     }
 
-    public ModelAndView cerrarSesion(Request req, Response res){
+
+    public ModelAndView cerrarSesion(Request req, Response res) {
         res.removeCookie("cookie_nombre");
+        res.removeCookie("cookie_nombreGuardarropas");
         res.redirect("/login");
         return new ModelAndView(new ControllerSesion(), "login.hbs");
     }
 
-    public String getMensajeSesion(){
+
+    public String getMensajeSesion() {
         return mensajeSesion;
     }
+
+    public void iniciarUsuarioDePrueba(){
+        RepositorioUsuarios.admin.setPassword("12345");
+        RepositorioUsuarios.admin.crearEvento("Cumpleaños de juan", RepositorioUsuarios.fechaCumpleWilly, FrecuenciaEvento.NO_SE_REPITE,"Casa de Juan");
+        RepositorioUsuarios.admin.crearEvento("Cumpleaños de pepe", RepositorioUsuarios.fechaCumplePepe, FrecuenciaEvento.NO_SE_REPITE,"Casa de pepe");
+        RepositorioUsuarios.admin.crearEvento("Cumpleaños de robertito", RepositorioUsuarios.fechaCumpleRoberto, FrecuenciaEvento.NO_SE_REPITE,"Casa de roberto");
+    }
 }
+
+
+
+

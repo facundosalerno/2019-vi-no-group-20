@@ -1,9 +1,11 @@
 package cron;
 
+import domain.evento.FrecuenciaEvento;
 import domain.usuario.TipoDeUsuario;
 import domain.usuario.Usuario;
 import exceptions.UsuarioInexistente;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -46,5 +48,8 @@ public class RepositorioUsuarios {
         return listaDeUsuarios;
     }
 
-    static final public Usuario admin = new Usuario("admin", Arrays.asList(RepositorioGuardarropas.guardarropasDelAdmin, RepositorioGuardarropas.guardarropasDelAdminAuxiliar), TipoDeUsuario.PREMIUM);
+    public static Usuario admin = new Usuario("admin", Arrays.asList(RepositorioGuardarropas.guardarropasDelAdmin, RepositorioGuardarropas.guardarropasDelAdminAuxiliar), TipoDeUsuario.PREMIUM);
+    public static LocalDateTime fechaCumpleWilly = LocalDateTime.of(2019,06,20,20,30);
+    public static LocalDateTime fechaCumplePepe = LocalDateTime.of(2019,06,20,20,30);
+    public static LocalDateTime fechaCumpleRoberto = LocalDateTime.of(2020,02,10,20,30);
 }

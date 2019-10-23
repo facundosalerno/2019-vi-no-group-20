@@ -7,6 +7,7 @@ import javax.persistence.*;
 @Entity
 @DiscriminatorValue(value="Calificar")
 public class Calificar extends Decision{
+
     public Calificar(Atuendo atuendo, int calificacion){
         this.atuendo=atuendo;
         atuendo.calificar(calificacion);

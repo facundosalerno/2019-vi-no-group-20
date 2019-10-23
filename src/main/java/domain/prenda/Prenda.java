@@ -89,7 +89,6 @@ public class Prenda implements Comparable<Prenda>{
 
 
 
-
     /** Getters y setters */
 
     public Categoria getCategoria() {

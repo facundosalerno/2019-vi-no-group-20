@@ -4,6 +4,8 @@ import domain.guardarropas.Guardarropas;
 import domain.guardarropas.GuardarropasPremium;
 import domain.prenda.*;
 import domain.usuario.Usuario;
+import exceptions.NoExisteGuardarropasException;
+import exceptions.UsuarioInexistente;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,10 +17,6 @@ public class RepositorioGuardarropas {
 
     private List<Guardarropas> listaDeGuardarropas = new ArrayList<>();
 
-    private static final Color rojo = new Color(255, 0, 0);
-    private static final Color verde = new Color(0, 255, 0);
-    private static final Color azul = new Color(0, 0, 255);
-
     private RepositorioGuardarropas(){}
 
     public static RepositorioGuardarropas getInstance() {
@@ -27,25 +25,6 @@ public class RepositorioGuardarropas {
         return instance;
     }
 
-    public static Prenda armarUnaPrenda(String nombre,TipoDePrenda tipoDePrenda, Material material, Color colorPrimario, Color colorSecundario, Trama trama){
-        BorradorPrenda borradorPrenda = new BorradorPrenda();
-        borradorPrenda.definirNombre(nombre);
-        borradorPrenda.definirTipo(tipoDePrenda);
-        borradorPrenda.definirMaterial(material);
-        borradorPrenda.definirColorPrimario(colorPrimario);
-        borradorPrenda.definirColorSecundario(colorSecundario);
-        borradorPrenda.definirTrama(trama);
-        //borradorPrenda.definirImagen("/public/remera.png");
-        return borradorPrenda.crearPrenda();
-    }
-
-    /* No tiene sentido */
-    public GuardarropasPremium findByUsuario(Usuario usuario) {
-        GuardarropasPremium guardarropas = new GuardarropasPremium("ropa sport");
-        guardarropas.agregarPrendaSuperior(armarUnaPrenda("Remera copada",TipoDePrenda.REMERA, Material.ALGODON, azul, rojo, Trama.CUADROS));
-        guardarropas.agregarPrendaInferior(armarUnaPrenda("Pantalon de laburo",TipoDePrenda.PANTALON, Material.JEAN, verde, rojo, Trama.RAYADA));
-        return guardarropas;
-    }
 
     public List<Guardarropas> getListaDeGuardarropas() {
         return listaDeGuardarropas;
@@ -61,21 +40,40 @@ public class RepositorioGuardarropas {
             listaDeGuardarropas.remove(guardarropas);
     }
 
+    public Guardarropas buscarGuardarropas(String nombre){
+        Guardarropas guardarropas = listaDeGuardarropas.stream().filter(g -> g.getNombre().equals(nombre)).findFirst().orElse(null);
+        if(guardarropas == null)
+            throw new NoExisteGuardarropasException();
+        return guardarropas;
+    }
+
+
+    public static Prenda armarUnaPrenda(String nombre, TipoDePrenda tipoDePrenda, Material material, Color colorPrimario, Color colorSecundario, Trama trama){
+        BorradorPrenda borradorPrenda = new BorradorPrenda();
+        borradorPrenda.definirNombre(nombre);
+        borradorPrenda.definirTipo(tipoDePrenda);
+        borradorPrenda.definirMaterial(material);
+        borradorPrenda.definirColorPrimario(colorPrimario);
+        borradorPrenda.definirColorSecundario(colorSecundario);
+        borradorPrenda.definirTrama(trama);
+        //borradorPrenda.definirImagen("/public/remera.png");
+        return borradorPrenda.crearPrenda();
+    }
 
 
     public static GuardarropasPremium guardarropasDelAdmin = new GuardarropasPremium(
-            Arrays.asList(armarUnaPrenda("remera", TipoDePrenda.REMERA, Material.ALGODON, azul, rojo, Trama.CUADROS), armarUnaPrenda("buso", TipoDePrenda.BUSO, Material.ALGODON, azul, verde, Trama.LISA)),
-            Arrays.asList(armarUnaPrenda("pantalon", TipoDePrenda.PANTALON, Material.JEAN, verde, rojo, Trama.RAYADA)),
-            Arrays.asList(armarUnaPrenda("zapatos", TipoDePrenda.ZAPATO, Material.CUERO, rojo, azul, Trama.GASTADO)),
-            Arrays.asList(armarUnaPrenda("anteojos", TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA))
+            "guardarropas principal",
+            Arrays.asList(armarUnaPrenda("remera", TipoDePrenda.REMERA, Material.ALGODON, new Color(0, 0, 255), new Color(255, 0, 0), Trama.CUADROS), armarUnaPrenda("buso", TipoDePrenda.BUSO, Material.ALGODON, new Color(0, 255, 0), new Color(0, 0, 255), Trama.LISA)),
+            Arrays.asList(armarUnaPrenda("pantalon", TipoDePrenda.PANTALON, Material.JEAN, new Color(0, 255, 0), new Color(255, 0, 0), Trama.RAYADA)),
+            Arrays.asList(armarUnaPrenda("zapatos", TipoDePrenda.ZAPATO, Material.CUERO, new Color(255, 0, 0), new Color(0, 0, 255), Trama.GASTADO)),
+            Arrays.asList(armarUnaPrenda("anteojos", TipoDePrenda.ANTEOJOS, Material.PLASTICO, new Color(0, 255, 0), new Color(255, 0, 0), Trama.LISA))
     );
 
     public static GuardarropasPremium guardarropasDelAdminAuxiliar = new GuardarropasPremium(
-            Arrays.asList(armarUnaPrenda("remera", TipoDePrenda.REMERA, Material.ALGODON, azul, rojo, Trama.CUADROS), armarUnaPrenda("buso", TipoDePrenda.BUSO, Material.ALGODON, azul, verde, Trama.LISA)),
-            Arrays.asList(armarUnaPrenda("pantalon", TipoDePrenda.PANTALON, Material.JEAN, verde, rojo, Trama.RAYADA)),
-            Arrays.asList(armarUnaPrenda("zapatos", TipoDePrenda.ZAPATO, Material.CUERO, rojo, azul, Trama.GASTADO)),
-            Arrays.asList(armarUnaPrenda("anteojos", TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA))
+            "guardarropas de emergencia",
+            Arrays.asList(armarUnaPrenda("remera", TipoDePrenda.REMERA, Material.ALGODON, new Color(0, 0, 255), new Color(255, 0, 0), Trama.CUADROS), armarUnaPrenda("buso", TipoDePrenda.BUSO, Material.ALGODON, new Color(0, 255, 0), new Color(0, 0, 255), Trama.LISA)),
+            Arrays.asList(armarUnaPrenda("pantalon", TipoDePrenda.PANTALON, Material.JEAN, new Color(0, 255, 0), new Color(255, 0, 0), Trama.RAYADA)),
+            Arrays.asList(armarUnaPrenda("zapatos", TipoDePrenda.ZAPATO, Material.CUERO, new Color(255, 0, 0), new Color(0, 0, 255), Trama.GASTADO)),
+            Arrays.asList(armarUnaPrenda("anteojos", TipoDePrenda.ANTEOJOS, Material.PLASTICO, new Color(0, 255, 0), new Color(255, 0, 0), Trama.LISA))
     );
-
-
 }

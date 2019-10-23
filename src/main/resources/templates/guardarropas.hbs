@@ -1,25 +1,19 @@
 {{#partial "body"}}
-    <div class="contenedor-guardarropas">
+    <div class="contenedor_guardarropas">
     {{#each guardarropas}}
         <div class="card guardarropa">
-            <form action="/perfil/guardarropas/prendas" method="POST">
+            <form action="/guardarropas/{{nombre}}/prendas" method="GET">
                 <img src="/remera.png" class="card-img-top" alt="Remera">
                 <div class="card-body">
-                    <ul>
-                        {{#each prendasSuperiores}}
-                            <li>
-                                <p class="card-text">{{nombre}}</p>
-                            </li>
-                        {{/each}}
-                    </ul>
-                    <button class="btn btn-primary">Ver más</button>
+                    <h5 class="card-title text-capitalize">{{nombre}}</h5>
+                    <button class="btn btn-primary">Ver</button>
                 </div>
             </form>
         </div>
     {{/each}}
         <div class="card guardarropa">
             <div class="card-body text-center">
-                <button class="card-text text-center" id="button_plus">
+                <button class="card-text text-center" id="button_plus" onclick="alert('No disponible.')">
                     <img src="/ic_plus.png">
                 </button>
             </div>

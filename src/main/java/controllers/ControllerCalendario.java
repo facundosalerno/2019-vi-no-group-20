@@ -1,22 +1,25 @@
 package controllers;
 
 import cron.RepositorioUsuarios;
+import domain.evento.Evento;
+import domain.prenda.Prenda;
 import domain.usuario.Usuario;
 import exceptions.UsuarioInexistente;
+import scala.math.Ordering;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
-public class ControllerPerfil {
+public class ControllerCalendario {
 
     public ModelAndView mostrar(Request req, Response res){
-        //Usuario usuario = new Usuario("foo","foo");
-        //Map<String,String> model = HashMap<>;
-        //SE USA SOLO EL ID, SE RECUPERA DE LA COOKIE Y CON EL MISMO SE BUSCA EN LA BASE DE DATOS PARA OBTENER TODOS LOS OTROS DATOS
-
         String nombre= req.cookie("cookie_nombre");
         Usuario usuario;
         try{
@@ -24,6 +27,7 @@ public class ControllerPerfil {
         }catch (UsuarioInexistente e){
             return new ModelAndView(null, "forbidden.hbs");
         }
-        return new ModelAndView(usuario, "perfil.hbs");
+        Collections.sort(usuario.getEventos());
+        return new ModelAndView(usuario, "calendario.hbs");
     }
 }

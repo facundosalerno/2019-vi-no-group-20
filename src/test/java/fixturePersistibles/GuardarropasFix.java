@@ -44,11 +44,11 @@ public  class  GuardarropasFix {
 	    
 	    
 	    public   GuardarropasLimitado GuardarropasLimitado() {
-	    	return new GuardarropasLimitado(new ArrayList<Prenda>(Arrays.asList(remera, blusa)),new ArrayList<Prenda> (Arrays.asList(shorts, pantalon)),new ArrayList<Prenda>( Arrays.asList(zapatos, zapatillas)),new ArrayList<Prenda>(Arrays.asList(pulseras, anteojos)));
+	    	return new GuardarropasLimitado("guardarropas limitado", new ArrayList<Prenda>(Arrays.asList(remera, blusa)),new ArrayList<Prenda> (Arrays.asList(shorts, pantalon)),new ArrayList<Prenda>( Arrays.asList(zapatos, zapatillas)),new ArrayList<Prenda>(Arrays.asList(pulseras, anteojos)));
 	    }
 	    
 	    public   GuardarropasPremium GuardarropasPremium() {
-	    	return new GuardarropasPremium(new ArrayList<Prenda>(Arrays.asList(remera, blusa)), new ArrayList<Prenda>(Arrays.asList(shorts, pantalon)),new ArrayList<Prenda>( Arrays.asList(zapatos, zapatillas)),new ArrayList<Prenda>(Arrays.asList(pulseras, anteojos)));
+	    	return new GuardarropasPremium("guardarropas premium", new ArrayList<Prenda>(Arrays.asList(remera, blusa)), new ArrayList<Prenda>(Arrays.asList(shorts, pantalon)),new ArrayList<Prenda>( Arrays.asList(zapatos, zapatillas)),new ArrayList<Prenda>(Arrays.asList(pulseras, anteojos)));
 	    }
 
 

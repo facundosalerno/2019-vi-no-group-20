@@ -120,6 +120,8 @@ public abstract class Guardarropas {
         return listaDePrendas.stream().allMatch(capa -> capa.abrigaBien(climaActual));
     }
 
+
+    //TODO importante hacer estos metodos abstract para que los implemente cada clase
     public void agregarPrendaSuperior(Prenda prendaAgregada) {
         if (!prendaAgregada.esDeCategoria(Categoria.PARTE_SUPERIOR)) {
             throw new NoPerteneceALaCategoriaException();
@@ -153,6 +155,23 @@ public abstract class Guardarropas {
         this.accesorios.add(prendaAgregada);
     }
 
+    public void agregarPrenda(Prenda prenda){
+        switch (prenda.getCategoria()){
+            case PARTE_SUPERIOR:
+                prendasSuperiores.add(prenda);
+                break;
+            case PARTE_INFERIOR:
+                prendasInferiores.add(prenda);
+                break;
+            case CALZADO:
+                calzados.add(prenda);
+                break;
+            case ACCESORIOS:
+                accesorios.add(prenda);
+                break;
+        }
+    }
+
     // getters y setters
 
     public Long getId() {
@@ -184,14 +203,16 @@ public abstract class Guardarropas {
         if (this == o) return true;
         if (!(o instanceof Guardarropas)) return false;
         Guardarropas that = (Guardarropas) o;
-        return Objects.equals(prendasSuperiores, that.prendasSuperiores) &&
+        return Objects.equals(id, that.id) &&
+                Objects.equals(prendasSuperiores, that.prendasSuperiores) &&
                 Objects.equals(prendasInferiores, that.prendasInferiores) &&
                 Objects.equals(calzados, that.calzados) &&
-                Objects.equals(accesorios, that.accesorios);
+                Objects.equals(accesorios, that.accesorios) &&
+                Objects.equals(nombre, that.nombre);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(prendasSuperiores, prendasInferiores, calzados, accesorios);
+        return Objects.hash(id, prendasSuperiores, prendasInferiores, calzados, accesorios, nombre);
     }
 }

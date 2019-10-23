@@ -51,7 +51,7 @@ public class EventoWindow extends MainWindow<Usuario> {
         pantalon = armarUnaPrenda(TipoDePrenda.PANTALON, Material.JEAN, verde, rojo, Trama.RAYADA);
         anteojos= armarUnaPrenda(TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA);
 
-        yo = new Usuario("Facundo Salerno",Arrays.asList(new GuardarropasPremium(Arrays.asList(remera, remera), Arrays.asList(pantalon, pantalon, pantalon), Arrays.asList(zapatos, zapatos, zapatos), Arrays.asList(anteojos))), TipoDeUsuario.PREMIUM);
+        yo = new Usuario("Facundo Salerno",Arrays.asList(new GuardarropasPremium("guardarropas de facu", Arrays.asList(remera, remera), Arrays.asList(pantalon, pantalon, pantalon), Arrays.asList(zapatos, zapatos, zapatos), Arrays.asList(anteojos))), TipoDeUsuario.PREMIUM);
         LocalDateTime fechaCumpleDePancho = LocalDateTime.of(2020,06,20,20,30);
         yo.crearEvento("Cumpleaños de pancho", fechaCumpleDePancho, FrecuenciaEvento.ANUAL, "Casa de pancho");
         /* Parte importante */
