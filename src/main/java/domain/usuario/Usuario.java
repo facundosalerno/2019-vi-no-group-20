@@ -40,7 +40,7 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
     @GeneratedValue
     private Long id;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="usuarioId_eventos")
     private List<Evento> eventos = new ArrayList<Evento>();
 
@@ -48,15 +48,15 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
 
     private int hashPass = 0;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name= "usuarioId_decisiones")
     private List<Decision> decisiones = new ArrayList<Decision>();
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "usuarioId_atuendosAceptados")
     private List<Atuendo> atuendosAceptados = new ArrayList<Atuendo>();
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "usuarioId_atuendosRechazados")
     private List<Atuendo> atuendosRechazados = new ArrayList<Atuendo>();
 

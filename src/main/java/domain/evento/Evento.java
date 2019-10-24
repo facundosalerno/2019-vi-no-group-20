@@ -32,18 +32,19 @@ public class Evento implements Notificable, Comparable<Evento> {
     Long id;
 
     private String nombre;
+
     @Convert(converter = LocalDateTimeConverter.class)
     private LocalDateTime fecha;
     private String lugar;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Usuario usuario;
 
     @Enumerated
     private FrecuenciaEvento frecuencia;
 
     //Los atuendos pueden ser muchos para muchos eventos o solo hay muchos atuendos para un unico evento?
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Atuendo> sugerenciasObtenidas = new ArrayList<>();
 
 

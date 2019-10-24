@@ -5,7 +5,7 @@ body {
 }
 
 .contenedor_login{
-    top: 20%; /* Top */
+    top: 10rem; /* Top */
     left: 50%; /* Para que este centrado */
     display: block;
     position: relative;
