@@ -19,7 +19,7 @@ import javax.persistence.Persistence;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class ControllerPrendas implements WithGlobalEntityManager, TransactionalOps, EntityManagerOps {
+public class ControllerPrendas implements WithGlobalEntityManager, TransactionalOps {
 
     private String mensajeError;
 

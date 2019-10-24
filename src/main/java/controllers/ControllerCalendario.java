@@ -24,7 +24,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ControllerCalendario implements WithGlobalEntityManager, TransactionalOps, EntityManagerOps {
+public class ControllerCalendario implements WithGlobalEntityManager, TransactionalOps{
 
     public ModelAndView mostrar(Request req, Response res){
         String nombre= req.cookie("cookie_nombre");

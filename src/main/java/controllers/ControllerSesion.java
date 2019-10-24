@@ -23,7 +23,7 @@ import static spark.Spark.after;
 import java.util.Arrays;
 
 
-public class ControllerSesion implements WithGlobalEntityManager, TransactionalOps, EntityManagerOps {
+public class ControllerSesion implements WithGlobalEntityManager, TransactionalOps {
 
     private String mensajeSesion = "Nunca compartas tu contraseña con nadie.";
 

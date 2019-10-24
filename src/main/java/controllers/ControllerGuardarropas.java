@@ -14,7 +14,7 @@ import spark.Response;
 
 import javax.persistence.EntityManager;
 
-public class ControllerGuardarropas implements WithGlobalEntityManager, TransactionalOps, EntityManagerOps {
+public class ControllerGuardarropas implements WithGlobalEntityManager, TransactionalOps {
 
     public ModelAndView mostrarGuardarropas(Request req, Response res) {
         String nombre= req.cookie("cookie_nombre");

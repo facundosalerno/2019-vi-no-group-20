@@ -14,7 +14,7 @@ import javax.persistence.EntityManager;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ControllerPerfil implements WithGlobalEntityManager, TransactionalOps, EntityManagerOps {
+public class ControllerPerfil implements WithGlobalEntityManager, TransactionalOps{
 
     public ModelAndView mostrar(Request req, Response res){
         //Usuario usuario = new Usuario("foo","foo");
