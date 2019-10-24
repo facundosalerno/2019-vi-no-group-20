@@ -7,6 +7,7 @@
                     <h5 class="card-title text-capitalize">Crear evento</h5>
                 </div>
                 <div class="col" style="text-align: right;">
+                    <a class="btn btn-primary" style="color: white;" onclick="goBack()">Cancelar</a>
                     <button class="btn btn-primary">Listo</button>
                 </div>
             </div>
@@ -70,5 +71,12 @@
             </div>
         </div>
     </form>
+
+
+    <script>
+        function goBack() {
+        window.history.back();
+        }
+    </script>
 {{/partial}}
 {{>encabezado.hbs}}
