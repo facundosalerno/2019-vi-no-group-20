@@ -7,6 +7,7 @@ import spark.debug.DebugScreen;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import static spark.Spark.after;
+import static spark.Spark.before;
 
 public class Server {
     public static void main(String[] args) {
@@ -14,6 +15,20 @@ public class Server {
         //Spark.staticFiles.location("/public");
         Spark.staticFileLocation("/public");
         Spark.init();
+
+
+        before((request, response) -> {
+            
+
+          /** Ejemplo de pagina de Spark
+            boolean authenticated;
+            // ... check if authenticated
+            if (!authenticated) {
+                halt(401, "You are not welcome here");
+            }
+
+           */
+        });
 
 
         /** GLUE CODE */
@@ -47,10 +62,10 @@ public class Server {
 
         //TODO: OJO, VER AL MOMENTO DE ver tema TRANSACCIONES
 
-        /*after((request,response) -> {
+        after((request,response) -> {
             PerThreadEntityManagers.getEntityManager();
             PerThreadEntityManagers.closeEntityManager();
-        });*/
+        });
 
 
     }

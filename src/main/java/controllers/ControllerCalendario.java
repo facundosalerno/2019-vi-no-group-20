@@ -6,6 +6,7 @@ import domain.prenda.Prenda;
 import domain.usuario.Usuario;
 import exceptions.UsuarioInexistente;
 import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import scala.Array;
 import scala.math.Ordering;
@@ -23,7 +24,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ControllerCalendario implements TransactionalOps, EntityManagerOps {
+public class ControllerCalendario implements WithGlobalEntityManager, TransactionalOps, EntityManagerOps {
 
     public ModelAndView mostrar(Request req, Response res){
         String nombre= req.cookie("cookie_nombre");
@@ -36,11 +37,6 @@ public class ControllerCalendario implements TransactionalOps, EntityManagerOps 
         Collections.sort(usuario.getEventos());
         ControllerMonth controllerMonth = new ControllerMonth(usuario.getEventos());
         return new ModelAndView(controllerMonth, "calendario.hbs");
-    }
-
-    @Override
-    public EntityManager entityManager() {
-        return null;
     }
 
 }

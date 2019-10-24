@@ -9,6 +9,7 @@ import domain.usuario.*;
 import exceptions.ContraseñaInvalidaException;
 import exceptions.UsuarioInexistente;
 import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import spark.ModelAndView;
 import spark.Request;
@@ -22,7 +23,7 @@ import static spark.Spark.after;
 import java.util.Arrays;
 
 
-public class ControllerSesion implements TransactionalOps, EntityManagerOps {
+public class ControllerSesion implements WithGlobalEntityManager, TransactionalOps, EntityManagerOps {
 
     private String mensajeSesion = "Nunca compartas tu contraseña con nadie.";
 
@@ -66,17 +67,12 @@ public class ControllerSesion implements TransactionalOps, EntityManagerOps {
         return mensajeSesion;
     }
 
-    public void iniciarUsuarioDePrueba(){
+    public void iniciarUsuarioDePrueba() {
         RepositorioUsuarios.admin.setPassword("12345");
-        RepositorioUsuarios.admin.crearEvento("Cumpleaños de willy", RepositorioUsuarios.fechaCumpleWilly, FrecuenciaEvento.NO_SE_REPITE,"Casa de willy");
-        RepositorioUsuarios.admin.crearEvento("Cumpleaños de pepe", RepositorioUsuarios.fechaCumplePepe, FrecuenciaEvento.NO_SE_REPITE,"Casa de pepe");
-        RepositorioUsuarios.admin.crearEvento("Cumpleaños de robertito", RepositorioUsuarios.fechaCumpleRoberto, FrecuenciaEvento.NO_SE_REPITE,"Casa de roberto");
-        RepositorioUsuarios.admin.crearEvento("Entrega tp diseño", RepositorioUsuarios.entregaDiseño, FrecuenciaEvento.NO_SE_REPITE,"campus");
-    }
-
-    @Override
-    public EntityManager entityManager() {
-        return null;
+        RepositorioUsuarios.admin.crearEvento("Cumpleaños de willy", RepositorioUsuarios.fechaCumpleWilly, FrecuenciaEvento.NO_SE_REPITE, "Casa de willy");
+        RepositorioUsuarios.admin.crearEvento("Cumpleaños de pepe", RepositorioUsuarios.fechaCumplePepe, FrecuenciaEvento.NO_SE_REPITE, "Casa de pepe");
+        RepositorioUsuarios.admin.crearEvento("Cumpleaños de robertito", RepositorioUsuarios.fechaCumpleRoberto, FrecuenciaEvento.NO_SE_REPITE, "Casa de roberto");
+        RepositorioUsuarios.admin.crearEvento("Entrega tp diseño", RepositorioUsuarios.entregaDiseño, FrecuenciaEvento.NO_SE_REPITE, "campus");
     }
 }
 
