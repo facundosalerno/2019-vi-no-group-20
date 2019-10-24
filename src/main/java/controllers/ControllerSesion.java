@@ -68,6 +68,13 @@ public class ControllerSesion implements WithGlobalEntityManager, TransactionalO
         RepositorioUsuarios.admin.crearEvento("Cumpleaños de pepe", RepositorioUsuarios.fechaCumplePepe, FrecuenciaEvento.NO_SE_REPITE, "Casa de pepe");
         RepositorioUsuarios.admin.crearEvento("Cumpleaños de robertito", RepositorioUsuarios.fechaCumpleRoberto, FrecuenciaEvento.NO_SE_REPITE, "Casa de roberto");
         RepositorioUsuarios.admin.crearEvento("Entrega tp diseño", RepositorioUsuarios.entregaDiseño, FrecuenciaEvento.NO_SE_REPITE, "campus");
+
+        //Agregamos usuario y guardarropas a sus correspondientes repos
+        withTransaction(() ->{
+            RepositorioGuardarropas.getInstance().agregarGuardarropas(RepositorioGuardarropas.guardarropasDelAdmin);
+            RepositorioGuardarropas.getInstance().agregarGuardarropas(RepositorioGuardarropas.guardarropasDelAdminAuxiliar);
+            RepositorioUsuarios.getInstance().agregarUsuario(RepositorioUsuarios.admin);
+        });
     }
 }
 

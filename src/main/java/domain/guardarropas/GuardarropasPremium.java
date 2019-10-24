@@ -10,16 +10,20 @@ import domain.prenda.Prenda;
 import domain.usuario.TipoDeUsuario;
 import exceptions.NoPermiteGuardarropaIncompletoException;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Entity
+@DiscriminatorValue(value="P")
 public class GuardarropasPremium extends Guardarropas{
 	
 	//Solo para que sea compatible con JPA
-    protected GuardarropasPremium() {};
+    protected GuardarropasPremium() {}
 
     public GuardarropasPremium(String nombre){
         this.nombre = nombre;
@@ -38,7 +42,7 @@ public class GuardarropasPremium extends Guardarropas{
         this.calzados = new ArrayList<>(calzados);
         this.accesorios= new ArrayList<>(accesorios);
         this.nombre=nombre;
-        RepositorioGuardarropas.getInstance().agregarGuardarropas(this);
+        //RepositorioGuardarropas.getInstance().agregarGuardarropas(this);
     }
 
     @Override

@@ -44,8 +44,8 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
     @JoinColumn(name="usuarioId_eventos")
     private List<Evento> eventos = new ArrayList<Evento>();
 
-
     private String nombre;
+
     private int hashPass = 0;
 
     @OneToMany
@@ -89,8 +89,7 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
         this.tipoDeUsuario=tipoDeUsuario;
         guardarropas.stream().forEach( guardarropasAValidar -> validarTipoDeGuardarropas(guardarropasAValidar));
         this.guardarropas = guardarropas;
-        RepositorioUsuarios.getInstance().agregarUsuario(this);
-
+        //RepositorioUsuarios.getInstance().agregarUsuario(this);
     }
 
     public void validarContraseña(String password){
@@ -171,8 +170,9 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
 
 
     /** Arena */
-
+    @Transient
     private LocalDateTime filtroEventoInicial = LocalDateTime.now();
+    @Transient
     private LocalDateTime filtroEventoFinal = LocalDateTime.now();
     @Transient
     private List<Evento> eventosFiltrados = new ArrayList<>();

@@ -1,9 +1,11 @@
 package cron;
 
 import domain.evento.FrecuenciaEvento;
+import domain.guardarropas.Guardarropas;
 import domain.usuario.TipoDeUsuario;
 import domain.usuario.Usuario;
 import exceptions.UsuarioInexistente;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -11,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class RepositorioUsuarios {
+public class RepositorioUsuarios implements WithGlobalEntityManager {
     static private RepositorioUsuarios instancia = null;
     private List<Usuario> listaDeUsuarios = new ArrayList<>();
 
@@ -28,9 +30,16 @@ public class RepositorioUsuarios {
 
 
     public void agregarUsuario(Usuario usuario){
+        /*
         if(!listaDeUsuarios.contains(usuario))
             listaDeUsuarios.add(usuario);
+        */
+
+        if(usuario.getId() == null) {  //TODO: verificar que ande y que sea correcto
+            entityManager().persist(usuario);
+        }
     }
+
 
     public void eliminarUsuario(Usuario usuario){
         if(listaDeUsuarios.contains(usuario))
@@ -38,7 +47,7 @@ public class RepositorioUsuarios {
     }
 
     public Usuario buscarUsuario(String nombre){
-        Usuario usuario = listaDeUsuarios.stream().filter(u -> u.getNombre().equals(nombre)).findFirst().orElse(null);
+        Usuario usuario =  entityManager().find(Usuario.class, nombre);//listaDeUsuarios.stream().filter(u -> u.getNombre().equals(nombre)).findFirst().orElse(null);
         if(usuario == null)
             throw new UsuarioInexistente();
         return usuario;

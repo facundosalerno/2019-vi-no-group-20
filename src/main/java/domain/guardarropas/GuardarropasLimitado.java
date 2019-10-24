@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 
 
 @Entity
-@DiscriminatorValue(value="Limitado")
+@DiscriminatorValue(value="L")
 public class GuardarropasLimitado extends Guardarropas {
 
 	//Solo para que sea compatible con JPA
@@ -43,7 +43,7 @@ public class GuardarropasLimitado extends Guardarropas {
         this.calzados = new ArrayList<>(calzados);
         this.accesorios= new ArrayList<>(accesorios);
         this.nombre=nombre;
-        RepositorioGuardarropas.getInstance().agregarGuardarropas(this);
+        //RepositorioGuardarropas.getInstance().agregarGuardarropas(this);
     }
 
     private static int cantidadPrendasPermitidas(){

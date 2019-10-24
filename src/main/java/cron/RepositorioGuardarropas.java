@@ -6,12 +6,13 @@ import domain.prenda.*;
 import domain.usuario.Usuario;
 import exceptions.NoExisteGuardarropasException;
 import exceptions.UsuarioInexistente;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class RepositorioGuardarropas {
+public class RepositorioGuardarropas implements WithGlobalEntityManager {
 
     private static RepositorioGuardarropas instance = null;
 
@@ -31,8 +32,12 @@ public class RepositorioGuardarropas {
     }
 
     public void agregarGuardarropas(Guardarropas guardarropas){
-        if(!listaDeGuardarropas.contains(guardarropas))
+        /*if(!listaDeGuardarropas.contains(guardarropas))
             listaDeGuardarropas.add(guardarropas);
+        */
+        if(guardarropas.getId() == null) {  //TODO: verificar que ande y que sea correcto
+            entityManager().persist(guardarropas);
+        }
     }
 
     public void eliminarGuardarropas(Guardarropas guardarropas){
@@ -40,8 +45,8 @@ public class RepositorioGuardarropas {
             listaDeGuardarropas.remove(guardarropas);
     }
 
-    public Guardarropas buscarGuardarropas(String nombre){
-        Guardarropas guardarropas = listaDeGuardarropas.stream().filter(g -> g.getNombre().equals(nombre)).findFirst().orElse(null);
+    public Guardarropas buscarGuardarropas(Long id){  //String nombre
+        Guardarropas guardarropas = entityManager().find(Guardarropas.class, id);//listaDeGuardarropas.stream().filter(g -> g.getNombre().equals(nombre)).findFirst().orElse(null);
         if(guardarropas == null)
             throw new NoExisteGuardarropasException();
         return guardarropas;

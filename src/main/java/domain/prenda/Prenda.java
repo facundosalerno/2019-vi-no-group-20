@@ -17,12 +17,13 @@ import static java.util.Objects.requireNonNull;
 
 @Entity
 public class Prenda implements Comparable<Prenda>{
-	@Id	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	String nombre;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
     private TipoDePrenda tipoPrenda;
 
 	@Enumerated(EnumType.STRING)

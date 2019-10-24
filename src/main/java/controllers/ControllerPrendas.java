@@ -68,16 +68,14 @@ public class ControllerPrendas implements WithGlobalEntityManager, Transactional
     }};
 
 
-
-
-
     public ModelAndView mostrarPrendas(Request req, Response res) {
-        String nombreGuardarropas = req.params(":nombre");
-        Guardarropas guardarropas;
-        try{
-            guardarropas = RepositorioGuardarropas.getInstance().buscarGuardarropas(nombreGuardarropas);
+        String idGuardarropas = req.params(":id");
 
-        }catch (NoExisteGuardarropasException e){
+        Guardarropas guardarropas;
+        try {
+            guardarropas = RepositorioGuardarropas.getInstance().buscarGuardarropas(Long.parseLong(idGuardarropas));
+
+        } catch (NoExisteGuardarropasException e) {
             return new ModelAndView(null, "forbidden.hbs");
         }
 
@@ -85,81 +83,77 @@ public class ControllerPrendas implements WithGlobalEntityManager, Transactional
     }
 
 
-
-
-
-    public ModelAndView creacionPrenda(Request req, Response res){
-        String nombreGuardarropas = req.params(":nombre");
+    public ModelAndView creacionPrenda(Request req, Response res) {
+        String idGuardarropas = req.params(":id");
         Guardarropas guardarropas;
-        try{
-            guardarropas = RepositorioGuardarropas.getInstance().buscarGuardarropas(nombreGuardarropas);
+        try {
+            guardarropas = RepositorioGuardarropas.getInstance().buscarGuardarropas(Long.parseLong(idGuardarropas));
 
-        }catch (NoExisteGuardarropasException e){
+        } catch (NoExisteGuardarropasException e) {
             return new ModelAndView(null, "forbidden.hbs");
         }
         return new ModelAndView(guardarropas, "crearPrenda.hbs");
     }
 
 
-
-
-
     public ModelAndView crearPrenda(Request req, Response res) throws IOException {
-        String nombreGuardarropas = req.params(":nombre");
+        String idGuardarropas = req.params(":id");
         Guardarropas guardarropas;
+        try {
+            guardarropas = RepositorioGuardarropas.getInstance().buscarGuardarropas(Long.parseLong(idGuardarropas));
 
+        } catch (NoExisteGuardarropasException e) {
+            return new ModelAndView(null, "forbidden.hbs");
+        }
 
+        BorradorPrenda borradorPrenda = new BorradorPrenda();
+        borradorPrenda.definirNombre(
+                req.queryParams("query_nombre")
+        );
 
-            try {
-                guardarropas = RepositorioGuardarropas.getInstance().buscarGuardarropas(nombreGuardarropas);
-
-            } catch (NoExisteGuardarropasException e) {
-                return new ModelAndView(null, "forbidden.hbs");
+        try {
+            borradorPrenda.definirTipo(tiposDePrenda.get(req.queryParams("query_tipoPrenda")));
+            borradorPrenda.definirMaterial(materialesDePrenda.get(req.queryParams("query_material")));
+            borradorPrenda.definirColorPrimario(new Color(Integer.parseInt(req.queryParams("query_colorp_r")), Integer.parseInt(req.queryParams("query_colorp_g")), Integer.parseInt(req.queryParams("query_colorp_b"))));
+            if (req.queryParams("query_colors_enabled").equals("on")) {
+                borradorPrenda.definirColorSecundario(new Color(Integer.parseInt(req.queryParams("query_colors_r")), Integer.parseInt(req.queryParams("query_colors_g")), Integer.parseInt(req.queryParams("query_colors_b"))));
             }
+            borradorPrenda.definirTrama(tramasDePrenda.get(req.queryParams("query_trama")));
+            borradorPrenda.definirImagen(req.queryParams("query_imagen"));
+            Prenda prenda = borradorPrenda.crearPrenda();
 
-            BorradorPrenda borradorPrenda = new BorradorPrenda();
-            borradorPrenda.definirNombre(
-                    req.queryParams("query_nombre")
-            );
+            guardarropas.agregarPrenda(prenda);
 
-            try {
-                borradorPrenda.definirTipo(tiposDePrenda.get(req.queryParams("query_tipoPrenda")));
-                borradorPrenda.definirMaterial(materialesDePrenda.get(req.queryParams("query_material")));
-                borradorPrenda.definirColorPrimario(new Color(Integer.parseInt(req.queryParams("query_colorp_r")), Integer.parseInt(req.queryParams("query_colorp_g")), Integer.parseInt(req.queryParams("query_colorp_b"))));
-                if (req.queryParams("query_colors_enabled").equals("on")) {
-                    borradorPrenda.definirColorSecundario(new Color(Integer.parseInt(req.queryParams("query_colors_r")), Integer.parseInt(req.queryParams("query_colors_g")), Integer.parseInt(req.queryParams("query_colors_b"))));
-                }
-                borradorPrenda.definirTrama(tramasDePrenda.get(req.queryParams("query_trama")));
-                borradorPrenda.definirImagen(req.queryParams("query_imagen"));
-                Prenda prenda = borradorPrenda.crearPrenda();
+/*
+                withTransaction(() ->{
 
-                guardarropas.agregarPrenda(prenda);
-            } catch (NullPointerException e) {
-                mensajeError = e.getMessage();
-                return new ModelAndView(this, "fallaCreacionPrenda.hbs");
-            } catch (TipoDePrendaNoDefinidoExcepcion e) {
-                mensajeError = e.getMessage();
-                return new ModelAndView(this, "fallaCreacionPrenda.hbs");
-            } catch (NoPermiteMaterialException e) {
-                mensajeError = "El material elegido no esta disponible para el tipo de prenda seleccionado.";
-                return new ModelAndView(this, "fallaCreacionPrenda.hbs");
-            } catch (NoPermiteSerElMismoColorException e) {
-                mensajeError = "Los colores primario y secundario no pueden ser iguales.";
-                return new ModelAndView(this, "fallaCreacionPrenda.hbs");
-            } catch (NumberFormatException e) {
-                mensajeError = "Los colores deben ser numericos."; //TODO permitir color secundario que sea nulo ya que con esta solucion lo pone en 0 0 0
-            } catch (Exception e) {
-                mensajeError = "Error desconocido.";
-                return new ModelAndView(this, "fallaCreacionPrenda.hbs");
-            }
+                });
+*/
+        } catch (NullPointerException e) {
+            mensajeError = e.getMessage();
+            return new ModelAndView(this, "fallaCreacionPrenda.hbs");
+        } catch (TipoDePrendaNoDefinidoExcepcion e) {
+            mensajeError = e.getMessage();
+            return new ModelAndView(this, "fallaCreacionPrenda.hbs");
+        } catch (NoPermiteMaterialException e) {
+            mensajeError = "El material elegido no esta disponible para el tipo de prenda seleccionado.";
+            return new ModelAndView(this, "fallaCreacionPrenda.hbs");
+        } catch (NoPermiteSerElMismoColorException e) {
+            mensajeError = "Los colores primario y secundario no pueden ser iguales.";
+            return new ModelAndView(this, "fallaCreacionPrenda.hbs");
+        } catch (NumberFormatException e) {
+            mensajeError = "Los colores deben ser numericos."; //TODO permitir color secundario que sea nulo ya que con esta solucion lo pone en 0 0 0
+        } catch (Exception e) {
+            mensajeError = "Error desconocido.";
+            return new ModelAndView(this, "fallaCreacionPrenda.hbs");
+        }
 
 
-            //Si no se pone el redirect, igual va a ir a esa uri por que esta en la action de la form. Pero el metodo va a ser post, entonces cada vez que se recargue la pagina se vuelve a agregar la prenda. El redirect es un get de la uri.
-            res.redirect("/guardarropas/" + nombreGuardarropas + "/prendas");
+        //Si no se pone el redirect, igual va a ir a esa uri por que esta en la action de la form. Pero el metodo va a ser post, entonces cada vez que se recargue la pagina se vuelve a agregar la prenda. El redirect es un get de la uri.
+        res.redirect("/guardarropas/" + idGuardarropas + "/prendas");
 
 
-
-            return new ModelAndView(guardarropas, "prendas.hbs");
+        return new ModelAndView(guardarropas, "prendas.hbs");
 
 
     }

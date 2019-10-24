@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 public abstract class Guardarropas {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @OneToMany(cascade = CascadeType.ALL)

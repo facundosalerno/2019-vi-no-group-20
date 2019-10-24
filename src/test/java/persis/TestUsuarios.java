@@ -65,7 +65,7 @@ public class TestUsuarios extends AbstractPersistenceTest implements WithGlobalE
 
         entityManager().persist(facundo);
 
-        entityManager().find(Usuario.class,facundo.getId());
+        entityManager().find(Usuario.class,facundo.getId());  //Assert not null
     }
 
     @Test

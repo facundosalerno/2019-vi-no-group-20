@@ -12,6 +12,8 @@ public class RangoTemperatura{
     double rangoSuperior = 0;
     double rangoInferior = 0;
 
+    public RangoTemperatura(){}
+
     public RangoTemperatura(double rangoInferior, double rangoSuperior){
         this.rangoInferior = rangoInferior;
         this.rangoSuperior = rangoSuperior;
