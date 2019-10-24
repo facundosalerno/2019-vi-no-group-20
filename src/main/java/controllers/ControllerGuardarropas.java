@@ -5,14 +5,11 @@ import cron.RepositorioUsuarios;
 import domain.guardarropas.GuardarropasPremium;
 import domain.usuario.Usuario;
 import exceptions.UsuarioInexistente;
-import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-
-import javax.persistence.EntityManager;
 
 public class ControllerGuardarropas implements WithGlobalEntityManager, TransactionalOps {
 

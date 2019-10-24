@@ -8,17 +8,12 @@ import domain.prenda.*;
 import domain.usuario.*;
 import exceptions.ContraseñaInvalidaException;
 import exceptions.UsuarioInexistente;
-import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
+
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-import spark.Spark.*;
-
-import javax.persistence.EntityManager;
-
-import static spark.Spark.after;
 
 import java.util.Arrays;
 

@@ -3,6 +3,8 @@ package controllers;
 import cron.RepositorioUsuarios;
 import domain.usuario.Usuario;
 import exceptions.UsuarioInexistente;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -10,7 +12,7 @@ import spark.Response;
 import java.time.LocalDateTime;
 import java.util.Collections;
 
-public class ControllerEvento {
+public class ControllerEvento implements WithGlobalEntityManager, TransactionalOps {
     LocalDateTime hoy;
 
     public ModelAndView creacionEvento(Request req, Response res){
