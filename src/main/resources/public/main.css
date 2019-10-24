@@ -5,8 +5,8 @@ body {
 }
 
 .contenedor_login{
-    top: 20%; /* Top */
-    left: 50%; /* Para que este centrado */
+    top: 10rem; /* Top */
+    left: 50rem; /* Para que este centrado */
     display: block;
     position: relative;
     width: 600px;
@@ -113,6 +113,7 @@ body {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+	height: 270px;
 }
 
 td {
@@ -190,7 +191,6 @@ td {
 
 /* Lista de eventos container */
 .lista-de-eventos{
-    height: 100%;
     border-radius: 0 0 1em 1em;
     background: #FFFFFF;
 }

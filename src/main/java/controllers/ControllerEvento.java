@@ -1,6 +1,7 @@
 package controllers;
 
 import cron.RepositorioUsuarios;
+import domain.evento.FrecuenciaEvento;
 import domain.usuario.Usuario;
 import exceptions.UsuarioInexistente;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
@@ -29,6 +30,8 @@ public class ControllerEvento implements WithGlobalEntityManager, TransactionalO
             return new ModelAndView(null, "forbidden.hbs");
         }
 
+        usuario.crearEvento(req.queryParams("query_nombre"), LocalDateTime.parse(req.queryParams("query_localDateTime")), FrecuenciaEvento.NO_SE_REPITE, req.queryParams("query_lugar"));
+        res.redirect("/calendario");
         return new ModelAndView(null, "calendario.hbs");
     }
 

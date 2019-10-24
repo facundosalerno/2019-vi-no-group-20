@@ -29,7 +29,6 @@ public class ControllerSesion implements WithGlobalEntityManager, TransactionalO
 
 
     public ModelAndView iniciarSesion(Request req, Response res) {
-        iniciarUsuarioDePrueba();
         Usuario usuario;
 
         try {
@@ -62,13 +61,7 @@ public class ControllerSesion implements WithGlobalEntityManager, TransactionalO
         return mensajeSesion;
     }
 
-    public void iniciarUsuarioDePrueba() {
-        RepositorioUsuarios.admin.setPassword("12345");
-        RepositorioUsuarios.admin.crearEvento("Cumpleaños de willy", RepositorioUsuarios.fechaCumpleWilly, FrecuenciaEvento.NO_SE_REPITE, "Casa de willy");
-        RepositorioUsuarios.admin.crearEvento("Cumpleaños de pepe", RepositorioUsuarios.fechaCumplePepe, FrecuenciaEvento.NO_SE_REPITE, "Casa de pepe");
-        RepositorioUsuarios.admin.crearEvento("Cumpleaños de robertito", RepositorioUsuarios.fechaCumpleRoberto, FrecuenciaEvento.NO_SE_REPITE, "Casa de roberto");
-        RepositorioUsuarios.admin.crearEvento("Entrega tp diseño", RepositorioUsuarios.entregaDiseño, FrecuenciaEvento.NO_SE_REPITE, "campus");
-    }
+
 }
 
 
