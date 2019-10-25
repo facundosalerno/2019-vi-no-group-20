@@ -18,11 +18,17 @@ public class Imagen {
     final private int altura=100;
 	@Transient
     final private int ancho=100;
-    final private String url;
+
+	private String url=new String();
+
+	Imagen(){}
 
     Imagen(String nombreDeArchivo) {
         url = nombreDeArchivo;
     }
+
+    public String getUrl(){return url;}
+
 
     public BufferedImage getImagen()throws IOException{
         BufferedImage imagenDeArchivo = ImageIO.read(new File(url));                     //Abre la imagen desde un path

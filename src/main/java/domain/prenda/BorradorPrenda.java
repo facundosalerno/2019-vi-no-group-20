@@ -62,7 +62,7 @@ public class BorradorPrenda {
 
     public void definirImagen(String pathDeArchivo) throws IOException {
         requireNonNull(pathDeArchivo, "El path del archivo no es valido");
-        imagen=new Imagen(pathDeArchivo);
+        imagen = new Imagen(pathDeArchivo);
     }
 
     public Prenda crearPrenda() {

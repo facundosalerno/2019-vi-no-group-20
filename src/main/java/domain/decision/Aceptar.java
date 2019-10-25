@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Entity
 @DiscriminatorValue(value="Aceptar")
 public class Aceptar extends Decision {
+    public Aceptar(){}
 
     public Aceptar(Atuendo atuendo){
         this.atuendo=atuendo;

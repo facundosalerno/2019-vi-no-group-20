@@ -10,6 +10,8 @@ import javax.persistence.*;
 @DiscriminatorValue(value="Rechazar")
 public class Rechazar extends Decision{
 
+    public Rechazar(){}
+
     public Rechazar (Atuendo atuendo){
         this.atuendo=atuendo;
         atuendo.cambiarEstado(Estado.RECHAZADO);

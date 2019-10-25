@@ -108,7 +108,7 @@ public class Prenda implements Comparable<Prenda>{
     public Color getColorSecundario() { return colorSecundario;}
     public Trama getTrama() { return trama;}
     public NivelDeCapa getNivelDeCapa(){return tipoPrenda.getNivelDeCapa();}
-
+    public Imagen getImagen(){return this.imagen;}
 
     public String getNombre(){
         return nombre;

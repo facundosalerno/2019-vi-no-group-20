@@ -16,7 +16,11 @@
             <div class="card mb-3 shadow prenda">
                 <div class="row no-gutters">
                     <div class="col-md-4">
-                        <img src="/remera.png" class="card-img imagen_prenda" alt="Remera">
+                        {{#if imagen}}
+                                <img src="{{this.imagen.url}}" class="card-img imagen_prenda" alt="Remera">
+                        {{else}}
+                                <img src="/remera.png" class="card-img imagen_prenda" alt="Remera">
+                        {{/if}}
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">

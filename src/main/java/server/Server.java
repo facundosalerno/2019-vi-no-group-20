@@ -4,6 +4,7 @@ import controllers.*;
 import cron.RepositorioGuardarropas;
 import cron.RepositorioUsuarios;
 import domain.evento.FrecuenciaEvento;
+import exceptions.UsuarioInexistente;
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 import spark.Spark;
 import spark.debug.DebugScreen;
@@ -22,6 +23,7 @@ public class Server {
         ControllerSesion controllerSesion= new ControllerSesion();
 
         iniciarUsuarioDePrueba();
+
         controllerSesion.persistirUsuarioPrueba();
 
         before((request, response) -> {
@@ -76,10 +78,10 @@ public class Server {
 
 
     public static void iniciarUsuarioDePrueba() {
-        RepositorioUsuarios.admin.setPassword("12345");
-        RepositorioUsuarios.admin.crearEvento("Cumpleaños de willy", RepositorioUsuarios.fechaCumpleWilly, FrecuenciaEvento.NO_SE_REPITE, "Casa de willy");
-        RepositorioUsuarios.admin.crearEvento("Cumpleaños de pepe", RepositorioUsuarios.fechaCumplePepe, FrecuenciaEvento.NO_SE_REPITE, "Casa de pepe");
-        RepositorioUsuarios.admin.crearEvento("Cumpleaños de robertito", RepositorioUsuarios.fechaCumpleRoberto, FrecuenciaEvento.NO_SE_REPITE, "Casa de roberto");
-        RepositorioUsuarios.admin.crearEvento("Entrega tp diseño", RepositorioUsuarios.entregaDiseño, FrecuenciaEvento.NO_SE_REPITE, "campus");
+            RepositorioUsuarios.admin.setPassword("12345");
+            RepositorioUsuarios.admin.crearEvento("Cumpleaños de willy", RepositorioUsuarios.fechaCumpleWilly, FrecuenciaEvento.NO_SE_REPITE, "Casa de willy");
+            RepositorioUsuarios.admin.crearEvento("Cumpleaños de pepe", RepositorioUsuarios.fechaCumplePepe, FrecuenciaEvento.NO_SE_REPITE, "Casa de pepe");
+            RepositorioUsuarios.admin.crearEvento("Cumpleaños de robertito", RepositorioUsuarios.fechaCumpleRoberto, FrecuenciaEvento.NO_SE_REPITE, "Casa de roberto");
+            RepositorioUsuarios.admin.crearEvento("Entrega tp diseño", RepositorioUsuarios.entregaDiseño, FrecuenciaEvento.NO_SE_REPITE, "campus");
     }
 }

@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @Entity
 @DiscriminatorColumn(name = "tipo_guardarropas")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public abstract class Guardarropas {
+public abstract class Guardarropas{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
