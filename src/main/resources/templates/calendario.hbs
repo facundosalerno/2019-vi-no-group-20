@@ -1,9 +1,16 @@
 {{#partial "body"}}
     <div class="container calendar-container">
-        <div style="margin-bottom: 20px; text-align: right;">
-            <form action="/evento/wizard" method="GET" >
-                <button class="btn btn-primary">Agregar</button>
-            </form>
+        <div class="container">
+            <div class="row" style="padding-top:10px;">
+                <div class="col">
+                    <h5 class="card-title text-capitalize">Mis eventos</h5>
+                </div>
+                <div class="col" style="text-align: right;">
+                    <form action="/evento/wizard" method="GET" >
+                        <button class="btn btn-primary">Agregar</button>
+                    </form>
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="col">
@@ -51,13 +58,13 @@
 
 
             <div class="col" style="height: 558px; width:553px; overflow:auto;">
-                <table class="table shadow lista-de-eventos">
+                <table class="table shadow lista-de-eventos table-borderless">
                     <thead>
                     <tr>
-                        <th scope="col">Evento</th>
+                        <th scope="col" style="border-radius: 10px 0 0 0;">Evento</th>
                         <th scope="col">Lugar</th>
                         <th scope="col">Fecha</th>
-                        <th scope="col">Sugerencias</th>
+                        <th scope="col" style="border-radius: 0 10px 0 0;">Sugerencias</th>
                     </tr>
                     </thead>
                     <tbody>

@@ -1,6 +1,7 @@
 package controllers;
 
 import cron.RepositorioUsuarios;
+import domain.atuendo.Atuendo;
 import domain.evento.Evento;
 import domain.evento.FrecuenciaEvento;
 import domain.usuario.Usuario;
@@ -49,6 +50,18 @@ public class ControllerEvento implements WithGlobalEntityManager, TransactionalO
         String nombreEvento = req.params(":nombre");
         Evento evento = usuario.buscarEvento(nombreEvento);
         return new ModelAndView(evento, "sugerenciasEvento.hbs");
+    }
+
+    public ModelAndView aceptarSugerencia(Request req, Response res){
+        String nombre= req.cookie("cookie_nombre");
+        Usuario usuario;
+        try{
+            usuario = RepositorioUsuarios.getInstance().buscarUsuario(nombre);
+        }catch (UsuarioInexistente e){
+            return new ModelAndView(null, "forbidden.hbs");
+        }
+
+        return new ModelAndView(usuario, "sugerenciasEvento.hbs");
     }
 
     public ModelAndView verSugerenciasAceptadas(Request req, Response res){

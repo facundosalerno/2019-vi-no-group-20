@@ -85,6 +85,10 @@ public class Evento implements Notificable, Comparable<Evento> {
         return sugerenciasObtenidas;
     }
 
+    public Atuendo buscarAtuendo(Long id){
+        return sugerenciasObtenidas.stream().filter(a -> a.getId().equals(id)).findFirst().orElse(null);
+    }
+
 
     public boolean seLlama(String nombre) {
         return this.nombre.equals(nombre);

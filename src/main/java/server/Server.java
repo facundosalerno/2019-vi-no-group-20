@@ -2,6 +2,7 @@ package server;
 
 import clima.AccuWeather;
 import clima.OpenWeather;
+import clima.TemperaturaAccuWeather;
 import controllers.*;
 import cron.RepositorioUsuarios;
 import domain.evento.FrecuenciaEvento;
@@ -10,6 +11,8 @@ import spark.Spark;
 import spark.debug.DebugScreen;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static spark.Spark.after;
 import static spark.Spark.before;
 
@@ -61,6 +64,7 @@ public class Server {
         Spark.get("/evento/wizard", controllerEvento::creacionEvento, new HandlebarsTemplateEngine());
         Spark.post("/evento", controllerEvento::crear, new HandlebarsTemplateEngine());
         Spark.get("/evento/:nombre/sugerencias", controllerEvento::sugerenciasDelEvento, new HandlebarsTemplateEngine());
+        Spark.post("/evento/:nombre/sugerencias/:id", controllerEvento::aceptarSugerencia, new HandlebarsTemplateEngine());
         Spark.get("/sugerencias/aceptadas", controllerEvento::verSugerenciasAceptadas, new HandlebarsTemplateEngine());
 
         DebugScreen.enableDebugScreen();
@@ -69,10 +73,18 @@ public class Server {
 
     public static void iniciarUsuarioDePrueba() {
         RepositorioUsuarios.admin.setPassword("12345");
+
         RepositorioUsuarios.admin.crearEvento("Cumpleaños de willy", RepositorioUsuarios.fechaCumpleWilly, FrecuenciaEvento.NO_SE_REPITE, "Casa de willy");
         RepositorioUsuarios.admin.crearEvento("Cumpleaños de pepe", RepositorioUsuarios.fechaCumplePepe, FrecuenciaEvento.NO_SE_REPITE, "Casa de pepe");
         RepositorioUsuarios.admin.crearEvento("Cumpleaños de robertito", RepositorioUsuarios.fechaCumpleRoberto, FrecuenciaEvento.NO_SE_REPITE, "Casa de roberto");
         RepositorioUsuarios.admin.crearEvento("Entrega tp diseño", RepositorioUsuarios.entregaDiseño, FrecuenciaEvento.NO_SE_REPITE, "campus");
-        RepositorioUsuarios.admin.getEventos().forEach(e -> e.generarSugerencias(new OpenWeather()));
+
+        TemperaturaAccuWeather temperatura = mock(TemperaturaAccuWeather.class);
+        when(temperatura.getTemperature()).thenReturn(20.0);
+
+        AccuWeather meteorologo = mock(AccuWeather.class);
+        when(meteorologo.obtenerClima()).thenReturn(temperatura);
+
+        RepositorioUsuarios.admin.getEventos().forEach(e -> e.generarSugerencias(meteorologo));
     }
 }
