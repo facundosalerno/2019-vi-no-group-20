@@ -2,6 +2,7 @@ package domain.usuario;
 
 import clima.Clima;
 import clima.Meteorologo;
+import com.google.common.collect.Iterables;
 import cron.Cron;
 import cron.RepositorioUsuarios;
 import domain.atuendo.Atuendo;
@@ -137,13 +138,15 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
     }
 
     private Decision popDecision(){
-        return decisiones.remove(decisiones.size()-1);
+        return decisiones.size() > 0 ? decisiones.remove(decisiones.size()-1) : null;
     }
 
     public void deshacerUltimaDecision(){
         if(this.decisiones.isEmpty())
             throw new NoHayDecisionesParaDeshacer();
-        popDecision().deshacer();
+        Decision d = popDecision();
+        if(d != null)
+            d.deshacer();
     }
 
     public void aceptarSugerencia(Atuendo atuendo){

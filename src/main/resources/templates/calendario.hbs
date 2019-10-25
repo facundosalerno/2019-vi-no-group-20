@@ -50,7 +50,7 @@
             </div> <!-- end calendar-container -->
 
 
-            <div class="col">
+            <div class="col" style="height: 558px; width:553px; overflow:auto;">
                 <table class="table shadow lista-de-eventos">
                     <thead>
                     <tr>
@@ -65,6 +65,12 @@
                             <th scope="row">{{nombre}}</th>
                             <td>{{lugar}}</td>
                             <td>{{fecha}}</td>
+                        </tr>
+                    {{else}}
+                        <tr>
+                            <th scope="row"></th>
+                            <td>No hay eventos</td>
+                            <td></td>
                         </tr>
                     {{/each}}
                     </tbody>

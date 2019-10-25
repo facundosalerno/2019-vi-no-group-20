@@ -1,6 +1,8 @@
 package server;
 
 import controllers.*;
+import cron.RepositorioUsuarios;
+import domain.evento.FrecuenciaEvento;
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 import spark.Spark;
 import spark.debug.DebugScreen;
@@ -15,7 +17,7 @@ public class Server {
         //Spark.staticFiles.location("/public");
         Spark.staticFileLocation("/public");
         Spark.init();
-
+        iniciarUsuarioDePrueba();
 
         before((request, response) -> {
             
@@ -58,16 +60,14 @@ public class Server {
         Spark.post("/evento", controllerEvento::crear, new HandlebarsTemplateEngine());
 
         DebugScreen.enableDebugScreen();
-
-
-        //TODO: OJO, VER AL MOMENTO DE ver tema TRANSACCIONES
-
-        after((request,response) -> {
-            PerThreadEntityManagers.getEntityManager();
-            PerThreadEntityManagers.closeEntityManager();
-        });
-
-
     }
 
+
+    public static void iniciarUsuarioDePrueba() {
+        RepositorioUsuarios.admin.setPassword("12345");
+        RepositorioUsuarios.admin.crearEvento("Cumpleaños de willy", RepositorioUsuarios.fechaCumpleWilly, FrecuenciaEvento.NO_SE_REPITE, "Casa de willy");
+        RepositorioUsuarios.admin.crearEvento("Cumpleaños de pepe", RepositorioUsuarios.fechaCumplePepe, FrecuenciaEvento.NO_SE_REPITE, "Casa de pepe");
+        RepositorioUsuarios.admin.crearEvento("Cumpleaños de robertito", RepositorioUsuarios.fechaCumpleRoberto, FrecuenciaEvento.NO_SE_REPITE, "Casa de roberto");
+        RepositorioUsuarios.admin.crearEvento("Entrega tp diseño", RepositorioUsuarios.entregaDiseño, FrecuenciaEvento.NO_SE_REPITE, "campus");
+    }
 }
