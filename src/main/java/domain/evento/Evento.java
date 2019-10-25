@@ -116,6 +116,10 @@ public class Evento implements Notificable, Comparable<Evento> {
         frecuencia.renovarEvento(this);
     }
 
+    public void borrarSugerenciasObtenidas(){
+        sugerenciasObtenidas = new ArrayList<>();
+    }
+
 
     /**
      * Observer

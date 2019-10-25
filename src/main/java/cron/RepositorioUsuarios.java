@@ -47,8 +47,8 @@ public class RepositorioUsuarios implements WithGlobalEntityManager {
     }
 
     public Usuario buscarUsuario(String nombre){
-        Usuario usuario =  entityManager().createQuery("from Usuario where nombre = '"+nombre+"'", Usuario.class).getResultList()
-                .get(0);//find(Usuario.class, nombre);//listaDeUsuarios.stream().filter(u -> u.getNombre().equals(nombre)).findFirst().orElse(null);
+        Usuario usuario =  entityManager().createQuery("from Usuario where nombre = '"+nombre+"'", Usuario.class).getResultList().stream().findFirst().orElse(null);
+        //find(Usuario.class, nombre);//listaDeUsuarios.stream().filter(u -> u.getNombre().equals(nombre)).findFirst().orElse(null);
         if(usuario == null)
             throw new UsuarioInexistente();
         return usuario;

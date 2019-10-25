@@ -41,7 +41,7 @@ public class ControllerEvento implements WithGlobalEntityManager, TransactionalO
         }
 
         usuario.crearEvento(req.queryParams("query_nombre"), LocalDateTime.parse(req.queryParams("query_localDateTime")), FrecuenciaEvento.NO_SE_REPITE, req.queryParams("query_lugar"));
-/*        Evento eventoAPersistir = usuario.buscarEvento(req.queryParams("cookie_nombre"));
+        Evento eventoAPersistir = usuario.buscarEvento(req.queryParams("query_nombre"));
 
         withTransaction(() -> {
             entityManager().persist(eventoAPersistir);
@@ -49,7 +49,7 @@ public class ControllerEvento implements WithGlobalEntityManager, TransactionalO
 
         });
 
-*/
+
         res.redirect("/calendario");
         return new ModelAndView(null, "calendario.hbs");
     }
@@ -87,7 +87,20 @@ public class ControllerEvento implements WithGlobalEntityManager, TransactionalO
         Evento evento = usuario.buscarEvento(nombreEvento);
         String idSugerencia = req.params(":id");
         Atuendo atuendo = evento.buscarAtuendo(Long.parseLong(idSugerencia));
+
         usuario.aceptarSugerencia(atuendo);
+
+
+        evento.getSugerenciasObtenidas().stream().filter(a-> !a.equals(atuendo)).forEach(a->usuario.rechazarSugerencia(a));
+        evento.borrarSugerenciasObtenidas();
+
+        withTransaction(() -> {
+            entityManager().persist(atuendo);
+            entityManager().merge(usuario);
+
+        });
+
+
         res.redirect("/sugerencias/aceptadas");
         return new ModelAndView(null, null);
     }
@@ -122,6 +135,13 @@ public class ControllerEvento implements WithGlobalEntityManager, TransactionalO
         Atuendo atuendo = usuario.buscarAtuendoAceptado(Long.parseLong(idSugerencia));
         int calificacion = Integer.parseInt(req.queryParams("var_button_calificacion"));
         usuario.calificarSugerencia(atuendo, calificacion);
+
+        withTransaction(() -> {
+            entityManager().merge(atuendo);
+            entityManager().merge(usuario);
+
+        });
+
         res.redirect("/sugerencias/aceptadas");
         return new ModelAndView(null, "sugerenciaAceptadas.hbs");
     }

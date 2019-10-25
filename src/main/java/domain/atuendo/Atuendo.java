@@ -129,6 +129,10 @@ public class Atuendo {
         return id;
     }
 
+    public int getCalificacion() {
+        return calificacion;
+    }
+
 
     /**
      * Equals y hashcode

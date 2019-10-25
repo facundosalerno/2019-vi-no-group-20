@@ -69,7 +69,7 @@
                     </div>
                     <div class="container" style="padding-top: 10px;">
                         <nav aria-label="Page navigation example">
-                            <form action="/sugerencias/aceptadas/:{{id}}" method="POST">
+                            <form action="/sugerencias/aceptadas/{{id}}" method="POST">
                                 <ul class="pagination">
                                     <p class="card-text" style="padding: 10px 10px 0 0;"><small class="text-muted">Calificacion </small></p>
                                     <li class="page-item"><button class="page-link" name="var_button_calificacion" value="1">1</button></li>
@@ -85,6 +85,75 @@
                                 </ul>
                             </form>
                         </nav>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+
+
+
+        {{#each atuendosCalificados}}
+            <div class="card mb-3 shadow prenda">
+                <div class="row no-gutters">
+                    {{#each prendasSuperiores}}
+                        <div class="col-md-4">
+                            {{#if imagen}}
+                                <img src="{{this.imagen.url}}" class="card-img imagen_prenda" alt="Remera">
+                            {{else}}
+                                <img src="/remera.png" class="card-img imagen_prenda" alt="Remera">
+                            {{/if}}
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title text-capitalize">{{nombre}}</h5>
+                                <p class="card-text"><small class="text-muted">La prenda podria estar siendo usada por alguien mas.</small></p>
+                            </div>
+                        </div>
+                    {{/each}}
+
+                    <div class="col-md-4">
+                        {{#if prendaInferior.imagen}}
+                            <img src="{{prendaInferior.imagen.url}}" class="card-img imagen_prenda" alt="Remera">
+                        {{else}}
+                            <img src="/remera.png" class="card-img imagen_prenda" alt="Remera">
+                        {{/if}}
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title text-capitalize">{{prendaInferior.nombre}}</h5>
+                            <p class="card-text"><small class="text-muted">La prenda podria estar siendo usada por alguien mas.</small></p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        {{#if prendaInferior.imagen}}
+                            <img src="{{prendaInferior.imagen.url}}" class="card-img imagen_prenda" alt="Remera">
+                        {{else}}
+                            <img src="/remera.png" class="card-img imagen_prenda" alt="Remera">
+                        {{/if}}
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title text-capitalize">{{calzado.nombre}}</h5>
+                            <p class="card-text"><small class="text-muted">La prenda podria estar siendo usada por alguien mas.</small></p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        {{#if prendaInferior.imagen}}
+                            <img src="{{prendaInferior.imagen.url}}" class="card-img imagen_prenda" alt="Remera">
+                        {{else}}
+                            <img src="/remera.png" class="card-img imagen_prenda" alt="Remera">
+                        {{/if}}
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title text-capitalize">{{accesorio.nombre}}</h5>
+                            <p class="card-text"><small class="text-muted">La prenda podria estar siendo usada por alguien mas.</small></p>
+                        </div>
+                    </div>
+                    <div class="container" style="padding: 10px 0 10px 10px; text-align: center;">
+                        <h7 class="card-text">Calificado con {{calificacion}}.</h7>
                     </div>
                 </div>
             </div>

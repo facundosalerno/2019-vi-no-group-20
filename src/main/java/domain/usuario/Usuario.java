@@ -61,6 +61,10 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
     @JoinColumn(name = "usuarioId_atuendosRechazados")
     private List<Atuendo> atuendosRechazados = new ArrayList<Atuendo>();
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "usuarioId_atuendosCalificados")
+    private List<Atuendo> atuendosCalificados = new ArrayList<Atuendo>();
+
     @Enumerated(EnumType.STRING)
     private TipoDeUsuario tipoDeUsuario;
 
@@ -164,6 +168,8 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
 
     public void calificarSugerencia(Atuendo atuendo, int calificacion){
         this.decisiones.add(new Calificar(atuendo,calificacion));
+        this.atuendosCalificados.add(atuendo);
+        this.atuendosAceptados.remove(atuendo);
     }
 
     public void rechazarSugerencia(Atuendo atuendo){
@@ -256,6 +262,10 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
 
     public List<Atuendo> getAtuendosAceptados() {
         return atuendosAceptados;
+    }
+
+    public List<Atuendo> getAtuendosCalificados() {
+        return atuendosCalificados;
     }
 
     /** Observer */
