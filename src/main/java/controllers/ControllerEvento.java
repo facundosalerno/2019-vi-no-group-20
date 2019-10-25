@@ -41,6 +41,15 @@ public class ControllerEvento implements WithGlobalEntityManager, TransactionalO
         }
 
         usuario.crearEvento(req.queryParams("query_nombre"), LocalDateTime.parse(req.queryParams("query_localDateTime")), FrecuenciaEvento.NO_SE_REPITE, req.queryParams("query_lugar"));
+/*        Evento eventoAPersistir = usuario.buscarEvento(req.queryParams("cookie_nombre"));
+
+        withTransaction(() -> {
+            entityManager().persist(eventoAPersistir);
+            entityManager().merge(usuario);
+
+        });
+
+*/
         res.redirect("/calendario");
         return new ModelAndView(null, "calendario.hbs");
     }

@@ -129,7 +129,9 @@ public class ControllerPrendas implements WithGlobalEntityManager, Transactional
             guardarropas.agregarPrenda(prenda);
 
             withTransaction(() -> {
+                entityManager().persist(prenda);
                 entityManager().merge(guardarropas);
+                //entityManager().flush();
             });
 
         }
@@ -151,7 +153,6 @@ public class ControllerPrendas implements WithGlobalEntityManager, Transactional
             mensajeError = "Error desconocido.";
             return new ModelAndView(this, "fallaCreacionPrenda.hbs");
         }
-
 
         //Si no se pone el redirect, igual va a ir a esa uri por que esta en la action de la form. Pero el metodo va a ser post, entonces cada vez que se recargue la pagina se vuelve a agregar la prenda. El redirect es un get de la uri.
         res.redirect("/guardarropas/" + idGuardarropas + "/prendas");

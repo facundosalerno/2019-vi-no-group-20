@@ -27,9 +27,9 @@ public class Server {
 
         ControllerSesion controllerSesion= new ControllerSesion();
 
-        iniciarUsuarioDePrueba();
+        //iniciarUsuarioDePrueba();
 
-        controllerSesion.persistirUsuarioPrueba();
+        //controllerSesion.persistirUsuarioPrueba();
 
         before((request, response) -> {
             
