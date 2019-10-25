@@ -111,13 +111,12 @@ public class ControllerPrendas implements WithGlobalEntityManager, Transactional
                 req.queryParams("query_nombre")
         );
 
-        //try {
+        try {
             borradorPrenda.definirTipo(tiposDePrenda.get(req.queryParams("query_tipoPrenda")));
             borradorPrenda.definirMaterial(materialesDePrenda.get(req.queryParams("query_material")));
             borradorPrenda.definirColorPrimario(new Color(Integer.parseInt(req.queryParams("query_colorp_r")), Integer.parseInt(req.queryParams("query_colorp_g")), Integer.parseInt(req.queryParams("query_colorp_b"))));
 
-            if (req.queryParams("query_colors_enabled").equals("on")) {
-                System.out.println("ENTRO");
+            if (req.queryParams("query_colors_enabled") != null) {
                 borradorPrenda.definirColorSecundario(new Color(Integer.parseInt(req.queryParams("query_colors_r")), Integer.parseInt(req.queryParams("query_colors_g")), Integer.parseInt(req.queryParams("query_colors_b"))));
             }
 
@@ -133,9 +132,9 @@ public class ControllerPrendas implements WithGlobalEntityManager, Transactional
                 entityManager().merge(guardarropas);
             });
 
-        //}
-        /*catch (NullPointerException e) {
-            mensajeError = "Es el null" + e.getMessage();
+        }
+        catch (NullPointerException e) {
+            mensajeError = "Null error: " + e.getMessage();
             return new ModelAndView(this, "fallaCreacionPrenda.hbs");
         } catch (TipoDePrendaNoDefinidoExcepcion e) {
             mensajeError = e.getMessage();
@@ -151,7 +150,7 @@ public class ControllerPrendas implements WithGlobalEntityManager, Transactional
         } catch (Exception e) {
             mensajeError = "Error desconocido.";
             return new ModelAndView(this, "fallaCreacionPrenda.hbs");
-        }*/
+        }
 
 
         //Si no se pone el redirect, igual va a ir a esa uri por que esta en la action de la form. Pero el metodo va a ser post, entonces cada vez que se recargue la pagina se vuelve a agregar la prenda. El redirect es un get de la uri.

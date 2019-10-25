@@ -18,6 +18,7 @@ import java.util.Objects;
 public class Atuendo {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
     @OneToMany

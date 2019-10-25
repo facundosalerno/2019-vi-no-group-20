@@ -12,7 +12,11 @@
                 <div class="row no-gutters">
                     {{#each prendasSuperiores}}
                         <div class="col-md-4">
-                            <img src="/remera.png" class="card-img imagen_prenda" alt="Remera">
+                            {{#if imagen}}
+                                <img src="{{this.imagen.url}}" class="card-img imagen_prenda" alt="Remera">
+                            {{else}}
+                                <img src="/remera.png" class="card-img imagen_prenda" alt="Remera">
+                            {{/if}}
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
@@ -23,7 +27,11 @@
                     {{/each}}
 
                     <div class="col-md-4">
-                        <img src="/remera.png" class="card-img imagen_prenda" alt="Remera">
+                        {{#if prendaInferior.imagen}}
+                            <img src="{{prendaInferior.imagen.url}}" class="card-img imagen_prenda" alt="Remera">
+                        {{else}}
+                            <img src="/remera.png" class="card-img imagen_prenda" alt="Remera">
+                        {{/if}}
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
@@ -33,7 +41,11 @@
                     </div>
 
                     <div class="col-md-4">
-                        <img src="/remera.png" class="card-img imagen_prenda" alt="Remera">
+                        {{#if prendaInferior.imagen}}
+                            <img src="{{prendaInferior.imagen.url}}" class="card-img imagen_prenda" alt="Remera">
+                        {{else}}
+                            <img src="/remera.png" class="card-img imagen_prenda" alt="Remera">
+                        {{/if}}
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
@@ -43,7 +55,11 @@
                     </div>
 
                     <div class="col-md-4">
-                        <img src="/remera.png" class="card-img imagen_prenda" alt="Remera">
+                        {{#if prendaInferior.imagen}}
+                            <img src="{{prendaInferior.imagen.url}}" class="card-img imagen_prenda" alt="Remera">
+                        {{else}}
+                            <img src="/remera.png" class="card-img imagen_prenda" alt="Remera">
+                        {{/if}}
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">

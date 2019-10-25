@@ -134,6 +134,10 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
         return eventos.stream().filter(e -> e.getNombre().equals(nombre)).findFirst().orElse(null);
     }
 
+    public Atuendo buscarAtuendoAceptado(Long id){
+        return atuendosAceptados.stream().filter(a -> a.getId().equals(id)).findFirst().orElse(null);
+    }
+
     public List<Atuendo> recibirSugerenciasEvento(String nombreEvento, LocalDateTime fechaEvento){ //Tambien podriamos haber usado index en la lista
         return eventos.stream().filter(evento -> evento.seLlama(nombreEvento))
                 .filter(evento -> evento.esEnLaFecha(fechaEvento))
@@ -248,6 +252,10 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
 
     public int getHashPass() {
         return hashPass;
+    }
+
+    public List<Atuendo> getAtuendosAceptados() {
+        return atuendosAceptados;
     }
 
     /** Observer */

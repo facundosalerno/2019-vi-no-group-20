@@ -18,10 +18,18 @@ import java.util.Collections;
 public class ControllerEvento implements WithGlobalEntityManager, TransactionalOps {
     LocalDateTime hoy;
 
+
+
+
+
     public ModelAndView creacionEvento(Request req, Response res){
         hoy = LocalDateTime.now();
         return new ModelAndView(this, "crearEvento.hbs");
     }
+
+
+
+
 
     public ModelAndView crear(Request req, Response res){
         String nombre= req.cookie("cookie_nombre");
@@ -39,6 +47,8 @@ public class ControllerEvento implements WithGlobalEntityManager, TransactionalO
 
 
 
+
+
     public ModelAndView sugerenciasDelEvento(Request req, Response res){
         String nombre= req.cookie("cookie_nombre");
         Usuario usuario;
@@ -52,19 +62,11 @@ public class ControllerEvento implements WithGlobalEntityManager, TransactionalO
         return new ModelAndView(evento, "sugerenciasEvento.hbs");
     }
 
+
+
+
+
     public ModelAndView aceptarSugerencia(Request req, Response res){
-        String nombre= req.cookie("cookie_nombre");
-        Usuario usuario;
-        try{
-            usuario = RepositorioUsuarios.getInstance().buscarUsuario(nombre);
-        }catch (UsuarioInexistente e){
-            return new ModelAndView(null, "forbidden.hbs");
-        }
-
-        return new ModelAndView(usuario, "sugerenciasEvento.hbs");
-    }
-
-    public ModelAndView verSugerenciasAceptadas(Request req, Response res){
         String nombre= req.cookie("cookie_nombre");
         Usuario usuario;
         try{
@@ -74,8 +76,50 @@ public class ControllerEvento implements WithGlobalEntityManager, TransactionalO
         }
         String nombreEvento = req.params(":nombre");
         Evento evento = usuario.buscarEvento(nombreEvento);
-        return new ModelAndView(evento, "sugerenciaAceptadas.hbs");
+        String idSugerencia = req.params(":id");
+        Atuendo atuendo = evento.buscarAtuendo(Long.parseLong(idSugerencia));
+        usuario.aceptarSugerencia(atuendo);
+        res.redirect("/sugerencias/aceptadas");
+        return new ModelAndView(null, null);
     }
+
+
+
+
+
+    public ModelAndView verSugerenciasAceptadas(Request req, Response res){
+        String nombre= req.cookie("cookie_nombre");
+        Usuario usuario;
+        try{
+            usuario = RepositorioUsuarios.getInstance().buscarUsuario(nombre);
+        }catch (UsuarioInexistente e){
+            return new ModelAndView(null, "forbidden.hbs");
+        }
+        return new ModelAndView(usuario, "sugerenciaAceptadas.hbs");
+    }
+
+
+
+
+    public ModelAndView calificar(Request req, Response res){
+        String nombre= req.cookie("cookie_nombre");
+        Usuario usuario;
+        try{
+            usuario = RepositorioUsuarios.getInstance().buscarUsuario(nombre);
+        }catch (UsuarioInexistente e){
+            return new ModelAndView(null, "forbidden.hbs");
+        }
+        String idSugerencia = req.params("id");
+        Atuendo atuendo = usuario.buscarAtuendoAceptado(Long.parseLong(idSugerencia));
+        int calificacion = Integer.parseInt(req.queryParams("var_button_calificacion"));
+        usuario.calificarSugerencia(atuendo, calificacion);
+        res.redirect("/sugerencias/aceptadas");
+        return new ModelAndView(null, "sugerenciaAceptadas.hbs");
+    }
+
+
+
+
 
     public LocalDateTime getHoy() {
         return hoy;

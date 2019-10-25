@@ -73,6 +73,7 @@ public class Server {
         Spark.get("/evento/:nombre/sugerencias", controllerEvento::sugerenciasDelEvento, new HandlebarsTemplateEngine());
         Spark.post("/evento/:nombre/sugerencias/:id", controllerEvento::aceptarSugerencia, new HandlebarsTemplateEngine());
         Spark.get("/sugerencias/aceptadas", controllerEvento::verSugerenciasAceptadas, new HandlebarsTemplateEngine());
+        Spark.post("/sugerencias/aceptadas/:id", controllerEvento::calificar, new HandlebarsTemplateEngine());
 
         DebugScreen.enableDebugScreen();
 
