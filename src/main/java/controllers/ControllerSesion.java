@@ -60,6 +60,14 @@ public class ControllerSesion implements WithGlobalEntityManager, TransactionalO
     public String getMensajeSesion() {
         return mensajeSesion;
     }
+
+    public void persistirUsuarioPrueba(){
+        withTransaction(() ->{
+            RepositorioGuardarropas.getInstance().agregarGuardarropas(RepositorioGuardarropas.guardarropasDelAdmin);
+            RepositorioGuardarropas.getInstance().agregarGuardarropas(RepositorioGuardarropas.guardarropasDelAdminAuxiliar);
+            RepositorioUsuarios.getInstance().agregarUsuario(RepositorioUsuarios.admin);
+        });
+    }
 }
 
 

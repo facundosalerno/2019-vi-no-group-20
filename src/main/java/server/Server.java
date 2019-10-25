@@ -1,6 +1,7 @@
 package server;
 
 import controllers.*;
+import cron.RepositorioGuardarropas;
 import cron.RepositorioUsuarios;
 import domain.evento.FrecuenciaEvento;
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
@@ -17,7 +18,11 @@ public class Server {
         //Spark.staticFiles.location("/public");
         Spark.staticFileLocation("/public");
         Spark.init();
+
+        ControllerSesion controllerSesion= new ControllerSesion();
+
         iniciarUsuarioDePrueba();
+        controllerSesion.persistirUsuarioPrueba();
 
         before((request, response) -> {
             
@@ -35,7 +40,7 @@ public class Server {
 
         /** GLUE CODE */
 
-        ControllerSesion controllerSesion= new ControllerSesion();
+
         Spark.get("/login", controllerSesion::mostrarLogin, new HandlebarsTemplateEngine());
         Spark.post("/login", controllerSesion::iniciarSesion, new HandlebarsTemplateEngine());
         Spark.post("/", controllerSesion::cerrarSesion, new HandlebarsTemplateEngine());
@@ -60,6 +65,13 @@ public class Server {
         Spark.post("/evento", controllerEvento::crear, new HandlebarsTemplateEngine());
 
         DebugScreen.enableDebugScreen();
+
+        //TODO: OJO, VER AL MOMENTO DE ver tema TRANSACCIONES
+
+        after((request,response) -> {
+            PerThreadEntityManagers.getEntityManager();
+            PerThreadEntityManagers.closeEntityManager();
+        });
     }
 
 
