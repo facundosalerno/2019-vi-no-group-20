@@ -23,7 +23,7 @@ public class Prenda implements Comparable<Prenda>{
 
 	String nombre;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)
     private TipoDePrenda tipoPrenda;
 
 	@Enumerated(EnumType.STRING)

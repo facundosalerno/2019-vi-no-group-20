@@ -130,7 +130,7 @@ public class ControllerPrendas implements WithGlobalEntityManager, Transactional
             guardarropas.agregarPrenda(prenda);
 
             withTransaction(() -> {
-                entityManager().persist(guardarropas);
+                entityManager().merge(guardarropas);
             });
 
         //}
