@@ -17,7 +17,7 @@ import java.util.Objects;
 @Entity
 public class Atuendo {
 
-	@Id
+    @Id
 	private Long id;
 
     @OneToMany
@@ -106,6 +106,26 @@ public class Atuendo {
 
     public Estado getEstado() {
         return this.estado;
+    }
+
+    public Prenda getPrendaInferior() {
+        return prendaInferior;
+    }
+
+    public List<Prenda> getPrendasSuperiores() {
+        return prendasSuperiores;
+    }
+
+    public Prenda getAccesorio() {
+        return accesorio;
+    }
+
+    public Prenda getCalzado() {
+        return calzado;
+    }
+
+    public Long getId() {
+        return id;
     }
 
 

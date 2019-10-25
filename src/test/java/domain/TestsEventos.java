@@ -66,11 +66,12 @@ public class TestsEventos {
         LocalDateTime fechaCumpleWilly = LocalDateTime.of(2020,06,20,20,30);
         panchoPepeGil.crearEvento("Cumpleaños de juan", fechaCumpleWilly, FrecuenciaEvento.ANUAL,"Casa de Juan");
 
-        AccuWeather meteorologoAccuweather = mock(AccuWeather.class);
-        TemperaturaAccuWeather temperaturaImpostora= mock(TemperaturaAccuWeather.class);
-        temperaturaImpostora.setValue(20);
-        when(meteorologoAccuweather.obtenerClima()).thenReturn(temperaturaImpostora);
-        panchoPepeGil.getEventos().get(0).generarSugerencias(meteorologoAccuweather);
+        TemperaturaAccuWeather temperatura = mock(TemperaturaAccuWeather.class);
+        when(temperatura.getTemperature()).thenReturn(20.0);
+
+        AccuWeather meteorologo = mock(AccuWeather.class);
+        when(meteorologo.obtenerClima()).thenReturn(temperatura);
+        panchoPepeGil.getEventos().get(0).generarSugerencias(meteorologo);
     }
 
     /* Testea que si el evento esta proximo, las sugerencia se realizan */

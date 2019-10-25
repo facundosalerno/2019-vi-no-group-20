@@ -130,6 +130,10 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
         eventos.add(new Evento(nombre, fechaYHora, frecuencia, lugar, this));
     }
 
+    public Evento buscarEvento(String nombre){
+        return eventos.stream().filter(e -> e.getNombre().equals(nombre)).findFirst().orElse(null);
+    }
+
     public List<Atuendo> recibirSugerenciasEvento(String nombreEvento, LocalDateTime fechaEvento){ //Tambien podriamos haber usado index en la lista
         return eventos.stream().filter(evento -> evento.seLlama(nombreEvento))
                 .filter(evento -> evento.esEnLaFecha(fechaEvento))

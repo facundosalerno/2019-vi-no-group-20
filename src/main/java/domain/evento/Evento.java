@@ -76,7 +76,7 @@ public class Evento implements Notificable, Comparable<Evento> {
     }
 
     private int diasDeProximidadAEventos() {
-        return 1;
+        return 31;
     }
 
     public List<Atuendo> obtenerSugerencias() {
@@ -84,6 +84,10 @@ public class Evento implements Notificable, Comparable<Evento> {
             throw new NoHaySugerenciasParaElEvento();
         }
         return sugerenciasObtenidas;
+    }
+
+    public Atuendo buscarAtuendo(Long id){
+        return sugerenciasObtenidas.stream().filter(a -> a.getId().equals(id)).findFirst().orElse(null);
     }
 
 
@@ -159,6 +163,10 @@ public class Evento implements Notificable, Comparable<Evento> {
 
     public String getLugar() {
         return lugar;
+    }
+
+    public List<Atuendo> getSugerenciasObtenidas() {
+        return sugerenciasObtenidas;
     }
     /**
      * Equals y hashcode
