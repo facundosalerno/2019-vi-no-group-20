@@ -75,7 +75,7 @@ public class Evento implements Notificable, Comparable<Evento> {
     }
 
     private int diasDeProximidadAEventos() {
-        return 1;
+        return 31;
     }
 
     public List<Atuendo> obtenerSugerencias() {
@@ -158,6 +158,10 @@ public class Evento implements Notificable, Comparable<Evento> {
 
     public String getLugar() {
         return lugar;
+    }
+
+    public List<Atuendo> getSugerenciasObtenidas() {
+        return sugerenciasObtenidas;
     }
     /**
      * Equals y hashcode

@@ -1,6 +1,7 @@
 package controllers;
 
 import cron.RepositorioUsuarios;
+import domain.evento.Evento;
 import domain.evento.FrecuenciaEvento;
 import domain.usuario.Usuario;
 import exceptions.UsuarioInexistente;
@@ -33,6 +34,34 @@ public class ControllerEvento implements WithGlobalEntityManager, TransactionalO
         usuario.crearEvento(req.queryParams("query_nombre"), LocalDateTime.parse(req.queryParams("query_localDateTime")), FrecuenciaEvento.NO_SE_REPITE, req.queryParams("query_lugar"));
         res.redirect("/calendario");
         return new ModelAndView(null, "calendario.hbs");
+    }
+
+
+
+    public ModelAndView sugerenciasDelEvento(Request req, Response res){
+        String nombre= req.cookie("cookie_nombre");
+        Usuario usuario;
+        try{
+            usuario = RepositorioUsuarios.getInstance().buscarUsuario(nombre);
+        }catch (UsuarioInexistente e){
+            return new ModelAndView(null, "forbidden.hbs");
+        }
+        String nombreEvento = req.params(":nombre");
+        Evento evento = usuario.buscarEvento(nombreEvento);
+        return new ModelAndView(evento, "sugerenciasEvento.hbs");
+    }
+
+    public ModelAndView verSugerenciasAceptadas(Request req, Response res){
+        String nombre= req.cookie("cookie_nombre");
+        Usuario usuario;
+        try{
+            usuario = RepositorioUsuarios.getInstance().buscarUsuario(nombre);
+        }catch (UsuarioInexistente e){
+            return new ModelAndView(null, "forbidden.hbs");
+        }
+        String nombreEvento = req.params(":nombre");
+        Evento evento = usuario.buscarEvento(nombreEvento);
+        return new ModelAndView(evento, "sugerenciaAceptadas.hbs");
     }
 
     public LocalDateTime getHoy() {

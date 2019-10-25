@@ -1,5 +1,7 @@
 package server;
 
+import clima.AccuWeather;
+import clima.OpenWeather;
 import controllers.*;
 import cron.RepositorioUsuarios;
 import domain.evento.FrecuenciaEvento;
@@ -58,6 +60,8 @@ public class Server {
         ControllerEvento controllerEvento = new ControllerEvento();
         Spark.get("/evento/wizard", controllerEvento::creacionEvento, new HandlebarsTemplateEngine());
         Spark.post("/evento", controllerEvento::crear, new HandlebarsTemplateEngine());
+        Spark.get("/evento/:nombre/sugerencias", controllerEvento::sugerenciasDelEvento, new HandlebarsTemplateEngine());
+        Spark.get("/sugerencias/aceptadas", controllerEvento::verSugerenciasAceptadas, new HandlebarsTemplateEngine());
 
         DebugScreen.enableDebugScreen();
     }
@@ -69,5 +73,6 @@ public class Server {
         RepositorioUsuarios.admin.crearEvento("Cumpleaños de pepe", RepositorioUsuarios.fechaCumplePepe, FrecuenciaEvento.NO_SE_REPITE, "Casa de pepe");
         RepositorioUsuarios.admin.crearEvento("Cumpleaños de robertito", RepositorioUsuarios.fechaCumpleRoberto, FrecuenciaEvento.NO_SE_REPITE, "Casa de roberto");
         RepositorioUsuarios.admin.crearEvento("Entrega tp diseño", RepositorioUsuarios.entregaDiseño, FrecuenciaEvento.NO_SE_REPITE, "campus");
+        RepositorioUsuarios.admin.getEventos().forEach(e -> e.generarSugerencias(new OpenWeather()));
     }
 }
