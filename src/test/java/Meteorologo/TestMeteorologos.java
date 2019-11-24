@@ -10,18 +10,18 @@ import clima.OpenWeather;
 import clima.TemperaturaAccuWeather;
 import clima.TemperaturaOpenWeather;
 
-/*
+
 
 public class TestMeteorologos {
 
-	//verificar con postman las temperaturas antes del hacer el test
+	/**verificar con postman las temperaturas antes del hacer el test*/
 	@Test
 	public void debeDevolverJSONEnUnObjetoAccuWeather() {
 		
 		AccuWeather nuevaConexion= new AccuWeather();
 		TemperaturaAccuWeather nuevoClima= nuevaConexion.obtenerClima();
 
-		Assert.assertEquals(12.2, nuevoClima.getTemperature(), 0.5);
+		Assert.assertEquals(24, nuevoClima.getTemperature(), 0.5);
 	}
 	
 	@Test
@@ -30,7 +30,7 @@ public class TestMeteorologos {
 		OpenWeather nuevaConexion= new OpenWeather();
 		TemperaturaOpenWeather nuevoClima= nuevaConexion.obtenerClima();
 
-		Assert.assertEquals(10.94, nuevoClima.getTemperature(), 0.5);
+		Assert.assertEquals(26, nuevoClima.getTemperature(), 0.5);
 		
 	}
 	
@@ -50,4 +50,3 @@ public class TestMeteorologos {
 
 	}
 }
-*/
