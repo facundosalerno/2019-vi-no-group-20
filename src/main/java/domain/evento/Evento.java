@@ -68,8 +68,12 @@ public class Evento implements Notificable, Comparable<Evento> {
      */
 
     public void generarSugerencias(Meteorologo meteorologo) {
-        if (Math.abs(fecha.getDayOfMonth() - LocalDateTime.now().getDayOfMonth()) <= diasDeProximidadAEventos()) {
+        if (Math.abs((fecha.getYear()-LocalDateTime.now().getYear())*365 + fecha.getDayOfMonth() - LocalDateTime.now().getDayOfMonth()) <= this.diasDeProximidadAEventos()) {
             sugerenciasObtenidas = usuario.obtenerSugerenciasDeTodosSusGuardarropas(meteorologo);
+
+
+            System.out.println("El dia de hoy es ");
+            System.out.println("El evento esta cerca, la cantidad de dias que faltan es "+ Math.abs(fecha.getDayOfMonth() - LocalDateTime.now().getDayOfMonth()));
         } else {
             throw new TodaviaNoEstaCercaElEvento();
         }

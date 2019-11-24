@@ -30,19 +30,20 @@ public class TestsValidacionAtuendo {
         Color verde = new Color(0, 255, 0);
         Color azul = new Color(0, 0, 255);
 
-        zapatos = armarUnaPrenda(TipoDePrenda.ZAPATO, Material.CUERO, rojo, azul, Trama.GASTADO);
-        remera = armarUnaPrenda(TipoDePrenda.REMERA, Material.ALGODON, azul, rojo, Trama.CUADROS);
-        pantalon = armarUnaPrenda(TipoDePrenda.PANTALON, Material.JEAN, verde, rojo, Trama.RAYADA);
-        anteojos = armarUnaPrenda(TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA);
+        zapatos = armarUnaPrenda("zapatos",TipoDePrenda.ZAPATO, Material.CUERO, rojo, azul, Trama.GASTADO);
+        remera = armarUnaPrenda("remera",TipoDePrenda.REMERA, Material.ALGODON, azul, rojo, Trama.CUADROS);
+        pantalon = armarUnaPrenda("pantalon",TipoDePrenda.PANTALON, Material.JEAN, verde, rojo, Trama.RAYADA);
+        anteojos = armarUnaPrenda("anteojos",TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA);
 
-        buso = armarUnaPrenda(TipoDePrenda.BUSO, Material.ALGODON, azul, verde, Trama.LISA);
-        campera = armarUnaPrenda(TipoDePrenda.CAMPERA, Material.JEAN, verde, null, Trama.GASTADO);
+        buso = armarUnaPrenda("buso",TipoDePrenda.BUSO, Material.ALGODON, azul, verde, Trama.LISA);
+        campera = armarUnaPrenda("campera",TipoDePrenda.CAMPERA, Material.JEAN, verde, null, Trama.GASTADO);
 
 
     }
 
-    public Prenda armarUnaPrenda(TipoDePrenda tipoDePrenda, Material material, Color colorPrimario, Color colorSecundario, Trama trama) {
+    public Prenda armarUnaPrenda(String nombre,TipoDePrenda tipoDePrenda, Material material, Color colorPrimario, Color colorSecundario, Trama trama) {
         BorradorPrenda borradorPrenda = new BorradorPrenda();
+        borradorPrenda.definirNombre(nombre);
         borradorPrenda.definirTipo(tipoDePrenda);
         borradorPrenda.definirMaterial(material);
         borradorPrenda.definirColorPrimario(colorPrimario);

@@ -29,15 +29,16 @@ public class TestsGuardarropasVariados {
         Color azul = new Color(0, 0, 255);
         Color blanco = new Color(255, 255, 255);
 
-        zapatos = armarUnaPrenda(TipoDePrenda.ZAPATO, Material.CUERO, rojo, azul, Trama.GASTADO);
-        remera = armarUnaPrenda(TipoDePrenda.REMERA, Material.ALGODON, azul, rojo, Trama.CUADROS);
-        pantalon = armarUnaPrenda(TipoDePrenda.PANTALON, Material.JEAN, verde, rojo, Trama.RAYADA);
-        anteojos= armarUnaPrenda(TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA);
-        camisa = armarUnaPrenda(TipoDePrenda.CAMISA, Material.ALGODON, blanco, rojo, Trama.LISA);
+        zapatos = armarUnaPrenda("Zapatos",TipoDePrenda.ZAPATO, Material.CUERO, rojo, azul, Trama.GASTADO);
+        remera = armarUnaPrenda("Remera",TipoDePrenda.REMERA, Material.ALGODON, azul, rojo, Trama.CUADROS);
+        pantalon = armarUnaPrenda("Pantalon",TipoDePrenda.PANTALON, Material.JEAN, verde, rojo, Trama.RAYADA);
+        anteojos= armarUnaPrenda("Anteojos",TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA);
+        camisa = armarUnaPrenda("Camisa",TipoDePrenda.CAMISA, Material.ALGODON, blanco, rojo, Trama.LISA);
     }
 
-    public Prenda armarUnaPrenda(TipoDePrenda tipoDePrenda, Material material, Color colorPrimario, Color colorSecundario, Trama trama){
+    public Prenda armarUnaPrenda(String nombre, TipoDePrenda tipoDePrenda, Material material, Color colorPrimario, Color colorSecundario, Trama trama){
         BorradorPrenda borradorPrenda = new BorradorPrenda();
+        borradorPrenda.definirNombre(nombre);
         borradorPrenda.definirTipo(tipoDePrenda);
         borradorPrenda.definirMaterial(material);
         borradorPrenda.definirColorPrimario(colorPrimario);

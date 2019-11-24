@@ -32,24 +32,25 @@ public class TestsValidacionUsuarioYGuardarropas {
         Color verde = new Color(0, 255, 0);
         Color azul = new Color(0, 0, 255);
 
-        zapatos = armarUnaPrenda(TipoDePrenda.ZAPATO, Material.CUERO, rojo, azul, Trama.GASTADO);
-        remera = armarUnaPrenda(TipoDePrenda.REMERA, Material.ALGODON, azul, rojo, Trama.CUADROS);
-        pantalon = armarUnaPrenda(TipoDePrenda.PANTALON, Material.JEAN, verde, rojo, Trama.RAYADA);
-        shorts = armarUnaPrenda(TipoDePrenda.SHORT, Material.JEAN, verde, rojo, Trama.GASTADO);
-        blusa = armarUnaPrenda(TipoDePrenda.BLUSA, Material.ALGODON, azul, verde, Trama.LISA);
-        zapatillas = armarUnaPrenda(TipoDePrenda.ZAPATILLA, Material.GAMUZA, azul, verde, Trama.LISA);
-        pollera = armarUnaPrenda(TipoDePrenda.POLLERA, Material.POLIESTER, rojo, verde, Trama.CUADROS);
-        ojotas = armarUnaPrenda(TipoDePrenda.OJOTAS, Material.GOMA, azul, rojo, Trama.LISA);
-        alpargatas = armarUnaPrenda(TipoDePrenda.ALPARGATAS, Material.ALGODON, azul, rojo, Trama.CUADROS);
-        camisa = armarUnaPrenda(TipoDePrenda.CAMISA, Material.ALGODON, azul, rojo, Trama.CUADROS);
-        pulseras=  armarUnaPrenda(TipoDePrenda.PULSERA, Material.PLASTICO, azul, rojo, Trama.LISA);
-        anteojos = armarUnaPrenda(TipoDePrenda.ANTEOJOS, Material.PLASTICO, rojo, verde, Trama.LISA);
+        zapatos = armarUnaPrenda("zapatos",TipoDePrenda.ZAPATO, Material.CUERO, rojo, azul, Trama.GASTADO);
+        remera = armarUnaPrenda("remera",TipoDePrenda.REMERA, Material.ALGODON, azul, rojo, Trama.CUADROS);
+        pantalon = armarUnaPrenda("pantalon",TipoDePrenda.PANTALON, Material.JEAN, verde, rojo, Trama.RAYADA);
+        shorts = armarUnaPrenda("shorts",TipoDePrenda.SHORT, Material.JEAN, verde, rojo, Trama.GASTADO);
+        blusa = armarUnaPrenda("blusa",TipoDePrenda.BLUSA, Material.ALGODON, azul, verde, Trama.LISA);
+        zapatillas = armarUnaPrenda("zapatillas",TipoDePrenda.ZAPATILLA, Material.GAMUZA, azul, verde, Trama.LISA);
+        pollera = armarUnaPrenda("pollera",TipoDePrenda.POLLERA, Material.POLIESTER, rojo, verde, Trama.CUADROS);
+        ojotas = armarUnaPrenda("ojotas",TipoDePrenda.OJOTAS, Material.GOMA, azul, rojo, Trama.LISA);
+        alpargatas = armarUnaPrenda("alpargatas",TipoDePrenda.ALPARGATAS, Material.ALGODON, azul, rojo, Trama.CUADROS);
+        camisa = armarUnaPrenda("camisa",TipoDePrenda.CAMISA, Material.ALGODON, azul, rojo, Trama.CUADROS);
+        pulseras=  armarUnaPrenda("pulsera",TipoDePrenda.PULSERA, Material.PLASTICO, azul, rojo, Trama.LISA);
+        anteojos = armarUnaPrenda("anteojos",TipoDePrenda.ANTEOJOS, Material.PLASTICO, rojo, verde, Trama.LISA);
     }
 
     
     
-    public Prenda armarUnaPrenda(TipoDePrenda tipoDePrenda, Material material, Color colorPrimario, Color colorSecundario, Trama trama){
+    public Prenda armarUnaPrenda(String nombre,TipoDePrenda tipoDePrenda, Material material, Color colorPrimario, Color colorSecundario, Trama trama){
         BorradorPrenda borradorPrenda = new BorradorPrenda();
+        borradorPrenda.definirNombre(nombre);
         borradorPrenda.definirTipo(tipoDePrenda);
         borradorPrenda.definirMaterial(material);
         borradorPrenda.definirColorPrimario(colorPrimario);

@@ -39,19 +39,20 @@ public class TestsEventos {
         Color verde = new Color(0, 255, 0);
         Color azul = new Color(0, 0, 255);
 
-        zapatos = armarUnaPrenda(TipoDePrenda.ZAPATO, Material.CUERO, rojo, azul, Trama.GASTADO);
-        remera = armarUnaPrenda(TipoDePrenda.REMERA, Material.ALGODON, azul, rojo, Trama.CUADROS);
-        pantalon = armarUnaPrenda(TipoDePrenda.PANTALON, Material.JEAN, verde, rojo, Trama.RAYADA);
-        anteojos= armarUnaPrenda(TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA);
-        buso = armarUnaPrenda(TipoDePrenda.BUSO, Material.ALGODON, azul, verde, Trama.LISA);
-        campera = armarUnaPrenda(TipoDePrenda.CAMPERA, Material.JEAN, verde, azul, Trama.GASTADO);
+        zapatos = armarUnaPrenda("Zapatos",TipoDePrenda.ZAPATO, Material.CUERO, rojo, azul, Trama.GASTADO);
+        remera = armarUnaPrenda("Remera",TipoDePrenda.REMERA, Material.ALGODON, azul, rojo, Trama.CUADROS);
+        pantalon = armarUnaPrenda("Pantalon",TipoDePrenda.PANTALON, Material.JEAN, verde, rojo, Trama.RAYADA);
+        anteojos= armarUnaPrenda("Anteojos",TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA);
+        buso = armarUnaPrenda("Buso",TipoDePrenda.BUSO, Material.ALGODON, azul, verde, Trama.LISA);
+        campera = armarUnaPrenda("Campera",TipoDePrenda.CAMPERA, Material.JEAN, verde, azul, Trama.GASTADO);
 
         panchoPepeGil = new Usuario("Facundo Salerno",Arrays.asList(new GuardarropasPremium("guardarropas casual", Arrays.asList(remera, buso, campera), Arrays.asList(pantalon), Arrays.asList(zapatos), Arrays.asList(anteojos))), TipoDeUsuario.PREMIUM);
 
     }
 
-    public Prenda armarUnaPrenda(TipoDePrenda tipoDePrenda, Material material, Color colorPrimario, Color colorSecundario, Trama trama){
+    public Prenda armarUnaPrenda(String nombre, TipoDePrenda tipoDePrenda, Material material, Color colorPrimario,Color colorSecundario, Trama trama){
         BorradorPrenda borradorPrenda = new BorradorPrenda();
+        borradorPrenda.definirNombre(nombre);
         borradorPrenda.definirTipo(tipoDePrenda);
         borradorPrenda.definirMaterial(material);
         borradorPrenda.definirColorPrimario(colorPrimario);
@@ -63,7 +64,7 @@ public class TestsEventos {
     /* Testea que las sugerencias solo se realizan cuando el evento esta proximo */
     @Test(expected = TodaviaNoEstaCercaElEvento.class)
     public void verificarQueSoloSeHacenSugerenciasAlEstarProximoElEvento(){
-        LocalDateTime fechaCumpleWilly = LocalDateTime.of(2020,06,20,20,30);
+        LocalDateTime fechaCumpleWilly = LocalDateTime.of(2021,06,20,20,30);
         panchoPepeGil.crearEvento("Cumpleaños de juan", fechaCumpleWilly, FrecuenciaEvento.ANUAL,"Casa de Juan");
 
         TemperaturaAccuWeather temperatura = mock(TemperaturaAccuWeather.class);

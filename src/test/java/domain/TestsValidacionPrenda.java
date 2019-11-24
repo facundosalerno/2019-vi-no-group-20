@@ -34,6 +34,7 @@ public class TestsValidacionPrenda{
             borradorPrenda.definirColorPrimario(rojo);
             borradorPrenda.definirColorSecundario(verde);
             borradorPrenda.definirTrama(Trama.LISA);
+            borradorPrenda.definirNombre("remera lisa navidad");
             remeraLisaDeCarlos = borradorPrenda.crearPrenda();
             Assert.assertEquals(remeraLisaDeCarlos.getTipoPrenda(), TipoDePrenda.REMERA);
         }catch (NullPointerException | TipoDePrendaNoDefinidoExcepcion | NoPermiteMaterialException | NoPermiteSerElMismoColorException ex){
@@ -49,6 +50,7 @@ public class TestsValidacionPrenda{
         borradorPrenda.definirColorPrimario(rojo);
         borradorPrenda.definirColorSecundario(verde);
         borradorPrenda.definirTrama(Trama.LISA);
+        borradorPrenda.definirNombre("remera lisa navidad");
         Prenda remeraLisaDeCarlos = borradorPrenda.crearPrenda();
 
         Assert.assertTrue(remeraLisaDeCarlos.getTipoPrenda().permiteMaterial(Material.ALGODON));

@@ -34,21 +34,22 @@ public class TestsSugerencias {
         Color verde = new Color(0, 255, 0);
         Color azul = new Color(0, 0, 255);
 
-        musculosa = armarUnaPrenda(TipoDePrenda.REMERA, Material.ALGODON, rojo, azul, Trama.GASTADO);
-        remeraMangaLarga = armarUnaPrenda(TipoDePrenda.REMERA, Material.ALGODON, azul, rojo, Trama.CUADROS);
-        pantalon = armarUnaPrenda(TipoDePrenda.PANTALON, Material.JEAN, verde, rojo, Trama.RAYADA);
-        trajeDeBaño = armarUnaPrenda(TipoDePrenda.SHORT, Material.ALGODON, verde, rojo, Trama.LISA);
-        zapatos = armarUnaPrenda(TipoDePrenda.ZAPATO, Material.CUERO, rojo, azul, Trama.GASTADO);
-        ojotas = armarUnaPrenda(TipoDePrenda.OJOTAS, Material.GOMA, azul, rojo, Trama.CUADROS);
-        anteojos= armarUnaPrenda(TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA);
+        musculosa = armarUnaPrenda("Musculosa",TipoDePrenda.REMERA, Material.ALGODON, rojo, azul, Trama.GASTADO);
+        remeraMangaLarga = armarUnaPrenda("Remera manga larga",TipoDePrenda.REMERA, Material.ALGODON, azul, rojo, Trama.CUADROS);
+        pantalon = armarUnaPrenda("Pantalon",TipoDePrenda.PANTALON, Material.JEAN, verde, rojo, Trama.RAYADA);
+        trajeDeBaño = armarUnaPrenda("Traje de banio",TipoDePrenda.SHORT, Material.ALGODON, verde, rojo, Trama.LISA);
+        zapatos = armarUnaPrenda("Zapatos",TipoDePrenda.ZAPATO, Material.CUERO, rojo, azul, Trama.GASTADO);
+        ojotas = armarUnaPrenda("Ojotas",TipoDePrenda.OJOTAS, Material.GOMA, azul, rojo, Trama.CUADROS);
+        anteojos= armarUnaPrenda("Anteojos",TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA);
 
         guardarropasDeWilly = new GuardarropasPremium("guardarropas casual", Arrays.asList(musculosa), Arrays.asList(trajeDeBaño), Arrays.asList(ojotas), Arrays.asList(anteojos));
 
     }
 
-    public Prenda armarUnaPrenda(TipoDePrenda tipoDePrenda, Material material, Color colorPrimario, Color colorSecundario, Trama trama){
+    public Prenda armarUnaPrenda(String nombre, TipoDePrenda tipoDePrenda, Material material, Color colorPrimario, Color colorSecundario, Trama trama){
         BorradorPrenda borradorPrenda = new BorradorPrenda();
         borradorPrenda.definirTipo(tipoDePrenda);
+        borradorPrenda.definirNombre(nombre);
         borradorPrenda.definirMaterial(material);
         borradorPrenda.definirColorPrimario(colorPrimario);
         borradorPrenda.definirColorSecundario(colorSecundario);

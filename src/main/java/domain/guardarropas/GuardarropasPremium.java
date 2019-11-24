@@ -33,10 +33,10 @@ public class GuardarropasPremium extends Guardarropas{
 
         if(prendasSuperiores.isEmpty() || prendasInferiores.isEmpty() || calzados.isEmpty() || accesorios.isEmpty())
             throw new NoPermiteGuardarropaIncompletoException();
-        prendasCoincidenConCategoria(prendasSuperiores, Categoria.PARTE_SUPERIOR);
-        prendasCoincidenConCategoria(prendasInferiores, Categoria.PARTE_INFERIOR);
-        prendasCoincidenConCategoria(calzados, Categoria.CALZADO);
-        prendasCoincidenConCategoria(accesorios, Categoria.ACCESORIOS);
+        prendasCoincidenConCategoria(this.prendasSuperiores, Categoria.PARTE_SUPERIOR);
+        prendasCoincidenConCategoria(this.prendasInferiores, Categoria.PARTE_INFERIOR);
+        prendasCoincidenConCategoria(this.calzados, Categoria.CALZADO);
+        prendasCoincidenConCategoria(this.accesorios, Categoria.ACCESORIOS);
         this.prendasSuperiores = new ArrayList<>(prendasSuperiores);
         this.prendasInferiores = new ArrayList<>(prendasInferiores);
         this.calzados = new ArrayList<>(calzados);

@@ -30,20 +30,21 @@ public class TestsDecisiones {
     public void init(){
         Color negro = new Color(0, 0, 0);
 
-        botaNegra = armarUnaPrenda(TipoDePrenda.ZAPATO, Material.CUERO, negro, Trama.GASTADO);
-        armaduraNegra = armarUnaPrenda(TipoDePrenda.REMERA, Material.ALGODON, negro, Trama.CUADROS);
-        pantalonNegro = armarUnaPrenda(TipoDePrenda.PANTALON, Material.JEAN, negro, Trama.RAYADA);
-        antifazDeMurcielago = armarUnaPrenda(TipoDePrenda.ANTEOJOS, Material.PLASTICO, negro, Trama.LISA);
+        botaNegra = armarUnaPrenda("Bota Negra",TipoDePrenda.ZAPATO, Material.CUERO, negro, Trama.GASTADO);
+        armaduraNegra = armarUnaPrenda("Armadura Negra",TipoDePrenda.REMERA, Material.ALGODON, negro, Trama.CUADROS);
+        pantalonNegro = armarUnaPrenda("Pantalon Negro",TipoDePrenda.PANTALON, Material.JEAN, negro, Trama.RAYADA);
+        antifazDeMurcielago = armarUnaPrenda("Antifaz de murcielago",TipoDePrenda.ANTEOJOS, Material.PLASTICO, negro, Trama.LISA);
 
         trajeBatman = new Atuendo(Arrays.asList(armaduraNegra), pantalonNegro, botaNegra, antifazDeMurcielago);
 
-        guardarropasVeranoBatman = new GuardarropasPremium("guardarropas de verano", Arrays.asList(prendaArmaduraNegra), Arrays.asList(prendaPantalonNegro), Arrays.asList(prendaBotaNegra), Arrays.asList(prendaAntifazDeMurcielago));
+        guardarropasVeranoBatman = new GuardarropasPremium("Guardarropas de verano", Arrays.asList(prendaArmaduraNegra), Arrays.asList(prendaPantalonNegro), Arrays.asList(prendaBotaNegra), Arrays.asList(prendaAntifazDeMurcielago));
 
         batman = new Usuario("Facundo Salerno",Arrays.asList(guardarropasVeranoBatman), TipoDeUsuario.PREMIUM);
     }
 
-    public Prenda armarUnaPrenda(TipoDePrenda tipoDePrenda, Material material, Color colorPrimario, Trama trama){
+    public Prenda armarUnaPrenda(String nombre, TipoDePrenda tipoDePrenda, Material material, Color colorPrimario, Trama trama){
         BorradorPrenda borradorPrenda = new BorradorPrenda();
+        borradorPrenda.definirNombre(nombre);
         borradorPrenda.definirTipo(tipoDePrenda);
         borradorPrenda.definirMaterial(material);
         borradorPrenda.definirColorPrimario(colorPrimario);
