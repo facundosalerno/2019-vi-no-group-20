@@ -77,7 +77,7 @@ public class TestsPrendasSuperpuestas {
         //remeraCanchera = armarUnaPrenda(TipoDePrenda.REMERA, Material.ALGODON, azul, rojo, Trama.RAYADA);  //TODO: Para tests guardarropas
         remeraDeDia = armarUnaPrenda("remeraDeDia",TipoDePrenda.REMERA, Material.ALGODON, azul, null, Trama.LISA);
 
-        guardarropasInvierno = new GuardarropasPremium("guardarropas de invierno", new ArrayList<Prenda>(Arrays.asList(sweaterFormal,remeraDeDia, camisaSalida, busoInformal, camperaParaSalida, camisaFormalBlanca, camperaMichelin)), new ArrayList<Prenda>(Arrays.asList(pantalonParaSalida)), new ArrayList<Prenda>(Arrays.asList(zapatosFormales)), new ArrayList<Prenda>(Arrays.asList(anteojos)));
+        guardarropasInvierno = new GuardarropasPremium("guardarropas de invierno", new ArrayList<Prenda>(Arrays.asList( camisaFormalBlanca,remeraDeDia, camisaSalida, sweaterFormal, busoInformal, camperaParaSalida, camperaMichelin)), new ArrayList<Prenda>(Arrays.asList(pantalonParaSalida)), new ArrayList<Prenda>(Arrays.asList(zapatosFormales)), new ArrayList<Prenda>(Arrays.asList(anteojos)));
 
         nuevoClima =	mock(TemperaturaOpenWeather.class);
 
@@ -85,7 +85,7 @@ public class TestsPrendasSuperpuestas {
         nuevoMeteorologo = mock (OpenWeather.class);
         when (nuevoMeteorologo.obtenerClima()).thenReturn(nuevoClima);
 
-       // Assert.assertEquals(guardarropasInvierno.sugerirAtuendo(nuevoClima), Arrays.asList());
+        // Assert.assertEquals(guardarropasInvierno.sugerirAtuendo(nuevoClima), Arrays.asList());
 
     }
 
@@ -123,10 +123,6 @@ public class TestsPrendasSuperpuestas {
 
     @Test
     public void seGeneranAtuendosEsperadosConUnaTemperaturaDe10Grados(){
-/*
-        System.out.println("Tamanio de lista es: "+ guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).size());
-        System.out.println("Capas por Temperatura: " +CapasPorTemperatura.capasDeAbrigoParaClima(nuevoClima));
-*/
         when(nuevoClima.getTemperature()).thenReturn(10.0);
 
         Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).size() == 12);
@@ -143,5 +139,35 @@ public class TestsPrendasSuperpuestas {
         Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo((Arrays.asList(camisaFormalBlanca,busoInformal,camperaParaSalida)),pantalonParaSalida,zapatosFormales,anteojos))));
         Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo((Arrays.asList(camisaSalida,sweaterFormal,camperaMichelin)),pantalonParaSalida,zapatosFormales,anteojos))));
         Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo((Arrays.asList(camisaSalida,busoInformal,camperaMichelin)),pantalonParaSalida,zapatosFormales,anteojos))));
+    }
+
+    @Test
+    public void seGeneranAtuendosEsperadosConUnaTemperaturaDe20Grados(){
+        when(nuevoClima.getTemperature()).thenReturn(20.0);
+
+        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).size() == 12);
+        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo((Arrays.asList(remeraDeDia,camperaParaSalida)),pantalonParaSalida,zapatosFormales,anteojos))));
+        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo((Arrays.asList(remeraDeDia,camperaMichelin)),pantalonParaSalida,zapatosFormales,anteojos))));
+        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo((Arrays.asList(remeraDeDia,busoInformal)),pantalonParaSalida,zapatosFormales,anteojos))));
+        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo((Arrays.asList(remeraDeDia,sweaterFormal)),pantalonParaSalida,zapatosFormales,anteojos))));
+        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo((Arrays.asList(camisaSalida,camperaParaSalida)),pantalonParaSalida,zapatosFormales,anteojos))));
+        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo((Arrays.asList(camisaSalida,sweaterFormal)),pantalonParaSalida,zapatosFormales,anteojos))));
+        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo((Arrays.asList(camisaFormalBlanca,camperaParaSalida)),pantalonParaSalida,zapatosFormales,anteojos))));
+        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo((Arrays.asList(camisaFormalBlanca,camperaMichelin)),pantalonParaSalida,zapatosFormales,anteojos))));
+        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo((Arrays.asList(camisaFormalBlanca,sweaterFormal)),pantalonParaSalida,zapatosFormales,anteojos))));
+        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo((Arrays.asList(camisaFormalBlanca,busoInformal)),pantalonParaSalida,zapatosFormales,anteojos))));
+        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo((Arrays.asList(camisaSalida,camperaMichelin)),pantalonParaSalida,zapatosFormales,anteojos))));
+        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo((Arrays.asList(camisaSalida,busoInformal)),pantalonParaSalida,zapatosFormales,anteojos))));
+    }
+
+    @Test
+    public void seGeneranAtuendosEsperadosConUnaTemperaturaDe25Grados(){    //TODO: revisar lo que pasa con la temperatura de 30 grados
+        when(nuevoClima.getTemperature()).thenReturn(25.0);
+
+        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).size() == 3);
+
+        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo((Arrays.asList(remeraDeDia)),pantalonParaSalida,zapatosFormales,anteojos))));
+        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo((Arrays.asList(camisaFormalBlanca)),pantalonParaSalida,zapatosFormales,anteojos))));
+        Assert.assertTrue(guardarropasInvierno.sugerirAtuendo(nuevoMeteorologo).stream().anyMatch(sugerencia->sugerencia.equals(new Atuendo((Arrays.asList(camisaSalida)),pantalonParaSalida,zapatosFormales,anteojos))));
     }
 }
