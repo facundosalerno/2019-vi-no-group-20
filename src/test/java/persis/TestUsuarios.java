@@ -25,7 +25,6 @@ public class TestUsuarios extends AbstractPersistenceTest implements WithGlobalE
     private Usuario facundo;
 
     private GuardarropasPremium guardarropasCasual;
-    private GuardarropasLimitado guardarropasLimitado;
     private GuardarropasPremium guardarropasCopado;
     private Prenda zapatos;
     private Prenda remera;

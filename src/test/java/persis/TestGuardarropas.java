@@ -113,8 +113,6 @@ public class TestGuardarropas extends AbstractPersistenceTest implements WithGlo
 
         guardarropasInvierno.agregarPrenda(camisaFormalAzul);
 
-        //entityManager().persist(guardarropasInvierno);
-
         assertEquals(entityManager().find(Guardarropas.class,guardarropasInvierno.getId()).getPrendas().contains(camisaFormalAzul),guardarropasInvierno.getPrendas().contains(camisaFormalAzul));
 
     }
