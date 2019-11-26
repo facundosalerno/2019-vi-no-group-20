@@ -119,6 +119,8 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
         }
     }
     public List<Atuendo> obtenerSugerenciasDeTodosSusGuardarropas(Meteorologo meteorologo){
+
+        /**TODO:VER TEMA COEFICIENTE DE USUARIO EN BASE A CALIFICACION DE ATUENDOS*/
         return guardarropas.stream()
                 .flatMap(guardarropas -> guardarropas.sugerirAtuendo(meteorologo).stream())
                 .collect(Collectors.toList());

@@ -75,8 +75,8 @@ public class TipoDePrenda {
     public static final TipoDePrenda SIN_ACCESORIO = new TipoDePrenda(1,Categoria.ACCESORIOS, Arrays.asList(Material.NINGUNO), new RangoTemperatura(-20, 40), NivelDeCapa.ABAJO);
     public static final TipoDePrenda ZAPATO = new TipoDePrenda(2,Categoria.CALZADO, Arrays.asList(Material.CUERO, Material.GAMUZA), new RangoTemperatura(10, 25), NivelDeCapa.MEDIO);
     public static final TipoDePrenda REMERA = new TipoDePrenda(3,Categoria.PARTE_SUPERIOR, Arrays.asList(Material.ALGODON), new RangoTemperatura(-20, 40), NivelDeCapa.ABAJO);
-    public static final TipoDePrenda CAMISA = new TipoDePrenda(4,Categoria.PARTE_SUPERIOR, Arrays.asList(Material.ALGODON,Material.POLIESTER, Material.JEAN,Material.LINO), new RangoTemperatura(1, 30), NivelDeCapa.ABAJO);
-    public static final TipoDePrenda PANTALON = new TipoDePrenda(5,Categoria.PARTE_INFERIOR, Arrays.asList(Material.JEAN), new RangoTemperatura(-5, 28), NivelDeCapa.MEDIO);
+    public static final TipoDePrenda CAMISA = new TipoDePrenda(4,Categoria.PARTE_SUPERIOR, Arrays.asList(Material.ALGODON,Material.POLIESTER, Material.JEAN,Material.LINO,Material.SEDA), new RangoTemperatura(1, 30), NivelDeCapa.ABAJO);
+    public static final TipoDePrenda PANTALON = new TipoDePrenda(5,Categoria.PARTE_INFERIOR, Arrays.asList(Material.JEAN,Material.POLIESTER), new RangoTemperatura(-5, 28), NivelDeCapa.MEDIO);
     public static final TipoDePrenda SHORT = new TipoDePrenda(6,Categoria.PARTE_INFERIOR, Arrays.asList(Material.ALGODON,Material.JEAN), new RangoTemperatura(20, 40), NivelDeCapa.MEDIO);
     public static final TipoDePrenda BLUSA = new TipoDePrenda(7,Categoria.PARTE_SUPERIOR, Arrays.asList(Material.ALGODON), new RangoTemperatura(10, 25), NivelDeCapa.MEDIO);
     public static final TipoDePrenda ZAPATILLA = new TipoDePrenda(8,Categoria.CALZADO, Arrays.asList(Material.GAMUZA), new RangoTemperatura(-20, 40), NivelDeCapa.MEDIO);

@@ -1,5 +1,4 @@
 package persis;
-
 import domain.evento.FrecuenciaEvento;
 import domain.guardarropas.Guardarropas;
 import domain.guardarropas.GuardarropasLimitado;
@@ -18,9 +17,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.junit.Assert.assertEquals;
-
-public class TestUsuarios extends AbstractPersistenceTest implements WithGlobalEntityManager {
+public class TestEventos extends AbstractPersistenceTest implements WithGlobalEntityManager {
     private Usuario facundo;
 
     private GuardarropasPremium guardarropasCasual;
@@ -46,6 +43,9 @@ public class TestUsuarios extends AbstractPersistenceTest implements WithGlobalE
         anteojos= armarUnaPrenda("anteojos",TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA);
         camisa = armarUnaPrenda("camisa",TipoDePrenda.CAMISA, Material.ALGODON, blanco, rojo, Trama.LISA);
 
+
+        fechaCumpleWilly = LocalDateTime.of(2020,06,20,20,30);
+
     }
 
     public Prenda armarUnaPrenda(String nombre,TipoDePrenda tipoDePrenda, Material material, Color colorPrimario, Color colorSecundario, Trama trama){
@@ -58,8 +58,10 @@ public class TestUsuarios extends AbstractPersistenceTest implements WithGlobalE
         borradorPrenda.definirTrama(trama);
         return borradorPrenda.crearPrenda();
     }
+
+    /*
     @Test
-    public void sePersisteUnUsuarioConSuGuardarropas(){
+    public void sePersisteUnEvento(){
         facundo = new Usuario("Facundo Salerno",new ArrayList<Guardarropas>(Arrays.asList(new GuardarropasPremium("guardarropas casual", Arrays.asList(remera, camisa), Arrays.asList(pantalon), Arrays.asList(zapatos), Arrays.asList(anteojos)))), TipoDeUsuario.PREMIUM);
         guardarropasCasual = new GuardarropasPremium("guardarropas casual", new ArrayList<Prenda>(Arrays.asList(camisa, remera)), new ArrayList<Prenda>(Arrays.asList(pantalon)), new ArrayList<Prenda>(Arrays.asList(zapatos)), new ArrayList<Prenda>(Arrays.asList(anteojos)));
 
@@ -67,20 +69,11 @@ public class TestUsuarios extends AbstractPersistenceTest implements WithGlobalE
 
         entityManager().persist(facundo);
 
-        assertEquals(entityManager().find(Usuario.class,facundo.getId()),facundo);
+        entityManager().find(Usuario.class,facundo.getId());  //Assert not null
     }
 
     @Test
-    public void sePersisteUnUsuarioConUnEvento(){
-        facundo = new Usuario("Facundo Salerno",new ArrayList<Guardarropas>(Arrays.asList(new GuardarropasPremium("guardarropas casual", Arrays.asList(remera, camisa), Arrays.asList(pantalon), Arrays.asList(zapatos), Arrays.asList(anteojos)))), TipoDeUsuario.PREMIUM);
-        facundo.crearEvento("Cumpleaños de juan", fechaCumpleWilly, FrecuenciaEvento.ANUAL,"Casa de Juan");
-        entityManager().persist(facundo);
-
-        assertEquals(entityManager().find(Usuario.class,facundo.getId()),facundo);
-    }
-
-    @Test
-    public void seRecuperaGuardarropasDeUsuario() throws Exception {
+    public void seRecuperaUnEventoAPartirDeSuID() throws Exception {
 
         facundo = new Usuario("Facundo Salerno",new ArrayList<Guardarropas>(Arrays.asList(new GuardarropasPremium("guardarropas casual", Arrays.asList(remera, camisa), Arrays.asList(pantalon), Arrays.asList(zapatos), Arrays.asList(anteojos)))), TipoDeUsuario.PREMIUM);
         guardarropasCopado = new GuardarropasPremium("guardarropas copado", new ArrayList<Prenda>(Arrays.asList(camisa, remera)), new ArrayList<Prenda>(Arrays.asList(pantalon)), new ArrayList<Prenda>(Arrays.asList(zapatos)), new ArrayList<Prenda>(Arrays.asList(anteojos)));
@@ -89,29 +82,33 @@ public class TestUsuarios extends AbstractPersistenceTest implements WithGlobalE
 
         entityManager().persist(facundo);
 
-        assertEquals(entityManager()
+        Usuario hermanoGemeloDeFacundoQueSeCopiaAFacundo = entityManager()
                 .createQuery("from Usuario where id LIKE :IdUsuario", Usuario.class)
                 .setParameter("IdUsuario", facundo.getId())
                 .getResultList()
-                .get(0).getGuardarropas(1),
-                guardarropasCopado);
+                .get(0);
+
+
+        Assert.isTrue(hermanoGemeloDeFacundoQueSeCopiaAFacundo.getGuardarropas(1).getNombre().equals("guardarropas copado"));
 
 
     }
 
     @Test
-    public void seRecuperaEventoDeUsuario() throws Exception {
+    public void seRecuperanEventosAPartirDeFecha() throws Exception {
 
         facundo = new Usuario("Facundo Salerno",new ArrayList<Guardarropas>(Arrays.asList(new GuardarropasPremium("guardarropas casual", Arrays.asList(remera, camisa), Arrays.asList(pantalon), Arrays.asList(zapatos), Arrays.asList(anteojos)))), TipoDeUsuario.PREMIUM);
         facundo.crearEvento("Cumpleaños de juan", fechaCumpleWilly, FrecuenciaEvento.ANUAL,"Casa de Juan");
 
         entityManager().persist(facundo);
 
-        assertEquals(entityManager()
-                        .createQuery("from Usuario where id LIKE :IdUsuario", Usuario.class)
-                        .setParameter("IdUsuario", facundo.getId())
-                        .getResultList()
-                        .get(0).getEventos().get(0).getNombre(),
-                "Cumpleaños de juan");
+        Usuario hermanoGemeloDeFacundoQueSeCopiaAFacundo = entityManager()
+                .createQuery("from Usuario where id LIKE :IdUsuario", Usuario.class)
+                .setParameter("IdUsuario", facundo.getId())
+                .getResultList()
+                .get(0);
+
+        Assert.isTrue(hermanoGemeloDeFacundoQueSeCopiaAFacundo.getEventos().get(0).getNombre().equals("Cumpleaños de juan"));
     }
+*/
 }
