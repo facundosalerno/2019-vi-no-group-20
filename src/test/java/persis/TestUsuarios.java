@@ -7,6 +7,7 @@ import domain.guardarropas.GuardarropasPremium;
 import domain.prenda.*;
 import domain.usuario.TipoDeUsuario;
 import domain.usuario.Usuario;
+import fixturePersistibles.GuardarropasFix;
 import org.eclipse.core.runtime.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,6 +32,7 @@ public class TestUsuarios extends AbstractPersistenceTest implements WithGlobalE
     private Prenda camisa;
     private Prenda pantalon;
     private Prenda anteojos;
+    private Prenda camperaMichelin;
 
     LocalDateTime fechaCumpleWilly;
     @Before
@@ -45,6 +47,7 @@ public class TestUsuarios extends AbstractPersistenceTest implements WithGlobalE
         pantalon = armarUnaPrenda("pantalon",TipoDePrenda.PANTALON, Material.JEAN, verde, rojo, Trama.RAYADA);
         anteojos= armarUnaPrenda("anteojos",TipoDePrenda.ANTEOJOS, Material.PLASTICO, verde, rojo, Trama.LISA);
         camisa = armarUnaPrenda("camisa",TipoDePrenda.CAMISA, Material.ALGODON, blanco, rojo, Trama.LISA);
+        camperaMichelin = armarUnaPrenda("camperaMichelin",TipoDePrenda.CAMPERA, Material.PLUMA, azul, blanco, Trama.LISA);
 
     }
 
@@ -114,4 +117,24 @@ public class TestUsuarios extends AbstractPersistenceTest implements WithGlobalE
                         .get(0).getEventos().get(0).getNombre(),
                 "Cumpleaños de juan");
     }
+
+    @Test
+    public void SePuedeAgregarPrendaAlguardarropasDeUnUsuarioPersistido() {
+
+        facundo = new Usuario("Facundo Salerno",new ArrayList<Guardarropas>(Arrays.asList(new GuardarropasPremium("guardarropas casual", Arrays.asList(remera, camisa), Arrays.asList(pantalon), Arrays.asList(zapatos), Arrays.asList(anteojos)))), TipoDeUsuario.PREMIUM);
+        guardarropasCasual = new GuardarropasPremium("guardarropas casual", new ArrayList<Prenda>(Arrays.asList(camisa, remera)), new ArrayList<Prenda>(Arrays.asList(pantalon)), new ArrayList<Prenda>(Arrays.asList(zapatos)), new ArrayList<Prenda>(Arrays.asList(anteojos)));
+
+        facundo.agregarGuardarropas(guardarropasCasual);
+
+        entityManager().persist(facundo);
+
+        guardarropasCasual.agregarPrenda(camperaMichelin);
+
+        Assert.isTrue(entityManager()
+                .createQuery("from Usuario where id LIKE :IdUsuario", Usuario.class)
+                .setParameter("IdUsuario", facundo.getId())
+                .getResultList()
+                .get(0).getGuardarropas(1).getPrendas().size() == 6);
+    }
+
 }

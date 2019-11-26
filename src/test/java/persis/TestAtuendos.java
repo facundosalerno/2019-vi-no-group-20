@@ -58,7 +58,18 @@ public class TestAtuendos extends AbstractPersistenceTest implements WithGlobalE
     }
 
     @Test
-    public void sePersisteUnUsuarioConSuGuardarropas(){
+    public void sePersisteAtuendoAceptadoPorUsuario(){
 
     }
+
+    @Test
+    public void sePersisteAtuendoRechazadoPorUsuario(){
+
+    }
+
+    @Test
+    public void sePersisteAtuendoCalificadoPorUsuario(){
+
+    }
+
 }
