@@ -74,7 +74,7 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
      TODO: ES UNA CLASE EN PARALELO CON PREMIUM Y LIMITADO O HACE QUE ESTAS HEREDEN DE EL O DE UNO COMUN?
      TODO: DENTRO DE LA LISTA DE GUARDARROPAS DEL USUARIO O UNA LISTA PARALELA DE GUARDARROPAS COMPARTIDOS?
     */
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Guardarropas> guardarropas=new ArrayList<Guardarropas>();
 
     @OneToMany
