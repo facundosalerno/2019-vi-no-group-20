@@ -92,8 +92,10 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
     public Usuario(String nombre, List<Guardarropas> guardarropas, TipoDeUsuario tipoDeUsuario) {
         this.nombre=nombre;
         this.tipoDeUsuario=tipoDeUsuario;
-        guardarropas.stream().forEach( guardarropasAValidar -> validarTipoDeGuardarropas(guardarropasAValidar));
-        this.guardarropas = guardarropas;
+        if(guardarropas !=null){
+            guardarropas.stream().forEach( guardarropasAValidar -> validarTipoDeGuardarropas(guardarropasAValidar));
+            this.guardarropas = guardarropas;
+        }
         //RepositorioUsuarios.getInstance().agregarUsuario(this);
     }
 
