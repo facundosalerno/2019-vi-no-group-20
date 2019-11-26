@@ -1,8 +1,7 @@
-package persis;
+package Persistencia;
 
 import domain.evento.FrecuenciaEvento;
 import domain.guardarropas.Guardarropas;
-import domain.guardarropas.GuardarropasLimitado;
 import domain.guardarropas.GuardarropasPremium;
 import domain.prenda.*;
 import domain.usuario.TipoDeUsuario;
@@ -14,7 +13,6 @@ import org.junit.Test;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
-import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,7 +1,6 @@
-package persis;
+package Persistencia;
 import clima.OpenWeather;
 import clima.TemperaturaOpenWeather;
-import domain.atuendo.Atuendo;
 import domain.evento.Evento;
 import domain.evento.FrecuenciaEvento;
 import domain.guardarropas.Guardarropas;
@@ -10,17 +9,14 @@ import domain.guardarropas.GuardarropasPremium;
 import domain.prenda.*;
 import domain.usuario.TipoDeUsuario;
 import domain.usuario.Usuario;
-import org.eclipse.core.runtime.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
-import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;

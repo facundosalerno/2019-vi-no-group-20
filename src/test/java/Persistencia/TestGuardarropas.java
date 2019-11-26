@@ -1,10 +1,9 @@
-package persis;
+package Persistencia;
 
 import domain.guardarropas.Guardarropas;
 import domain.guardarropas.GuardarropasLimitado;
 import domain.guardarropas.GuardarropasPremium;
 import domain.prenda.*;
-import domain.usuario.Usuario;
 import org.junit.Before;
 import org.junit.Test;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
