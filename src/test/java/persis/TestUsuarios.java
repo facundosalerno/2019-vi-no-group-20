@@ -118,7 +118,7 @@ public class TestUsuarios extends AbstractPersistenceTest implements WithGlobalE
     }
 
     @Test
-    public void SePuedeAgregarPrendaAlguardarropasDeUnUsuarioPersistido() {
+    public void SeAgregaPrendaAlguardarropasDeUnUsuarioPersistido() {
 
         facundo = new Usuario("Facundo Salerno",new ArrayList<Guardarropas>(Arrays.asList(new GuardarropasPremium("guardarropas casual", Arrays.asList(remera, camisa), Arrays.asList(pantalon), Arrays.asList(zapatos), Arrays.asList(anteojos)))), TipoDeUsuario.PREMIUM);
         guardarropasCasual = new GuardarropasPremium("guardarropas casual", new ArrayList<Prenda>(Arrays.asList(camisa, remera)), new ArrayList<Prenda>(Arrays.asList(pantalon)), new ArrayList<Prenda>(Arrays.asList(zapatos)), new ArrayList<Prenda>(Arrays.asList(anteojos)));

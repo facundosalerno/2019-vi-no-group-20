@@ -1,4 +1,8 @@
 package persis;
+import clima.OpenWeather;
+import clima.TemperaturaOpenWeather;
+import domain.atuendo.Atuendo;
+import domain.evento.Evento;
 import domain.evento.FrecuenciaEvento;
 import domain.guardarropas.Guardarropas;
 import domain.guardarropas.GuardarropasLimitado;
@@ -16,6 +20,11 @@ import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class TestEventos extends AbstractPersistenceTest implements WithGlobalEntityManager {
     private Usuario facundo;
@@ -30,6 +39,12 @@ public class TestEventos extends AbstractPersistenceTest implements WithGlobalEn
     private Prenda anteojos;
 
     LocalDateTime fechaCumpleWilly;
+    LocalDateTime fechaCumpleSuegra;
+    LocalDateTime fechaUltimaEntrega;
+
+    TemperaturaOpenWeather nuevoClima;
+    OpenWeather nuevoMeteorologo;
+
     @Before
     public void init(){
         Color rojo = new Color(255, 0, 0);
@@ -44,7 +59,19 @@ public class TestEventos extends AbstractPersistenceTest implements WithGlobalEn
         camisa = armarUnaPrenda("camisa",TipoDePrenda.CAMISA, Material.ALGODON, blanco, rojo, Trama.LISA);
 
 
-        fechaCumpleWilly = LocalDateTime.of(2020,06,20,20,30);
+
+        /**OJO CON FECHA ACTUAL PARA LA GENERACION DE SUGERENCIAS EN EL EVENTO*/
+        fechaCumpleWilly = LocalDateTime.of(2019,12,02,20,30);
+        fechaCumpleSuegra = LocalDateTime.of(2019,12,12,20,30);
+        fechaUltimaEntrega = LocalDateTime.of(2019,11,29,20,30);
+
+
+
+        nuevoClima =	mock(TemperaturaOpenWeather.class);
+
+
+        nuevoMeteorologo = mock (OpenWeather.class);
+        when (nuevoMeteorologo.obtenerClima()).thenReturn(nuevoClima);
 
     }
 
@@ -59,38 +86,42 @@ public class TestEventos extends AbstractPersistenceTest implements WithGlobalEn
         return borradorPrenda.crearPrenda();
     }
 
-    /*
-    @Test
-    public void sePersisteUnEvento(){
-        facundo = new Usuario("Facundo Salerno",new ArrayList<Guardarropas>(Arrays.asList(new GuardarropasPremium("guardarropas casual", Arrays.asList(remera, camisa), Arrays.asList(pantalon), Arrays.asList(zapatos), Arrays.asList(anteojos)))), TipoDeUsuario.PREMIUM);
-        guardarropasCasual = new GuardarropasPremium("guardarropas casual", new ArrayList<Prenda>(Arrays.asList(camisa, remera)), new ArrayList<Prenda>(Arrays.asList(pantalon)), new ArrayList<Prenda>(Arrays.asList(zapatos)), new ArrayList<Prenda>(Arrays.asList(anteojos)));
 
-        facundo.agregarGuardarropas(guardarropasCasual);
+    @Test
+    public void sePersisteUnEventoYSeRecupera(){
+        facundo = new Usuario("Facundo Salerno",new ArrayList<Guardarropas>(Arrays.asList(new GuardarropasPremium("guardarropas casual", Arrays.asList(remera, camisa), Arrays.asList(pantalon), Arrays.asList(zapatos), Arrays.asList(anteojos)))), TipoDeUsuario.PREMIUM);
+
+        facundo.crearEvento("Cumpleaños de juan", fechaCumpleWilly, FrecuenciaEvento.ANUAL,"Casa de Juan");
 
         entityManager().persist(facundo);
 
-        entityManager().find(Usuario.class,facundo.getId());  //Assert not null
+        assertEquals(entityManager()
+                        .createQuery("from Usuario where id LIKE :IdUsuario", Usuario.class)
+                        .setParameter("IdUsuario", facundo.getId())
+                        .getResultList()
+                        .get(0).getEventos().get(0).getNombre(),
+                "Cumpleaños de juan");
     }
 
     @Test
-    public void seRecuperaUnEventoAPartirDeSuID() throws Exception {
+    public void seRecuperanSugerenciasDeEvento() throws Exception {
+
+        when(nuevoClima.getTemperature()).thenReturn(25.0);
 
         facundo = new Usuario("Facundo Salerno",new ArrayList<Guardarropas>(Arrays.asList(new GuardarropasPremium("guardarropas casual", Arrays.asList(remera, camisa), Arrays.asList(pantalon), Arrays.asList(zapatos), Arrays.asList(anteojos)))), TipoDeUsuario.PREMIUM);
-        guardarropasCopado = new GuardarropasPremium("guardarropas copado", new ArrayList<Prenda>(Arrays.asList(camisa, remera)), new ArrayList<Prenda>(Arrays.asList(pantalon)), new ArrayList<Prenda>(Arrays.asList(zapatos)), new ArrayList<Prenda>(Arrays.asList(anteojos)));
 
-        facundo.agregarGuardarropas(guardarropasCopado);
+        facundo.crearEvento("Cumpleaños de juan", fechaCumpleWilly, FrecuenciaEvento.ANUAL,"Casa de Juan");
 
         entityManager().persist(facundo);
 
-        Usuario hermanoGemeloDeFacundoQueSeCopiaAFacundo = entityManager()
-                .createQuery("from Usuario where id LIKE :IdUsuario", Usuario.class)
-                .setParameter("IdUsuario", facundo.getId())
-                .getResultList()
-                .get(0);
+        facundo.getEventos().get(0).generarSugerencias(nuevoMeteorologo);
 
-
-        Assert.isTrue(hermanoGemeloDeFacundoQueSeCopiaAFacundo.getGuardarropas(1).getNombre().equals("guardarropas copado"));
-
+        assertEquals(entityManager()
+                        .createQuery("from Usuario where id LIKE :IdUsuario", Usuario.class)
+                        .setParameter("IdUsuario", facundo.getId())
+                        .getResultList()
+                        .get(0).getEventos().get(0).getSugerenciasObtenidas(),
+                facundo.getEventos().get(0).getSugerenciasObtenidas());
 
     }
 
@@ -98,17 +129,23 @@ public class TestEventos extends AbstractPersistenceTest implements WithGlobalEn
     public void seRecuperanEventosAPartirDeFecha() throws Exception {
 
         facundo = new Usuario("Facundo Salerno",new ArrayList<Guardarropas>(Arrays.asList(new GuardarropasPremium("guardarropas casual", Arrays.asList(remera, camisa), Arrays.asList(pantalon), Arrays.asList(zapatos), Arrays.asList(anteojos)))), TipoDeUsuario.PREMIUM);
+
         facundo.crearEvento("Cumpleaños de juan", fechaCumpleWilly, FrecuenciaEvento.ANUAL,"Casa de Juan");
+        facundo.crearEvento("Cumpleaños de Suegra", fechaCumpleSuegra, FrecuenciaEvento.ANUAL,"Casa de suegri");
+        facundo.crearEvento("Ultima entrega", fechaUltimaEntrega, FrecuenciaEvento.NO_SE_REPITE,"Lugano");
 
         entityManager().persist(facundo);
 
-        Usuario hermanoGemeloDeFacundoQueSeCopiaAFacundo = entityManager()
-                .createQuery("from Usuario where id LIKE :IdUsuario", Usuario.class)
-                .setParameter("IdUsuario", facundo.getId())
-                .getResultList()
-                .get(0);
+        LocalDateTime fechaBusqueda= LocalDateTime.of(2019,12,11,20,30);
 
-        Assert.isTrue(hermanoGemeloDeFacundoQueSeCopiaAFacundo.getEventos().get(0).getNombre().equals("Cumpleaños de juan"));
+        assertEquals(entityManager()
+                        .createQuery("from Evento where fecha BETWEEN :inicio AND :fin", Evento.class)
+                        .setParameter("inicio", fechaBusqueda.minusDays(2))
+                        .setParameter("fin", fechaBusqueda.plusDays(2))
+                        .getResultList()
+                        .get(0).getNombre(),
+                "Cumpleaños de Suegra");
+
     }
-*/
+
 }
