@@ -7,6 +7,7 @@ import exceptions.AtuendoInvalidoException;
 import exceptions.NoCumpleRequisitoParaCalificarException;
 import net.sf.oval.guard.Pre;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 
@@ -25,13 +26,13 @@ public class Atuendo {
     @JoinColumn(name = "atuendo_id")
     private List<Prenda> prendasSuperiores=new ArrayList<>();
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private Prenda prendaInferior;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private Prenda calzado;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private Prenda accesorio;
 
 
