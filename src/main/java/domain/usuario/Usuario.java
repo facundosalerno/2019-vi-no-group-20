@@ -268,6 +268,10 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
         return atuendosAceptados;
     }
 
+    public List<Atuendo> getAtuendosRechazados() {
+        return atuendosRechazados;
+    }
+
     public List<Atuendo> getAtuendosCalificados() {
         return atuendosCalificados;
     }
