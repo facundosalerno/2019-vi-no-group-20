@@ -35,5 +35,10 @@ public class TemperaturaAccuWeather extends Clima{
 		
 		return this.getValue();
 	}
+
+	@Override
+	public void setTemperature(double valor){
+		this.Value = valor;
+	}
 }
 

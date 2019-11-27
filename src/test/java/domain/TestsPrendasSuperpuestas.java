@@ -85,7 +85,7 @@ public class TestsPrendasSuperpuestas {
         nuevoMeteorologo = mock (OpenWeather.class);
         when (nuevoMeteorologo.obtenerClima()).thenReturn(nuevoClima);
 
-        // Assert.assertEquals(guardarropasInvierno.sugerirAtuendo(nuevoClima), Arrays.asList());
+        // Assert.assertEquals(guardarropasInvierno.sugerirAtuendo(temperaturaCiudadGotica), Arrays.asList());
 
     }
 

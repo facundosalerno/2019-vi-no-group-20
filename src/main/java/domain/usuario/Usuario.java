@@ -81,10 +81,8 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
     @JoinColumn(name = "usuarioId_mediosDeNotificacion")
     private Set<MedioDeNotificacion> mediosDeNotificacion = new HashSet<>();
 
-
-
     //Solo para que sea compatible con JPA
-    public Usuario() {};
+    public Usuario() {}
 
 
     /** Metodos */
@@ -124,14 +122,14 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
 
         /**TODO:VER TEMA COEFICIENTE DE USUARIO EN BASE A CALIFICACION DE ATUENDOS*/
         return guardarropas.stream()
-                .flatMap(guardarropas -> guardarropas.sugerirAtuendo(meteorologo).stream())
+                .flatMap(guardarropas -> guardarropas.sugerirAtuendo(meteorologo, this.getCoeficienteSensacionT()).stream())
                 .collect(Collectors.toList());
     }
 
     public List<Atuendo> obtenerSugerencias(int indexGuardarropas, Meteorologo meteorologo){
         if(indexGuardarropas<0 || guardarropas.size() >= indexGuardarropas)
             throw new NoExisteGuardarropasException();
-        return guardarropas.get(indexGuardarropas).sugerirAtuendo(meteorologo);
+        return guardarropas.get(indexGuardarropas).sugerirAtuendo(meteorologo, this.getCoeficienteSensacionT());
     }
 
     public void crearEvento(String nombre, LocalDateTime fechaYHora, FrecuenciaEvento frecuencia, String lugar){
@@ -202,10 +200,6 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
         eventosFiltrados = eventos.stream().filter(evento -> evento.estaEntre(filtroEventoInicial, filtroEventoFinal)).collect(Collectors.toList());
     }
 
-
-
-
-
     /** Getters y setters */
 
     public void setFiltroEventoInicial(LocalDateTime filtroEventoInicial) {
@@ -274,6 +268,20 @@ public class Usuario implements InteresadoEvento, InteresadoAlertaMeteorologica 
 
     public List<Atuendo> getAtuendosCalificados() {
         return atuendosCalificados;
+    }
+
+    public double getCoeficienteSensacionT(){
+        final int cantidadCalificacionesPromediadas= 3;
+
+        List<Atuendo> atuendosCalificados = this.getAtuendosCalificados();
+
+        if(atuendosCalificados.size() == 0)
+            return 0;
+
+        return (double) atuendosCalificados.subList(Math.max(atuendosCalificados.size() - cantidadCalificacionesPromediadas, 0), atuendosCalificados.size()).
+                stream().
+                map(a -> a.getCalificacion()).
+                reduce(0, (suma, calificacion) -> suma + calificacion) / (atuendosCalificados.size() - Math.max(atuendosCalificados.size() - cantidadCalificacionesPromediadas, 0));
     }
 
     /** Observer */
