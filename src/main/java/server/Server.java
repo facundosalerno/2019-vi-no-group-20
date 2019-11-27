@@ -20,7 +20,7 @@ import static spark.Spark.before;
 
 public class Server {
     public static void main(String[] args) {
-        Spark.port(9010);
+        Spark.port(getHerokuAssignedPort()); //Si falla, devuelve 9010 para debugear local
         //Spark.staticFiles.location("/public");
         Spark.staticFileLocation("/public");
         Spark.init();
@@ -84,6 +84,17 @@ public class Server {
             PerThreadEntityManagers.closeEntityManager();
         });
     }
+
+
+    static int getHerokuAssignedPort() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        }
+
+        return 9010; //return default port if heroku-port isn't set (i.e. on localhost)
+    }
+
 
 
     public static void iniciarUsuarioDePrueba() {
