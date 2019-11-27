@@ -13,6 +13,7 @@
 
     <!--- Configuracion de maven y java -->
     <build>
+        <finalName>${artifactId}</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -40,7 +41,7 @@
 				         </descriptorRefs>
 				         <archive>
 				             <manifest>
-				                 <mainClass>Server</mainClass>
+				                 <mainClass>server/Server</mainClass>
 				             </manifest>
 				         </archive>
 				    </configuration>
