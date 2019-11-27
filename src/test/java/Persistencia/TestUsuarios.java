@@ -6,7 +6,6 @@ import domain.guardarropas.GuardarropasPremium;
 import domain.prenda.*;
 import domain.usuario.TipoDeUsuario;
 import domain.usuario.Usuario;
-import fixturePersistibles.GuardarropasFix;
 import org.eclipse.core.runtime.Assert;
 import org.junit.Before;
 import org.junit.Test;

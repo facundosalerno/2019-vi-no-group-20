@@ -90,6 +90,18 @@ public abstract class Guardarropas{
                 .collect(Collectors.toList());
     }
 
+    public List<Atuendo> sugerirAtuendo(Meteorologo meteorologo , double coeficienteUsuario) {
+        Clima climaActual = meteorologo.obtenerClima();
+
+        climaActual.setTemperature(climaActual.getTemperature() + coeficienteUsuario * 2);
+
+        return Sets.cartesianProduct(ImmutableList.of(ImmutableSet.copyOf(superponerPrendas(prendasSuperiores, climaActual)), ImmutableSet.copyOf(obtenerPrendasParaClima(prendasInferiores, climaActual)), ImmutableSet.copyOf(obtenerPrendasParaClima(calzados, climaActual)), ImmutableSet.copyOf(obtenerPrendasParaClima(accesorios, climaActual))))
+                .stream()
+                .map(list -> new Atuendo((List<Prenda>) list.get(0),(Prenda) list.get(1), (Prenda) list.get(2),(Prenda) list.get(3)))
+                .filter(atuendo -> atuendo.esElegible())
+                .collect(Collectors.toList());
+    }
+
 
     public static List<List<Prenda>> superponerPrendas(List<Prenda> prendas, Clima climaActual) {  //TODO: IMPORTANTE private
         int cantidadCapas = CapasPorTemperatura.capasDeAbrigoParaClima(climaActual);

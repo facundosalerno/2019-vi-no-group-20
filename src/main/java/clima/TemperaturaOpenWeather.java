@@ -21,4 +21,9 @@ public class TemperaturaOpenWeather extends Clima {
 		return this.temp-273.15;
 	}
 
+	@Override
+	public void setTemperature(double valor){
+    	this.temp = valor + 273.15;
+    }
+
 }

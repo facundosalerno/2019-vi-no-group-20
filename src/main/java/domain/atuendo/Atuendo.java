@@ -88,7 +88,7 @@ public class Atuendo {
 
     public void calificar(int calificacion) {        //Solo se usa al momento de generar una decision de calificar
         if (this.estado == Estado.ACEPTADO) {
-            this.calificacion = calificacion > 10 ? 10 : calificacion < 0 ? 0 : calificacion;
+            this.calificacion = calificacion > 5 ? 5 : calificacion < -5 ? -5 : calificacion;
         }else{
             throw new NoCumpleRequisitoParaCalificarException();
         }
