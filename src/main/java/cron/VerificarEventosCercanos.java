@@ -3,6 +3,7 @@ package cron;
 import clima.AccuWeather;
 import domain.usuario.Usuario;
 import exceptions.TodaviaNoEstaCercaElEvento;
+
 import java.util.List;
 import java.util.TimerTask;
 

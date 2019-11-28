@@ -6,19 +6,14 @@ import domain.notificaciones.Notificable;
 import domain.usuario.Usuario;
 import exceptions.NoHaySugerenciasParaElEvento;
 import exceptions.TodaviaNoEstaCercaElEvento;
-import org.uqbar.commons.model.annotations.Observable;
-import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
 import org.uqbarproject.jpa.java8.extras.convert.LocalDateTimeConverter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import static java.time.temporal.ChronoUnit.DAYS;
 
 //TODO: VER TEMA DE QUE SEA UNA IMPLEMENTACION DE NOTIFICABLE, LAS INTERFACES NO SE MAPPEAN
 

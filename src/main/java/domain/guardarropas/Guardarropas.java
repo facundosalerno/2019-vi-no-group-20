@@ -16,7 +16,10 @@ import exceptions.NoPerteneceALaCategoriaException;
 import exceptions.NoSePuedenGenerarSugerenciasEx;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 

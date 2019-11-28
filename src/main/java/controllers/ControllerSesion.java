@@ -2,20 +2,14 @@ package controllers;
 
 import cron.RepositorioGuardarropas;
 import cron.RepositorioUsuarios;
-import domain.evento.FrecuenciaEvento;
-import domain.guardarropas.GuardarropasPremium;
-import domain.prenda.*;
-import domain.usuario.*;
+import domain.usuario.Usuario;
 import exceptions.ContraseñaInvalidaException;
 import exceptions.UsuarioInexistente;
-
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-
-import java.util.Arrays;
 
 
 public class ControllerSesion implements WithGlobalEntityManager, TransactionalOps {

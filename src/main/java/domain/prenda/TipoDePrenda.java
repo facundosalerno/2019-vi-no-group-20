@@ -5,11 +5,10 @@ import domain.capaPrenda.NivelDeCapa;
 import domain.temperaturaPrenda.RangoTemperatura;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
+import javax.persistence.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-
-import javax.persistence.*;
 
 @Entity
 public class TipoDePrenda {

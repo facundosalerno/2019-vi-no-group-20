@@ -13,7 +13,6 @@ import spark.Request;
 import spark.Response;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
 
 public class ControllerEvento implements WithGlobalEntityManager, TransactionalOps {
     LocalDateTime hoy;

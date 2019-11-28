@@ -1,10 +1,6 @@
 package domain.guardarropas;
 
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Sets;
-import cron.RepositorioGuardarropas;
 import domain.prenda.Categoria;
 import domain.prenda.Prenda;
 import domain.usuario.TipoDeUsuario;
@@ -13,10 +9,7 @@ import exceptions.NoPermiteGuardarropaIncompletoException;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 @DiscriminatorValue(value="P")

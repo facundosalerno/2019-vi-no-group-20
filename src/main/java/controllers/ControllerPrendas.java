@@ -1,21 +1,18 @@
 package controllers;
 
 import cron.RepositorioGuardarropas;
-import cron.RepositorioUsuarios;
 import domain.guardarropas.Guardarropas;
 import domain.prenda.*;
-import domain.usuario.Usuario;
-import exceptions.*;
-import javassist.bytecode.analysis.ControlFlow;
-import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
+import exceptions.NoExisteGuardarropasException;
+import exceptions.NoPermiteMaterialException;
+import exceptions.NoPermiteSerElMismoColorException;
+import exceptions.TipoDePrendaNoDefinidoExcepcion;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 import java.io.IOException;
 import java.util.HashMap;
 

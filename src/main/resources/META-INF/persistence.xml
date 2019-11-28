@@ -41,7 +41,7 @@
             <property name="hibernate.connection.password" value="12345678" />
 -->
 			<property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver" />
-            <property name="hibernate.connection.url" value="mysql://ucy6xfvuzw4bq00y:t4r5dm1zz1dc7xou@kf3k4aywsrp0d2is.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/e2s6sclk16smxb18" />
+            <property name="hibernate.connection.url" value="jdbc:mysql://ucy6xfvuzw4bq00y:t4r5dm1zz1dc7xou@kf3k4aywsrp0d2is.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/e2s6sclk16smxb18"/>
             <property name="hibernate.connection.username" value="ucy6xfvuzw4bq00y" />
             <property name="hibernate.connection.password" value="t4r5dm1zz1dc7xou" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
@@ -56,7 +56,7 @@
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="use_sql_comments" value="true"/>
-            <property name="hibernate.hbm2ddl.auto" value="create"/> <!-- update-->
+            <property name="hibernate.hbm2ddl.auto" value="update"/> <!-- update-->
         </properties>
 
     </persistence-unit>

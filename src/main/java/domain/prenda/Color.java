@@ -2,7 +2,7 @@ package domain.prenda;
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
-import javax.persistence.*;
+import javax.persistence.Embeddable;
 import java.util.Objects;
 
 @Embeddable

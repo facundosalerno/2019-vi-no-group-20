@@ -3,7 +3,6 @@ package domain.decision;
 import domain.atuendo.Atuendo;
 
 import javax.persistence.*;
-
 import java.util.Objects;
 
 @Entity

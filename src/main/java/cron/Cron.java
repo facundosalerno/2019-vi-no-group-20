@@ -1,6 +1,5 @@
 package cron;
 
-import exceptions.RepositorioDeUsuariosNoEstaInstanciado;
 import java.util.Timer;
 
 public class Cron {

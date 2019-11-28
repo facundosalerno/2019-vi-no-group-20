@@ -5,14 +5,8 @@ import domain.atuendo.Estado;
 import domain.capaPrenda.NivelDeCapa;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
-import java.io.IOException;
-import java.util.Objects;
-
 import javax.persistence.*;
-import javax.persistence.Transient;
-
-
-import static java.util.Objects.requireNonNull;
+import java.util.Objects;
 
 
 @Entity

@@ -1,13 +1,10 @@
 package server;
 
 import clima.AccuWeather;
-import clima.OpenWeather;
 import clima.TemperaturaAccuWeather;
 import controllers.*;
-import cron.RepositorioGuardarropas;
 import cron.RepositorioUsuarios;
 import domain.evento.FrecuenciaEvento;
-import exceptions.UsuarioInexistente;
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 import spark.Spark;
 import spark.debug.DebugScreen;
@@ -20,28 +17,28 @@ import static spark.Spark.before;
 
 public class Server {
     public static void main(String[] args) {
-        Spark.port(getHerokuAssignedPort()); //Si falla, devuelve 9010 para debugear local
+        Spark.port(getHerokuAssignedPort()); //Si falla, devuelve 5000 para debugear local -> http://localhost:5000/login
         //Spark.staticFiles.location("/public");
         Spark.staticFileLocation("/public");
         Spark.init();
 
-        ControllerSesion controllerSesion= new ControllerSesion();
+        ControllerSesion controllerSesion = new ControllerSesion();
 
         //iniciarUsuarioDePrueba();
 
         //controllerSesion.persistirUsuarioPrueba();
 
         before((request, response) -> {
-            
 
-          /** Ejemplo de pagina de Spark
-            boolean authenticated;
-            // ... check if authenticated
-            if (!authenticated) {
-                halt(401, "You are not welcome here");
-            }
 
-           */
+            /** Ejemplo de pagina de Spark
+             boolean authenticated;
+             // ... check if authenticated
+             if (!authenticated) {
+             halt(401, "You are not welcome here");
+             }
+
+             */
         });
 
 
@@ -52,7 +49,7 @@ public class Server {
         Spark.post("/login", controllerSesion::iniciarSesion, new HandlebarsTemplateEngine());
         Spark.post("/", controllerSesion::cerrarSesion, new HandlebarsTemplateEngine());
 
-        ControllerPerfil controllerPerfil= new ControllerPerfil();
+        ControllerPerfil controllerPerfil = new ControllerPerfil();
         Spark.get("/perfil", controllerPerfil::mostrar, new HandlebarsTemplateEngine());
 
         ControllerGuardarropas controllerGuardarropas = new ControllerGuardarropas();
@@ -60,8 +57,8 @@ public class Server {
         /* POST /guardarropas para crear guardarropas */
 
         ControllerPrendas controllerPrendas = new ControllerPrendas();
-        Spark.get("/guardarropas/:id/prendas", controllerPrendas::mostrarPrendas,  new HandlebarsTemplateEngine());
-        Spark.get("/guardarropas/:id/prendas/wizard", controllerPrendas::creacionPrenda,  new HandlebarsTemplateEngine());
+        Spark.get("/guardarropas/:id/prendas", controllerPrendas::mostrarPrendas, new HandlebarsTemplateEngine());
+        Spark.get("/guardarropas/:id/prendas/wizard", controllerPrendas::creacionPrenda, new HandlebarsTemplateEngine());
         Spark.post("/guardarropas/:id/prendas", controllerPrendas::crearPrenda, new HandlebarsTemplateEngine());
 
         ControllerCalendario controllerCalendario = new ControllerCalendario();
@@ -79,7 +76,7 @@ public class Server {
 
         //TODO: OJO, VER AL MOMENTO DE ver tema TRANSACCIONES
 
-        after((request,response) -> {
+        after((request, response) -> {
             PerThreadEntityManagers.getEntityManager();
             PerThreadEntityManagers.closeEntityManager();
         });
@@ -92,9 +89,8 @@ public class Server {
             return Integer.parseInt(processBuilder.environment().get("PORT"));
         }
 
-        return 9010; //return default port if heroku-port isn't set (i.e. on localhost)
+        return 5000; //return default port if heroku-port isn't set (i.e. on localhost)
     }
-
 
 
     public static void iniciarUsuarioDePrueba() {

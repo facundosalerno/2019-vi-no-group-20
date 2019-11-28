@@ -3,7 +3,6 @@ package domain.temperaturaPrenda;
 import clima.Clima;
 
 import javax.persistence.Embeddable;
-import javax.persistence.Entity;
 import java.util.Objects;
 
 @Embeddable

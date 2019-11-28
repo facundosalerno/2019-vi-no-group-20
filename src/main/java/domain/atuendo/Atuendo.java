@@ -5,12 +5,9 @@ import domain.prenda.Categoria;
 import domain.prenda.Prenda;
 import exceptions.AtuendoInvalidoException;
 import exceptions.NoCumpleRequisitoParaCalificarException;
-import net.sf.oval.guard.Pre;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

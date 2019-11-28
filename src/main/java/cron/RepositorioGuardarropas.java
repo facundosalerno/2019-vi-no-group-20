@@ -3,9 +3,7 @@ package cron;
 import domain.guardarropas.Guardarropas;
 import domain.guardarropas.GuardarropasPremium;
 import domain.prenda.*;
-import domain.usuario.Usuario;
 import exceptions.NoExisteGuardarropasException;
-import exceptions.UsuarioInexistente;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import java.util.ArrayList;

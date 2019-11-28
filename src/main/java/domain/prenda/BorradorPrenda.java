@@ -1,7 +1,8 @@
 package domain.prenda;
 
-import domain.capaPrenda.NivelDeCapa;
-import exceptions.*;
+import exceptions.NoPermiteMaterialException;
+import exceptions.NoPermiteSerElMismoColorException;
+import exceptions.TipoDePrendaNoDefinidoExcepcion;
 
 import java.io.IOException;
 

@@ -1,7 +1,6 @@
 package clima;
 
 import com.google.gson.*;
-
 import conexionesUrl.NetClientGet;
 
 

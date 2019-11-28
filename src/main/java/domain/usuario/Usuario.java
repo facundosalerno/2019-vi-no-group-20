@@ -2,9 +2,6 @@ package domain.usuario;
 
 import clima.Clima;
 import clima.Meteorologo;
-import com.google.common.collect.Iterables;
-import cron.Cron;
-import cron.RepositorioUsuarios;
 import domain.atuendo.Atuendo;
 import domain.decision.Aceptar;
 import domain.decision.Calificar;
@@ -16,20 +13,17 @@ import domain.guardarropas.Guardarropas;
 import domain.notificaciones.InteresadoAlertaMeteorologica;
 import domain.notificaciones.InteresadoEvento;
 import domain.notificaciones.MedioDeNotificacion;
-import domain.prenda.Prenda;
-import exceptions.*;
-
-import java.lang.reflect.Member;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.*;
-import java.util.stream.Collectors;
-
+import exceptions.ContraseñaInvalidaException;
+import exceptions.ElGuardarropasNoEsAptoException;
+import exceptions.NoExisteGuardarropasException;
+import exceptions.NoHayDecisionesParaDeshacer;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
-import org.mockito.cglib.core.Local;
 import org.uqbar.commons.model.annotations.Observable;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Observable /** Necesario para poder usarse con arena */
 

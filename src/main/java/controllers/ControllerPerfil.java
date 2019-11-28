@@ -3,15 +3,11 @@ package controllers;
 import cron.RepositorioUsuarios;
 import domain.usuario.Usuario;
 import exceptions.UsuarioInexistente;
-
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class ControllerPerfil implements WithGlobalEntityManager, TransactionalOps{
 

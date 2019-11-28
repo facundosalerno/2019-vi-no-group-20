@@ -2,7 +2,9 @@ package domain.decision;
 
 import domain.atuendo.Atuendo;
 import domain.atuendo.Estado;
-import javax.persistence.*;
+
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue(value="Calificar")

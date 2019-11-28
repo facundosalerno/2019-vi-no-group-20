@@ -1,7 +1,6 @@
 package domain.guardarropas;
 
 
-import cron.RepositorioGuardarropas;
 import domain.prenda.Categoria;
 import domain.prenda.Prenda;
 import domain.usuario.TipoDeUsuario;
@@ -9,11 +8,10 @@ import exceptions.NoAceptaCantidadPrendasException;
 import exceptions.NoPermiteGuardarropaIncompletoException;
 import exceptions.NoPerteneceALaCategoriaException;
 
-import javax.persistence.*;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.LinkedBlockingDeque;
-import java.util.stream.Stream;
 
 
 

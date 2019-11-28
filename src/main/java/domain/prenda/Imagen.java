@@ -1,15 +1,12 @@
 package domain.prenda;
 
 import javax.imageio.ImageIO;
-import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.swing.*;
+import javax.persistence.Embeddable;
+import javax.persistence.Transient;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.awt.image.BufferedImage;
 import java.util.Objects;
 
 @Embeddable
