@@ -5,7 +5,10 @@ import clima.TemperaturaAccuWeather;
 import controllers.*;
 import cron.RepositorioUsuarios;
 import domain.evento.FrecuenciaEvento;
+import domain.usuario.Usuario;
+import exceptions.UsuarioInexistente;
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
+import spark.ModelAndView;
 import spark.Spark;
 import spark.debug.DebugScreen;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -29,8 +32,6 @@ public class Server {
         //controllerSesion.persistirUsuarioPrueba();
 
         before((request, response) -> {
-
-
             /** Ejemplo de pagina de Spark
              boolean authenticated;
              // ... check if authenticated
@@ -44,6 +45,7 @@ public class Server {
 
         /** GLUE CODE */
 
+        Spark.get("/", controllerSesion::mostrarLogin, new HandlebarsTemplateEngine());
 
         Spark.get("/login", controllerSesion::mostrarLogin, new HandlebarsTemplateEngine());
         Spark.post("/login", controllerSesion::iniciarSesion, new HandlebarsTemplateEngine());
