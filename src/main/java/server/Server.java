@@ -12,8 +12,7 @@ import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static spark.Spark.after;
-import static spark.Spark.before;
+import static spark.Spark.*;
 
 public class Server {
     public static void main(String[] args) {
@@ -28,19 +27,16 @@ public class Server {
 
         //controllerSesion.persistirUsuarioPrueba();
 
-        before((request, response) -> {
+        before("/login",(request, response) -> {
 
-
-            /** Ejemplo de pagina de Spark
-             boolean authenticated;
+             //boolean authenticated= false;
              // ... check if authenticated
-             if (!authenticated) {
-             halt(401, "You are not welcome here");
-             }
+             //if (!authenticated) {
+             //halt(401, "You are not welcome here");
+             //}
 
-             */
+
         });
-
 
         /** GLUE CODE */
 
@@ -48,7 +44,18 @@ public class Server {
         Spark.get("/login", controllerSesion::mostrarLogin, new HandlebarsTemplateEngine());
         Spark.post("/login", controllerSesion::iniciarSesion, new HandlebarsTemplateEngine());
         Spark.post("/", controllerSesion::cerrarSesion, new HandlebarsTemplateEngine());
+/*
+        before((request, response) -> {
 
+            boolean authenticated= false;
+            // ... check if authenticated
+            if (!authenticated) {
+                halt(401, "You are not welcome here");
+            }
+
+
+        });
+  */
         ControllerPerfil controllerPerfil = new ControllerPerfil();
         Spark.get("/perfil", controllerPerfil::mostrar, new HandlebarsTemplateEngine());
 
@@ -59,6 +66,16 @@ public class Server {
         ControllerPrendas controllerPrendas = new ControllerPrendas();
         Spark.get("/guardarropas/:id/prendas", controllerPrendas::mostrarPrendas, new HandlebarsTemplateEngine());
         Spark.get("/guardarropas/:id/prendas/wizard", controllerPrendas::creacionPrenda, new HandlebarsTemplateEngine());
+
+        Spark.get("/guardarropas/:id/prendas/wizard/nombre", controllerPrendas::creacionPrenda, new HandlebarsTemplateEngine());
+        Spark.get("/guardarropas/:id/prendas/wizard/tipoprenda", controllerPrendas::creacionPrenda, new HandlebarsTemplateEngine());
+        Spark.get("/guardarropas/:id/prendas/wizard/material", controllerPrendas::creacionPrenda, new HandlebarsTemplateEngine());
+        Spark.get("/guardarropas/:id/prendas/wizard/color", controllerPrendas::creacionPrenda, new HandlebarsTemplateEngine());
+        Spark.get("/guardarropas/:id/prendas/wizard/trama", controllerPrendas::creacionPrenda, new HandlebarsTemplateEngine());
+        Spark.get("/guardarropas/:id/prendas/wizard/imagen", controllerPrendas::creacionPrenda, new HandlebarsTemplateEngine());
+
+
+
         Spark.post("/guardarropas/:id/prendas", controllerPrendas::crearPrenda, new HandlebarsTemplateEngine());
 
         ControllerCalendario controllerCalendario = new ControllerCalendario();
