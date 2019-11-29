@@ -84,13 +84,7 @@ public abstract class Guardarropas{
     }
 
     public List<Atuendo> sugerirAtuendo(Meteorologo meteorologo) {
-        Clima climaActual = meteorologo.obtenerClima();
-
-        return Sets.cartesianProduct(ImmutableList.of(ImmutableSet.copyOf(superponerPrendas(prendasSuperiores, climaActual)), ImmutableSet.copyOf(obtenerPrendasParaClima(prendasInferiores, climaActual)), ImmutableSet.copyOf(obtenerPrendasParaClima(calzados, climaActual)), ImmutableSet.copyOf(obtenerPrendasParaClima(accesorios, climaActual))))
-                .stream()
-                .map(list -> new Atuendo((List<Prenda>) list.get(0),(Prenda) list.get(1), (Prenda) list.get(2),(Prenda) list.get(3)))
-                .filter(atuendo -> atuendo.esElegible())
-                .collect(Collectors.toList());
+        return this.sugerirAtuendo(meteorologo,0);
     }
 
     public List<Atuendo> sugerirAtuendo(Meteorologo meteorologo , double coeficienteUsuario) {
