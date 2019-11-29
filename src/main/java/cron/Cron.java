@@ -1,22 +1,36 @@
 package cron;
 
-import java.util.Timer;
+import com.rabbitmq.client.ConnectionFactory;
+import org.quartz.*;
+import org.quartz.impl.StdSchedulerFactory;
+
+import java.net.URISyntaxException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+
+import static org.quartz.SimpleScheduleBuilder.repeatSecondlyForever;
+import static org.quartz.JobBuilder.newJob;
+import static org.quartz.TriggerBuilder.newTrigger;
 
 public class Cron {
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws SchedulerException, NoSuchAlgorithmException, KeyManagementException, URISyntaxException {
+        int oneDayInSeconds = 86400; //1 dia
 
-        Timer timer = new Timer();
-        long oneDayInMiliseconds = 86400000; //1 dia
+        Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
+        scheduler.start();
 
-        VerificarEventosCercanos eventosCercanos = new VerificarEventosCercanos();
-        timer.scheduleAtFixedRate(eventosCercanos, 0, oneDayInMiliseconds);
+        JobDetail frecuenciasEventos = newJob(RenovarFrecuenciasEventos.class).build();
+        Trigger triggerFrecuencias = newTrigger().startNow().withSchedule(repeatSecondlyForever(oneDayInSeconds)).build();
+        scheduler.scheduleJob(frecuenciasEventos, triggerFrecuencias);
 
-        VerificarAlertasMeteorologicas alertasMeteorologicas = new VerificarAlertasMeteorologicas();
-        timer.scheduleAtFixedRate(alertasMeteorologicas, 0, oneDayInMiliseconds);
+        JobDetail alertasMeteorologicas = newJob(VerificarAlertasMeteorologicas.class).build();
+        Trigger triggerAlertas = newTrigger().startNow().withSchedule(repeatSecondlyForever(oneDayInSeconds)).build();
+        scheduler.scheduleJob(alertasMeteorologicas, triggerAlertas);
 
-        RenovarFrecuenciasEventos eventosRecurrentes = new RenovarFrecuenciasEventos();
-        timer.scheduleAtFixedRate(eventosRecurrentes, 0, oneDayInMiliseconds);
+        JobDetail eventosCercanos = newJob(VerificarEventosCercanos.class).build();
+        Trigger triggerEventos = newTrigger().startNow().withSchedule(repeatSecondlyForever(oneDayInSeconds)).build();
+        scheduler.scheduleJob(eventosCercanos, triggerEventos);
     }
 }
 
